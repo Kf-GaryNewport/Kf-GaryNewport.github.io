@@ -1,139 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>{{ page.title }}</title>
-    <!-- Meta -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ page.title }}">
-    <meta name="author" content="Gary Newport">
-    <link rel="shortcut icon" href="favicon.ico">
+<html>
+  <head>
+    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
-    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,300italic,400italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    {% include meta.html %}
 
-    <!-- FontAwesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
-    <!-- Global CSS -->
-    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <!-- github calendar css -->
-    <link rel="stylesheet" href="/assets/plugins/github-calendar/dist/github-calendar.css">
-    <!-- github acitivity css -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
-    <link rel="stylesheet" href="/assets/plugins/github-activity/github-activity-0.1.5.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
 
-    <!-- Theme CSS -->
-    <link id="theme-style" rel="stylesheet" href="/assets/css/styles.css">
+    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+  </head>
 
-</head>
-<body>
-    <!-- ******HEADER****** -->
-    <header class="header">
-        <div class="container clearfix">
-            <img class="profile-image img-fluid float-left" src="/assets/images/fingers.jpg" alt="Gary Newport" />
-            <div class="profile-content float-left">
-                <h1 class="name">Gary Newport</h1>
-                <h2 class="desc">Developer</h2>
-                <ul class="social list-inline">
-                    <li class="list-inline-item"><a href="https://www.linkedin.com/in/GaryNewport"><i class="fab fa-linkedin-in"></i></a></li>
-                    <li class="list-inline-item"><a href="https://github.com/newportg"><i class="fab fa-github-alt"></i></a></li>
-                    <!--							<li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                                <li class="list-inline-item"><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                                                <li class="list-inline-item"><a href="#"><i class="fab fa-stack-overflow"></i></a></li>
-                                                <li class="list-inline-item last-item"><a href="#"><i class="fab fa-codepen"></i></a></li>     -->
-                </ul>
-            </div><!--//profile-->
-            <a class="btn btn-cta-primary float-right" href="mailto:gary.newport@zoomalong.co.uk" target="_blank"><i class="fas fa-paper-plane"></i> Contact Me</a>
-        </div><!--//container-->
-    </header><!--//header-->
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
 
-    <div class="container sections-wrapper">
-        <div class="row">
-            <div class="primary col-md-8 col-sm-12 col-xs-12">
-                <section class="blog section">
-                    <div class="section-inner">
-                        <div class="content">
-                            {% for post in site.posts %}
-                            <div class="post item row">
-                                <div class="desc col-xs-12">
-                                    <h2 class="title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
-                                    <h3 class="date">{{ post.date | date_to_string }}</h3>
-                                    <div class="main-article">
-                                        {{ post.content }}
-                                    </div>
-                                    <p><a class="more-link" href="{{ post.url }}"><i class="fa fa-arrow-circle-right"></i> Continue Reading...</a></p>
-                                </div><!--//desc-->
-                            </div><!--//item-->
-                            <hr class="divider" />
-                            {% endfor %}
-                        </div>
+          <div class="site-info">
+            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
+            <p class="site-description">{{ site.description }}</p>
+          </div>
 
-                    </div><!--//section-inner-->
-                </section><!--//section-->
-            </div><!--//primary-->
-            <div class="secondary col-lg-4 col-12">
-                <aside class="info aside section">
-                    <div class="section-inner">
-                        <!--
-                            <form class="search-form" method="get" action="/search/">
-                                <div class="input-group">
-                                    <input type="search" name="q" class="form-control"  placeholder="Search site..." />
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                                    </span>
-                                </div>
-                            </form>
-                        -->
-                        <hr />
-                        <h2 class="heading sr-only">Basic Information</h2>
-                        <div class="content">
-                            <ul class="list-unstyled">
-                                <li><i class="fas fa-map-marker-alt"></i><span class="sr-only">Location:</span>Woking, UK</li>
-                                <li><i class="fas fa-envelope"></i><span class="sr-only">Email:</span><a href="mailto:gary.newport@zoomalong.co.uk">gary.newport@zoomalong.co.uk</a></li>
-                                <li><i class="fas fa-link"></i><span class="sr-only">Website:</span><a href="https://www.zoomalong.co.uk">https://www.zoomalong.co.uk</a></li>
-                                <li><i class="fa fa-linkedin"></i><span class="sr-only">LinkedIn:</span><a href="https://www.linkedin.com/in/garynewport">LinkedIn</a></li>
-                                <li><i class="fa fa-github"></i><span class="sr-only">GitHub:</span><a href="https://github.com/newportg">GitHub</a></li>
-                            </ul>
-                            <hr />
-                            <!--
-                                <ul class="list-unstyled">
-                                    <li><i class="fa fa-rss"></i><span class="sr-only">RSS Feed:</span><a href="/feed/rss/index.xml">Subscribe via RSS</a></li>
-                                </ul>
-                            -->
-                        </div><!--//content-->
-                    </div><!--//section-inner-->
-                </aside><!--//aside-->
-                <aside class="about aside section">
-                    <div class="section-inner">
-                        <h2 class="heading">About Me</h2>
-                        <div class="content">
-                            <p>I'm a fish.</p>
-                        </div><!--//content-->
-                    </div><!--//section-inner-->
-                </aside><!--//section-->
-            </div><!--//secondary-->
-        </div><!--//row-->
-    </div><!--//masonry-->
-    <!-- ******FOOTER****** -->
-    <footer class="footer">
-        <div class="container text-center">
-            <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out our commercial license options via our website: themes.3rdwavemedia.com */-->
-            <small class="copyright">Designed with <i class="fas fa-space-shuttle"></i> by <a href="https://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-        </div><!--//container-->
-    </footer><!--//footer-->
-    <!-- Javascript -->
-    <script type="text/javascript" src="/assets/plugins/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="/assets/plugins/popper.min.js"></script>
-    <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script>
-    <!-- github calendar plugin -->
-    <script type="text/javascript" src="/assets/plugins/github-calendar/dist/github-calendar.min.js"></script>
-    <!-- github activity plugin -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
-    <script type="text/javascript" src="/assets/plugins/github-activity/github-activity-0.1.5.min.js"></script>
-    <!-- custom js -->
-    <script type="text/javascript" src="/assets/js/main.js"></script>
-</body>
-</html> 
+          <nav>
+            <a href="{{ site.baseurl }}/">Blog</a>
+            <a href="{{ site.baseurl }}/about">About</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      {{ content }}
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          {% include svg-icons.html %}
+        </footer>
+      </div>
+    </div>
+
+    {% include analytics.html %}
+  </body>
+</html>
+
+
