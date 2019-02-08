@@ -1,6 +1,9 @@
 ---
-published: false
+published: true
+layout: post
+title: PlantUml
 ---
+
 ## A New Post
 
 
