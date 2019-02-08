@@ -1,0 +1,110 @@
+[[plantuml width="600px" tooltip="Container" [
+
+@startuml
+
+title TPX-Silverback Component System
+
+skinparam defaultTextAlignment center
+skinparam rectangle {
+    roundCorner<<Person>> 25
+    BackgroundColor<<Person>> #08427b    
+    FontColor<<Person>> white
+    StereotypeFontColor<<Person>> white
+
+    roundCorner<<Software System>> 25
+    FontColor<<Software System>> White
+    StereotypeFontColor<<Software System>> White
+    BorderColor<<Software System>> #1168bd
+
+    roundCorner<<Container>> 25
+    BackgroundColor<<Container>> #438dd5   
+    FontColor<<Container>> white
+    StereotypeFontColor<<Container>> White
+
+    roundCorner<<Component>> 25
+    BackgroundColor<<Component>> #85bbf0   
+    FontColor<<Component>> Black
+    StereotypeFontColor<<Component>> Black
+
+    roundCorner<<External System>> 25
+    BackgroundColor<<External System>> #81D4FA   
+    FontColor<<External System>> Black
+    StereotypeFontColor<<External System>> Black
+
+    roundCorner<<EHI Service>> 25
+    BackgroundColor<<EHI Service>> #81D4FA   
+    FontColor<<EHI Service>> Black
+    StereotypeFontColor<<EHI Service>> Black
+}
+skinparam database {
+    BackgroundColor<<Container>> #438dd5   
+    FontColor<<Container>> white
+    StereotypeFontColor<<Container>> White
+}
+ 
+legend top left
+|= |= Type |
+|<back:#08427b>   </back>| Person |
+|<back:#1168bd>   </back>| Software System |
+|<back:#438dd5>   </back>| Container |
+|<back:#85bbf0>   </back>| Component |
+|<back:#81D4FA>   </back>| External System |
+|<back:#81D4FA>   </back>| EHI Service |
+endlegend
+
+rectangle BusUser <<Person>> [
+    **Business User** 
+    A regular business user ]
+
+rectangle "**SilverBack**\n " as SilverBack <<Software System>> {
+    rectangle WebApp <<Component>> [
+        **Invoice Controler** ]  
+    rectangle AppSec <<Component>> [
+        **Security Component** ]
+    rectangle cnSvc <<Component>> [
+        **Customer Number**
+        **Service** ]
+    rectangle ppOrc <<Component>> [
+        **Payment Pack**
+        **Orchestration**
+ 
+        Creates Invoices in either 
+        Bordereaux or Email format. ]
+    rectangle inSvc <<Component>> [
+        **Invoice Service** ]
+    rectangle fc <<Component>> [
+        **File System**
+        Stores generated output ]
+
+    database db <<Container>> [
+        **Database**
+        Claim and
+        Invoice data ]
+} 
+rectangle EHISec <<EHI Service>> [
+    **AppSec** ]
+
+rectangle LookUp <<External System>> [
+    **LookUp**
+    Reference Data ] 
+
+
+
+BusUser .down.>> WebApp : Uses\n[HTTPS]
+WebApp .left.>> AppSec : Uses
+AppSec .left.>> EHISec : Uses\n[HTTPS]
+
+WebApp .down.>> cnSvc : Uses\n[HTTPS]
+cnSvc .down.>> db : Uses
+
+WebApp .down.>> ppOrc :Uses
+ppOrc .left.>> LookUp : Uses
+ppOrc <<.down.>> fc : Reads/Writes 
+
+ppOrc .down.>> inSvc : Uses\n[HTTPS]
+inSvc .down.>> db : Uses
+
+center footer [Component]
+
+@enduml
+]]]
