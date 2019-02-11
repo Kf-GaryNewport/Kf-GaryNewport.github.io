@@ -1,0 +1,23 @@
+@startuml Hello World
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/master/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Databases/AzureCosmosDb.puml
+!includeurl AzurePuml/Identity/AzureActiveDirectory.puml
+!includeurl AzurePuml/Storage/AzureBlobStorage.puml
+!includeurl AzurePuml/Web/AzureWebApp.puml
+
+Person(user, "Office Online")
+
+AzureActiveDirectory( azAd, "Active Directory", "App registration")
+AzureBlobStorage( azBS, "File Storage", "Office documents")
+AzureWebApp( azWa, "WOPI Host", "Provides Office Online access to the blob store")
+AzureCosmosDb( azCDb, "Metadata", "Document Metadata")
+
+Rel(user, azWa, "Uses", "HTTPS")
+Rel( azWa, azBS, "Read/Write file")
+Rel( azWa, azCDb, "Read/Write file Metadata")
+Rel( azWa, azAd, "Register app with AD")
+
+
+@enduml
