@@ -5,9 +5,9 @@
 !includeurl AzurePuml/Compute/all.puml
 !includeurl AzurePuml/Security/all.puml
 
-AzureActiveDirectory( aad, "Active Directory", "33")
-AzureFunction( azFunc, "Process", "33")
-AzureKeyVault( azKv, "Serects and Config", "33")
+AzureActiveDirectory( aad, "Active Directory", "Provides valid Users and permissions")
+AzureFunction( azFunc, "Process", "Consumer of secrets")
+AzureKeyVault( azKv, "Serects and Config", "")
 
 azFunc --> aad : Register
 azKv --> aad : Register
