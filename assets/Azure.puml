@@ -10,5 +10,5 @@ AzureCosmosDb(cosmosDbAlias, "Label", "Technology", "Optional Description")
 
 personAlias --> functionAlias
 functionAlias --> cosmosDbAlias
-
+  
 @enduml
