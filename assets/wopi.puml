@@ -1,4 +1,4 @@
-@startuml Hello World
+@startuml WOPI
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
 !define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/master/dist
 !includeurl AzurePuml/AzureCommon.puml
@@ -7,7 +7,7 @@
 !includeurl AzurePuml/Storage/AzureBlobStorage.puml
 !includeurl AzurePuml/Web/AzureWebApp.puml
 
-Person(user, "Office Online")
+Person(user, "Office Online", "*.wopihost.hub.knightfrank.com")
 
 AzureActiveDirectory( azAd, "Active Directory", "App registration")
 AzureBlobStorage( azBS, "File Storage", "Office documents")
