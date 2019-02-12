@@ -1,9 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
     "\\_layouts",
     "\\_posts"
   ],
-  "SelectedNode": "\\_posts\\2014-3-3-Hello-World.md",
+  "SelectedNode": "\\assets\\keyvault.puml",
   "PreviewInSolutionExplorer": false
 }
