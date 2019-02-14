@@ -18,7 +18,7 @@ Used to store any files or images etc.
 Because both the API and Web Application exist on the same URL then we wont run into any CORS issues.
 Remember to bind the DNS Cname to the Azure function proxy and not the website.
 
-<a href="{{ site.baseurl }}/"><img src="{{ aah1.png }}" /></a>
+![aah1](/images/aah1.png)
 
 
 How ?
