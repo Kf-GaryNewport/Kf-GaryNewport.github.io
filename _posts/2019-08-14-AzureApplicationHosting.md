@@ -10,9 +10,9 @@ So:-
 
 Route | Result
 ------|-------
-zoomalong.co.uk|Website
-zoomalong.co.uk/api|Azure functions
-zoomalong.co.uk/static|Azure Storage Account
+zoomalong.co.uk | Website
+zoomalong.co.uk/api | Azure functions
+zoomalong.co.uk/static | Azure Storage Account
 
 Used to store any files or images etc.
 Because both the API and Web Application exist on the same URL then we wont run into any CORS issues.
@@ -65,9 +65,9 @@ Change in the build.
 
 Proxy|URL
 -----|---
-proxies.api.backendUri|https://azure website url
-proxies.app.backendUri|https://azure function url
-proxies.appRewsources.backendUri|https:// azure storage account blob strorage
+proxies.api.backendUri | https://azure website url
+proxies.app.backendUri | https://azure function url
+proxies.appRewsources.backendUri | https:// azure storage account blob strorage
 
 * Repeat in the release.
 
