@@ -12,7 +12,7 @@ He hosts a index.html file within a Azure function Http Trigger request. Althoug
 The Html file you serve up can should only contain links to CDN resources or to readable JS or other files within your storage account blob storage.
 By proxying the azure function then everything could be accessed via the same URL.
 
-'''
+```
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -55,4 +55,4 @@ namespace Counterflip
         }
     }
 }
-'''
+```
