@@ -55,20 +55,18 @@ proxies.json
 ```
 
 Change in the build.
-Build should include Azure App Service Deploy V3 or greater
-Update this section with the file to be changed.
-
-Add your substitutions to the Variables section
-As Path to variable to be replace element.element.element
-Value to be replaced.
-as below
-
-Proxy|URL
+* Build should include Azure App Service Deploy V3 or greater
+* Update this section with the file to be changed.
+* ![aah2](/images/aah2.png)
+* Add your substitutions to the Variables section
+	* As Path to variable to be replace element.element.element
+	* Value to be replaced.
+	* as below
+	* Proxy|URL
 -----|---
 proxies.api.backendUri|https://azure website url
 proxies.app.backendUri|https://azure function url
 proxies.appRewsources.backendUri|https:// azure storage account blob strorage
-
-Repeat in the release.
+* Repeat in the release.
 
 
