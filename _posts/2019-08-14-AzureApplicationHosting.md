@@ -14,15 +14,14 @@ zoomalong.co.uk|Website
 zoomalong.co.uk/api|Azure functions
 zoomalong.co.uk/static|Azure Storage Account
 
-
 Used to store any files or images etc.
 Because both the API and Web Application exist on the same URL then we wont run into any CORS issues.
 Remember to bind the DNS Cname to the Azure function proxy and not the website.
 
- 
 How ?
 In your Azure Functions Project
-Create a files called proxies.json and insert the following code
+Create a files called proxies.json and insert the following code
+
 ```
 proxies.json
 {
@@ -51,8 +50,7 @@ proxies.json
     }
   }
  ```
- 
- 
+
 Change in the build.
 Build should include Azure App Service Deploy V3 or greater
 Update this section with the file to be changed.
