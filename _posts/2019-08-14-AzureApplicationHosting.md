@@ -8,14 +8,12 @@ The normal method would be to deploy out each individual component to Azure and 
 By using the proxy feature of Azure Functions we can define routes to each of the installed artifacts while preserving a single URL for the application.
 So:-
 
----
-Route:zoomalong.co.uk
-Result:Website
-Route:zoomalong.co.uk/api
-Result:Azure functions
-Route:zoomalong.co.uk/static
-Result:Azure Storage Account
----
+Route | Result
+--------------
+zoomalong.co.uk|Website
+zoomalong.co.uk/api|Azure functions
+zoomalong.co.uk/static|Azure Storage Account
+
 
 Used to store any files or images etc.
 Because both the API and Web Application exist on the same URL then we wont run into any CORS issues.
