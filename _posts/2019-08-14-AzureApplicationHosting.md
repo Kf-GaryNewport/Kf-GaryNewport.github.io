@@ -62,11 +62,13 @@ Change in the build.
 	* As Path to variable to be replace element.element.element
 	* Value to be replaced.
 	* as below
+
 Proxy|URL
 -----|---
 proxies.api.backendUri|https://azure website url
 proxies.app.backendUri|https://azure function url
 proxies.appRewsources.backendUri|https:// azure storage account blob strorage
+
 * Repeat in the release.
 
 
