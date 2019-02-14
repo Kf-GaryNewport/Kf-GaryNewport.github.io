@@ -49,7 +49,7 @@ proxies.json
       }
     }
   }
- ```
+```
 
 Change in the build.
 Build should include Azure App Service Deploy V3 or greater
