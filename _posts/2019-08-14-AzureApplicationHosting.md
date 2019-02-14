@@ -9,7 +9,7 @@ By using the proxy feature of Azure Functions we can define routes to each of th
 So:-
 
 Route | Result
---------------
+------|-------
 zoomalong.co.uk|Website
 zoomalong.co.uk/api|Azure functions
 zoomalong.co.uk/static|Azure Storage Account
