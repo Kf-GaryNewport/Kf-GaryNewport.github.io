@@ -3,7 +3,6 @@ layout: post
 title: Storage Accounts
 ---
 
-# Create Blob Containers
 The blob container resource is a sub-resource of the storage account. When you create a storage account, you can now specify an array of resources, which is where you define the containers you want to create. We are then going to specify objects of type "blobServices/containers", and make sure to use an API version of 2018-02-01 or later.
 In the example below, we are creating a storage account with two containers.
 
