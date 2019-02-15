@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\assets",
+    "\\_layouts",
     "\\_posts"
   ],
-  "SelectedNode": "\\_posts\\2019-02-08-PlantUml.md",
+  "SelectedNode": "\\_posts\\2018-08-14-Hosting AzureStaticWebsites.md",
   "PreviewInSolutionExplorer": false
 }
