@@ -55,7 +55,7 @@ Blob (only Blobs are publically accessible)
 
 The above example is fine, but you need to specify each of the containers as separate parameters, and remember to add the correct number of container clauses to the script.
 
-So if we spcify the containers as a array in the parameters
+So if we specify the containers as a array in the parameters file
 
 ```Json
     "para_storageObject": {
@@ -75,7 +75,7 @@ So if we spcify the containers as a array in the parameters
     },
 ```
 
-Then we can use a copy clause to cycle over the array and create our containers
+Then we can use a copy clause to cycle over the array and create our containers in the deploy
 
 ```Json
     {
