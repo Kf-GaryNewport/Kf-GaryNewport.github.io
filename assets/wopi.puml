@@ -8,6 +8,7 @@
 !includeurl AzurePuml/Web/AzureWebApp.puml
 
 Person(user, "Office Online", "*.wopihost.hub.knightfrank.com")
+Container( disco, "Discovery", "Xml")
 
 AzureActiveDirectory( azAd, "Active Directory", "App registration")
 AzureBlobStorage( azBS, "File Storage", "Office documents")
@@ -18,6 +19,8 @@ Rel(user, azWa, "Uses", "HTTPS")
 Rel( azWa, azBS, "Read/Write file")
 Rel( azWa, azCDb, "Read/Write file Metadata")
 Rel( azWa, azAd, "Register app with AD")
+Rel( azWa, disco, "Reads")
+Rel( disco, user, "Reads")
 
 
 @enduml
