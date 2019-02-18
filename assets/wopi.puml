@@ -6,6 +6,7 @@
 !includeurl AzurePuml/Identity/AzureActiveDirectory.puml
 !includeurl AzurePuml/Storage/AzureBlobStorage.puml
 !includeurl AzurePuml/Web/AzureWebApp.puml
+!includeurl AzurePuml/Security/AzureKeyVault.puml
 
 Person(user, "Office Online", "*.wopihost.hub.knightfrank.com")
 
