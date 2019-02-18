@@ -13,11 +13,13 @@ AzureActiveDirectory( azAd, "Active Directory", "App registration")
 AzureBlobStorage( azBS, "File Storage", "Office documents")
 AzureWebApp( azWa, "WOPI Host", "Provides Office Online access to the blob store")
 AzureCosmosDb( azCDb, "Metadata", "Document Metadata")
+AzureKeyVault( azKv, "Key Vault", "Secret Store")
 
 Rel(user, azWa, "Uses", "HTTPS")
 Rel( azWa, azBS, "Read/Write file")
 Rel( azWa, azCDb, "Read/Write file Metadata")
 Rel( azWa, azAd, "Register app with AD")
+Rel( azWa, azKv, "Read secrets")
 
 
 @enduml
