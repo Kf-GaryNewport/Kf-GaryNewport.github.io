@@ -23,7 +23,7 @@ Rel( disco, azWa, "Maps")
 Rel(user, azWa, "Uses", "HTTPS")
 Rel( azWa, azBS, "Read/Write file")
 Rel( azWa, azCDb, "Read/Write file Metadata")
-Rel( azWa, azAv, "Register app with AD")
+Rel( azWa, azKv, "Register app with AD")
 
 
 @enduml
