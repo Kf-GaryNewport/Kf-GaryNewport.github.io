@@ -8,6 +8,7 @@
 !includeurl AzurePuml/Web/AzureWebApp.puml
 !includeurl AzurePuml/Security/AzureKeyVault.puml
 
+
 Person(user, "Office Online", "*.wopihost.hub.knightfrank.com")
 
 AzureActiveDirectory( azAd, "Active Directory", "App registration")
@@ -19,8 +20,7 @@ AzureKeyVault( azKv, "Key Vault", "Secret Store")
 Rel(user, azWa, "Uses", "HTTPS")
 Rel( azWa, azBS, "Read/Write file")
 Rel( azWa, azCDb, "Read/Write file Metadata")
-Rel( azWa, azAd, "Register app with AD")
-Rel( azWa, azKv, "Read secrets")
+Rel( azWa, azAv, "Register app with AD")
 
 
 @enduml
