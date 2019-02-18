@@ -6,25 +6,18 @@
 !includeurl AzurePuml/Identity/AzureActiveDirectory.puml
 !includeurl AzurePuml/Storage/AzureBlobStorage.puml
 !includeurl AzurePuml/Web/AzureWebApp.puml
-!includeurl AzurePuml/Security/AzureKeyVault.puml
-
 
 Person(user, "Office Online", "*.wopihost.hub.knightfrank.com")
-Container(disco, "Discovery", "Xml")
 
 AzureActiveDirectory( azAd, "Active Directory", "App registration")
 AzureBlobStorage( azBS, "File Storage", "Office documents")
 AzureWebApp( azWa, "WOPI Host", "Provides Office Online access to the blob store")
 AzureCosmosDb( azCDb, "Metadata", "Document Metadata")
-AzureKeyVault( azKv, "Key Vault", "Secret Store")
 
-Rel( user, disco, "Uses", "HTTPS")
-Rel( disco, azWa, "Maps")
 Rel(user, azWa, "Uses", "HTTPS")
 Rel( azWa, azBS, "Read/Write file")
 Rel( azWa, azCDb, "Read/Write file Metadata")
 Rel( azWa, azAd, "Register app with AD")
-Rel( azWa, azKv, "Read Secrets")
 
 
 @enduml
