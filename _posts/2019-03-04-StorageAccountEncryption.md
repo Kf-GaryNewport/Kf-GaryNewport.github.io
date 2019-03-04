@@ -24,6 +24,15 @@ To use your own key, you will need.
 * Storage needs permissons to access your Key Vault.
     * Need to grant wrapKey, unwrapKey privileges
 
+## Data Encryption
+A key point to understand, the data itself is not encrypted with the key. Microsoft employs a two stage encryption proces which involves a DEK (Data Encryption Key) and a KEK (Key Encryption Key). The DEK is generated when the storage account is created. The DEK is it self is encrypted with a key that Microsoft holds, Its this Microsoft key that can be replaced with the users own key. 
+
+## Key Rotation
+ This is currently under development by Microsoft.
+ Key rotation is a process where the KEK (see Data Encryption above) is rotated evey 90 days, this involves decrypting the existing key and reencrypting it with a newly generated key. 
+
+ The aim is to rotate the encryption key every 90 days.
+ This does not involved decrypting and re-encrypting the data.
 
 ## References
 * https://docs.microsoft.com/en-us/azure/storage/common/storage-service-encryption

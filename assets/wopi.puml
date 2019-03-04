@@ -6,21 +6,51 @@
 !includeurl AzurePuml/Identity/AzureActiveDirectory.puml
 !includeurl AzurePuml/Storage/AzureBlobStorage.puml
 !includeurl AzurePuml/Web/AzureWebApp.puml
+!includeurl AzurePuml/Security/AzureKeyVault.puml
+!includeurl AzurePuml/DevOps/AzureApplicationInsights.puml
+!includeurl AzurePuml/Networking/AzureTrafficManager.puml
+!includeurl AzurePuml/Networking/AzureVPNGateway.puml
+!includeurl AzurePuml/Networking/AzureVirtualNetwork.puml
+
+LAYOUT_TOP_DOWN
 
 Person(user, "Office Online", "*.wopihost.hub.knightfrank.com")
-Container( disco, "Discovery", "Xml")
+Container( disco, "Office Online\nServer", "Xml")
+AzureTrafficManager( azTm, "Traffic Manager", "Traffic Manager")
 
-AzureActiveDirectory( azAd, "Active Directory", "App registration")
-AzureBlobStorage( azBS, "File Storage", "Office documents")
-AzureWebApp( azWa, "WOPI Host", "Provides Office Online access to the blob store")
-AzureCosmosDb( azCDb, "Metadata", "Document Metadata")
+frame "Northern Europe" as azRGNe {
+    AzureWebApp( azWaNe, "WOPI Host", "Provides Office Online access to the blob store")
+    AzureBlobStorage( azBSNe, "File Storage", "Office documents")
+    AzureVPNGateway( azVpnNe, "VPN Gateway", "fred")
+}
 
-Rel(user, azWa, "Uses", "HTTPS")
-Rel( azWa, azBS, "Read/Write file")
-Rel( azWa, azCDb, "Read/Write file Metadata")
-Rel( azWa, azAd, "Register app with AD")
-Rel( azWa, disco, "Reads")
-Rel( disco, user, "Reads")
+frame "Western Europe" as azRGwe{
+    AzureVPNGateway( azVpnWe, "VPN Gateway", "fred")
+    AzureBlobStorage( azBSWe, "File Storage(Copy)", "Office documents")
+    AzureWebApp( azWaWe, "WOPI Host", "Provides Office Online access to the blob store")
+}
+
+System_Boundary(azGC, "Shared Components"){
+    AzureActiveDirectory( azAd, "Active Directory", "App registration")
+    AzureCosmosDb( azCDb, "Metadata", "Document Metadata")
+    AzureKeyVault(azKv, "KeyVault", "KeyVault")
+    AzureApplicationInsights( azAI, "Application Insights", "Application Insights")
+}
+
+azBSNe .right.> azBSWe
+
+azTm --> azWaNe
+azTm --> azWaWe
+user --> azTm
+
+azWaNe --> azGC
+azWaWe --> azGC
+
+azWaNe -up-> azVpnNe
+azWaWe -up-> azVpnWe
+
+azVpnNe --> disco
+azVpnWe --> disco
 
 
 @enduml
