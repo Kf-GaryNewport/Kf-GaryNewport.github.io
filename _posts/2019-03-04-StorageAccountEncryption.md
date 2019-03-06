@@ -25,7 +25,8 @@ To use your own key, you will need.
     * Need to grant wrapKey, unwrapKey privileges
 
 ## Data Encryption
-A key point to understand, the data itself is not encrypted with the key. Microsoft employs a two stage encryption process which involves a DEK (Data Encryption Key) and a KEK (Key Encryption Key). The DEK is generated when the storage account is created. The DEK is it self is encrypted with a key that Microsoft holds, Its this Microsoft key that can be replaced with the users own key. 
+A key point to understand, the data itself is not encrypted with the key. Microsoft employs a two stage encryption process which involves a DEK (Data Encryption Key) and a KEK (Key Encryption Key). 
+The DEK is generated when the storage account is created, and is used to encrypt the data. The DEK is it self is encrypted with a key that Microsoft holds (KEK), Its this Microsoft key that can be replaced with the users own key. 
 
 ## Key Rotation
  This is currently under development by Microsoft.
