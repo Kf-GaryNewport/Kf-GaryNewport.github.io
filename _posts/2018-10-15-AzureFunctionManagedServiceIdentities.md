@@ -1,10 +1,10 @@
 ---
 layout: post
-title: Azure Function Managed Service Identitiess
+title: Azure Function Managed Service Identities
 ---
 
 # Bootstrapping
-The trouble with many security policies is that at least some element needs to know the password in order to instigate access to resources. That used to mean putting credentials into a configuration file or inserting them during a deployment process. The Manages Service Identities (MSI) facility has got around this by allowing all your resources to register a service principal with Active Directory, and then each resource grants the desired level of access to that service principal. By doing the security in this way each of the resources never need to know credentials, they only request access and deal with the response. So, by removing credentials from the equation then there is no need to have to rotate passwords or update certs on a timely basis as they simply don’t exist between the resources.
+The trouble with many security policies is that at least some element needs to know the password in order to instigate access to resources. That used to mean putting credentials into a configuration file or inserting them during a deployment process. The Manage Service Identities (MSI) facility has got around this by allowing all your resources to register a service principal with Active Directory, and then each resource grants the desired level of access to that service principal. By doing the security in this way, each of the resources never need to know credentials, they only request access and deal with the response. So, by removing credentials from the equation then there is no need to have to rotate passwords or update certs on a timely basis as they simply don’t exist between the resources.
 
 # So how do we accomplish this.
 Within the azure function arm template declaration insert the following, this will register the function with your active directory.

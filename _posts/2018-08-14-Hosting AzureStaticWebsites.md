@@ -3,12 +3,14 @@ layout: post
 title: Hosting Azure Static Websites
 ---
 
-Microsoft announced that you can now enable static websites on a storage account. This will generate a new url  for your site, and enable read access to any static html files within the blob storage.
+Microsoft announced that you can now enable static websites on a storage account. This will generate a new URL  for your site, and enable read access to any static html files within the blob storage.
 There's a link to Microsoft's preview announcement here.
 https://azure.microsoft.com/en-us/blog/azure-storage-static-web-hosting-public-preview/
+
 At the moment I prefer the approach made by Anthony Chu in his blog post
 https://anthonychu.ca/post/azure-functions-static-file-server/
-He hosts a index.html file within a Azure function Http Trigger request. Although this only returns a static file, it does offer allow you to create a on demand website.
+
+He hosts a index.html file within a Azure function Http Trigger request. Although this only returns a static file, it does allow you to create a on demand website.
 The Html file you serve up can should only contain links to CDN resources or to readable JS or other files within your storage account blob storage.
 By proxying the azure function then everything could be accessed via the same URL.
 

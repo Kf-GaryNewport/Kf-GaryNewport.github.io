@@ -3,9 +3,9 @@ layout: post
 title: Azure Application Hosting
 ---
 
-Each component is a separately deploy-able artifact, but we need a coherent single URL to link them all.
+Each component is a separately deploy-able artefact, but we need a coherent single URL to link them all.
 The normal method would be to deploy out each individual component to Azure and each would get its own 'aurewebsites.com' URL. This approach would lead to confusion, as it would mean you would need to keep lists of URL's
-By using the proxy feature of Azure Functions we can define routes to each of the installed artifacts while preserving a single URL for the application.
+By using the proxy feature of Azure Functions we can define routes to each of the installed artefacts while preserving a single URL for the application.
 So:-
 
 |Route | Result|
@@ -15,7 +15,7 @@ So:-
 |zoomalong.co.uk/static | Azure Storage Account|
 
 Used to store any files or images etc.
-Because both the API and Web Application exist on the same URL then we wont run into any CORS issues.
+Because both the API and Web Application exist on the same URL then we won’t run into any CORS issues.
 Remember to bind the DNS Cname to the Azure function proxy and not the website.
 
 ![aah1](/images/aah1.png)
@@ -70,5 +70,6 @@ Change in the build.
 |proxies.appRewsources.backendUri | https:// azure storage account blob strorage|
 
 * Repeat in the release.
+
 
 
