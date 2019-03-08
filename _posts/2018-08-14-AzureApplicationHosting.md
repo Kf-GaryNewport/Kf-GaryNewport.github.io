@@ -15,7 +15,7 @@ So:-
 |zoomalong.co.uk/static | Azure Storage Account|
 
 Used to store any files or images etc.
-Because both the API and Web Application exist on the same URL then we won’t run into any CORS issues.
+Because both the API and Web Application exist on the same URL then we wonï¿½t run into any CORS issues.
 Remember to bind the DNS Cname to the Azure function proxy and not the website.
 
 ![aah1](/images/aah1.png)
@@ -57,7 +57,7 @@ proxies.json
 Change in the build.
 * Build should include Azure App Service Deploy V3 or greater
 * Update this section with the file to be changed.
-* ![aah2](/images/aah2.png)
+  * ![aah2](/images/aah2.png)
 * Add your substitutions to the Variables section
 	* As Path to variable to be replace element.element.element
 	* Value to be replaced.
