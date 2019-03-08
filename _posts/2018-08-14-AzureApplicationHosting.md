@@ -67,7 +67,7 @@ Change in the build.
 |-----|---|
 |proxies.api.backendUri | https://azure website url|
 |proxies.app.backendUri | https://azure function url|
-|proxies.appRewsources.backendUri | https:// azure storage account blob strorage|
+|proxies.appResources.backendUri | https:// azure storage account blob strorage|
 
 * Repeat in the release.
 
