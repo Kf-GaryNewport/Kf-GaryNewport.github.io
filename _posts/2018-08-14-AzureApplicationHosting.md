@@ -15,7 +15,7 @@ So:-
 |zoomalong.co.uk/static | Azure Storage Account|
 
 Used to store any files or images etc.
-Because both the API and Web Application exist on the same URL then we won�t run into any CORS issues.
+Because both the API and Web Application exist on the same URL then we won't run into any CORS issues.
 Remember to bind the DNS Cname to the Azure function proxy and not the website.
 
 ![aah1](/images/aah1.png)
