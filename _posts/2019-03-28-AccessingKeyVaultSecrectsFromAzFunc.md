@@ -21,10 +21,13 @@ So How do we do it, in ARM Templates
     * This creates a Appsetting which can be seen in the code, and assigns to it a KeyVault secret. 
       * N.B The AppSetting gets its value from the KeyVault when the app is instantiated.
       * N.B Getting the 
-``` json
-"name": "appsettings",
-          "properties": {
-            "applicationuser": "[concat('@Microsoft.KeyVault(SecretUri=', reference('applicationuser').secretUriWithVersion, ')')]",
+``` JSON
+    {
+    "name": "appsettings",
+        "properties": {
+            "applicationuser": "[concat('@Microsoft.KeyVault(SecretUri=', reference('applicationuser').secretUriWithVersion, ')')]"
+        }
+    }
 ```
 * Define a KeyVault
   * Set access policy 
@@ -64,7 +67,7 @@ So How do we do it, in ARM Templates
 ## Application Usage
 
 Access as you would a config variable 
-``` c#
+``` C#
         private static string StorageAccount = System.Environment.GetEnvironmentVariable("StorageAccount");
 ```
 
