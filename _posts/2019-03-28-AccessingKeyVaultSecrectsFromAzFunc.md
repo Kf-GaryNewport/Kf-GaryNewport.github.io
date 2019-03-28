@@ -22,15 +22,13 @@ So How do we do it, in ARM Templates
   * Add KeyVault Key names to App Settings
     * The KeyVault key is not a secret.
     * This creates a Appsetting which can be seen in the code, and assigns to it a KeyVault secret. 
-      * N.B The AppSetting gets its value from the KeyVault when the app is instantiated.
-      * N.B Getting the 
+
 ``` JSON
-    {
-    "name": "appsettings",
-        "properties": {
-            "applicationuser": "[concat('@Microsoft.KeyVault(SecretUri=', reference('applicationuser').secretUriWithVersion, ')')]"
-        }
+"name": "appsettings",
+    "properties": {
+        "applicationuser": "[concat('@Microsoft.KeyVault(SecretUri=', reference('applicationuser').secretUriWithVersion, ')')]"
     }
+
 ```
 * Define a KeyVault
   * Set access policy 
