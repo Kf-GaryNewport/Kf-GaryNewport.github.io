@@ -1,4 +1,7 @@
-# Getting Secrects from KeyVault in Azure Functions
+---
+layout: post
+title: Getting Secrects from KeyVault in Azure Functions
+---
 
 KeyVault is a central resource where you should be storing all of your applications secrects/connection strings and config.
 The reason for using KeyVault rather than using a local config file, is really quite simple. config files dont exist for most azure artifacts, and if they did, it would encourage the sort of key management that has plagued .NET since day one.
