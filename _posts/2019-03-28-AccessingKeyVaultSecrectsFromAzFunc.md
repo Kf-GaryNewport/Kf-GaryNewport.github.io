@@ -1,11 +1,11 @@
 ---
 layout: post
-title: Getting Secrects from KeyVault in Azure Functions
+title: Getting Secrets from KeyVault in Azure Functions
 ---
 
-KeyVault is a central resource where you should be storing all of your applications secrects/connection strings and config.
-The reason for using KeyVault rather than using a local config file, is really quite simple. config files dont exist for most azure artifacts, and if they did, it would encourage the sort of key management that has plagued .NET since day one.
-By using the KeyVault in this way means that the application code doesnt need to know anything about the enviroment or its configuration. The build process should inject any secrets into the parameters file, which the ARM Template deployment consumes and deploys.
+KeyVault is a central resource where you should be storing all of your applications secrets/connection strings and config.
+The reason for using KeyVault rather than using a local config file, is really quite simple. config files dont exist for most azure artefacts, and if they did, it would encourage the sort of key management that has plagued .NET since day one.
+By using the KeyVault in this way means that the application code doesn't need to know anything about the environment or its configuration. The build process should inject any secrets into the parameters file, which the ARM Template deployment consumes and deploys.
 
 * The Azure Functions AppSettings values are set to point to the keys in the KeyVault. 
 * The AppSetting gets its value from the KeyVault when the app is instantiated.
