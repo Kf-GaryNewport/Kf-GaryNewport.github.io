@@ -1,0 +1,31 @@
+@startuml
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+title Mediator Pattern
+
+' classes
+mediator : mediate()
+concMediator : mediate()
+concColleague1 : getState()
+concColleague1 : action1()
+concColleague2 : getState()
+concColleague2 : action2()
+
+' Set screen position
+mediator <- colleague : mediator
+mediator -[hidden]-> concMediator
+colleague -[hidden]-> concColleague1
+colleague -[hidden]-> concColleague2
+concColleague1 -[hidden]> concColleague2
+
+' Relationship
+concMediator --|> mediator
+concColleague1 --|> colleague
+concColleague2 --|> colleague
+concMediator -> concColleague1
+concMediator -> concColleague2
+
+
+@enduml
