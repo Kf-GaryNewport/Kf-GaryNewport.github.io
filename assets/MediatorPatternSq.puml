@@ -13,4 +13,16 @@ activate Colleague1
     deactivate Mediator 
 deactivate Colleague1
 
+Colleague2 --> Mediator : mediate(c2)
+activate Colleague2
+    activate Mediator
+        Colleague2 <-- Mediator : getState()
+            activate Colleague2
+            deactivate Colleague2
+        Mediator --> Colleague1 : action1()
+            activate Colleague1
+            deactivate Colleague1        
+    deactivate Mediator 
+deactivate Colleague2
+
 @enduml
