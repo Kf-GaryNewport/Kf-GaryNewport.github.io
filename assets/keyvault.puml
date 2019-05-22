@@ -1,5 +1,5 @@
 @startuml Hello World
-!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/1-0/dist
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
 !includeurl AzurePuml/AzureCommon.puml
 !includeurl AzurePuml/Identity/all.puml
 !includeurl AzurePuml/Compute/all.puml

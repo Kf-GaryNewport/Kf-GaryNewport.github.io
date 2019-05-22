@@ -1,0 +1,31 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+title Mediator Pattern
+
+Container(mediator,"Mediator","")
+Container(concMediator,"Concrete Mediator","")
+Container(colleague,"Colleague","")
+Container(concColleague1,"Concrete Colleague1","")
+Container(concColleague2,"Concrete Colleague2","")
+
+' Set screen position
+mediator <- colleague
+mediator -[hidden]-> concMediator
+colleague -[hidden]-> concColleague1
+colleague -[hidden]-> concColleague2
+
+concMediator --|> mediator
+concColleague1 --|> colleague
+concColleague2 --|> colleague
+
+concMediator -> concColleague1
+concMediator -> concColleague2
+
+
+@enduml

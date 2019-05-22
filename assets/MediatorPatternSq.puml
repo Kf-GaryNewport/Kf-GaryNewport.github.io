@@ -1,0 +1,16 @@
+@startuml
+title Mediator Pattern
+
+Colleague1 --> Mediator : mediate(c1)
+activate Colleague1
+    activate Mediator
+        Colleague1 <-- Mediator : getState()
+            activate Colleague1
+            deactivate Colleague1
+        Mediator --> Colleague2 : action2()
+            activate Colleague2
+            deactivate Colleague2
+    deactivate Mediator 
+deactivate Colleague1
+
+@enduml
