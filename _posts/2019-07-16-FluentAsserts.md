@@ -18,5 +18,5 @@ E.g.
 
   Message: Expected response.StatusCode to be NotFound, but found OK.
 
-  ## Reference: 
+ ## Reference: 
   * https://fluentassertions.com/
