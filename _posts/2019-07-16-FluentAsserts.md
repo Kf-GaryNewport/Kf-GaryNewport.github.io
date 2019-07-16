@@ -1,9 +1,7 @@
 ---
 layout: post
-title: Fluent Asserts
+title: Fluent Assertions
 ---
-
-# URL: https://fluentassertions.com/
 
 Fluent Assertions is a helper library for testing that tries to add better context to your assertions.
 
@@ -19,3 +17,6 @@ E.g.
   Other than making the calling more explicit, it also gives a a clearer error message on failure.
 
   Message: Expected response.StatusCode to be NotFound, but found OK.
+
+  ## Reference: 
+  * https://fluentassertions.com/
