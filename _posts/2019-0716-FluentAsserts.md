@@ -1,0 +1,21 @@
+---
+layout: post
+title: Fluent Asserts
+---
+
+# URL: https://fluentassertions.com/
+
+Fluent Assertions is a helper library for testing that tries to add better context to your assertions.
+
+E.g.
+* Where you would have used 
+  * Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+* or should it have been 
+  * Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+
+* You can now do this :-
+  * response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+  Other than making the calling more explicit, it also gives a a clearer error message on failure.
+
+  Message: Expected response.StatusCode to be NotFound, but found OK.
