@@ -3,7 +3,7 @@ layout: post
 title: SAS Storage Account Access
 ---
 
-# Best practices when using SAS
+## Best practices when using SAS
 When you use shared access signatures in your applications, you need to be aware of two potential risks:
 
 * If a SAS is leaked, it can be used by anyone who obtains it, which can potentially compromise your storage account.
@@ -22,11 +22,12 @@ The following recommendations for using shared access signatures can help mitiga
 * **Don't always use SAS.** Sometimes the risks associated with a particular operation against your storage account outweigh the benefits of SAS. For such operations, create a middle-tier service that writes to your storage account after performing business rule validation, authentication, and auditing. Also, sometimes it's simpler to manage access in other ways. For example, if you want to make all blobs in a container publicly readable, you can make the container Public, rather than providing a SAS to every client for access.
 * **Use Storage Analytics to monitor your application.** You can use logging and metrics to observe any spike in authentication failures due to an outage in your SAS provider service or to the inadvertent removal of a stored access policy. See the Azure Storage Team Blog for additional information.
 
-# Authorization
+## Authorization
 * Azure Active Directory
   * Considered to be the most secure, as access is keyed to the users AD roles and permissions.
 * Shared Key
- * Seen as the 'Root key' to the storage account, and has access to perform all operations.
+  * The Shared Key is the 'Root key' to the storage account, and has access to perform all operations.
+  * This should not be shared or distributed.
 * Shared Access Signature
   * SAS tokens can be generated, and allow access to resources. The SAS tokens can be limited to:-
   * Time
@@ -35,5 +36,5 @@ The following recommendations for using shared access signatures can help mitiga
 * Anonymous access to containers and blobs
   * You can set the storage account, so that anyone can access blobs or containers. This is obviously the least secure 
 
-# Reference
+## Reference
 * https://docs.microsoft.com/en-us/azure/storage/common/storage-dotnet-shared-access-signature-part-1
