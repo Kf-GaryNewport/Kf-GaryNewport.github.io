@@ -4,39 +4,49 @@
 !includeurl AzurePuml/AzureCommon.puml
 !includeurl AzurePuml/Integration/AzureLogicApps.puml
 
-LAYOUT_LEFT_RIGHT()
+LAYOUT_TOP_DOWN
 
 Message( user, "Message W\ Data")
-AzureLogicApps( endpoint, "Label", "Technology", "LoqateService")
-AzureLogicApps( find, "Label", "Technology", "LoqateFindService")
 
-Message( msgI, "Message")
-Splitter( sp1, "De-batch")
-DocumentMessage( msgD1)
+frame "LoqateService" as f {
+    'AzureLogicApps( endpoint, "Label", "Technology", "LoqateService")
+    AzureLogicApps( find, "Label", "Technology", "LoqateFindService")
+    Message( msgI, "Message")
+    Splitter( sp1, "De-batch")
+    DocumentMessage( msgD1)
+}
 
-MessageFilter( add, "Address")
-MessageFilter( nadd, "not Address")
-AzureLogicApps( retrieve, "Label", "Technology", "LoqateRetrieveService")
-Message( msgO, "Message")
-Splitter( sp2, "De-batch")
-DocumentMessage( msgD)
-MessageStore( db, "DataStore")
+frame "Not Address" as na {
+    MessageFilter( nadd, "not Address")
+}
 
-user --> endpoint
-endpoint --> find
-find --> msgI
-msgI --> sp1
-sp1 --> msgD1
+frame "Address" as a {
+    MessageFilter( add, "Address")
+    AzureLogicApps( retrieve, "Label", "Technology", "LoqateRetrieveService")
+    Message( msgO, "Message")
+    Splitter( sp2, "De-batch")
+    DocumentMessage( msgDb)
+    MessageStore( db, "DataStore")
+}
 
-msgD1 --> nadd
-nadd --> endpoint
+f -[hidden]down-> na
+na -[hidden]right-> a
+
+user --> find
+'endpoint --> find
+find -> msgI
+msgI -> sp1
+sp1 -> msgD1
+
+msgD1 -[bold,#red]-> nadd
+nadd -[bold,#red]-> find
 
 msgD1 --> add
 add --> retrieve
-retrieve --> msgO
-msgO --> sp2
-sp2 --> msgD
-msgD --> db
+retrieve -> msgO
+msgO -> sp2
+sp2 -> msgDb
+msgDb -> db
 
 
 @enduml
