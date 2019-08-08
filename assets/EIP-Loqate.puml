@@ -1,4 +1,4 @@
-@startuml Claim Check
+@startuml Loqate
 !includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
 !define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
 !includeurl AzurePuml/AzureCommon.puml
