@@ -1,0 +1,20 @@
+@startuml EIP Claim Check
+!includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
+
+LAYOUT_LEFT_RIGHT()
+
+Message( msgI, "Message W\ Data")
+ContentFilter( cf, "secure filter <$claim_check>")
+Message( msgCC, "Message W\ <$claim_check>")
+MessageStore( db, "DataStore")
+DataEnricher( de, "Enricher", db)
+Message( msgO, "Message W\ Data")
+
+
+msgI --> cf
+cf --> msgCC
+cf -down-> db
+msgCC --> de
+de --> msgO
+
+@enduml
