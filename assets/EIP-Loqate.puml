@@ -1,0 +1,42 @@
+@startuml Claim Check
+!includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Integration/AzureLogicApps.puml
+
+LAYOUT_LEFT_RIGHT()
+
+Message( user, "Message W\ Data")
+AzureLogicApps( endpoint, "Label", "Technology", "LoqateService")
+AzureLogicApps( find, "Label", "Technology", "LoqateFindService")
+
+Message( msgI, "Message")
+Splitter( sp1, "De-batch")
+DocumentMessage( msgD1)
+
+MessageFilter( add, "Address")
+MessageFilter( nadd, "not Address")
+AzureLogicApps( retrieve, "Label", "Technology", "LoqateRetrieveService")
+Message( msgO, "Message")
+Splitter( sp2, "De-batch")
+DocumentMessage( msgD)
+MessageStore( db, "DataStore")
+
+user --> endpoint
+endpoint --> find
+find --> msgI
+msgI --> sp1
+sp1 --> msgD1
+
+msgD1 --> nadd
+nadd --> endpoint
+
+msgD1 --> add
+add --> retrieve
+retrieve --> msgO
+msgO --> sp2
+sp2 --> msgD
+msgD --> db
+
+
+@enduml
