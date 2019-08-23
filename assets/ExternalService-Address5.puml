@@ -1,0 +1,34 @@
+@startuml
+
+class FindQueryResultsItem {
+    + Id : string <<get>> <<set>>
+    + Type : string <<get>> <<set>>
+    + Text : string <<get>> <<set>>
+    + Highlight : string <<get>> <<set>>
+    + Description : string <<get>> <<set>>
+    + Language : string <<get>> <<set>>
+    + Country : string <<get>> <<set>>
+    + Container : string <<get>> <<set>>
+}
+ConfigurationElement <|-- FindQueryResultsItem
+
+class RetrieveQueryResultsItem {
+    + Id : string <<get>> <<set>>
+    + BuildingNumber : string <<get>> <<set>>
+    + City : string <<get>> <<set>>
+    + SubBuilding : string <<get>> <<set>>
+    + SecondaryStreet : string <<get>> <<set>>
+    + Street : string <<get>> <<set>>
+    + District : string <<get>> <<set>>
+    + Line1 : string <<get>> <<set>>
+    + Line2 : string <<get>> <<set>>
+    + Line3 : string <<get>> <<set>>
+    + Province : string <<get>> <<set>>
+    + ProvinceName : string <<get>> <<set>>
+    + PostalCode : string <<get>> <<set>>
+    + Type : string <<get>> <<set>>
+    + CountryIsoCode : string <<get>> <<set>>
+}
+ConfigurationElement <|-- RetrieveQueryResultsItem
+
+@enduml

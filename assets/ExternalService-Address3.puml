@@ -1,0 +1,28 @@
+@startuml
+
+class FakeAddressServiceConfiguration {
+    + {static} Configuration : FakeAddressServiceConfiguration <<get>>
+    + RetrieveQueryResults : RetrieveQueryResultsCollection <<get>>
+    + FindQueryResults : FindQueryResultsCollection <<get>>
+}
+
+ConfigurationSection <|-- FakeAddressServiceConfiguration
+IFakeAddressServiceConfiguration <|-- FakeAddressServiceConfiguration
+
+interface IFakeAddressServiceConfiguration {
+    RetrieveQueryResults : RetrieveQueryResultsCollection <<get>>
+    FindQueryResults : FindQueryResultsCollection <<get>>
+}
+
+interface IPcaPredictServiceConfiguration {
+    AuthKey : string <<get>>
+}
+
+class PcaPredictServiceConfiguration {
+    + {static} Configuration : PcaPredictServiceConfiguration <<get>>
+    + AuthKey : string <<get>> <<set>>
+}
+ConfigurationSection <|-- PcaPredictServiceConfiguration
+IPcaPredictServiceConfiguration <|-- PcaPredictServiceConfiguration
+
+@enduml

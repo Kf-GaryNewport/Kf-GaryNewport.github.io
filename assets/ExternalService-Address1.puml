@@ -1,0 +1,65 @@
+@startuml
+
+class ExternalAddressServiceProfile {
+    + {static} Initialize(profile:Profile) : void
+}
+
+class AddressServiceFindQuery {
+    + Text : string <<get>> <<set>>
+    + Country : string <<get>> <<set>>
+    + Limit : int <<get>> <<set>>
+    + Language : string <<get>> <<set>>
+    + Container : string <<get>> <<set>>
+}
+
+class AddressServiceFindQueryResult {
+    + Id : string <<get>> <<set>>
+    + Type : string <<get>> <<set>>
+    + Text : string <<get>> <<set>>
+    + Highlight : string <<get>> <<set>>
+    + Description : string <<get>> <<set>>
+    + GroupCount : int <<get>> <<set>>
+    + Container : string <<get>> <<set>>
+}
+
+class AddressServiceFindQueryResults {
+    + AddressServiceFindQueryResults()
+    + Results : IEnumerable<AddressServiceFindQueryResult>
+}
+
+class AddressServiceRetrieveQuery {
+    + Id : string <<get>> <<set>>
+}
+
+class AddressServiceRetrieveQueryResult {
+    + Id : string <<get>> <<set>>
+    + Language : string <<get>> <<set>>
+    + Department : string <<get>> <<set>>
+    + Company : string <<get>> <<set>>
+    + SubBuilding : string <<get>> <<set>>
+    + BuildingNumber : string <<get>> <<set>>
+    + BuildingName : string <<get>> <<set>>
+    + SecondaryStreet : string <<get>> <<set>>
+    + Street : string <<get>> <<set>>
+    + Block : string <<get>> <<set>>
+    + Neighbourhood : string <<get>> <<set>>
+    + District : string <<get>> <<set>>
+    + City : string <<get>> <<set>>
+    + Line1 : string <<get>> <<set>>
+    + Line2 : string <<get>> <<set>>
+    + Line3 : string <<get>> <<set>>
+    + Line4 : string <<get>> <<set>>
+    + Line5 : string <<get>> <<set>>
+    + Province : string <<get>> <<set>>
+    + ProvinceName : string <<get>> <<set>>
+    + ProvinceCode : string <<get>> <<set>>
+    + PostalCode : string <<get>> <<set>>
+    + CountryName : string <<get>> <<set>>
+    + CountryIsoCode : string <<get>> <<set>>
+    + Label : string <<get>> <<set>>
+    + Type : string <<get>> <<set>>
+    + UdprnKey : string <<get>> <<set>>
+    + POBoxNumber : string <<get>> <<set>>
+}
+
+@enduml

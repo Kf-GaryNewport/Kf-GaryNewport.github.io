@@ -1,0 +1,18 @@
+@startuml
+
+class FindQueryResultsCollection {
+    + GetResults(searchTerm:string, language:string, country:string) : IEnumerable<AddressServiceFindQueryResult>
+    # <<override>> CreateNewElement() : ConfigurationElement
+    # <<override>> GetElementKey(element:ConfigurationElement) : object
+}
+
+ConfigurationElementCollection <|-- FindQueryResultsCollection
+
+class RetrieveQueryResultsCollection {
+    + GetResults(id:string) : IEnumerable<AddressServiceRetrieveQueryResult>
+    # <<override>> CreateNewElement() : ConfigurationElement
+    # <<override>> GetElementKey(element:ConfigurationElement) : object
+}
+ConfigurationElementCollection <|-- RetrieveQueryResultsCollection
+
+@enduml

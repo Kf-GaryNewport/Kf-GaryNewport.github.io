@@ -4,31 +4,6 @@ class ExternalAddressServiceProfile {
     + {static} Initialize(profile:Profile) : void
 }
 
-
-class PcaPredictAddressService {
-    - <<readonly>> findService : IFindService
-    - <<readonly>> retrieveService : IRetrieveService
-    - <<readonly>> configurationSection : IPcaPredictServiceConfiguration
-    + PcaPredictAddressService(configurationSection:IPcaPredictServiceConfiguration)
-    + Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
-    + Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
-}
-
-IExternalAddressService <|-- PcaPredictAddressService
-
-interface IExternalAddressService {
-    Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
-    Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
-}
-
-class FakeAddressService {
-    - <<readonly>> configuration : IFakeAddressServiceConfiguration
-    + FakeAddressService(configuration:IFakeAddressServiceConfiguration)
-    + Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
-    + Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
-}
-IExternalAddressService <|-- FakeAddressService
-
 class AddressServiceFindQuery {
     + Text : string <<get>> <<set>>
     + Country : string <<get>> <<set>>
@@ -87,6 +62,31 @@ class AddressServiceRetrieveQueryResult {
     + POBoxNumber : string <<get>> <<set>>
 }
 
+class PcaPredictAddressService {
+    - <<readonly>> findService : IFindService
+    - <<readonly>> retrieveService : IRetrieveService
+    - <<readonly>> configurationSection : IPcaPredictServiceConfiguration
+    + PcaPredictAddressService(configurationSection:IPcaPredictServiceConfiguration)
+    + Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
+    + Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
+}
+
+IExternalAddressService <|-- PcaPredictAddressService
+
+interface IExternalAddressService {
+    Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
+    Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
+}
+
+class FakeAddressService {
+    - <<readonly>> configuration : IFakeAddressServiceConfiguration
+    + FakeAddressService(configuration:IFakeAddressServiceConfiguration)
+    + Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
+    + Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
+}
+IExternalAddressService <|-- FakeAddressService
+
+
 class FakeAddressServiceConfiguration {
     + {static} Configuration : FakeAddressServiceConfiguration <<get>>
     + RetrieveQueryResults : RetrieveQueryResultsCollection <<get>>
@@ -95,26 +95,6 @@ class FakeAddressServiceConfiguration {
 
 ConfigurationSection <|-- FakeAddressServiceConfiguration
 IFakeAddressServiceConfiguration <|-- FakeAddressServiceConfiguration
-
-class FindQueryResultsCollection {
-    + GetResults(searchTerm:string, language:string, country:string) : IEnumerable<AddressServiceFindQueryResult>
-    # <<override>> CreateNewElement() : ConfigurationElement
-    # <<override>> GetElementKey(element:ConfigurationElement) : object
-}
-
-ConfigurationElementCollection <|-- FindQueryResultsCollection
-
-class FindQueryResultsItem {
-    + Id : string <<get>> <<set>>
-    + Type : string <<get>> <<set>>
-    + Text : string <<get>> <<set>>
-    + Highlight : string <<get>> <<set>>
-    + Description : string <<get>> <<set>>
-    + Language : string <<get>> <<set>>
-    + Country : string <<get>> <<set>>
-    + Container : string <<get>> <<set>>
-}
-ConfigurationElement <|-- FindQueryResultsItem
 
 interface IFakeAddressServiceConfiguration {
     RetrieveQueryResults : RetrieveQueryResultsCollection <<get>>
@@ -132,12 +112,32 @@ class PcaPredictServiceConfiguration {
 ConfigurationSection <|-- PcaPredictServiceConfiguration
 IPcaPredictServiceConfiguration <|-- PcaPredictServiceConfiguration
 
+class FindQueryResultsCollection {
+    + GetResults(searchTerm:string, language:string, country:string) : IEnumerable<AddressServiceFindQueryResult>
+    # <<override>> CreateNewElement() : ConfigurationElement
+    # <<override>> GetElementKey(element:ConfigurationElement) : object
+}
+
+ConfigurationElementCollection <|-- FindQueryResultsCollection
+
 class RetrieveQueryResultsCollection {
     + GetResults(id:string) : IEnumerable<AddressServiceRetrieveQueryResult>
     # <<override>> CreateNewElement() : ConfigurationElement
     # <<override>> GetElementKey(element:ConfigurationElement) : object
 }
 ConfigurationElementCollection <|-- RetrieveQueryResultsCollection
+
+class FindQueryResultsItem {
+    + Id : string <<get>> <<set>>
+    + Type : string <<get>> <<set>>
+    + Text : string <<get>> <<set>>
+    + Highlight : string <<get>> <<set>>
+    + Description : string <<get>> <<set>>
+    + Language : string <<get>> <<set>>
+    + Country : string <<get>> <<set>>
+    + Container : string <<get>> <<set>>
+}
+ConfigurationElement <|-- FindQueryResultsItem
 
 class RetrieveQueryResultsItem {
     + Id : string <<get>> <<set>>
@@ -159,3 +159,6 @@ class RetrieveQueryResultsItem {
 ConfigurationElement <|-- RetrieveQueryResultsItem
 
 @enduml
+
+
+

@@ -1,0 +1,27 @@
+@startuml
+
+class PcaPredictAddressService {
+    - <<readonly>> findService : IFindService
+    - <<readonly>> retrieveService : IRetrieveService
+    - <<readonly>> configurationSection : IPcaPredictServiceConfiguration
+    + PcaPredictAddressService(configurationSection:IPcaPredictServiceConfiguration)
+    + Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
+    + Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
+}
+
+IExternalAddressService <|-- PcaPredictAddressService
+
+interface IExternalAddressService {
+    Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
+    Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
+}
+
+class FakeAddressService {
+    - <<readonly>> configuration : IFakeAddressServiceConfiguration
+    + FakeAddressService(configuration:IFakeAddressServiceConfiguration)
+    + Find(query:AddressServiceFindQuery) : AddressServiceFindQueryResults
+    + Retrieve(query:AddressServiceRetrieveQuery) : AddressServiceRetrieveQueryResults
+}
+IExternalAddressService <|-- FakeAddressService
+
+@enduml

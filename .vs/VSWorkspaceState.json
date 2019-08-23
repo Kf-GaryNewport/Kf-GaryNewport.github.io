@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\assets"
   ],
-  "SelectedNode": "\\assets",
+  "SelectedNode": "\\assets\\ExternalService-Address.puml",
   "PreviewInSolutionExplorer": false
 }
