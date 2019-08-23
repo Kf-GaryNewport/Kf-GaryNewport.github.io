@@ -1,0 +1,5 @@
+@startuml
+class ExternalAddressServiceProfile {
+    + {static} Initialize(profile:Profile) : void
+}
+@enduml
