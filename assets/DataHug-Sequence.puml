@@ -1,0 +1,68 @@
+@startuml
+
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
+
+== Initialization ==
+
+box "Internal Service" 
+    participant Hub
+end box
+
+box "DataHug Service"
+	participant Authentication
+	participant Service
+end box
+
+Hub -> Authentication: Authentication Request
+activate Authentication
+rnote right Authentication
+ **URL**
+  https://apps.datahug.com/identity/connect/token
+ **Header**
+  Accept:application/json; charset=utf-8"
+  Content-Type:application/x-www-form-urlencoded
+ **Body**
+  client_id: **clientId**
+  client_secrect: **secret**
+  grant_type:client_credentials
+  scope:datahug_api
+endrnote
+return 200 Authentication Response JWT
+deactivate Authentication
+
+== Service Request ==
+
+Hub -> Service : 
+activate Service
+rnote right Service
+ **URL**
+  https://api.datahug.com/.....
+ **Header**
+  Accept:application/json"
+  Content-Type:application/json; charset=utf-8
+  ImpUsername: **<Imporsonate Email Address>**
+  Autorisation: Bearer **<JWT Token>**
+endrnote
+return 200 Success Response
+deactivate Service
+
+alt Error Response
+
+Hub -> Service : Request
+rnote right Service
+ **Error Responses**
+  invalid_request
+  invalid_client
+  unauthorized_client
+  access_denied
+  unsupported_response_type
+  unsupported_grant_type
+  invalid_scope
+  server_error
+  temporarily_unavailable
+endrnote
+return 40x error response
+
+end
+@enduml
