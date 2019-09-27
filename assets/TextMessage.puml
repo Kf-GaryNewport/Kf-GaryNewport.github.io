@@ -1,0 +1,32 @@
+@startuml TextMessage
+
+allow_mixing
+
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Databases/all.puml
+!includeurl AzurePuml/Web/all.puml
+!includeurl AzurePuml/Storage/all.puml
+
+Interface ITextMessageWebJobModule
+Interface ITextMessageRecipientValidator
+
+Module --> TextMessageWebJobModule
+Module --> TextMessageRecipientValidator
+
+ITextMessageWebJobModule <|-- TextMessageWebJobModule
+ITextMessageRecipientValidator <|-- TextMessageRecipientValidator
+
+
+Interface IMessagingClient
+IMessagingClient : MessageResource SendMessage(string recipientNumber, string body);
+
+IMessagingClient <|-- MessagingClient 
+MessagingClient : MessageResource SendMessage(string recipientNumber, string body)}
+IMessagingClient -right-> IServcieProvider
+
+Interface IServcieProvider
+IServcieProvider <|-- SvcSMSSpeedway
+IServcieProvider <|-- Twilio 
+
+@enduml

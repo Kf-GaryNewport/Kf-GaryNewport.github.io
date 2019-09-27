@@ -1,0 +1,71 @@
+@startuml Elastic Search Overview
+
+allow_mixing
+
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Databases/all.puml
+!includeurl AzurePuml/Web/all.puml
+!includeurl AzurePuml/Storage/all.puml
+
+'object "hub" as hub
+'object "ElasticSearch" as es
+
+'AzureWebApp(wbApp, "General", "WebJob")
+'AzureSqlDatabase(sqlDb, "Database", "Technology")
+'AzureQueueStorage(stQueue, "Queue", "Technology")
+
+'hub --> sqlDb 
+'hub --> stQueue
+'wbApp --> stQueue
+'wbApp --> es 
+
+'interface IEntityFeed
+'class EntityFeedBase {
+'    + string GetIndexName(string name)
+'    + {abstract} void FeedData(ElasticSearchQueueMessage message);
+'}
+'IEntityFeed <|-- EntityFeedBase
+'EntityFeedBase <|-- ActivityFeed
+'EntityFeedBase <|-- ActivityAdminWidgetFeed
+'EntityFeedBase <|-- AssetFeed
+'AssetFeed <|-- PropertyFeed
+'EntityFeedBase <|-- CompanyFeed
+'EntityFeedBase <|-- ContactFeed
+'EntityFeedBase <|-- DevelopmentFeed
+'EntityFeedBase <|-- InstructionFeed
+'EntityFeedBase <|-- MarketingListFeed
+'EntityFeedBase <|-- NoteFeed
+'EntityFeedBase <|-- OfferFeed
+'EntityFeedBase <|-- PitchFeed
+'EntityFeedBase <|-- PortfolioFeed
+'EntityFeedBase <|-- ReferralFeed
+'EntityFeedBase <|-- RequirementFeed
+'EntityFeedBase <|-- TenancyFeed
+
+' Set screen position
+INotification <- INotificationHandler : mediator
+INotification -[hidden]-> NotificationMessage
+
+' Relationship
+NotificationMessage --|> INotification
+
+interface INotificationHandler 
+INotificationHandler <|-- ElasticSearchQueueMessageHandler
+INotificationHandler <-- ElasticSearchQueueMessage
+NotificationMessage -> ElasticSearchQueueMessageHandler
+
+' Set screen position
+IRequest <- IRequestHandler : mediator
+IRequest -[hidden]-> RequestMessage
+
+' Relationship
+RequestMessage --|> IRequestHandler
+
+interface IRequestHandler
+IRequestHandler <|-- RefreshTenanciesCommandHandler
+IRequestHandler <-- RefreshTenanciesCommand
+RequestMessage -> RefreshTenanciesCommandHandler
+
+
+@enduml

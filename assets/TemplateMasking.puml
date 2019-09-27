@@ -1,0 +1,28 @@
+@startuml Template Masking
+
+Interface BaseDs
+BaseDs <|-- OfferDs
+BaseDs <|-- RequirementDs
+BaseDs <|-- ActivityDs
+
+Interface IDataSourceBuilder
+IDataSourceBuilder : BuildOfferDS
+IDataSourceBuilder : BuildRequirementDS
+IDataSourceBuilder : BuildActivityDS
+
+IDataSourceBuilder <|-- DataSourceBuilder
+IDataSourceBuilder -right-> BaseDs
+
+DataSourceBuilder : BuildOfferDS
+DataSourceBuilder : BuildRequirementDS
+DataSourceBuilder : BuildActivityDS
+
+DataSourceBuilder -up-> OfferDs
+DataSourceBuilder -up-> RequirementDs
+DataSourceBuilder -up-> ActivityDs
+
+Interface IDocumentGeneratorBehaviour
+IDocumentGeneratorBehaviour <|-- OfferDocumentGeneratorBehaviour
+OfferDocumentGeneratorBehaviour -right-> IDataSourceBuilder
+
+@enduml
