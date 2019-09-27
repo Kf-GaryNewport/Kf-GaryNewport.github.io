@@ -1,5 +1,7 @@
 @startuml Template Masking
 
+allow_mixing
+
 Interface BaseDs
 BaseDs <|-- OfferDs
 BaseDs <|-- RequirementDs
@@ -21,8 +23,23 @@ DataSourceBuilder -up-> OfferDs
 DataSourceBuilder -up-> RequirementDs
 DataSourceBuilder -up-> ActivityDs
 
+OfferDocumentGeneratorBehaviour : GetOffer
+OfferDocumentGeneratorBehaviour : GetRequirement
+OfferDocumentGeneratorBehaviour : GetActivity
+
 Interface IDocumentGeneratorBehaviour
 IDocumentGeneratorBehaviour <|-- OfferDocumentGeneratorBehaviour
 OfferDocumentGeneratorBehaviour -right-> IDataSourceBuilder
+
+Interface ISecurityValidator
+ISecurityValidator <|-- SecurityValidator
+OfferDocumentGeneratorBehaviour -left-> SecurityValidator
+
+Database IReadGenericRepository
+OfferDocumentGeneratorBehaviour --> IReadGenericRepository
+
+'Interface IEntityValidator
+'IEntityValidator <|-- EntityValidator
+'OfferDocumentGeneratorBehaviour -left-> EntityValidator
 
 @enduml
