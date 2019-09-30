@@ -15,17 +15,17 @@ IDataSourceBuilder : BuildActivityDS
 IDataSourceBuilder <|-- DataSourceBuilder
 IDataSourceBuilder -right-> BaseDs
 
-DataSourceBuilder : BuildOfferDS
-DataSourceBuilder : BuildRequirementDS
-DataSourceBuilder : BuildActivityDS
+DataSourceBuilder : BuildOfferDS()
+DataSourceBuilder : BuildRequirementDS()
+DataSourceBuilder : BuildActivityDS()
 
 DataSourceBuilder -up-> OfferDs
 DataSourceBuilder -up-> RequirementDs
 DataSourceBuilder -up-> ActivityDs
 
-OfferDocumentGeneratorBehaviour : GetOffer
-OfferDocumentGeneratorBehaviour : GetRequirement
-OfferDocumentGeneratorBehaviour : GetActivity
+OfferDocumentGeneratorBehaviour : GetOffer()
+OfferDocumentGeneratorBehaviour : GetRequirement()
+OfferDocumentGeneratorBehaviour : GetActivity()
 
 Interface IDocumentGeneratorBehaviour
 IDocumentGeneratorBehaviour <|-- OfferDocumentGeneratorBehaviour
