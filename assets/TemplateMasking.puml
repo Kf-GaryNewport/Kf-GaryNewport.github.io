@@ -23,16 +23,25 @@ DataSourceBuilder -up-> OfferDs
 DataSourceBuilder -up-> RequirementDs
 DataSourceBuilder -up-> ActivityDs
 
+OfferDocumentGeneratorBehaviour : List<TemplateDataSource> DataSources
 OfferDocumentGeneratorBehaviour : GetOffer()
 OfferDocumentGeneratorBehaviour : GetRequirement()
 OfferDocumentGeneratorBehaviour : GetActivity()
 
 Interface IDocumentGeneratorBehaviour
+IDocumentGeneratorBehaviour : List<TemplateDataSource> DataSources
+
 IDocumentGeneratorBehaviour <|-- OfferDocumentGeneratorBehaviour
 OfferDocumentGeneratorBehaviour -right-> IDataSourceBuilder
 
 Interface ISecurityValidator
+ISecurityValidator : GetVisibilityLevel<T>(Guid Id)
+ISecurityValidator : CheckIsNotHidden<T>(Guid Id)
+
 ISecurityValidator <|-- SecurityValidator
+SecurityValidator : GetVisibilityLevel<T>(Guid Id)
+SecurityValidator : CheckIsNotHidden<T>(Guid Id)
+
 OfferDocumentGeneratorBehaviour -left-> SecurityValidator
 
 Database IReadGenericRepository
