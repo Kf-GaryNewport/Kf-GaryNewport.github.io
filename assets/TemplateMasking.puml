@@ -40,15 +40,10 @@ ISecurityValidator : CheckIsNotHidden<T>(Guid Id)
 
 ISecurityValidator <|-- SecurityValidator
 SecurityValidator : GetVisibilityLevel<T>(Guid Id)
-SecurityValidator : CheckIsNotHidden<T>(Guid Id)
 
 OfferDocumentGeneratorBehaviour -left-> SecurityValidator
 
 Database IReadGenericRepository
 OfferDocumentGeneratorBehaviour --> IReadGenericRepository
-
-'Interface IEntityValidator
-'IEntityValidator <|-- EntityValidator
-'OfferDocumentGeneratorBehaviour -left-> EntityValidator
 
 @enduml
