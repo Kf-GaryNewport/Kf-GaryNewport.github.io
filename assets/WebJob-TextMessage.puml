@@ -18,7 +18,11 @@ Class TextMessageWebJobModule
 Class SendTextMessageQueueMessageHandler
 SendTextMessageQueueMessageHandler : Handle()
 Class SendTextMessageQueueMessage
+note "Twilio Interface" as n1
 Class MessagingClient
+MessagingClient : SendMessage()
+n1 .. MessagingClient
+
 Class TextMessageRecipientValidator
 
 Module <-- TextMessageWebJobModule
