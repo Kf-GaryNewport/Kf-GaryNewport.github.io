@@ -8,6 +8,18 @@ allow_mixing
 !includeurl AzurePuml/Web/all.puml
 !includeurl AzurePuml/Storage/all.puml
 
+LAYOUT_TOP_DOWN
+'LAYOUT_WITH_LEGEND
+
+Actor hub
+AzureQueueStorage(aqs, "Queue", "Technology", "Optional Description")
+AzureWebApp(awa, "WebJob", "Technology", "Optional Description")
+
+hub -> aqs
+aqs -> awa
+awa -> SMSService
+
+
 'Interface ITextMessageWebJobModule
 'Interface ITextMessageRecipientValidator
 
