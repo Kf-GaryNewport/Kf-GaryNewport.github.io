@@ -1,60 +1,5 @@
 @startuml TextMessage
 
-allow_mixing
-
-!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
-!includeurl AzurePuml/AzureCommon.puml
-!includeurl AzurePuml/Databases/all.puml
-!includeurl AzurePuml/Web/all.puml
-!includeurl AzurePuml/Storage/all.puml
-
-LAYOUT_TOP_DOWN
-'LAYOUT_WITH_LEGEND
-
-Actor hub
-AzureQueueStorage(aqs, "Queue", "Technology", "Optional Description")
-AzureWebApp(awa, "WebJob", "Technology", "Optional Description")
-
-hub -> aqs
-aqs -> awa
-awa -> SMSService
-
-
-'Interface ITextMessageWebJobModule
-'Interface ITextMessageRecipientValidator
-
-'Module --> TextMessageWebJobModule
-'Module --> TextMessageRecipientValidator
-
-'ITextMessageWebJobModule <|-- TextMessageWebJobModule
-'ITextMessageRecipientValidator <|-- TextMessageRecipientValidator
-
-
-'Interface IMessagingClient
-'IMessagingClient : MessageResource SendMessage(string recipientNumber, string body);
-
-'IMessagingClient <|-- MessagingClient 
-'MessagingClient : MessageResource SendMessage(string recipientNumber, string body)}
-'IMessagingClient -right-> IServcieProvider
-
-'Interface IServcieProvider
-'IServcieProvider <|-- SvcSMSSpeedway
-'IServcieProvider <|-- Twilio 
-
-
-'Interface IRequestHandler
-'IRequestHandler : Handle()
-'TextMessageQuery <.. IRequestHandler
-'TextMessageViewModel <.. IRequestHandler
-'IRequestHandler <|-- TextMessageQueryHandler
-
-'TextMessageQueryHandler : Handle(TextMessageQuery query)
-'TextMessageQueryHandler : ApplySecurity(TextMessageViewModel textMessage)
-
-
-'BaseController <|-- TextMessagesController
-
-
 ' Interfaces, Classes, Methods
 Interface INotification
 Interface INotificationHandler 
@@ -72,6 +17,9 @@ INotification -[hidden]-> TextMessageOutboxedEventHandler
 INotification <|-- TextMessageOutboxedEvent : Implements
 INotificationHandler <|-- TextMessageOutboxedEventHandler : Implements
 TextMessageOutboxedEvent -> TextMessageOutboxedEventHandler
+
+note "En Queue Message" as n1
+n1 .. TextMessageOutboxedEventHandler
 
 ' =======================
 
@@ -91,10 +39,9 @@ IRequest -[hidden]-> TextMessageQueryHandler
 
 IRequest <|-- TextMessageCommandBase
 IRequestHandler <|-- TextMessageQueryHandler : Implements
-CreateTextMessageCommand -> CreateTextMessageCommandHandler
+CreateTextMessageCommand -up-> CreateTextMessageCommandHandler
 TextMessageQueryHandler <|-- CreateTextMessageCommandHandler : Implements
-TextMessageCommandBase -> TextMessageQueryHandler
-
-
+TextMessageCommand -up-> TextMessageCommandBase
+TextMessageCommand -right-> CreateTextMessageCommandHandler
 
 @enduml
