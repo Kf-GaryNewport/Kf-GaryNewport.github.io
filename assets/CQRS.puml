@@ -1,87 +1,32 @@
 @startuml CQRS
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Storage/all.puml
 
-System_Boundary(c1, "Version 1"){
+LAYOUT_TOP_DOWN
 
-frame "DC1" as v1dc1 {
-    Container( v1idxL1, "idx - Leader", "lead dc1")
+frame "CQRS" as v1dc1 {
+    Container( qh, "Query Handler", "")
+    Container( qp, "Query Processing", "")
+    Container( qs, "Query Store", "Elastic Search")
+
+    AzureQueueStorage( mq, "Message Queue", "")
+
+    Container( ch, "Command Handler", "")
+    Container( cp, "Command Processing", "")
+    Container( cs, "Command Store", "SQL")
+
+    qh -right-> qp 
+    qp -right-> qs
+
+    mq -up-> qp
+    cp -up-> mq
+
+    ch -right-> cp
+    cp -right-> cs
+
 }
 
-frame "DC2" as v1dc2 {
-    Container( v1idxF1, "idx - Follower", "follow dc1")
-}
-
-Container( v1ls1, "LogStash", "QUEUE")
-
-v1idxL1 --> v1idxF1
-v1ls1 --> v1idxL1
-}
-
-System_Boundary(c2, "Version 2"){
-
-frame "DC1" as v2dc1 {
-    Container( v2idxL1, "idx - Leader", "lead dc2")
-}
-
-frame "DC2" as v2dc2 {
-    Container( v2idxL2, "idx - Leader", "lead dc2")
-}
-
-Container( v2ls1, "LogStash", "QUEUE")
-
-v2ls1 --> v2idxL1
-v2ls1 --> v2idxL2
-}
-
-
-System_Boundary(c3, "Version 3"){
-
-frame "DC1" as v3dc1 {
-    Container( v3idxF1, "idx - Follower", "follow dc2")
-    Container( v3idxL1, "idx - Leader", "lead dc1")
-}
-
-frame "DC2" as v3dc2 {
-    Container( v3idxL2, "idx - Leader", "lead dc2")
-    Container( v3idxF2, "idx - Follower", "follow dc1")
-}
-
-Container( v3ls1, "LogStash", "QUEUE")
-
-v3idxL1 -left-> v3idxF2
-v3idxL2 -left-> v3idxF1
-
-v3ls1 -down-> v3idxL1
-v3ls1 -down-> v3idxL2
-}
-
-
-LAYOUT_LEFT_RIGHT
-Container( tm, "Traffic Manager", "")
-
-
-System_Boundary(ne, "NE"){
-    Container( neWeb, "Web", "")
-    Container( neES, "ES", "")
-    Container( neSql, "SQL", "")
-    Container( neWJ, "WebJob", "")
-    Container( neStor, "Storage", "")
-}
-
-System_Boundary(we, "WE"){
-    Container( weWeb, "Web", "")
-    Container( weES, "ES", "")
-    Container( weSql, "SQL", "")
-    Container( weWJ, "WebJob", "")
-    Container( weStor, "Storage", "")
-}
-
-
-neWeb <-left- tm
-tm -right-> weWeb
-neES .right.> weES
-neSql ..> weSql
-neWJ ..> weWJ
-neStor ..> weStor
 
 @enduml
