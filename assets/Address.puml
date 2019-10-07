@@ -1,0 +1,46 @@
+@startuml Address
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+Interface IExternalAddressService
+'Interface IFakeAddressServiceConfiguration
+Interface IPcaPredictServiceConfiguration
+'Class ExternalAddressServiceProfile
+'Class AddressServiceFindQueryResult
+'Class AddressServiceFindQueryResults
+'Class AddressServiceRetrieveQueryResult
+'Class AddressServiceRetrieveQueryResults
+'Class AddressServiceFindQuery
+'Class AddressServiceRetrieveQuery
+'Class ConfigurationSection
+
+Module <|-- ExternalServicesModule
+ExternalServicesModule -> PcaPredictFindServiceReference
+ExternalServicesModule -> PcaPredictRetrieveServiceReference
+ExternalServicesModule ->PcaPredictServiceConfiguration
+
+IExternalAddressService <|-- PcaPredictAddressService 
+
+PcaPredictAddressService -> PcaPredictServiceConfiguration
+ConfigurationElementCollection <|--FindQueryResultsCollection
+ConfigurationElement <|-- FindQueryResultsItem
+ConfigurationSection <|-- PcaPredictServiceConfiguration
+IPcaPredictServiceConfiguration <|-- PcaPredictServiceConfiguration
+'PcaPredictServiceConfiguration -> FindService
+'PcaPredictServiceConfiguration -> RetrieveService
+ConfigurationElementCollection <|-- RetrieveQueryResultsCollection
+'RetrieveQueryResultsCollection -> RetrieveQueryResultsItem
+ConfigurationElement <|-- RetrieveQueryResultsItem
+
+
+' Fake
+'ExternalServicesModule ->FakeAddressServiceConfiguration
+'IExternalAddressService <|-- FakeAddressService 
+'FakeAddressService -> FakeAddressServiceConfiguration
+'IFakeAddressServiceConfiguration <|-- FakeAddressServiceConfiguration
+'IFakeAddressServiceConfiguration <|-- ConfigurationSection
+'IFakeAddressServiceConfiguration -> RetrieveQueryResultsCollection
+'IFakeAddressServiceConfiguration -> FindQueryResultsCollection
+
+@enduml

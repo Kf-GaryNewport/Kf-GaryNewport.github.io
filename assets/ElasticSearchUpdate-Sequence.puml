@@ -1,0 +1,18 @@
+@startuml
+
+title "Elastic Search Update - Sequence Diagram"
+
+actor hub
+Database  SQL
+hub -> SQL
+return id
+Queue StorageQueue
+hub -> StorageQueue
+Webjob -> StorageQueue
+return
+Database ElasticSearch
+Webjob -> ElasticSearch
+return
+
+
+@enduml
