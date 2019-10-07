@@ -1,0 +1,22 @@
+@startuml
+
+title "SQL Integrated Change Tracking - Sequence Diagram"
+
+activate hub
+actor hub
+Database  SQL
+activate Webjob
+Webjob -> SQL : Connect
+hub -> SQL
+SQL -> Webjob : SQL Pushes Updates
+return
+Database ElasticSearch
+Webjob -> ElasticSearch
+return
+
+Webjob -> SQL : Disconnect
+deactivate Webjob
+deactivate hub
+
+
+@enduml
