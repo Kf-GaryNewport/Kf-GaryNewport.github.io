@@ -9,8 +9,16 @@ return Id
 Queue StorageQueue
 hub -> StorageQueue : Save Id
 Webjob -> StorageQueue : Get Id
-Webjob -> SQL : Get Data
 return
+
+Webjob -> SQL : Get Data
+activate Webjob
+return
+Webjob -> SQL
+return
+Webjob -> SQL
+return
+deactivate Webjob
 Database ElasticSearch
 Webjob -> ElasticSearch : Send Data
 return
