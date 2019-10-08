@@ -5,13 +5,14 @@ title "Elastic Search Update - Sequence Diagram"
 actor hub
 Database  SQL
 hub -> SQL
-return id
+return Id
 Queue StorageQueue
-hub -> StorageQueue
-Webjob -> StorageQueue
+hub -> StorageQueue : Save Id
+Webjob -> StorageQueue : Get Id
+Webjob -> SQL : Get Data
 return
 Database ElasticSearch
-Webjob -> ElasticSearch
+Webjob -> ElasticSearch : Send Data
 return
 
 
