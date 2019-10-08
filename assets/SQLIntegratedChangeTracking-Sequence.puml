@@ -8,10 +8,10 @@ Database  SQL
 activate Webjob
 Webjob -> SQL : Connect
 hub -> SQL
-SQL -> Webjob : SQL Pushes Updates
+Webjob -> SQL : Get Changes
 return
 Database ElasticSearch
-Webjob -> ElasticSearch
+Webjob -> ElasticSearch : Send Changes
 return
 
 Webjob -> SQL : Disconnect
