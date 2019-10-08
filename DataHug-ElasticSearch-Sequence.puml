@@ -1,0 +1,21 @@
+@startuml
+
+title "DataHug-Elastic Search Update- Sequence Diagram"
+
+Participant DataHug
+Participant Webjob
+Database ElasticSearch
+Database SQL
+
+activate Webjob
+Webjob -> DataHug
+return
+
+Webjob -> ElasticSearch
+return
+
+Webjob -> SQL
+return
+deactivate Webjob
+
+@enduml
