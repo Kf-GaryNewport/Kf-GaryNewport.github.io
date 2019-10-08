@@ -8,10 +8,13 @@ Database  SQL
 activate Webjob
 Webjob -> SQL : Connect
 hub -> SQL
+
 Webjob -> SQL : Get Changes
 return
+Webjob -> SQL : Get Data
+return
 Database ElasticSearch
-Webjob -> ElasticSearch : Send Changes
+Webjob -> ElasticSearch : Send Data
 return
 
 Webjob -> SQL : Disconnect
