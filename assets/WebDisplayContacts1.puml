@@ -1,0 +1,42 @@
+@startuml
+
+title Web Display Contacts
+
+object Activity
+object ActivityNegotiator
+object ActivityDepartment
+object ActivityWebnegotiator
+object User
+object OrganisationalUnit
+
+ActivityDepartment --|> OrganisationalUnit 
+ActivityNegotiator --|> User 
+ActivityNegotiator --|> Activity
+ActivityDepartment --|> Activity
+ActivityWebnegotiator --|> User 
+ActivityWebnegotiator --|> Activity
+
+User : Id
+User : FirstName
+User : LastName
+User : EmailAddress
+User : TelephoneNumber
+
+ActivityDepartment : Id
+ActivityDepartment : ActivityId
+ActivityDepartment : DepartmentId
+
+ActivityNegotiator : Id
+ActivityNegotiator : ActivityId
+ActivityNegotiator : UserId
+ActivityNegotiator : UserTypeId
+
+ActivityWebnegotiator : Id
+ActivityWebnegotiator : ActivityId
+ActivityWebnegotiator : UserId
+ActivityWebnegotiator : Order
+
+Activity : Id
+OrganisationalUnit : Id
+
+@enduml
