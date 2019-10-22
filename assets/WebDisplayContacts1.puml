@@ -3,24 +3,27 @@
 title Web Display Contacts
 
 object Activity
+object ActivityWebnegotiator
 object ActivityNegotiator
 object ActivityDepartment
-object ActivityWebnegotiator
+
 object User
 object OrganisationalUnit
 
+ActivityWebnegotiator --|> User 
+ActivityWebnegotiator -up-|> Activity
 ActivityDepartment --|> OrganisationalUnit 
 ActivityNegotiator --|> User 
-ActivityNegotiator --|> Activity
-ActivityDepartment --|> Activity
-ActivityWebnegotiator --|> User 
-ActivityWebnegotiator --|> Activity
+ActivityNegotiator -up-|> Activity
+ActivityDepartment -up-|> Activity
+User --|> OrganisationalUnit
 
 User : Id
 User : FirstName
 User : LastName
 User : EmailAddress
 User : TelephoneNumber
+User : ResponsibleForSaleOrLetNegotiatorDepartmentId
 
 ActivityDepartment : Id
 ActivityDepartment : ActivityId
