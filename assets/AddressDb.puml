@@ -1,0 +1,97 @@
+@startuml AddressDb
+
+left to right direction
+
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+table(EnumType) {
+  primary_key(Id)
+  Code
+}
+
+table(EnumTypeItem) {
+  primary_key(Id)
+  Code
+  EnumTypeId
+  PrimarySortOrder
+  SecondarySortOrder
+}
+
+table(AddressForm) {
+  primary_key(Id)
+  CountryId
+  AddressFormTypeId
+}
+
+table(AddressField) {
+  primary_key(Id)
+  Name
+}
+
+table(AddressFieldLabel) {
+  primary_key(Id)
+  LabelKey
+}
+
+table(AddressFormEntityType) {
+  primary_key(Id)
+  AddressFormId
+  EnumTypeId
+}
+table(AddressFieldDefinition) {
+  primary_key(Id)
+AddressFieldId
+AddressFieldLabelId
+AddressFormId
+Required
+RegEx
+RowOrder
+ColumnOrder
+ColumnSize
+Separator
+SpaceAfter
+}
+
+table(Address) {
+  primary_key(Id)
+  CountryId
+AddressFormId
+PropertyName
+PropertyNumber
+Line1
+Line2
+Line3
+Postcode
+City
+County
+ShortAddressFormated
+Marker
+AlternativePropertyName
+AlternativePropertyNumber
+AlternativeLine1
+AlternativeLine2
+AlternativeLine3
+AlternativePostcode
+AlternativeCity
+AlternativeCounty
+UdprnKey
+UmrrnKey
+UprnKey
+QubeSynchronized
+QubeErrorOccurred
+}
+
+Address --> AddressForm
+AddressFieldDefinition --> AddressForm
+AddressFormEntityType --> AddressForm
+AddressFieldDefinition --> AddressFieldLabel
+AddressFieldDefinition --> AddressField
+AddressFormEntityType --> EnumTypeItem
+AddressForm --> EnumTypeItem
+EnumTypeItem --> EnumType
+
+
+@enduml
