@@ -8,90 +8,102 @@ hide methods
 hide stereotypes
 
 table(EnumType) {
-  primary_key(Id)
-  Code
+    primary_key(Id)
+    Code
 }
 
 table(EnumTypeItem) {
-  primary_key(Id)
-  Code
-  EnumTypeId
-  PrimarySortOrder
-  SecondarySortOrder
-}
+    primary_key(Id)
+    Code
+    EnumTypeId
+    PrimarySortOrder
+    SecondarySortOrder
+    }
 
-table(AddressForm) {
-  primary_key(Id)
-  CountryId
-  AddressFormTypeId
+    table(AddressForm) {
+    primary_key(Id)
+    CountryId
+    AddressFormTypeId
 }
 
 table(AddressField) {
-  primary_key(Id)
-  Name
+    primary_key(Id)
+    Name
 }
 
 table(AddressFieldLabel) {
-  primary_key(Id)
-  LabelKey
-}
-
-table(AddressFormEntityType) {
-  primary_key(Id)
-  AddressFormId
-  EnumTypeId
-}
-table(AddressFieldDefinition) {
-  primary_key(Id)
-AddressFieldId
-AddressFieldLabelId
-AddressFormId
-Required
-RegEx
-RowOrder
-ColumnOrder
-ColumnSize
-Separator
-SpaceAfter
+    primary_key(Id)
+    LabelKey
 }
 
 table(Address) {
-  primary_key(Id)
-  CountryId
-AddressFormId
-PropertyName
-PropertyNumber
-Line1
-Line2
-Line3
-Postcode
-City
-County
-ShortAddressFormated
-Marker
-AlternativePropertyName
-AlternativePropertyNumber
-AlternativeLine1
-AlternativeLine2
-AlternativeLine3
-AlternativePostcode
-AlternativeCity
-AlternativeCounty
-UdprnKey
-UmrrnKey
-UprnKey
-QubeSynchronized
-QubeErrorOccurred
+    primary_key(Id)
+    CountryId
+    AddressFormId
+    PropertyName
+    PropertyNumber
+    Line1
+    Line2
+    Line3
+    Postcode
+    City
+    County
+    ShortAddressFormated
+    Marker
+    AlternativePropertyName
+    AlternativePropertyNumber
+    AlternativeLine1
+    AlternativeLine2
+    AlternativeLine3
+    AlternativePostcode
+    AlternativeCity
+    AlternativeCounty
+    UdprnKey
+    UmrrnKey
+    UprnKey
+    QubeSynchronized
+    QubeErrorOccurred
 }
 
-Address --> AddressForm
-AddressFieldDefinition --> AddressForm
+table(AddressFormEntityType) {
+    primary_key(Id)
+    AddressFormId
+    EnumTypeId
+}
+
+table(AddressFieldDefinition) {
+    primary_key(Id)
+    AddressFieldId
+    AddressFieldLabelId
+    AddressFormId
+    Required
+    RegEx
+    RowOrder
+    ColumnOrder
+    ColumnSize
+    Separator
+    SpaceAfter
+}
+
+table(Country) {
+    primary_key(Id)
+    IsoCode
+    DiallingCode
+    CurrencyId
+    DefaultLivingAreaUnitId
+}
+
 AddressFormEntityType --> AddressForm
+AddressFormEntityType --> EnumTypeItem
+Address --> AddressForm
+Address --> Country
+AddressFieldDefinition --> AddressForm
 AddressFieldDefinition --> AddressFieldLabel
 AddressFieldDefinition --> AddressField
-AddressFormEntityType --> EnumTypeItem
 AddressForm --> EnumTypeItem
+AddressForm --> Country
+Country --> EnumTypeItem
+Country --> EnumTypeItem
 EnumTypeItem --> EnumType
-
 
 @enduml
