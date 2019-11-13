@@ -4,6 +4,7 @@
 !includeurl AzurePuml/AzureCommon.puml
 !includeurl AzurePuml/Identity/AzureActiveDirectory.puml
 !includeurl AzurePuml/Networking/AzureFrontDoorService.puml
+!includeurl AzurePuml/Networking/AzureVirtualNetwork.puml
 !includeurl AzurePuml/Compute/AzureFunction.puml
 
 title Publically Accessible Endpoint 
@@ -16,8 +17,11 @@ System_Boundary(Az, "Azure") {
 
     AzureActiveDirectory(ad,"App Register","","")
     AzureFrontDoorService(fd, "Front Door", "", "")
-    AzureFunction(af, "Label", "Technology", "Optional Description")
-
+    
+    System_Boundary(rg, "Resource Group") {
+        AzureVirtualNetwork(vpn, "Vpn","","")
+        AzureFunction(af, "Label", "Technology", "Optional Description")
+    }
     System_Boundary(hub, "Hub") {
         Container(api, "Hub Api", "", "")
         ContainerDb(db, "Hub Database", "", "")
@@ -28,7 +32,8 @@ api -up-> ad : App  Registration
 af -up-> ad : App Registration
 out -left-> fd
 fd --> af
-af -> api
+af -left-> vpn
+vpn -> api
 api --> db
 
 @enduml
