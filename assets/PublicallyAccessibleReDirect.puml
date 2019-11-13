@@ -1,0 +1,47 @@
+@startuml PublicallyAccessibleReDirect 
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Identity/AzureActiveDirectory.puml
+!includeurl AzurePuml/Networking/AzureFrontDoorService.puml
+!includeurl AzurePuml/Networking/AzureVirtualNetwork.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Web/AzureCDN.puml
+!includeurl AzurePuml/Storage/AzureBlobStorage.puml
+
+title Publically Accessible Re-Direct 
+
+System_Boundary(off, "Office 365") {
+    Component(out, "", "Outlook", "Contact")
+}
+System_Boundary(ios, "Ios Contact") {
+    Component(ac, "", "Apple", "Contact")
+}
+
+System_Boundary(Az, "Azure") {
+    Container(rd, "", "Redirect", "")
+    Container(asa, "apple-app-site-association", "","")
+
+    AzureCDN(cdn, "CDN","","")
+
+    AzureFrontDoorService(fd, "Front Door","","")
+    AzureFunction(afHb, "HeartBeat","","")
+    AzureFunction(afRw, "ReWrite","","")
+    AzureBlobStorage(bs, "Blob Storage","","Static Content")
+}
+
+Container(hub, "", "Hub", "")
+
+
+
+ac -down-> asa
+out -down-> rd
+
+fd -down-> afRw
+fd -down-> afHb
+fd -down-> cdn
+bs -up-> cdn
+
+ afRw --> hub
+
+@enduml
