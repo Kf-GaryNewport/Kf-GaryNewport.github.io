@@ -6,6 +6,7 @@
 !includeurl AzurePuml/Networking/AzureApplicationGateway.puml
 !includeurl AzurePuml/Networking/AzureVirtualNetwork.puml
 !includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Compute/AzureAppService.puml
 !includeurl AzurePuml/Web/AzureCDN.puml
 !includeurl AzurePuml/Storage/AzureBlobStorage.puml
 
@@ -24,7 +25,7 @@ System_Boundary(Az, "Azure") {
     AzureCDN(cdn, "CDN","","")
     AzureApplicationGateway(fd, "ApplicationGateway","","")
     AzureFunction(afHb, "HeartBeat","","")
-    AzureFunction(afRw, "ReWrite","","")
+    AzureAppService(afRw, "ReWrite","","")
     AzureBlobStorage(bs, "Blob Storage","","Static Content")
 }
 
