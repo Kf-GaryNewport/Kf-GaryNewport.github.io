@@ -3,7 +3,7 @@
 !define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
 !includeurl AzurePuml/AzureCommon.puml
 !includeurl AzurePuml/Identity/AzureActiveDirectory.puml
-!includeurl AzurePuml/Networking/AzureFrontDoorService.puml
+!includeurl AzurePuml/Networking/AzureApplicationGateway.puml
 !includeurl AzurePuml/Networking/AzureVirtualNetwork.puml
 !includeurl AzurePuml/Compute/AzureFunction.puml
 !includeurl AzurePuml/Web/AzureCDN.puml
@@ -22,7 +22,7 @@ System_Boundary(Az, "Azure") {
     Container(asa, "apple-app-site-association", "","")
 
     AzureCDN(cdn, "CDN","","")
-    AzureFrontDoorService(fd, "Front Door","","")
+    AzureApplicationGateway(fd, "ApplicationGateway","","")
     AzureFunction(afHb, "HeartBeat","","")
     AzureFunction(afRw, "ReWrite","","")
     AzureBlobStorage(bs, "Blob Storage","","Static Content")
