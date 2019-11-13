@@ -20,7 +20,7 @@ System_Boundary(Az, "Azure") {
     
     System_Boundary(rg, "Resource Group") {
         AzureVirtualNetwork(vpn, "Vpn","","")
-        AzureFunction(af, "Label", "Technology", "Optional Description")
+        AzureFunction(af, "Label", "Technology", "")
     }
     System_Boundary(hub, "Hub") {
         Container(api, "Hub Api", "", "")
