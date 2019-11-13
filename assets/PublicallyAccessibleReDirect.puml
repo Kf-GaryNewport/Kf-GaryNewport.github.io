@@ -30,8 +30,6 @@ System_Boundary(Az, "Azure") {
 
 Container(hub, "", "Hub", "")
 
-
-
 ac -down-> fd
 out -down-> fd
 
