@@ -19,11 +19,9 @@ System_Boundary(ios, "Ios Contact") {
 }
 
 System_Boundary(Az, "Azure") {
-    Container(rd, "", "Redirect", "")
     Container(asa, "apple-app-site-association", "","")
 
     AzureCDN(cdn, "CDN","","")
-
     AzureFrontDoorService(fd, "Front Door","","")
     AzureFunction(afHb, "HeartBeat","","")
     AzureFunction(afRw, "ReWrite","","")
@@ -34,14 +32,15 @@ Container(hub, "", "Hub", "")
 
 
 
-ac -down-> asa
-out -down-> rd
+ac -down-> fd
+out -down-> fd
 
 fd -down-> afRw
 fd -down-> afHb
 fd -down-> cdn
 bs -up-> cdn
 
- afRw --> hub
+afRw --> hub
+asa -up-> bs
 
 @enduml
