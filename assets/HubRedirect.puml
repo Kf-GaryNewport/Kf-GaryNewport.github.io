@@ -47,7 +47,7 @@ System_Boundary(Az, "Azure") {
         tm -[hidden]down-> rgWe
     }
 
-    AzureVirtualMachine(vm, "Hub-env", "https://env.hub.knightfrank.com/")
+    AzureVirtualMachine(vm, "https://env.hub.knightfrank.com/", "Env")
 
     afNe -up-> vm : Proxied request
     afWe -up-> vm : Proxied request
