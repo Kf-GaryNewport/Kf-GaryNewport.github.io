@@ -11,49 +11,43 @@
 
 title Hub Redriect
 
-LAYOUT_TOP_DOWN
+!includeurl AzurePuml/AzureSimplified.puml
+LAYOUT_LEFT_RIGHT
 
-System_Boundary(off, "Office 365") {
-    Component(out, "", "Outlook", "Contact")
+
+System_Boundary(1off, "Office 365") {
+    Component(1out, "", "Outlook", "Contact")
 }
 
-
-System_Boundary(Az, "Azure") {
-
-    System_Boundary(rg, "Resource Group") {
-        AzureTrafficManager(tm, "Hub-Redirect-tm-env-ne", "Global")
-
-        System_Boundary(rgNe, "Northern Europe") {
-            AzureFunction(afNe, "Hub-Redirect-fn-env-ne", "Northern Europe")
-            AzureStorage(stNe, "Hub-Redirect-st-env-ne", "Northern Europe")
-            AzureApplicationInsights( aiNe, "Hub-Redirect-ai-env-ne", "Northern Europe")
-
-            afNe --> stNe : App/Log Storage
-            afNe --> aiNe : Performance Log
-        }
-        System_Boundary(rgWe, "Western Europe") {
-            AzureFunction(afWe, "Hub-Redirect-fn-env-we", "Western Europe")
-            AzureStorage( stWe, "Hub-Redirect-st-env-we", "Western Europe")
-            AzureApplicationInsights( aiWe, "Hub-Redirect-ai-env-we", "Western Europe")
-
-            afWe --> stWe : App/Log Storage
-            afWe --> aiWe : Performance Log
-        }
-
-        tm -[hidden]down-> rgNe
-        tm -[hidden]down-> rgWe
+System_Boundary(A1z, "Azure") {
+    AzureTrafficManager(1tm, "Hub-Redirect-tm-env-ne", "Global")
+    System_Boundary(1rgNe, "Northern Europe") {
+        AzureFunction(1afNe, "Hub-Redirect-fn-env-ne", "Northern Europe")
+        AzureStorage(1stNe, "Hub-Redirect-st-env-ne", "Northern Europe")
+        AzureApplicationInsights( 1aiNe, "Hub-Redirect-ai-env-ne", "Northern Europe")
     }
 
-    AzureVirtualMachine(vm, "https://env.hub.knightfrank.com/", "Env")
-
-    afNe -up-> vm : Proxied request
-    afWe -up-> vm : Proxied request
+    System_Boundary(1rgWe, "Western Europe") {
+        AzureFunction(1afWe, "Hub-Redirect-fn-env-we", "Western Europe")
+        AzureStorage( 1stWe, "Hub-Redirect-st-env-we", "Western Europe")
+        AzureApplicationInsights( 1aiWe, "Hub-Redirect-ai-env-we", "Western Europe")
+    }
+    System_Boundary(1kf, "Private Knight frank ") {
+        AzureVirtualMachine(1vm, "https://env.hub.knightfrank.com/", "Env")
+    }
 }
 
-out -down-> tm : Dns Lookup
-tm -up-> out : Address of resource
 
-out --> afNe 
-out --> afWe
+1out --> 1tm
+
+1tm --> 1afNe
+1afNe --> 1stNe
+1afNe --> 1aiNe
+1vm <-- 1afNe
+1tm --> 1afWe
+1afWe --> 1stWe
+1afWe --> 1aiWe
+1vm <-- 1afWe
+
 
 @enduml
