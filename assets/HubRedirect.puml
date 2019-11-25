@@ -27,11 +27,9 @@ System_Boundary(Az, "Azure") {
             AzureFunction(afNe, "Hub-Redirect-fn-env-ne", "Northern Europe")
             AzureStorage(stNe, "Hub-Redirect-st-ne", "Northern Europe")
             AzureApplicationInsights( aiNe, "Hub-Redirect-ai-env-ne", "Northern Europe")
-            AzureKeyVault(kvNe, "Hub-Redirect-kv-env-ne", "Northern Europe")
 
             afNe --> stNe : App/Log Storage
             afNe --> aiNe : Performance Log
-            afNe --> kvNe : Get Certificate
         }
         System_Boundary(rgWe, "Western Europe") {
             AzureFunction(afWe, "Hub-Redirect-fn-env-we", "Western Europe")
@@ -40,7 +38,6 @@ System_Boundary(Az, "Azure") {
 
             afWe --> stWe : App/Log Storage
             afWe --> aiWe : Performance Log
-            afWe -down-> kvNe : Get Certificate
         }
 
         tm -[hidden]down-> rgNe
