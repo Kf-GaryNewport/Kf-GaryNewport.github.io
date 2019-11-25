@@ -25,7 +25,7 @@ System_Boundary(Az, "Azure") {
 
         System_Boundary(rgNe, "Northern Europe") {
             AzureFunction(afNe, "Hub-Redirect-fn-env-ne", "Northern Europe")
-            AzureStorage(stNe, "Hub-Redirect-st-ne", "Northern Europe")
+            AzureStorage(stNe, "Hub-Redirect-st-env-ne", "Northern Europe")
             AzureApplicationInsights( aiNe, "Hub-Redirect-ai-env-ne", "Northern Europe")
 
             afNe --> stNe : App/Log Storage
@@ -33,7 +33,7 @@ System_Boundary(Az, "Azure") {
         }
         System_Boundary(rgWe, "Western Europe") {
             AzureFunction(afWe, "Hub-Redirect-fn-env-we", "Western Europe")
-            AzureStorage( stWe, "Hub-Redirect-st-we", "Western Europe")
+            AzureStorage( stWe, "Hub-Redirect-st-env-we", "Western Europe")
             AzureApplicationInsights( aiWe, "Hub-Redirect-ai-env-we", "Western Europe")
 
             afWe --> stWe : App/Log Storage
