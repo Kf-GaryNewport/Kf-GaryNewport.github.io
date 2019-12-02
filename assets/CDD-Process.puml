@@ -7,13 +7,15 @@ title CDD-Process
 (Request) -[#0000FF]-> (Northrow) : Get CDD before making an Offer
 (Northrow) -[#0000FF]-> (Request)  
   
-CounterParty --> (Accept)
-(Offer) --> CounterParty
-CounterParty --> (Reject)
-
-CDD --> Offer
+CDD --> (Offer)
 CDD --> (Withdraw)
 CDD --> (Reject)
+
+(Offer) --> CounterParty  
+CounterParty --> (Accept) : Communicates
+CounterParty --> (Reject) : Communicates
+
+
 (Withdraw) --> CounterParty : Notify
 
 (Accept) --> (Notify)
@@ -28,6 +30,9 @@ Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
 (Notify) --> (Request)
 (Notify) --> (Complete)
 
-(Complete) --> (End)
+(Complete) --> (Dashboard) : Update
+(Complete) --> (Report) : Update
+(Dashboard) --> CDD
+(Complete) --> (end)
 
 @enduml
