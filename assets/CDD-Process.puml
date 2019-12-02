@@ -1,6 +1,7 @@
 @startuml CDDProcess
 
 title CDD-Process
+left to right direction
 
 (Start) --> (Offer) : Received Offer
 (Offer) --> Party : Offer Passed\nto Party/Seller
