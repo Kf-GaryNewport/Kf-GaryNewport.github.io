@@ -7,7 +7,7 @@ title CDD-Process
 (Request) -[#0000FF]-> (Northrow) : Get CDD before making an Offer
 (Northrow) -[#0000FF]-> (Request)  
   
-(Offer) --> (Accept)
+CounterParty --> (Accept)
 (Offer) --> CounterParty
 CounterParty --> (Reject)
 
