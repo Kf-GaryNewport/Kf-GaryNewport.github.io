@@ -2,6 +2,7 @@
 
 title CDD-Process
 
+(Start) --> (Offer)
 (Offer) --> (Accept) : 1, Instruction\nCompleted
 (Accept) --> (CDD Request) : 2, Trigger CDD Request
 (Accept) --> Negotiator : 3, Add\nInformation
@@ -13,5 +14,5 @@ CDD_Admin --> CDD_Officer : 5, Assign
 (CDD Request) --> CDD_Officer : 7. Confirm and Check
 CDD_Officer --> (Completed)
 (Completed) --> (Activity Status) : 8. Exchanged/Completed
-
+(Activity Status) --> (end)
 @enduml
