@@ -4,12 +4,16 @@ title CDD-Process
 
 (Start) --> (Request)
 (Request) --> (Offer)
-(Request) --> (Northrow)
-(Northrow) --> (Request)
+(Request) -[#0000FF]-> (Northrow) : Get CDD before making an Offer
+(Northrow) -[#0000FF]-> (Request)
 
 (Offer) --> (Accept)
-(Offer) --> (Reject)
+(Offer) --> CounterParty
+CounterParty --> (Reject)
 (Offer) --> (Withdraw)
+
+CDD --> (Withdraw)
+(Withdraw) --> CounterParty : Notify
 
 (Accept) --> Negotiator : Additional Info
 (Accept) --> (Instruction) : Update
