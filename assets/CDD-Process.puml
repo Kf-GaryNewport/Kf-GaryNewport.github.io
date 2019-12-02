@@ -3,15 +3,15 @@
 title CDD-Process
 
 (Start) --> (Request)
-(Request) --> (Offer)
+(Request) --> CDD
 (Request) -[#0000FF]-> (Northrow) : Get CDD before making an Offer
 (Northrow) -[#0000FF]-> (Request)
 
 (Offer) --> (Accept)
 (Offer) --> CounterParty
 CounterParty --> (Reject)
-(Offer) --> (Withdraw)
 
+CDD --> Offer
 CDD --> (Withdraw)
 (Withdraw) --> CounterParty : Notify
 
@@ -26,7 +26,6 @@ Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
 (Notify) --> (Request)
 (Notify) --> (End)
 
-(Accept) --> (Complete)
 (Complete) --> (End)
 
 @enduml
