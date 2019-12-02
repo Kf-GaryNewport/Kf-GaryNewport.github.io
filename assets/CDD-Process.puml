@@ -1,5 +1,7 @@
 @Startuml CDD-Process
 
+Title CDD-Process
+
 (Start) --> (Request)
 (Request) --> (Offer)
 (Request) --> (Northrow)
@@ -22,6 +24,5 @@ Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
 
 (Accept) --> (Complete)
 (Complete) --> (End)
-
 
 @enduml
