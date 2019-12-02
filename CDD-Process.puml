@@ -1,0 +1,27 @@
+@Startuml CDD-Process
+
+(Start) --> (Request)
+(Request) --> (Offer)
+(Request) --> (Northrow)
+(Northrow) --> (Request)
+
+(Offer) --> (Accept)
+(Offer) --> (Reject)
+(Offer) --> (Withdraw)
+
+(Accept) --> Negotiator : Additional Info
+(Accept) --> (Instruction) : Update
+Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
+(Instruction) --> (Complete) 
+
+(Reject) --> (Notify)
+(Withdraw) --> (Notify)
+
+(Notify) --> (Request)
+(Notify) --> (End)
+
+(Accept) --> (Complete)
+(Complete) --> (End)
+
+
+@enduml

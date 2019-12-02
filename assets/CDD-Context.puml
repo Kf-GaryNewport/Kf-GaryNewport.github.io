@@ -1,0 +1,20 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Context.puml
+
+'LAYOUT_WITH_LEGEND
+
+title System Context diagram for Contact Due Diligence
+
+Enterprise_Boundary(c1, "Knight Frank LLP") {
+    Person(customer, "Knight Frank Employee ", "A employee working within Knight Frank")
+    System(hub_system, "hub  System", "Knight Frank CRM and Property database")
+    System(rep_system, "Reporting  System", "Power Bi Reporting")
+}
+System_Ext(northrow, "Northrow", "Automated Due Diligence")
+
+Rel(customer, hub_system, "Uses")
+Rel(hub_system, northrow, "Uses")
+Rel_R(hub_system, rep_system, "Uses")
+
+
+@enduml

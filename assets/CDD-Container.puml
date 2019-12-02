@@ -1,0 +1,38 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+'LAYOUT_WITH_LEGEND
+
+title Container diagram for Contact Due Diligence
+
+Enterprise_Boundary(c1, "Knight Frank LLP") {
+    Person(customer, "Knight Frank Employee ", "A employee working within Knight Frank")
+
+    System_Boundary(hub_system, "hub System"){
+
+        Container( hapi, "hub Api", "")
+        Container( hbll, "hub Bll", "")
+        ContainerDb( hdb, "hub data", "SQL")
+
+        System_Boundary(northrow_system, "Northrow Service"){
+            Container( napi, "Northrow Api", "")
+            ContainerDb( ndb, "Northrow data", "Json Store")
+        }
+    }
+    System(rep_system, "Reporting  System", "Power Bi Reporting")
+}
+System_Ext(northrow, "Northrow", "Automated Due Diligence")
+
+Rel(customer, hapi, "Uses")
+
+Rel(hapi, hbll, "Uses")
+Rel(hbll, hdb, "Uses")
+Rel(hbll, napi, "Uses")
+
+Rel(napi, northrow, "Uses")
+Rel(napi, ndb, "Uses")
+
+Rel_L(hbll, rep_system, "Uses")
+
+
+@enduml
