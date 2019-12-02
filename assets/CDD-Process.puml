@@ -6,13 +6,15 @@ title CDD-Process
 (Offer) --> (Accept) : 1, Instruction\nCompleted
 (Accept) --> (CDD Request) : 2, Trigger CDD Request
 (Accept) --> Negotiator : 3, Add\nInformation
+Negotiator --> (?)
 (CDD Request) --> (DashBoard) : 4, CDD Request
 (DashBoard) --> CDD_Admin
 CDD_Admin --> CDD_Officer : 5, Assign
-(Offer) --> (Withdraw) 
+(Offer) --> (Withdraw) : 6, Notify
 (Withdraw) --> CDD_Officer : 6. Notify
 (CDD Request) --> CDD_Officer : 7. Confirm and Check
 CDD_Officer --> (Completed)
+CDD_Officer --> (?) : Withdraw
 (Completed) --> (Activity Status) : 8. Exchanged/Completed
 (Activity Status) --> (end)
 @enduml

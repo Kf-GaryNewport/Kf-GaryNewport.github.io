@@ -27,7 +27,8 @@ Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
 
 (Complete) --> (Dashboard) : Update
 (Complete) --> (Report) : Update
-(Dashboard) --> CDD : Notify
+(Dashboard) --> CDD_Officer : Notify
+CDD_Officer --> CDD : Assign
 (Complete) --> (end)
 
 @enduml
