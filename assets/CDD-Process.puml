@@ -13,8 +13,10 @@ CounterParty --> (Reject)
 
 CDD --> Offer
 CDD --> (Withdraw)
+CDD --> (Reject)
 (Withdraw) --> CounterParty : Notify
 
+(Accept) --> (Notify)
 (Accept) --> Negotiator : Additional Info
 (Accept) --> (Instruction) : Update
 Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
