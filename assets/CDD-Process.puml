@@ -1,6 +1,6 @@
-@Startuml CDD-Process
+@startuml CDDProcess
 
-Title CDD-Process
+title CDD-Process
 
 (Start) --> (Request)
 (Request) --> (Offer)
