@@ -26,7 +26,7 @@ Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
 (Withdraw) --> (Notify)
 
 (Notify) --> (Request)
-(Notify) --> (End)
+(Notify) --> (Complete)
 
 (Complete) --> (End)
 
