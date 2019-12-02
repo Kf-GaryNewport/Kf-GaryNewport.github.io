@@ -2,32 +2,16 @@
 
 title CDD-Process
 
-(Start) --> (Request)
-(Request) --> CDD
-(Request) -[#0000FF]-> (Northrow) : Get CDD before \nmaking an Offer
-(Northrow) -[#0000FF]-> (Request)  
-  
-CDD --> (Offer) : Approves
-CDD --> (Withdraw) : Actions
-CDD --> (Reject) : Actions
-
-(Offer) --> CounterParty  
-(Withdraw) --> CounterParty : Notify
-CounterParty --> (Accept) : Communicates
-CounterParty --> (Reject) : Communicates
-
-(Accept) --> (Complete)
-(Accept) --> Negotiator : Additional Info
-(Accept) --> (Instruction) : Update
-Negotiator -[#0000FF]-> (Complete) : Is this Correct ?
-(Instruction) --> (Complete) 
-
-(Reject) --> (Complete)
-(Withdraw) --> (Complete)
-
-(Complete) --> (Dashboard) : Update
-(Complete) --> (Report) : Update
-(Dashboard) --> CDD : Notify
-(Complete) --> (end)
+(Offer) --> (Accept) : 1, Instruction\nCompleted
+(Accept) --> (CDD Request) : 2, Trigger CDD Request
+(Accept) --> Negotiator : 3, Add\nInformation
+(CDD Request) --> (DashBoard) : 4, CDD Request
+(DashBoard) --> CDD_Admin
+CDD_Admin --> CDD_Officer : 5, Assign
+(Offer) --> (Withdraw) 
+(Withdraw) --> CDD_Officer : 6. Notify
+(CDD Request) --> CDD_Officer : 7. Confirm and Check
+CDD_Officer --> (Completed)
+(Completed) --> (Activity Status) : 8. Exchanged/Completed
 
 @enduml
