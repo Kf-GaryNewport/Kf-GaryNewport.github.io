@@ -51,15 +51,7 @@ class Company {
     + <<virtual>> OrganisationUnitCompanies : ICollection<OrganisationUnitCompany> <<get>> <<set>>
     + AgreementName : string <<get>> <<set>>
 }
-BaseAuditableEntity <|-- Company
-IEntityWithAttachments <|-- Company
-IEntityWithNotes <|-- Company
-ISoftDeletableEntity <|-- Company
-IEntityWithVersion <|-- Company
-Company o-- CompanyAddress
-Company o-- OrganisationUnitCompany
-Company o-- CompanyContact
-Company o-- CompanyContactNote
+
 
 class CompanyContact {
     + ContactId : Guid <<get>> <<set>>
@@ -69,7 +61,6 @@ class CompanyContact {
     + JobTitle : string <<get>> <<set>>
     + NotCurrent : bool <<get>> <<set>>
 }
-BaseEntity <|-- CompanyContact
 
 class CompanyContactNote {
     + CompanyId : Guid <<get>> <<set>>
@@ -79,7 +70,6 @@ class CompanyContactNote {
     + NoteId : Guid <<get>> <<set>>
     + <<virtual>> Note : Note <<get>> <<set>>
 }
-BaseEntity <|-- CompanyContactNote
 
 class CompanyAddress {
     + CompanyId : Guid <<get>> <<set>>
@@ -91,10 +81,6 @@ class CompanyAddress {
     + NotCurrent : bool <<get>> <<set>>
     + ContactCompanyAddresses : ICollection<ContactCompanyAddress> <<get>> <<set>>
 }
-BaseAuditableEntity <|-- CompanyAddress
-CompanyAddress o-- ContactCompanyAddress
-
-
 
 class SapAddressUniqueNumber {
     + AddressId : Guid <<get>> <<set>>
@@ -127,16 +113,12 @@ interface IFormattableAddress {
     County : string <<get>>
 }
 
-
 class CompanyContactAddressResults {
     + CompanyContactAddresses : IList<CompanyContactAddress> <<get>> <<set>>
     + AddressesForFilter : IList<CompanyAddressForFilter> <<get>> <<set>>
     + TotalResults : int <<get>> <<set>>
     + ContactsCount : int <<get>> <<set>>
 }
-
-CompanyContactAddressResults o-- CompanyContactAddress
-CompanyContactAddressResults o-- CompanyAddressForFilter
 
 class CompanyContactAddress {
     + ContactId : Guid? <<get>> <<set>>
@@ -185,5 +167,23 @@ class CompanyAddressForFilter {
     + PropertyId : Guid? <<get>> <<set>>
 }
 
+
+BaseAuditableEntity <|-- Company
+IEntityWithAttachments <|-- Company
+IEntityWithNotes <|-- Company
+ISoftDeletableEntity <|-- Company
+IEntityWithVersion <|-- Company
+Company o-- CompanyAddress
+Company o-- OrganisationUnitCompany
+Company o-- CompanyContact
+Company o-- CompanyContactNote
+
+BaseEntity <|-- CompanyContact
+BaseEntity <|-- CompanyContactNote
+BaseAuditableEntity <|-- CompanyAddress
+CompanyAddress o-- ContactCompanyAddress
+
+CompanyContactAddressResults o-- CompanyContactAddress
+CompanyContactAddressResults o-- CompanyAddressForFilter
 
 @enduml
