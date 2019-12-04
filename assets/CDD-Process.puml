@@ -2,7 +2,8 @@
 
 title CDD-Process
 
-(Start) --> (Offer) : Received Offer
+(Start) --> CouterParty
+CouterParty --> (Offer) : Makes Offer
 (Offer) --> Party : Offer Passed\nto Party/Seller
 Party --> (Accept) : 1, Instruction\nCompleted
 (Accept) --> (CDD Request) : 2, Trigger CDD Request
