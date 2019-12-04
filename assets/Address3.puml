@@ -1,92 +1,5 @@
 @startuml Address
 
-'----------------------------
-
-class CompanyContact {
-    + ContactId : Guid <<get>> <<set>>
-    + Contact : Contact <<get>> <<set>>
-    + CompanyId : Guid <<get>> <<set>>
-    + Company : Company <<get>> <<set>>
-    + JobTitle : string <<get>> <<set>>
-    + NotCurrent : bool <<get>> <<set>>
-}
-BaseEntity <|-- CompanyContact
-
-class CompanyContactNote {
-    + CompanyId : Guid <<get>> <<set>>
-    + <<virtual>> Company : Company <<get>> <<set>>
-    + ContactId : Guid <<get>> <<set>>
-    + <<virtual>> Contact : Contact <<get>> <<set>>
-    + NoteId : Guid <<get>> <<set>>
-    + <<virtual>> Note : Note <<get>> <<set>>
-}
-BaseEntity <|-- CompanyContactNote
-
-class CompanyContactAddressResults {
-    + CompanyContactAddresses : IList<CompanyContactAddress> <<get>> <<set>>
-    + AddressesForFilter : IList<CompanyAddressForFilter> <<get>> <<set>>
-    + TotalResults : int <<get>> <<set>>
-    + ContactsCount : int <<get>> <<set>>
-}
-class CompanyContactAddress {
-    + ContactId : Guid? <<get>> <<set>>
-    + ContactName : string <<get>> <<set>>
-    + JobTitle : string <<get>> <<set>>
-    + ContactDatahugRank : short <<get>> <<set>>
-    + ContactLastInteractionDate : DateTimeOffset? <<get>> <<set>>
-    + ContactIsDatahugOnly : bool <<get>> <<set>>
-    + IsDeceased : bool <<get>> <<set>>
-    + PrimaryBusinessPhone : string <<get>> <<set>>
-    + PrimaryHomePhone : string <<get>> <<set>>
-    + PrimaryMobilePhone : string <<get>> <<set>>
-    + PrimaryEmail : string <<get>> <<set>>
-    + NegotiatorName : string <<get>> <<set>>
-    + NegotiatorDepartment : string <<get>> <<set>>
-    + NegotiatorActive : bool? <<get>> <<set>>
-    + AddressId : Guid? <<get>> <<set>>
-    + AddressCountryId : Guid? <<get>> <<set>>
-    + AddressPropertyName : string <<get>> <<set>>
-    + AddressPropertyNumber : string <<get>> <<set>>
-    + AddressLine1 : string <<get>> <<set>>
-    + AddressLine2 : string <<get>> <<set>>
-    + AddressLine3 : string <<get>> <<set>>
-    + AddressPostcode : string <<get>> <<set>>
-    + AddressCity : string <<get>> <<set>>
-    + AddressCounty : string <<get>> <<set>>
-    + PropertyId : Guid? <<get>> <<set>>
-    + AddressIsPrimary : bool? <<get>> <<set>>
-    + Switchboard : string <<get>> <<set>>
-    + CompanyId : Guid <<get>> <<set>>
-    + CompanyName : string <<get>> <<set>>
-}
-class CompanyAddressForFilter {
-    + Id : Guid <<get>> <<set>>
-    + CountryId : Guid <<get>> <<set>>
-    + AddressFormId : Guid <<get>> <<set>>
-    + CountryIsoCode : string <<get>> <<set>>
-    + City : string <<get>> <<set>>
-    + PropertyName : string <<get>> <<set>>
-    + PropertyNumber : string <<get>> <<set>>
-    + Line1 : string <<get>> <<set>>
-    + Line2 : string <<get>> <<set>>
-    + Line3 : string <<get>> <<set>>
-    + Postcode : string <<get>> <<set>>
-    + County : string <<get>> <<set>>
-    + PropertyId : Guid? <<get>> <<set>>
-}
-
-class CompanyAddress {
-    + CompanyId : Guid <<get>> <<set>>
-    + <<virtual>> Company : Company <<get>> <<set>>
-    + AddressId : Guid <<get>> <<set>>
-    + <<virtual>> Address : Address <<get>> <<set>>
-    + IsPrimary : bool <<get>> <<set>>
-    + Switchboard : string <<get>> <<set>>
-    + NotCurrent : bool <<get>> <<set>>
-    + ContactCompanyAddresses : ICollection<ContactCompanyAddress> <<get>> <<set>>
-}
-BaseAuditableEntity <|-- CompanyAddress
-
 class Company {
     + Name : string <<get>> <<set>>
     + AlternativeName : string <<get>> <<set>>
@@ -143,6 +56,45 @@ IEntityWithAttachments <|-- Company
 IEntityWithNotes <|-- Company
 ISoftDeletableEntity <|-- Company
 IEntityWithVersion <|-- Company
+Company o-- CompanyAddress
+Company o-- OrganisationUnitCompany
+Company o-- CompanyContact
+Company o-- CompanyContactNote
+
+class CompanyContact {
+    + ContactId : Guid <<get>> <<set>>
+    + Contact : Contact <<get>> <<set>>
+    + CompanyId : Guid <<get>> <<set>>
+    + Company : Company <<get>> <<set>>
+    + JobTitle : string <<get>> <<set>>
+    + NotCurrent : bool <<get>> <<set>>
+}
+BaseEntity <|-- CompanyContact
+
+class CompanyContactNote {
+    + CompanyId : Guid <<get>> <<set>>
+    + <<virtual>> Company : Company <<get>> <<set>>
+    + ContactId : Guid <<get>> <<set>>
+    + <<virtual>> Contact : Contact <<get>> <<set>>
+    + NoteId : Guid <<get>> <<set>>
+    + <<virtual>> Note : Note <<get>> <<set>>
+}
+BaseEntity <|-- CompanyContactNote
+
+class CompanyAddress {
+    + CompanyId : Guid <<get>> <<set>>
+    + <<virtual>> Company : Company <<get>> <<set>>
+    + AddressId : Guid <<get>> <<set>>
+    + <<virtual>> Address : Address <<get>> <<set>>
+    + IsPrimary : bool <<get>> <<set>>
+    + Switchboard : string <<get>> <<set>>
+    + NotCurrent : bool <<get>> <<set>>
+    + ContactCompanyAddresses : ICollection<ContactCompanyAddress> <<get>> <<set>>
+}
+BaseAuditableEntity <|-- CompanyAddress
+CompanyAddress o-- ContactCompanyAddress
+
+
 
 class SapAddressUniqueNumber {
     + AddressId : Guid <<get>> <<set>>
@@ -174,5 +126,64 @@ interface IFormattableAddress {
     City : string <<get>>
     County : string <<get>>
 }
+
+
+class CompanyContactAddressResults {
+    + CompanyContactAddresses : IList<CompanyContactAddress> <<get>> <<set>>
+    + AddressesForFilter : IList<CompanyAddressForFilter> <<get>> <<set>>
+    + TotalResults : int <<get>> <<set>>
+    + ContactsCount : int <<get>> <<set>>
+}
+
+CompanyContactAddressResults o-- CompanyContactAddress
+CompanyContactAddressResults o-- CompanyAddressForFilter
+
+class CompanyContactAddress {
+    + ContactId : Guid? <<get>> <<set>>
+    + ContactName : string <<get>> <<set>>
+    + JobTitle : string <<get>> <<set>>
+    + ContactDatahugRank : short <<get>> <<set>>
+    + ContactLastInteractionDate : DateTimeOffset? <<get>> <<set>>
+    + ContactIsDatahugOnly : bool <<get>> <<set>>
+    + IsDeceased : bool <<get>> <<set>>
+    + PrimaryBusinessPhone : string <<get>> <<set>>
+    + PrimaryHomePhone : string <<get>> <<set>>
+    + PrimaryMobilePhone : string <<get>> <<set>>
+    + PrimaryEmail : string <<get>> <<set>>
+    + NegotiatorName : string <<get>> <<set>>
+    + NegotiatorDepartment : string <<get>> <<set>>
+    + NegotiatorActive : bool? <<get>> <<set>>
+    + AddressId : Guid? <<get>> <<set>>
+    + AddressCountryId : Guid? <<get>> <<set>>
+    + AddressPropertyName : string <<get>> <<set>>
+    + AddressPropertyNumber : string <<get>> <<set>>
+    + AddressLine1 : string <<get>> <<set>>
+    + AddressLine2 : string <<get>> <<set>>
+    + AddressLine3 : string <<get>> <<set>>
+    + AddressPostcode : string <<get>> <<set>>
+    + AddressCity : string <<get>> <<set>>
+    + AddressCounty : string <<get>> <<set>>
+    + PropertyId : Guid? <<get>> <<set>>
+    + AddressIsPrimary : bool? <<get>> <<set>>
+    + Switchboard : string <<get>> <<set>>
+    + CompanyId : Guid <<get>> <<set>>
+    + CompanyName : string <<get>> <<set>>
+}
+class CompanyAddressForFilter {
+    + Id : Guid <<get>> <<set>>
+    + CountryId : Guid <<get>> <<set>>
+    + AddressFormId : Guid <<get>> <<set>>
+    + CountryIsoCode : string <<get>> <<set>>
+    + City : string <<get>> <<set>>
+    + PropertyName : string <<get>> <<set>>
+    + PropertyNumber : string <<get>> <<set>>
+    + Line1 : string <<get>> <<set>>
+    + Line2 : string <<get>> <<set>>
+    + Line3 : string <<get>> <<set>>
+    + Postcode : string <<get>> <<set>>
+    + County : string <<get>> <<set>>
+    + PropertyId : Guid? <<get>> <<set>>
+}
+
 
 @enduml
