@@ -1,0 +1,29 @@
+@startuml EIP GDPR Decrypt
+!includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
+
+LAYOUT_LEFT_RIGHT()
+
+title Decrypt
+
+Aggregator(ag ,"Create User Key")
+ContentFilter(cf1, "Unique Key") <<$claim_check>> 
+
+rectangle "First Name" as ip1
+rectangle "Surname" as ip2
+rectangle "Email Address" as ip3
+rectangle "System Secret" as ss
+rectangle "Db Column" as dc
+rectangle "Encrypted: Db Column" as edc
+
+ip1 --> ag
+ip2 --> ag
+ip3 --> ag
+
+ag --> cf1
+ss --> cf1
+
+DataEnricher(de ,"label", dc)
+cf1 --> de
+edc --> de
+
+@enduml
