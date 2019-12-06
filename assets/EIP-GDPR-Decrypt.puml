@@ -22,7 +22,7 @@ ip3 --> ag
 ag --> cf1
 ss --> cf1
 
-DataEnricher(de ,"Decrypt", dc)
+DataEnricher(de ,"Decrypt Column", dc)
 cf1 --> de
 edc --> de
 
