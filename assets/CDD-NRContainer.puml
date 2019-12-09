@@ -1,0 +1,25 @@
+@startuml  
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+'LAYOUT_WITH_LEGEND
+
+title Container diagram for Northrow
+
+Enterprise_Boundary(c1, "Knight Frank LLP") {
+        Container( hbll, "hub Bll", "")
+
+        System_Boundary(northrow_system, "Northrow Service"){
+            Container( napi, "Northrow Api", "Provides a consistent API for the hub app")
+            Container( nbll, "Northrow Busniess Layer", "Services API Calls, and Manages interaction with both Northrow and the Datastore")
+            ContainerDb( ndb, "Northrow data", "Json Store")
+        }
+}
+System_Ext(northrow, "Northrow", "Automated Due Diligence")
+
+Rel(hbll, napi, "Uses [Json/Https]")
+Rel(napi, nbll, "Uses")
+
+Rel(nbll, northrow, "Uses [Json/Https]")
+Rel(nbll, ndb, "Reads from and\nwrites to")
+
+@enduml

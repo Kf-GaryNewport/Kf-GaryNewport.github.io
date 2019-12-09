@@ -2,8 +2,10 @@
 
 title CDD-Process
 
-(Start) --> CouterParty
-CouterParty --> (Offer) : Makes Offer
+left to right direction
+
+(start) --> CounterParty
+CounterParty --> (Offer) : Makes Offer
 (Offer) --> Party : Offer Passed\nto Party/Seller
 Party --> (Accept) : 1, Instruction\nCompleted
 (Accept) --> (CDD Request) : 2, Trigger CDD Request
@@ -19,4 +21,38 @@ CDD_Officer --> (Completed)
 CDD_Officer --> (?) : Withdraw\nNot sure what\n to do now
 (Completed) --> (Activity Status) : 8. Exchanged/Completed
 (Activity Status) --> (end)
+
+' state "CounterParty" as CounterParty
+' state "Offer" as Offer
+' state "Party" as Party
+' state "Accept" as Accept
+' state "CDD Request" as CDDRequest
+' state "Negotiator" as Negotiator
+' state "DashBoard" as DashBoard
+' state "CDD_Admin" as CDD_Admin
+' state "Withdraw" as Withdraw
+' state "CDD_Officer" as CDD_Officer
+' state "Completed" as Completed
+' state "CDD_Officer" as CDD_Officer
+' state "Activity Status" as ActivityStatus
+' state "?" as quest
+
+' [*] --> CounterParty
+' CounterParty --> Offer
+' Offer --> Party
+' Party --> Accept
+' Accept --> CDDRequest
+' Accept --> Negotiator
+' Negotiator --> quest
+' CDDRequest --> DashBoard
+' DashBoard --> CDD_Admin
+' CDD_Admin --> CDD_Officer
+' Party --> Withdraw
+' Withdraw --> CDD_Officer
+' CDD_Officer --> Completed
+' CDD_Officer --> quest
+' Completed --> ActivityStatus
+' ActivityStatus --> [*]
+
+
 @enduml

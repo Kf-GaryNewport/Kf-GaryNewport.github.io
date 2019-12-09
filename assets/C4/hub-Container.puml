@@ -1,0 +1,86 @@
+@startuml "Hub Container"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_TOP_DOWN
+'LAYOUT_AS_SKETCH
+'LAYOUT_WITH_LEGEND
+
+Person(user, "User")
+Person(administration_user, "Administration User")
+
+System_Boundary(c1, "hub"){
+    Container(web_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
+    Container(filesystem, "Azure Storage", "Azure", "Stores search indexes")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+    Container(webjob, "Webjob", "Azure c# webjob", "Updates content on a scheduled and triggered basis")
+
+    Container(CDD, "CDD", "Azure Api", "Customer Due Diligence")
+}
+
+' External Systems
+System_Ext(ExternalSystem, "External Systems\nElasticSearch\nDataHug\nDotmailer\nSap\nTextMessage\nFeedCentre\nEmail")
+System_Ext( nr, "Northrow")
+
+'System_Ext(ElasticSearch, "ElasticSearch")
+'System_Ext(DataHug, "DataHug")
+'System_Ext(Dotmailer, "Dotmailer")
+'System_Ext(Sap, "Sap")
+'System_Ext(TextMessage, "TextMessage")
+'System_Ext(FeedCentre, "FeedCentre")
+'System_Ext(Email, "Email")
+
+' Internal Systems
+System(InternalSystem, "Internal System\nClaims\nInstruction\nMyKfFeed\nUserFeed\nFileConversion\nNegotiatorRelationship\nNotifications\nTemplates\nSearchToFile")
+
+'System(Claims, "Claims")
+'System(Instruction, "Instruction")
+'System(MyKfFeed, "MyKfFeed")
+'System(UserFeed, "UserFeed")
+'System(FileConversion, "FileConversion")
+'System(NegotiatorRelationship, "NegotiatorRelationship")
+'System(Notifications, "Notifications")
+'System(Templates, "Templates")
+'System(SearchToFile, "SearchToFile")
+
+
+' Relationships
+Rel(user, web_app, "Uses", "HTTPS")
+Rel(administration_user, web_app, "Uses", "HTTPS")
+
+Rel(web_app, rel_db, "Reads from\nand writes to")
+Rel(web_app, filesystem, "Reads from\nand writes to")
+Rel(web_app, es, "Reads from")
+Rel_L(web_app, CDD, "Reads from\nand writes to")
+
+Rel_U(webjob, rel_db, "Reads from\nand writes to")
+Rel_U(webjob, filesystem, "Reads from\nand writes to")
+Rel_U(webjob, es, "Reads from\nand writes to")
+
+'Rel(webjob, Claims, "Claims Recalculation", "HTTPS")
+'Rel(webjob, Instruction, "Marketing Emails", "HTTPS")
+'Rel(webjob, MyKfFeed, "My Kf Feed", "HTTPS")
+'Rel(webjob, UserFeed, "User Feed", "HTTPS")
+'Rel(webjob, FileConversion, "File Conversion", "HTTPS")
+'Rel(webjob, NegotiatorRelationship, "Negotiator Relationship", "HTTPS")
+'Rel(webjob, Notifications, "Notifications", "HTTPS")
+'Rel(webjob, Templates, "Templates", "HTTPS")
+'Rel(webjob, SearchToFile, "SearchToFile", "HTTPS")
+
+'Rel(webjob, DataHug, "Gets information about contact popularity", "HTTPS")
+'Rel(webjob, Dotmailer, "Marketing Emails", "HTTPS")
+'Rel(webjob, ElasticSearch, "ElasticSearch", "HTTPS")
+'Rel(webjob, Email, "Email", "HTTPS")
+'Rel(webjob, FeedCentre, "FeedCentre", "HTTPS")
+'Rel(webjob, Sap, "Sap", "HTTPS")
+'Rel(webjob, TextMessage, "TextMessage", "HTTPS")
+
+Rel(webjob, InternalSystem, "InternalSystem", "HTTPS")
+Rel(webjob, ExternalSystem, "ExternalSystem", "HTTPS")
+Rel(CDD, nr, "ExternalSystem", "HTTPS")
+
+' Layout
+Lay_R(rel_db, filesystem)
+
+@enduml

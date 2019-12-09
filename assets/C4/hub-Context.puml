@@ -1,0 +1,12 @@
+@startuml "hub Context"
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Context.puml
+
+'LAYOUT_WITH_LEGEND
+
+Person(user, "Knight Frank User", "")
+System(hub, "International Real Estate Manaagement", "Allows users to manage their business")
+System_Ext(external, "External Systems", "Hub uses many external systems, in order to execute business needs.")
+
+Rel(user, hub, "Uses")
+Rel(hub, external, "Uses")
+@enduml
