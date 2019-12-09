@@ -1,0 +1,70 @@
+@startuml GDPR
+
+left to right direction
+
+state "Set Retention Period" as state1
+state "Schedule" as sched
+sched : Run Daily
+
+state "Identify" as ident
+ident : At Max Retension\n(Max Retension + Any Extension)
+ident : Right to be Forgotten Set
+
+state "Identify-1" as identm
+identm : At Notification ( Max Retension - n)
+
+state "Anonymise" as anon
+
+state "Notify" as note
+note : Inform user of records\nto be Anonymised
+
+state "Modify Notified" as modNote
+modNote : Notified Boss
+
+state "Modify Authorisation" as modAuth
+modAuth : Set Extension Date
+modAuth : Increment Extension Count
+
+state " Authorise" as auth
+auth : Authorise Extension
+
+state "Boss Notification" as boss
+boss : Notified of records to extend
+
+state "Right to be Forgotten" as rtbf
+rtbf : Set Right to be Forgotten flag
+
+state "Right to be Forgotten Check" as rtbfc
+rtbfc : Generate Key
+state "Find Key in DB" as dbfind
+dbfind : Report 
+
+[*] --> rtbf
+rtbf --> [*]
+
+[*] --> rtbfc
+rtbfc --> dbfind
+dbfind --> [*]
+
+[*] --> state1
+state1 --> [*] 
+
+[*] --> sched
+sched --> ident
+ident --> anon
+anon --> [*]
+
+sched --> identm
+identm --> note
+note --> modNote
+modNote --> [*] 
+note --> [*] : Does Nothing
+
+sched --> boss
+boss --> auth
+boss --> [*] : Does Nothing
+auth --> modAuth
+auth --> [*] : Declines extension
+modAuth --> [*]
+
+@enduml

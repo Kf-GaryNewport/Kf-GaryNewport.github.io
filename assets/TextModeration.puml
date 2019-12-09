@@ -1,0 +1,30 @@
+@startuml Text Moderation
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+title Text Moderation
+
+' classes
+interface ITextModeration 
+interface ITextModerationHandler
+ITextModeration : mediate()
+ITextModerationHandler : NotifyText()
+TextModerationMessage : NotifyText()
+Notifier1 : Handle()
+Notifier2 : Handle()
+INotifierMediatorService : NotifyText()
+
+' Set screen position
+ITextModeration <- ITextModerationHandler : mediator
+ITextModeration -[hidden]-> TextModerationMessage
+
+' Relationship
+TextModerationMessage --|> ITextModeration
+ITextModerationHandler <|-- Notifier1
+ITextModerationHandler <|-- Notifier2
+'TextModerationMessage -> 
+TextModerationMessage -> Notifier2
+
+INotifierMediatorService <|-- NotifierMediatorService
+@enduml
