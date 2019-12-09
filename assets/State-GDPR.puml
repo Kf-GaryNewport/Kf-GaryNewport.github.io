@@ -9,6 +9,7 @@ sched : Run Daily
 state "Identify" as ident
 ident : At Max Retension\n(Max Retension + Any Extension)
 ident : Right to be Forgotten Set
+ident : No Un-Spent Transactions
 
 state "Identify-1" as identm
 identm : At Notification ( Max Retension - n)
