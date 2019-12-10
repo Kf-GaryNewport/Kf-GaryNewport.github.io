@@ -1,0 +1,81 @@
+@startuml CDD-ServiceProcess
+
+' left to right direction
+hide empty description
+
+actor hub
+actor Schedule
+participant  CddApi
+database Datastore
+
+== Normal Operation ==
+
+hub -> CddApi : CDD Request
+activate CddApi
+
+CddApi -> Datastore : Get Id
+activate Datastore
+
+group Found
+    CddApi <- Datastore : Response
+
+end
+group Not Found
+    CddApi <- Datastore : Response
+    deactivate Datastore
+
+    CddApi -> Northrow : Request
+    activate Northrow
+
+    group Success
+        CddApi <- Northrow : Response
+
+        CddApi -> Datastore : UpSert
+    end
+    group Fail
+        CddApi <- Northrow : Response
+        deactivate Northrow
+    end
+end
+
+hub <- CddApi : CDD Response
+deactivate CddApi
+
+== Expired Check ==
+
+Schedule -> CddApi : Check Expired
+activate CddApi
+CddApi -> Datastore : Get Expired\nList
+activate Datastore
+
+CddApi <- Datastore : Response
+deactivate Datastore
+loop
+    CddApi -> hub: Still Active ?
+
+    group Active
+        CddApi <- hub: Active
+        CddApi -> Northrow : Request
+        activate Northrow
+        group Success
+            CddApi <- Northrow : Response
+
+            CddApi -> Datastore : UpSert
+        end
+        group Fail
+            CddApi <- Northrow : Response
+            deactivate Northrow
+            CddApi -> Datastore : Delete
+        end
+
+    end
+    group Inactive
+        CddApi <- hub: Inactive
+        CddApi -> Datastore : Delete
+    end
+end
+
+Schedule <- CddApi : Complete
+deactivate CddApi
+
+@enduml
