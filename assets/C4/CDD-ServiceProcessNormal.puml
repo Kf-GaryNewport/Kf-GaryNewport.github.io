@@ -1,0 +1,44 @@
+@startuml CDD-ServiceProcess
+
+' left to right direction
+hide empty description
+
+actor hub
+actor Schedule
+participant  CddApi
+database Datastore
+
+== Normal Operation ==
+
+hub -> CddApi : CDD Request
+activate CddApi
+
+CddApi -> Datastore : Get Id
+activate Datastore
+
+group Found
+    CddApi <- Datastore : Response
+
+end
+group Not Found
+    CddApi <- Datastore : Response
+    deactivate Datastore
+
+    CddApi -> Northrow : Request
+    activate Northrow
+
+    group Success
+        CddApi <- Northrow : Response
+
+        CddApi -> Datastore : UpSert
+    end
+    group Fail
+        CddApi <- Northrow : Response
+        deactivate Northrow
+    end
+end
+
+hub <- CddApi : CDD Response
+deactivate CddApi
+
+@enduml
