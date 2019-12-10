@@ -4,7 +4,6 @@
 hide empty description
 
 actor hub
-actor Schedule
 participant  CddApi
 database Datastore
 
