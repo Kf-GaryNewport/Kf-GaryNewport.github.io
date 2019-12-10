@@ -1,0 +1,19 @@
+@startuml "Cdd Service"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_TOP_DOWN
+
+System_Ext( nr, "Northrow", "Automated Due Diligence service")
+
+ContainerDb(cdb, "DataStore", "Azure TableStorage", "Stores information regarding the due diligence of contacts and companies")
+
+Container_Boundary(c2, "CDD"){
+    Component(bll, "CddService", "C#", "Provides Automated Due Diligence information on contacts and companies")
+    Rel( bll, cdb, "Reads from\nand Writes to")
+}
+
+Rel_R( bll, nr, "Uses", "JSON/HTTPS")
+
+
+@enduml
