@@ -27,7 +27,7 @@ Container_Boundary(c1, "hub"){
     }
 
     Rel( hubWapp, hubApi,"Uses", "JSON/HTTPS")
-    Rel( hubApi, api, "Uses", "JSON/HTTPS")
+    Rel_L( hubApi, api, "Uses", "JSON/HTTPS")
     Rel_R( svc, nr, "Uses", "JSON/HTTPS")
 }
 
