@@ -22,12 +22,12 @@ Container_Boundary(c1, "hub"){
         Rel_R( bll, svc, "Uses")
         Rel( bll, tsh, "Uses")
         Rel( tsh, cdb, "Reads from\nand Writes to")
-        Rel_U( bll, hubApi,"Uses", "JSON/HTTPS")
+        Rel_R( bll, hubApi,"Uses", "JSON/HTTPS")
         Rel_L( tim, api, "Uses", "JSON/HTTPS")
     }
 
     Rel( hubWapp, hubApi,"Uses", "JSON/HTTPS")
-    Rel_L( hubApi, api, "Uses", "JSON/HTTPS")
+    Rel( hubApi, api, "Uses", "JSON/HTTPS")
     Rel_R( svc, nr, "Uses", "JSON/HTTPS")
 }
 
