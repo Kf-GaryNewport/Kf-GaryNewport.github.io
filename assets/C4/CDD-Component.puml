@@ -7,22 +7,28 @@ LAYOUT_TOP_DOWN
 System_Ext( nr, "Northrow", "Automated Due Diligence service")
 
 Container_Boundary(c1, "hub"){
-    Container(hub, "hub Web Application", "C#", "Allows users to view contacts, activities, properties, etc.")
+    Container(hubWapp, "hub Web Application", "C#", "Allows users to view contacts, activities, properties, etc.")
+    Container(hubApi, "hub Web API", "C#", "Allows users to view contacts, activities, properties, etc.")
     ContainerDb(cdb, "DataStore", "Azure TableStorage", "Stores information regarding the due diligence of contacts and companies")
 
     Container_Boundary(c2, "CDD"){
         Component(api, "CddController", "C# MVC Controller", "")
-        Component(bll, "CddService", "C#", "Provides Automated Due Diligence information on contacts and companies")
+        Component(bll, "Cdd Process", "C#", "Provides Automated Due Diligence information on contacts and companies")
+        Component(tsh, "Table Storage", "C#", "Provides Table storage access, Encryption/Decryption")
+        Component(svc, "CddService", "C#", "Provides Access to external service")
         Component(tim, "Scheduler", "C# Azure Function", "A Scheduled maintenance task to clean up expired information")
 
-        Rel( api, bll, "Uses", "JSON/HTTPS")
-        Rel( bll, cdb, "Reads from\nand Writes to")
-        Rel_U( bll, hub, "Request still used ?")
-        Rel_R( tim, api, "Uses", "JSON/HTTPS")
+        Rel( api, bll, "Uses")
+        Rel_R( bll, svc, "Uses")
+        Rel( bll, tsh, "Uses")
+        Rel( tsh, cdb, "Reads from\nand Writes to")
+        Rel_U( bll, hubApi,"Uses", "JSON/HTTPS")
+        Rel_L( tim, api, "Uses", "JSON/HTTPS")
     }
 
-    Rel( hub, api, "Uses", "JSON/HTTPS")
-    Rel_R( bll, nr, "Uses", "JSON/HTTPS")
+    Rel( hubWapp, hubApi,"Uses", "JSON/HTTPS")
+    Rel( hubApi, api, "Uses", "JSON/HTTPS")
+    Rel_R( svc, nr, "Uses", "JSON/HTTPS")
 }
 
 @enduml

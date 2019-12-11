@@ -17,11 +17,13 @@ System_Boundary(c1, "hub"){
     Container(webjob, "Webjob", "Azure c# webjob", "Updates content on a scheduled and triggered basis")
 
     Container(CDD, "CDD", "Azure Api", "Customer Due Diligence")
+    Container(Add, "Address Service", "Api", "Address Lookup")
 }
 
 ' External Systems
 System_Ext(ExternalSystem, "External Systems\nElasticSearch\nDataHug\nDotmailer\nSap\nTextMessage\nFeedCentre\nEmail")
 System_Ext( nr, "Northrow")
+System_Ext( pca, "Pca Predict/Loqate")
 
 'System_Ext(ElasticSearch, "ElasticSearch")
 'System_Ext(DataHug, "DataHug")
@@ -53,6 +55,7 @@ Rel(web_app, rel_db, "Reads from\nand writes to")
 Rel(web_app, filesystem, "Reads from\nand writes to")
 Rel(web_app, es, "Reads from")
 Rel_L(web_app, CDD, "Reads from\nand writes to")
+Rel(web_app, Add, "Reads from\nand writes to")
 
 Rel_U(webjob, rel_db, "Reads from\nand writes to")
 Rel_U(webjob, filesystem, "Reads from\nand writes to")
@@ -79,6 +82,7 @@ Rel_U(webjob, es, "Reads from\nand writes to")
 Rel(webjob, InternalSystem, "InternalSystem", "HTTPS")
 Rel(webjob, ExternalSystem, "ExternalSystem", "HTTPS")
 Rel(CDD, nr, "ExternalSystem", "HTTPS")
+Rel(Add, pca, "ExternalSystem", "HTTPS")
 
 ' Layout
 Lay_R(rel_db, filesystem)

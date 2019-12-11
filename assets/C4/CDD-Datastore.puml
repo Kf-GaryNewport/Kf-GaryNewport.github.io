@@ -8,10 +8,10 @@ System_Ext( nr, "Northrow", "Automated Due Diligence service")
 ContainerDb(cdb, "DataStore", "Azure TableStorage", "Stores information regarding the due diligence of contacts and companies")
 
 Container_Boundary(c2, "CDD"){
-    Component(bll, "CddService", "C#", "Provides Automated Due Diligence information on contacts and companies")
-    Rel( bll, cdb, "Reads from\nand Writes to")
+    Component(tsh, "Table Storage", "C#", "Provides Table storage access, Encryption/Decryption")
+    Rel( tsh, cdb, "Reads from\nand Writes to")
 }
 
-Rel_R( bll, nr, "Uses", "JSON/HTTPS")
+Rel_R( tsh, nr, "Uses", "JSON/HTTPS")
 
 @enduml
