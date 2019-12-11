@@ -14,7 +14,7 @@ Container_Boundary(c1, "hub"){
     ContainerDb(hdb, "Database", "SQL", "Central hub database")
 
     Container_Boundary(c2, "hub Web API"){
-        Component(cddl, "CDD", "C#", "Checks if Contact/Company is active")  
+        Component(cddl, "CDD API", "C#", "Checks if Contact/Company is active")  
         Component(cdds, "CDD Service", "C#", "")
 
         Component(con, "Contact", "C#", "")
