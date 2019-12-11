@@ -21,7 +21,7 @@ Container_Boundary(c1, "hub"){
         Rel( api, bll, "Uses")
         Rel_R( bll, svc, "Uses")
         Rel( bll, tsh, "Uses")
-        Rel( tsh, cdb, "Reads from\nand Writes to")
+        Rel_R( tsh, cdb, "Reads from\nand Writes to")
         Rel_R( bll, hubApi,"Uses", "JSON/HTTPS")
         Rel_L( tim, api, "Uses", "JSON/HTTPS")
     }
