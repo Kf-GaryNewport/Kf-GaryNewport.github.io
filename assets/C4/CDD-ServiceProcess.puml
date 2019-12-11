@@ -65,7 +65,6 @@ loop
         group Fail
             CddApi <- Northrow : Response
             deactivate Northrow
-            CddApi -> Datastore : Delete
         end
 
     end
