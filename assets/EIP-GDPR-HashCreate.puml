@@ -1,9 +1,9 @@
-@startuml EIP GDPR Hash
+@startuml EIP GDPR Hash Create
 !includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
 
 LAYOUT_LEFT_RIGHT()
 
-title Hash
+title Hash Create
 Aggregator(ag ,"Create User Key")
 ContentFilter(cf1, "Create Salt") <<$claim_check>> 
 ContentFilter(cf2, "Hash Column") <<$claim_check>> 
