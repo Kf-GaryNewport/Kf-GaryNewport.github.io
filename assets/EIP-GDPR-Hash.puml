@@ -1,0 +1,18 @@
+@startuml EIP GDPR Hash
+!includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
+
+LAYOUT_LEFT_RIGHT()
+
+title Hash
+
+ContentFilter(cf2, "Hash Column") <<$claim_check>> 
+
+rectangle "Db Column" as dc
+rectangle "System Secret\n(Salt)" as ss
+rectangle "Hashed: Db Column" as edc
+
+dc --> cf2
+ss --> cf2
+cf2 --> edc
+
+@enduml
