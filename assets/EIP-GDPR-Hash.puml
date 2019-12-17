@@ -5,7 +5,7 @@ LAYOUT_LEFT_RIGHT()
 
 title Hash
 
-ContentFilter(cf2, "Hash Column") <<$claim_check>> 
+ContentFilter(cf2, "Hash") <<$claim_check>> 
 
 rectangle "Db Column" as dc
 rectangle "System Secret\n(Salt)" as ss
