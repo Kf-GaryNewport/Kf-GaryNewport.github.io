@@ -19,8 +19,8 @@ rectangle "Create" {
 }
 
 rectangle "Find" {
-    ContentFilter(cf1, "Create Hash") <<$claim_check>> #LightBlue
-    ContentFilter(cf3, "Unique Key") <<$claim_check>> #LightBlue
+    ContentFilter(cf1, "Hash Json") <<$claim_check>> #LightBlue
+    Aggregator(cf3, "Create JSON Object") #LightBlue
     rectangle "First Name" as uk1 #LightBlue
     rectangle "Surname" as uk2 #LightBlue
     rectangle "Email Address" as uk3 #LightBlue
