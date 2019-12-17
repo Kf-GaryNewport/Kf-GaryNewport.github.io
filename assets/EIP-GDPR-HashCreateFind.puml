@@ -18,7 +18,7 @@ rectangle "Create" {
     rectangle "Encrypted: Db Column" as edc
 }
 
-rectangle "Find" {
+rectangle "Create/Find" {
     ContentFilter(cf1, "Hash Json") <<$claim_check>> #LightBlue
     Aggregator(cf3, "Create JSON Object") #LightBlue
     rectangle "First Name" as uk1 #LightBlue
