@@ -1,0 +1,49 @@
+@startuml EIP GDPR Hash Create Find
+!includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_LEFT_RIGHT()
+
+title Hash Create\Find
+
+rectangle "Create" {
+    Aggregator(ag ,"Create JSON Object")
+    ContentFilter(cf2, "Encrypt Json") <<$claim_check>> 
+    rectangle "First Name" as ip1
+    rectangle "Surname" as ip2
+    rectangle "Email Address" as ip3
+    rectangle "Telephone Number" as ip4
+    rectangle "Some Other PII" as ip5
+    rectangle "Some More PII" as ip6
+    rectangle "Encrypted: Db Column" as edc
+}
+
+rectangle "Find" {
+    ContentFilter(cf1, "Create Hash") <<$claim_check>> #LightBlue
+    ContentFilter(cf3, "Unique Key") <<$claim_check>> #LightBlue
+    rectangle "First Name" as uk1 #LightBlue
+    rectangle "Surname" as uk2 #LightBlue
+    rectangle "Email Address" as uk3 #LightBlue
+    rectangle "Hashed: Db Column" as hdc #LightBlue
+}
+
+rectangle "System Secret" as ss
+
+ip1 --> ag
+ip2 --> ag
+ip3 --> ag
+ip4 --> ag
+ip5 --> ag
+ip6 --> ag
+ag --> cf2
+ss --> cf2
+cf2 --> edc
+
+uk1 --> cf3
+uk2 --> cf3
+uk3 --> cf3
+ss --> cf1
+cf3 --> cf1
+cf1 --> hdc
+
+@enduml

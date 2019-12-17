@@ -4,7 +4,7 @@
 LAYOUT_LEFT_RIGHT()
 
 title Hash Find
-Aggregator(ag ,"Create JSON Object")
+Aggregator(ag ,"Create Key")
 ContentFilter(cf1, "Create Hash") <<$claim_check>> 
 
 rectangle "First Name" as ip1
