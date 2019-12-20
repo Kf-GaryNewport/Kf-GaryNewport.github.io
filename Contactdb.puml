@@ -1,0 +1,173 @@
+@startuml ContactDb
+
+left to right direction
+
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+table(Nationality)
+{
+    primary_key(Id)
+    IsoCode
+}
+
+table(Profession)
+{
+    primary_key(Id)
+}
+
+table(AgeBand)
+{
+    primary_key(Id)
+}
+
+table(Contact)
+{
+    primary_key(Id)
+    Nationality
+    Profession
+    AgeBand
+}
+
+table(Company)
+{
+    primary_key(Id)
+}
+
+table(Country)
+{
+    primary_key(Id)
+}
+
+table(CompanyContact)
+{
+    primary_key(Id)
+    ContactId
+    CompanyId
+}
+
+table(Address)
+{
+    primary_key(Id)
+}
+
+table(CompanyAddress)
+{
+    primary_key(Id)
+    AddressId
+    CompanyId
+}
+
+table(ContactCompanyAddress)
+{
+    primary_key(Id)
+    CompanyAddressId
+    ContactId
+}
+
+table(ContactAddress)
+{
+    primary_key(Id)
+    AddressId
+    ContactId
+}
+
+table(ContactPropertyInterest)
+{
+    primary_key(Id)
+    ContactId
+}
+
+table(ContactPropertyTypeInterest)
+{
+    primary_key(Id)
+    ContactId
+}
+
+table(AssetParty)
+{
+    primary_key(Id)
+    AssetId
+    ContractId
+    CompanyId
+}
+
+table(OwnershipOwner)
+{
+    primary_key(Id)
+    OwnerId
+    OwnershipId
+}
+
+table(Ownership)
+{
+    primary_key(Id)
+}
+
+table(RelationshipType)
+{
+    primary_key(Id)
+}
+table(Relationship)
+{
+    primary_key(Id)
+}
+table(ContactRelationship)
+{
+    primary_key(Id)
+    ContractId
+    RelationshipId
+}
+
+table(ContactEmail)
+{
+    primary_key(Id)
+    ContractId
+}
+
+table(ContactUser)
+{
+    primary_key(Id)
+    ContractId
+}
+
+table(ContactPhone)
+{
+    primary_key(Id)
+    ContractId
+}
+
+Contact --> Nationality
+Contact --> Profession
+Contact --> AgeBand
+Contact --> Country
+CompanyContact --> Contact
+CompanyContact --> Company
+Company --> Company
+Company --> Contact
+Company --> Country
+Address --> Country
+CompanyAddress --> Address
+CompanyAddress --> Company
+ContactCompanyAddress --> Contact
+ContactCompanyAddress --> CompanyAddress
+ContactAddress -->  Contact
+ContactAddress --> Address
+ContactPropertyTypeInterest --> AssetParty
+ContactPropertyInterest --> Contact
+AssetParty --> Contact
+AssetParty --> Company
+AssetParty --> Address
+OwnershipOwner --> Ownership
+OwnershipOwner --> AssetParty
+Relationship --> RelationshipType
+ContactRelationship --> Relationship
+ContactRelationship --> Contact
+ContactEmail --> Contact
+ContactUser --> Contact
+ContactPhone --> Contact
+
+
+@enduml

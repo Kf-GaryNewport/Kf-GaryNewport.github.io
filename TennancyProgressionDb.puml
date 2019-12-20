@@ -1,0 +1,121 @@
+@startuml AddressDb
+
+left to right direction
+
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+hide methods
+hide stereotypes
+
+table( Address)
+{
+    primary_key(Id)
+}
+
+table( Reference)
+{
+    primary_key(Id)
+}
+
+table( MapReferenceContact)
+{
+    primary_key(Id)
+    ReferenceId
+    ContactId
+}
+
+MapReferenceContact <-- Contact
+MapReferenceContact <-- Reference 
+
+table( Contact)
+{
+    primary_key(Id)
+    Type
+    Name
+    Address
+    ReferencesId
+    IndividualId
+    CompanyId
+}
+
+Contact --> Address
+
+table( Company)
+{
+    primary_key(Id)
+}
+
+table( Individual)
+{
+    primary_key(Id)
+    DOB
+}
+
+Contact <-- Company
+Contact <-- Individual
+
+
+table( Tenant)
+{
+    primary_key(Id)
+}
+
+table( Property)
+{
+    primary_key(Id)
+    Name
+    AddressId
+    OwnerId
+    Type
+}
+
+table( PropertyDetails)
+{
+    primary_key(Id)
+    Address
+    Spaces
+    BuildingTitle
+    EPC
+}
+
+PropertyDetails --> Reference : BuildingTitle
+PropertyDetails --> Reference : EPC
+PropertyDetails --> Address : AddressId
+
+table( MapTenantProperty)
+{
+    primary_key(Id)
+    ContactId
+    PropertyId
+    TennacyDetails
+}
+
+Property --> PropertyDetails 
+Property --> Contact : OwnerId
+MapTenantProperty <-- Property : PropertyId
+MapTenantProperty <-- Contact : ContactId
+MapTenantProperty --> TennacyDetails
+
+table(TennacyDetails)
+{
+    primary_key(Id)
+    StartDate
+    EndDate
+    Duration
+    RentId
+    Unit
+    NoncommissionableRent
+    NoncommissionableRentDescription
+    LanlordLivesIn
+    TennancyType
+    RentIncreaseId
+}
+
+table( RentIncrease)
+{
+    primary_key(Id)
+
+}
+
+
+@enduml
