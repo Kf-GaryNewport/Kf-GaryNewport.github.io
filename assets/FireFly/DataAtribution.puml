@@ -23,7 +23,7 @@ System_Boundary(c2, "Public HoldingArea"){
 Rel(sched, svc, "Uses", "HTTPS") 
 Rel(user, hub_app, "Uses", "HTTPS")
 Rel(hub_app, rel_db, "Reads from\nand writes to")
-Rel(hub_app, web_api, "Reads from\nand writes to")
+Rel(svc, web_api, "Reads from")
 Rel(svc, rel_db, "Reads from\nand writes to")
 
 ' External Systems
