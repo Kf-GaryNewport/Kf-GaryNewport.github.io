@@ -4,34 +4,36 @@
 
 LAYOUT_TOP_DOWN
 
-Person(sched, "Scheduler")
 Person(user, "User")
+Person(sched, "Scheduler")
 Person(sitecore, "SiteCore")
 
-System_Boundary(c1, "hub"){
+System_Boundary(c1, "Private hub"){
     Container(hub_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
-    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
-}
-
-System_Boundary(c2, "hubFly"){
-    Container(web_api, "Web API", "Azure Function, Logic App, C# ", "")
-    Container(store, "Azure Storage Table", "Azure", "Stores Contact in Canonical form")   
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "hub Database\nContact Staging Area")
     Container(svc, "Service", "C#", "Collects content from external services")
 }
 
+System_Boundary(c2, "Public HoldingArea"){
+    Container(web_api, "Web API", "Azure Function, Logic App, C# ", "")
+    Container(store, "Azure Storage Table", "Azure", "Stores Contact in Canonical form")   
+
+}
+
+Rel(sched, svc, "Uses", "HTTPS") 
 Rel(user, hub_app, "Uses", "HTTPS")
 Rel(hub_app, rel_db, "Reads from\nand writes to")
 Rel(hub_app, web_api, "Reads from\nand writes to")
+Rel(svc, rel_db, "Reads from\nand writes to")
 
 ' External Systems
 System_Ext(ExternalSystem, "External Systems\nGiosq\nResponseTap") 
 
 ' Relationships
-Rel(sched, web_api, "Uses", "HTTPS") 
+
 Rel(sitecore, web_api, "Uses", "HTTPS") 
-Rel(web_api, svc, "Uses")
-Rel(web_api, store, "Reads from")
-Rel_U(svc, store, "Writes to")
+Rel(web_api, store, "Reads from\nWrites To")
+'Rel_U(svc, store, "Writes to")
 Rel(svc, ExternalSystem, "ExternalSystem", "HTTPS")
 
 @enduml
