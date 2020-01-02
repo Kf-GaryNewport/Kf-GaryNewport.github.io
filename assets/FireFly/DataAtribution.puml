@@ -1,0 +1,37 @@
+@startuml FireFlyDA
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_TOP_DOWN
+
+Person(sched, "Scheduler")
+Person(user, "User")
+Person(sitecore, "SiteCore")
+
+System_Boundary(c1, "hub"){
+    Container(hub_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+}
+
+System_Boundary(c2, "hubFly"){
+    Container(web_api, "Web API", "Azure Function, Logic App, C# ", "")
+    Container(queue, "Azure Storage Queue", "Azure", "Stores Contact in Canonical form")   
+    Container(svc, "Service", "C#", "Collects content from external services")
+}
+
+Rel(user, hub_app, "Uses", "HTTPS")
+Rel(hub_app, rel_db, "Reads from\nand writes to")
+Rel(hub_app, web_api, "Reads from\nand writes to")
+
+' External Systems
+System_Ext(ExternalSystem, "External Systems\nGiosq\nResponseTap") 
+
+' Relationships
+Rel(sched, web_api, "Uses", "HTTPS") 
+Rel(sitecore, web_api, "Uses", "HTTPS") 
+Rel(web_api, svc, "Uses")
+Rel(web_api, queue, "Reads from")
+Rel_U(svc, queue, "Writes to")
+Rel(svc, ExternalSystem, "ExternalSystem", "HTTPS")
+
+@enduml
