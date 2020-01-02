@@ -2,10 +2,25 @@
 
 left to right direction
 
-!define table(x) class x << (T,#FFAAAA) >>
-!define primary_key(x) <u>x</u>
-hide methods
-hide stereotypes
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
 
 table(EnumType) {
     primary_key(Id)
@@ -15,15 +30,15 @@ table(EnumType) {
 table(EnumTypeItem) {
     primary_key(Id)
     Code
-    EnumTypeId
+    foreign_key(EnumTypeId)
     PrimarySortOrder
     SecondarySortOrder
     }
 
     table(AddressForm) {
     primary_key(Id)
-    CountryId
-    AddressFormTypeId
+    foreign_key(CountryId)
+    foreign_key(AddressFormTypeId)
 }
 
 table(AddressField) {
@@ -38,8 +53,8 @@ table(AddressFieldLabel) {
 
 table(Address) {
     primary_key(Id)
-    CountryId
-    AddressFormId
+    foreign_key(CountryId)
+    foreign_key(AddressFormId)
     PropertyName
     PropertyNumber
     Line1
@@ -67,15 +82,15 @@ table(Address) {
 
 table(AddressFormEntityType) {
     primary_key(Id)
-    AddressFormId
-    EnumTypeId
+    foreign_key(AddressFormId)
+    foreign_key(EnumTypeId)
 }
 
 table(AddressFieldDefinition) {
     primary_key(Id)
-    AddressFieldId
-    AddressFieldLabelId
-    AddressFormId
+    foreign_key(AddressFieldId)
+    foreign_key(AddressFieldLabelId)
+    foreign_key(AddressFormId)
     Required
     RegEx
     RowOrder
@@ -89,21 +104,35 @@ table(Country) {
     primary_key(Id)
     IsoCode
     DiallingCode
-    CurrencyId
-    DefaultLivingAreaUnitId
+    foreign_key(CurrencyId)
+    foreign_key(DefaultLivingAreaUnitId)
 }
 
-AddressFormEntityType --> AddressForm
-AddressFormEntityType --> EnumTypeItem
-Address --> AddressForm
-Address --> Country
-AddressFieldDefinition --> AddressForm
-AddressFieldDefinition --> AddressFieldLabel
-AddressFieldDefinition --> AddressField
-AddressForm --> EnumTypeItem
-AddressForm --> Country
-Country --> EnumTypeItem
-Country --> EnumTypeItem
-EnumTypeItem --> EnumType
+link(AddressFormEntityType,AddressForm)
+link(AddressFormEntityType,EnumTypeItem)
+link(Address,AddressForm)
+link(Address,Country)
+link(AddressFieldDefinition,AddressForm)
+link(AddressFieldDefinition,AddressFieldLabel)
+link(AddressFieldDefinition,AddressField)
+link(AddressForm,EnumTypeItem)
+link(AddressForm,Country)
+link(Country,EnumTypeItem)
+link(Country,EnumTypeItem)
+link(EnumTypeItem,EnumType)
+
+
+'AddressFormEntityType --> AddressForm
+'AddressFormEntityType --> EnumTypeItem
+'Address --> AddressForm
+'Address --> Country
+'AddressFieldDefinition --> AddressForm
+'AddressFieldDefinition --> AddressFieldLabel
+'AddressFieldDefinition --> AddressField
+'AddressForm --> EnumTypeItem
+'AddressForm --> Country
+'Country --> EnumTypeItem
+'Country --> EnumTypeItem
+'EnumTypeItem --> EnumType
 
 @enduml

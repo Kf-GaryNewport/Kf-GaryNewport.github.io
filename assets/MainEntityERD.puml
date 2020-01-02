@@ -1,0 +1,130 @@
+@startuml MainEntityERD
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+'skinparam linetype ortho
+
+table(Activity) {
+    primary_key(Id)
+    foreign_key(AcceptedOfferId)
+    foreign_key(RefferalId)
+    foreign_key(ResponcibleForSaleOrLetContactId)
+    foreign_key(ResponcibleForSaleOrLetCompanyId)
+    foreign_key(HeadLeaseId)
+}
+link( Activity, Offer)
+link( Activity, Referral)
+link( Activity, Contact)
+link( Activity, Company)
+link( Activity, Tenancy)
+
+table(Contact) {
+    primary_key(Id)
+    foreign_key(ActivityId)
+    foreign_key(RequirementId)
+}
+
+link( Contact, Activity)
+link( Contact, Requirement)
+
+table(Referral) {
+    primary_key(Id)
+    foreign_key(ReferralId)
+}
+link( Referral, Referral)
+
+table(Instruction) {
+    primary_key(Id)
+    foreign_key(ReferralId)
+}
+link( Instruction, Referral)
+
+table(Offer) {
+    primary_key(Id)
+    foreign_key(ActivityId)
+    foreign_key(ResponcibleForSaleOrLetCompanyId)
+    foreign_key(RequirementId)
+}
+link( Offer, Activity)
+link( Offer, Company)
+link( Offer, Requirement)
+
+table(Company) {
+    primary_key(Id)
+    foreign_key(OwningCompanyId)
+    foreign_key(DataHugOnly)
+    foreign_key(QubeSynchronized)
+}
+link( Company, Company)
+
+table(Tenancy) {
+    primary_key(Id)
+    foreign_key(HeadLeaseId)
+    foreign_key(RequirementId)
+    foreign_key(ActivityId)
+}
+link( Tenancy, Tenancy)
+link( Tenancy, Requirement)
+link( Tenancy, Activity)
+
+table(MatchDiscard) {
+    primary_key(Id)
+    foreign_key(ActivityId)
+    foreign_key(RequirementId)
+}
+link( MatchDiscard, Activity)
+link( MatchDiscard, Requirement)
+
+table(Match) {
+    primary_key(Id)
+    foreign_key(ActivityId)
+    foreign_key(RequirementId)
+}
+link( Match, Activity) 
+link( Match, Requirement) 
+
+table(Requirement) {
+    primary_key(Id)
+    foreign_key(CurrentLocationId)
+    foreign_key(ResponsibleForDealCompanyId)
+    foreign_key(ReferralId)
+    foreign_key(SellingPropertyId)
+}
+link( Requirement, Company) 
+link( Requirement, Referral) 
+link( Requirement, Asset) 
+link( Requirement, Requirement)
+
+table(Asset) {
+    primary_key(Id)
+    foreign_key(DevelopmentId)
+    foreign_key(EstateId)
+    foreign_key(PhaseId)
+    foreign_key(RequirementId)
+}
+link( Asset, Asset) : DevelopmentId
+link( Asset, Asset) : EstateId
+link( Asset, Asset) : PhaseId 
+'link( Asset, Company)
+
+@enduml

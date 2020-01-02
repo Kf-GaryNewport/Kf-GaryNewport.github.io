@@ -2,10 +2,25 @@
 
 left to right direction
 
-!define table(x) class x << (T,#FFAAAA) >>
-!define primary_key(x) <u>x</u>
-hide methods
-hide stereotypes
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
 
 table(Nationality)
 {
@@ -51,6 +66,31 @@ table(CompanyContact)
 table(Address)
 {
     primary_key(Id)
+    CountryId
+    AddressFormId
+    PropertyName
+    PropertyNumber
+    Line1
+    Line2
+    Line3
+    Postcode
+    City
+    County
+    ShortAddressFormated
+    Marker
+    AlternativePropertyName
+    AlternativePropertyNumber
+    AlternativeLine1
+    AlternativeLine2
+    AlternativeLine3
+    AlternativePostcode
+    AlternativeCity
+    AlternativeCounty
+    UdprnKey
+    UmrrnKey
+    UprnKey
+    QubeSynchronized
+    QubeErrorOccurred
 }
 
 table(CompanyAddress)
