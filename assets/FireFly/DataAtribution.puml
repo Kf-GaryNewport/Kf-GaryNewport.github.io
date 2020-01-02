@@ -15,7 +15,7 @@ System_Boundary(c1, "hub"){
 
 System_Boundary(c2, "hubFly"){
     Container(web_api, "Web API", "Azure Function, Logic App, C# ", "")
-    Container(queue, "Azure Storage Queue", "Azure", "Stores Contact in Canonical form")   
+    Container(store, "Azure Storage Table", "Azure", "Stores Contact in Canonical form")   
     Container(svc, "Service", "C#", "Collects content from external services")
 }
 
@@ -30,8 +30,8 @@ System_Ext(ExternalSystem, "External Systems\nGiosq\nResponseTap")
 Rel(sched, web_api, "Uses", "HTTPS") 
 Rel(sitecore, web_api, "Uses", "HTTPS") 
 Rel(web_api, svc, "Uses")
-Rel(web_api, queue, "Reads from")
-Rel_U(svc, queue, "Writes to")
+Rel(web_api, store, "Reads from")
+Rel_U(svc, store, "Writes to")
 Rel(svc, ExternalSystem, "ExternalSystem", "HTTPS")
 
 @enduml
