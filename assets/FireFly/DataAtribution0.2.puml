@@ -1,0 +1,46 @@
+@startuml FireFlyDA rev.0.2
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_TOP_DOWN
+
+Person(user, "User")
+Person(sched, "Scheduler")
+Person(sitecore, "SiteCore")
+
+System_Boundary(c1, "Private hub"){
+    Container(hub_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "hub Database\nContact Staging Area")
+    Container(hsvc, "QueueService", "C#", "Subscribes to queue")
+
+'Internal Relationships
+    Rel(user, hub_app, "Uses", "HTTPS")
+    Rel(hub_app, hsvc, "Uses")
+    Rel(hsvc, rel_db, "Writes To")  
+    Rel(hub_app, rel_db, "Reads From\nWrites To")
+}
+
+
+System_Boundary(c2, "Public HoldingArea"){
+    Container(web_api, "Web API", "Azure Function, Logic App, C# ", "")
+    Container(store, "Azure Storage Queue", "Azure", "Queues Contact in Canonical form")   
+    Container(svc, "Service", "C#", "Collects content from external services")
+
+'Internal Relationships
+
+    Rel(sched, web_api, "Uses", "HTTPS") 
+    Rel(sitecore, web_api, "Uses", "HTTPS") 
+    Rel(web_api, svc, "Uses") 
+    Rel(web_api, store, "Writes To")
+    Rel_R(svc, store, "Writes To")
+}
+
+' External Systems
+System_Ext(ExternalSystem, "External Systems\nGiosq\nResponseTap") 
+
+' External Relationships
+Rel(svc, ExternalSystem, "ExternalSystem", "HTTPS")
+Rel_L(hsvc, store, "Subscribes to\nReads From")
+
+
+@enduml
