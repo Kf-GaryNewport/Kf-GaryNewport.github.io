@@ -1,0 +1,45 @@
+@startuml "Component Azure Storage Queue"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_TOP_DOWN
+
+' External Systems
+System_Ext(exRt, "ResponseTap")
+System_Ext(exGi, "Giosg")
+
+
+System_Boundary(c2, "Public HoldingArea"){
+    Container(web_api, "Web API", "Azure Function, C# ", "")
+    Component(WaGi, "Map To Canonical", "C#", "Convert the inbound message into the canonical JSON Object")
+
+    Container_Boundary(c3, "ReponseTap Service"){
+
+        Component(MapRt, "Map To Canonical", "C#", "Convert the inbound message into the canonical JSON Object")
+        Component(SvcRt, "ReponseTapSvc", "Azure Function C#", "Timer Trigger")
+
+        Rel_L(SvcRt, MapRt, "Uses")
+        Rel_D(SvcRt, exRt, "Https")
+    }
+
+    Container_Boundary(c4, "Giosg Service"){
+
+        Component(MapGi, "Map To Canonical", "C#", "Convert the inbound message into the canonical JSON Object")
+        Component(SvcGi, "GiosgSvc", "Azure Function C#", "Timer Trigger")
+
+        Rel_R(SvcGi, MapGi, "Uses")
+        Rel_D(SvcGi, exGi, "Https")
+    }
+
+    'External Container
+    Container(store, "Azure Storage Queue", "Azure", "Queues Contact in Canonical form")
+
+    'Internal Relationships
+    Rel_R(web_api, WaGi, "Uses")
+    Rel_R(WaGi, store, "Writes To")
+    
+    Rel_U(SvcRt, store, "Writes To")
+    Rel_U(SvcGi, store, "Writes To")
+}
+
+@enduml

@@ -1,0 +1,44 @@
+{
+    "$id": "https://example.com/arrays.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "A consolidated contact",
+    "type": "object",
+    "properties": {
+        "Source": { "enum": [
+                "Giosg",
+                "ResponseTap",
+                "SiteCore",
+                "Email",
+                "Other"
+            ]},
+        "DateTime":{"type":"string", "format":"date-time", "example":"2018-11-13T20:20:39+00:00"},
+
+        "CustomerFirstName":{"type":"string", "maxLength": 50},
+        "CustomerLastName":{"type":"string", "maxLength": 50},
+        "CustomerPhoneNumber": { "type":"string", "maxLength": 20},
+        "CustomerEmail":{"type":"string", "format":"email"},
+        "PreferredDate":{"type":"string", "format":"date", "example":"2018-11-13"},
+        "PreferredTime":{"type":"string", "format":"time", "example":"20:20:39+00:00"},
+        "PropertyReference":{"type":"string"},
+        "Message":{"type":"string"},
+        "QueryType":{"type":"string"},
+        "QueryServiceLine":{"type":"string"},
+        "TrafficSource":{"type":"string"},
+        "Campaign": { "type":"string"},
+        "AdvertReference": { "type":"string"},
+        "SearchPhrase": { "type":"string"},
+        "Channel": { "type":"string"},
+        "Medium": { "type":"string"},
+        "LandingPage": { "type":"string", "format":"uri", "example":"https://helloworld.com"},
+        "ConversionPage": { "type":"string", "format":"uri", "example":"https://helloworld.com"},
+        "Date":{"type":"string", "format":"date", "example":"2018-11-13"},
+        "Time": {"type":"string", "format":"time", "example":"20:20:39+00:00"},
+        "Referrer": { "type":"string", "format":"uri", "example":"https://helloworld.com"},
+        "UTMCampaign": { "type":"string"},
+        "UTMMedium": { "type":"string"},
+        "UTMSource": { "type":"string"},
+        "GAClientID": { "type":"string"},
+        "GASessionID": { "type":"string"}
+    },
+    "required": ["Source", "DateTime"]
+}
