@@ -5,7 +5,6 @@
 LAYOUT_TOP_DOWN
 
 Person(user, "User")
-Person(sched, "Scheduler")
 Person(sitecore, "SiteCore")
 
 System_Boundary(c1, "Private hub"){
@@ -25,7 +24,6 @@ System_Boundary(c2, "Public HoldingArea"){
     Container(svc, "Service", "Azure Function, C#", "Collects content from external services")
 
     'Internal Relationships
-    Rel(sched, web_api, "Uses", "HTTPS") 
     Rel(sitecore, web_api, "Uses", "HTTPS") 
 
     Rel_L(web_api, store, "Writes To")
