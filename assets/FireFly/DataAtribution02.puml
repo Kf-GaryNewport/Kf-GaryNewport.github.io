@@ -15,11 +15,9 @@ System_Boundary(c1, "Private hub"){
 
 'Internal Relationships
     Rel(user, hub_app, "Uses", "HTTPS")
-    Rel(hub_app, hsvc, "Uses")
-    Rel(hsvc, rel_db, "Writes To")  
     Rel(hub_app, rel_db, "Reads From\nWrites To")
+    Rel(hsvc, rel_db, "Writes To")  
 }
-
 
 System_Boundary(c2, "Public HoldingArea"){
     Container(web_api, "Web API", "Azure Function, Logic App, C# ", "")
@@ -27,20 +25,19 @@ System_Boundary(c2, "Public HoldingArea"){
     Container(svc, "Service", "C#", "Collects content from external services")
 
 'Internal Relationships
-
     Rel(sched, web_api, "Uses", "HTTPS") 
     Rel(sitecore, web_api, "Uses", "HTTPS") 
     Rel(web_api, svc, "Uses") 
-    Rel(web_api, store, "Writes To")
-    Rel_R(svc, store, "Writes To")
+    Rel_L(web_api, store, "Writes To")
+    Rel(svc, store, "Writes To")
 }
 
 ' External Systems
 System_Ext(ExternalSystem, "External Systems\nGiosq\nResponseTap") 
 
 ' External Relationships
+Rel(hsvc, store, "Subscribes to\nReads From")
 Rel(svc, ExternalSystem, "ExternalSystem", "HTTPS")
-Rel_L(hsvc, store, "Subscribes to\nReads From")
 
 
 @enduml
