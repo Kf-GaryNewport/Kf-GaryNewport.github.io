@@ -1,0 +1,32 @@
+@startuml Rules
+
+Interface IRule
+Interface IRulesResult
+Class BaseRule
+Class Rule
+Class RulesChain
+Class RulesEvaluator
+
+IRule : IRulesResultEval()
+IRulesResult : IsSuccess
+IRulesResult : Execute()
+BaseRule : IRulesResultEval()
+Rule : IRulesResultEval()
+RulesChain : IRule Rule
+RulesChain : IsLastInChain
+RulesChain : List<RulesChain> ElseRules
+RulesEvaluator : EvaluateRulesChain()
+RulesEvaluator : OtherwiseDo(Action otherwiseAction)
+RulesEvaluator : OtherwiseEval( IRule alternativeRule)
+RulesEvaluator : RulesChain( IRule rule)
+
+
+BaseRule .UP.|> IRule
+Rule -UP-|> BaseRule
+IRule -Right-> IRulesResult
+BaseRule -UP-> IRulesResult
+RulesChain *-UP-> IRule
+RulesChain *--> RulesChain
+RulesEvaluator *-UP-> RulesChain
+
+@enduml
