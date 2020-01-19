@@ -1,0 +1,33 @@
+@startuml Residential Lettings 
+
+Actor Owner
+Actor Tenant
+Actor Agent
+
+' Use Case
+'Owner --> (Asset) : 1.Owns
+'Owner --> Agent : 2.Engages
+'Agent --> Owner :3.Validates
+'Agent --> (Markets) : 4.Advertisment
+'Asset --> Markets
+'Tenant --> Markets : 5.Selects
+'Agent --> Tenant : 6.Validates
+'Tenant --> (Asset) : 7.Rents
+'Tenant --> (Rent) : 8.Pays
+'Rent --> Agent : 9.Fees
+'Agent --> Owner : 10.Rent
+
+' Sequence
+Owner -> Asset : 1.Owns
+Owner -> Agent : 2.Engages
+Agent -> Owner :3.Validates
+Agent -> Market : 4.Advertisment
+Asset -> Market
+Tenant -> Market : 5.Selects
+Agent -> Tenant : 6.Validates
+Tenant -> Asset : 7.Rents
+Tenant -> Rent : 8.Pays
+Rent -> Agent : 9.Fees
+Agent -> Owner : 10.Rent
+
+@enduml
