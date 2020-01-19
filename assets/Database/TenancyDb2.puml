@@ -1,0 +1,637 @@
+@startuml TenancyDb
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+'skinparam linetype ortho
+     
+table(dbo.Tenancy) {   
+    ActivityId: uniqueidentifier <<fk>>   
+    AdHocCharge: decimal   
+    AdHocChargeDescription: nvarchar   
+    AdministrationFeeTds: decimal   
+    AgencyTypeId: uniqueidentifier <<fk>>   
+    AgreedMonthlyRent: decimal   
+    AgreedRentPa: decimal   
+    AgreedRentPerUnitMaxId: uniqueidentifier <<fk>>   
+    AgreedRentPerUnitMinId: uniqueidentifier <<fk>>   
+    AgreedWeeklyRent: decimal   
+    AlienationProvisionId: uniqueidentifier <<fk>>   
+    AssetId: uniqueidentifier <<fk>>   
+    BankChargesAmount: decimal   
+    BankChargesId: uniqueidentifier <<fk>>   
+    Capped: decimal   
+    Collared: decimal   
+    Comments: nvarchar   
+    CompletionDate: date   
+    CreatedByUserId: uniqueidentifier <<fk>>   
+    CreationTime: datetimeoffset   
+    CreditReferenceCheck: decimal   
+    CurrencyId: uniqueidentifier <<fk>>   
+    Deleted: bit   DepositAmount: decimal   
+    DurationTypeId: uniqueidentifier <<fk>>  
+    EstimatedRatesId: uniqueidentifier <<fk>>   
+    EstimatedServiceChargeId: uniqueidentifier <<fk>>   
+    FallThroughReason: nvarchar   
+    FeeComment: nvarchar   
+    FeeLandlordTa: decimal   
+    FeePercentage: decimal   
+    FeeSplitValueTypeId: uniqueidentifier   
+    FeeTenantTa: decimal   
+    FeeTypeId: uniqueidentifier <<fk>>   
+    FeeValue: decimal   
+    FinancialNegotiatorId: uniqueidentifier <<fk>>   
+    HeadLeaseId: uniqueidentifier <<fk>>   
+    HmoLicenceRequired: bit   
+    Id: uniqueidentifier <<pk>>   
+    IncludesBillsId: uniqueidentifier   
+    InitialPremium: decimal   
+    InsideActId: uniqueidentifier <<fk>>  
+    InventoryCharge: decimal   
+    IsActivated: bit   
+    IsAreaBreakdownInAcres: bit   
+    IsFallenThrough: bit   
+    IsRepresented: bit  
+    IsZoneA: bit   
+    LastModifiedByUserId: uniqueidentifier <<fk>>   
+    LastWriteTime: datetimeoffset   
+    LeaseAdvisoryAgreedRentPa: decimal   
+    LeaseAdvisoryAgreedRentPerUnitMaxId: uniqueidentifier <<fk>>   
+    LeaseAdvisoryAgreedRentPerUnitMinId: uniqueidentifier <<fk>>   
+    LeaseCommencementDate: date  
+    LeaseExpiryDate: date   
+    LeaseTermPeriodTypeId: uniqueidentifier <<fk>>   
+    ManagementFeePercentage: decimal  
+    ManagementFeeTypeId: uniqueidentifier <<fk>>  
+    ManagementFeeValue: decimal   
+    ManagementTypeId: uniqueidentifier <<fk>>   
+    MaskedClaimsId: binary  
+    OccupierRightToRentCheck: decimal   
+    OptionsToRenewId: uniqueidentifier   
+    OtherBillsDescription: nvarchar   
+    PassedToQube: bit   
+    QubeErrorOccurred: bit   
+    QubeReferenceId: nvarchar   
+    QubeUrl: nvarchar   
+    RentComment: nvarchar   
+    RentFreePeriod: int   
+    RentFrequencyId: uniqueidentifier <<fk>>   
+    RepairingObligationId: uniqueidentifier <<fk>>   
+    RequirementId: uniqueidentifier <<fk>>   
+    ReviewsComment: nvarchar   
+    SourceDescription: nvarchar   
+    SpecialRentArrangements: nvarchar   
+    SpecialTerms: nvarchar   
+    SurrenderDate: date   
+    TenancyAgreementTypeId: uniqueidentifier <<fk>>  
+    TenancyTypeId: uniqueidentifier <<fk>>   
+    UniqueReferenceCode: nvarchar   
+    UserId: uniqueidentifier <<fk>>   
+    Version: int   
+    VisibleClaimsId: binary   
+}  
+              
+table(dbo.LeaseAdvisoryTenancies) {   
+    ActivityId: uniqueidentifier <<pk>> <<fk>>   
+    TenancyId: uniqueidentifier <<pk>> <<fk>>   
+}  
+table(dbo.FeeSplit) {  
+    ActivityId: uniqueidentifier <<fk>>   
+    DepartmentId: uniqueidentifier <<fk>>   
+    FeeGroupId: uniqueidentifier <<fk>>   
+    FeePercentage: decimal   
+    FeeTakenFromId: uniqueidentifier <<fk>>   
+    FeeValue: decimal   
+    Id: uniqueidentifier <<pk>>   
+    NegotiatorId: uniqueidentifier <<fk>>   
+    PartyAddressId: uniqueidentifier <<fk>>   
+    PartyCompanyId: uniqueidentifier <<fk>>   
+    PartyContactId: uniqueidentifier <<fk>>   
+    PartyOtherName: nvarchar   
+    PartyRoleId: uniqueidentifier <<fk>>   
+    RequirementId: uniqueidentifier <<fk>>   
+    ShareOfFee: decimal   
+    TenancyId: uniqueidentifier <<fk>>   
+}  
+        
+table(dbo.TenancyPropertyArea) {   
+    AgreedRentId: uniqueidentifier <<fk>>   
+    FloorId: uniqueidentifier <<fk>>   
+    Id: uniqueidentifier <<pk>>   
+    PropertyAreaId: uniqueidentifier <<fk>>   
+    SizeId: uniqueidentifier <<fk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+    TenancyPropertyAreaId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyAreaHierarchy) {   
+    AreaHierarchyId: uniqueidentifier <<fk>>   
+    Id: uniqueidentifier <<pk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyDepartment) {   
+    DepartmentId: uniqueidentifier <<fk>>   
+    DepartmentTypeId: uniqueidentifier <<fk>>   
+    Id: uniqueidentifier <<pk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyAppointment) {   
+    AppointmentId: uniqueidentifier <<pk>> <<fk>>   
+    TenancyId: uniqueidentifier <<pk>> <<fk>>   
+}  
+table(dbo.TenancyAttachment) {   
+    AttachmentId: uniqueidentifier <<pk>> <<fk>>   
+    TenancyId: uniqueidentifier <<pk>> <<fk>>   
+}  
+table(dbo.Notification) {   
+    ActivityId: uniqueidentifier <<fk>>   
+    ContactId: uniqueidentifier <<fk>>   
+    DateOccurred: datetimeoffset   
+    EntityTypeId: uniqueidentifier <<fk>>   
+    Id: uniqueidentifier <<pk>>   
+    MarketingListId: uniqueidentifier <<fk>>   
+    OfferId: uniqueidentifier <<fk>>   
+    ReportId: uniqueidentifier <<fk>>   
+    RequirementId: uniqueidentifier <<fk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+    Title: nvarchar   
+    TypeId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyNegotiator) {   
+    CallDate: date   Id: uniqueidentifier <<pk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+    UserId: uniqueidentifier <<fk>>   
+    UserTypeId: uniqueidentifier <<fk>>   
+}  
+table(dbo.ExternalMessageTenancy) {  
+    ExternalMessageId: uniqueidentifier <<pk>> <<fk>>   
+    TenancyId: uniqueidentifier <<pk>> <<fk>>   
+}  
+table(dbo.TenancyNote) {   
+    NoteId: uniqueidentifier <<pk>> <<fk>>   
+    TenancyId: uniqueidentifier <<pk>> <<fk>>   
+}  
+table(dbo.Activity) {   
+    AcceptedOfferId: uniqueidentifier <<fk>>   
+    AcceptsSharers: bit  
+    AcceptsStudents: bit   
+    AccessArrangements: nvarchar   
+    ActivityAssetTypeId: uniqueidentifier <<fk>>   
+    ActivityInstructionCddStatusId: uniqueidentifier <<fk>>   
+    ActivityMainImageId: uniqueidentifier <<fk>>   
+    ActivityMarketingMainImageCreationTime: datetimeoffset  
+    ActivityPrice: decimal   
+    ActivityStatusId: uniqueidentifier <<fk>>   
+    ActivitySubTypeId: uniqueidentifier <<fk>>   
+    ActivityTypeId: uniqueidentifier <<fk>>   
+    AdvertisingNote: nvarchar   
+    AdvertisingPrContent: nvarchar   
+    AdvertisingPrPermittedTypeId: uniqueidentifier <<fk>>   
+    AdvertisingPublishToWeb: bit   
+    AdviceGivenDate: date   
+    AgencyExpiryDate: date   
+    AgencyExpiryDateComment: nvarchar   
+    AgencyTypeId: uniqueidentifier <<fk>>   
+    AgreedCapitalValueId: uniqueidentifier <<fk>>   
+    AgreedGrossInitialYield: decimal   
+    AgreedInitialMarketingPrice: decimal   
+    AgreedNetEquivalentYield: decimal   
+    AgreedNetInitialYield: decimal   
+    AgreedPrice: decimal   
+    AgreedPricePerBed: decimal   
+    AgreedPricePerRoomMax: decimal   
+    AgreedPricePerRoomMin: decimal   
+    AgreedRentMaxId: uniqueidentifier <<fk>>   
+    AgreedRentMinId: uniqueidentifier <<fk>>   
+    AgreedRentPA: decimal   
+    AgreedRentPAMax: decimal   
+    AgreedRentPAMin: decimal   
+    AgreedReversionaryYield: decimal   
+    AgreedSalePrice: decimal   
+    AgreedTaxEquivalentYield: decimal   
+    AlarmCodeIn: nvarchar   
+    AlarmCodeOut: nvarchar   
+    AlienationProvisionId: uniqueidentifier <<fk>>   
+    AnticipatedCompletionDate: date   
+    AssetId: uniqueidentifier <<fk>>   
+    AssumedBreakDate: date   
+    Assumptions: nvarchar   
+    AvailableDate: date   
+    BreakTypeId: uniqueidentifier <<fk>>   
+    ChainsExist: bit   
+    Comments: nvarchar   
+    CommercialSpace: nvarchar  
+    CompletionDate: date   
+    ConditionId: uniqueidentifier <<fk>>   
+    CreatedByUserId: uniqueidentifier <<fk>>   
+    CreationTime: datetimeoffset   
+    CurrencyId: uniqueidentifier <<fk>>   
+    DefinitionOfRent: nvarchar   
+    Deleted: bit   
+    DevPipelineComments: nvarchar   
+    DevPipelineCompletionDateQuarterId: uniqueidentifier <<fk>>   
+    DevPipelineCompletionDateYear: decimal   
+    DevPipelineConstructionStageId: uniqueidentifier <<fk>>   
+    DevPipelineConstructionStartQuarterId: uniqueidentifier <<fk>>   
+    DevPipelineConstructionStartYear: decimal   
+    DevPipelineDevelopmentProbabilityId: uniqueidentifier <<fk>>   
+    DevPipelineDevelopmentTypeId: uniqueidentifier <<fk>>   
+    DevPipelineRecordInfoId: uniqueidentifier <<fk>>   
+    DevPipelineSpeculativePreLetId: uniqueidentifier <<fk>>   
+    Discount: decimal   DiscountLevel: decimal   
+    DisposalTypeId: uniqueidentifier <<fk>>   
+    Disregards: nvarchar   
+    DurationTypeId: uniqueidentifier <<fk>>   
+    EbitdaCurrentYear: decimal   
+    EbitdaLastYear: decimal   
+    EbitdaNextYearForecast: decimal   
+    ElectronicBrochureUrl: nvarchar   
+    EstimatedRatesId: uniqueidentifier <<fk>>   
+    EstimatedRentalValueId: uniqueidentifier <<fk>>   
+    EstimatedRentalValuePA: decimal   
+    EstimatedServiceChargeId: uniqueidentifier <<fk>>   
+    ExchangedDate: date   
+    ExpectedMonthRent: decimal   
+    ExpectedWeekRent: decimal   
+    FeeComment: nvarchar   
+    FeePercentage: decimal   
+    FeeSplitValueTypeId: uniqueidentifier   
+    FeeTypeId: uniqueidentifier <<fk>>   
+    FeeValue: decimal   
+    FileReference: nvarchar   
+    FurnishingId: uniqueidentifier <<fk>>   
+    GearingPercentage: decimal   
+    GradeId: uniqueidentifier <<fk>>   
+    GroundRentAmount: decimal   
+    GroundRentNote: nvarchar   
+    HasSharedBathrooms: bit   
+    HasSharedKitchens: bit   
+    HeadLeaseCommencementDate: date   
+    HeadLeaseExpiryDate: date   
+    HeadLeaseId: uniqueidentifier <<fk>>  
+    HeadLeaseTermMonths: int   
+    HeadLeaseUnexpiredTerm: decimal   
+    HeadsOfTermsDate: date   
+    HelpToBuy: bit   
+    HmoLicenceRequired: bit   
+    HypotheticalTermDays: int   
+    HypotheticalTermMonths: int   
+    Id: uniqueidentifier <<pk>>   
+    ImportantInformation: nvarchar   
+    IncomeDate: date   
+    InformationQualityId: uniqueidentifier <<fk>>   
+    InstructedDate: date   
+    InternalCCTV: bit   
+    IsAreaBreakdownInAcres: bit   
+    IsFromDevelopmentPipeline: bit   
+    IsNewBuild: bit   
+    IsPeppercorn: bit   
+    IsSentToLonRes: bit   
+    IsServicedProperty: bit   
+    IsShariaCompliant: bit   
+    IsSurrenderPremiumWaived: bit   
+    IsUploaded: bit   
+    IsVacantProperty: bit   
+    ITZA: decimal   
+    KeyHolderDepartmentId: uniqueidentifier <<fk>>   
+    KeyHolderTypeId: uniqueidentifier <<fk>>   
+    KeyNumber: nvarchar   
+    KfValuationPrice: decimal   
+    LastModifiedByUserId: uniqueidentifier <<fk>>   
+    LastRefurbDate: date   
+    LastWriteTime: datetimeoffset   
+    LatestPublishToWebDate: datetimeoffset   
+    LeaseCommencementDate: date   
+    LeaseExpiryDate: date   
+    LeaseLengthMonths: int   
+    LicenceNumber: nvarchar   
+    LongAskingMonthRent: decimal   
+    LongAskingWeekRent: decimal   
+    LongKfValuationMonthlyPrice: decimal   
+    LongKfValuationWeeklyPrice: decimal   
+    LonResCommission: decimal   
+    LonResCommissionTypeId: uniqueidentifier <<fk>>   
+    LonResNegotiatorBonusFee: decimal   
+    LonResStatusId: uniqueidentifier <<fk>>   
+    LostFromId: uniqueidentifier <<fk>>   
+    ManagementFeePercentage: decimal   
+    ManagementFeeTypeId: uniqueidentifier <<fk>>   
+    ManagementFeeValue: decimal   
+    ManagementTypeId: uniqueidentifier <<fk>>   
+    MarketedDate: date   
+    MaskedClaimsId: binary   
+    Moneypenny: bit   
+    NetInitialYield: decimal   
+    NonContactKeyHolderDetails: nvarchar   
+    OriginalPropertyTypeId: uniqueidentifier <<fk>>   
+    OtherChargesGovtRatesPerQuarterAmount: decimal   
+    OtherChargesGovtRatesPerQuarterInclusive: bit   
+    OtherChargesGovtRatesPerQuarterToBeAdvised: bit   
+    OtherChargesGovtRentPerYearAmount: decimal   
+    OtherChargesGovtRentPerYearInclusive: bit   
+    OtherChargesGovtRentPerYearToBeAdvised: bit   
+    OtherChargesMonthlyAcFeeAmount: decimal   
+    OtherChargesMonthlyAcFeeInclusive: bit   
+    OtherChargesMonthlyAcFeeToBeAdvised: bit   
+    OtherChargesMonthlyCarParkFeeAmount: decimal   
+    OtherChargesMonthlyCarParkFeeInclusive: bit   
+    OtherChargesMonthlyCarParkFeeToBeAdvised: bit   
+    OtherChargesMonthlyManagementFeeAmount: decimal   
+    OtherChargesMonthlyManagementFeeInclusive: bit   
+    OtherChargesMonthlyManagementFeeToBeAdvised: bit   
+    OtherCondition: nvarchar   
+    OtherIncentives: nvarchar  
+    OwnershipTenureId: uniqueidentifier <<fk>>  
+    ParkingPriceMonth: decimal   
+    ParkingPriceWeek: decimal   
+    PetAllowed: bit   
+    PetSharersStudentsInfo: nvarchar  
+    PitchingThreats: nvarchar   
+    PremiumPaidById: uniqueidentifier <<fk>>   
+    PricePerDeskMax: decimal   
+    PricePerDeskMin: decimal   
+    PriceQualifierId: uniqueidentifier <<fk>>   
+    PriceTypeId: uniqueidentifier <<fk>>   
+    PriorAgreedRentMaxId: uniqueidentifier <<fk>>  
+    PriorAgreedRentMinId: uniqueidentifier <<fk>>   
+    PriorAgreedRentPA: decimal   
+    PropertyExtranet: nvarchar   
+    PropertyTypeId: uniqueidentifier <<fk>>   
+    PropertyVideoUrl: nvarchar   
+    PublishedToWeb: bit   
+    PurchaseCosts: decimal   
+    PurposeId: uniqueidentifier <<fk>>   
+    QubeErrorOccurred: bit   
+    QubeReferenceId: nvarchar   
+    QubeUrl: nvarchar   
+    QuotedCapitalValueId: uniqueidentifier <<fk>>   
+    QuotedGrossInitialYield: decimal   
+    QuotedNetEquivalentYield: decimal   
+    QuotedPrice: decimal   
+    QuotedPricePerBed: decimal   
+    QuotedPricePerRoom: decimal   
+    QuotedReversionaryYield: decimal   
+    QuotedTaxEquivalentYield: decimal   
+    QuotingRentMaxId: uniqueidentifier <<fk>>   
+    QuotingRentMinId: uniqueidentifier <<fk>>   
+    QuotingRentPAMax: decimal   
+    QuotingRentPAMin: decimal   
+    QuotingRentTypeId: uniqueidentifier <<fk>>   
+    QuotingTermsComments: nvarchar   
+    RateableValueMax: decimal   
+    RateableValueMin: decimal   
+    ReferralId: uniqueidentifier <<fk>>   
+    RegearDate: date   ReLet: bit   
+    RentFreePeriod: decimal   
+    RentFrequencyId: uniqueidentifier <<fk>>   
+    RentPA: decimal   
+    RepairingObligationId: uniqueidentifier <<fk>>   
+    RepresentingId: uniqueidentifier <<fk>>   
+    ResponsibleForSaleOrLetCompanyId: uniqueidentifier <<fk>>   
+    ResponsibleForSaleOrLetContactId: uniqueidentifier <<fk>>   
+    ResponsibleForSaleOrLetNegotiatorDepartmentId: uniqueidentifier <<fk>>   
+    ResponsibleForSaleOrLetNegotiatorId: uniqueidentifier <<fk>>  
+    RetirementHousingId: uniqueidentifier <<fk>>   
+    SalePotentialId: uniqueidentifier <<fk>>   
+    SalesBoardRemovalDate: date   
+    SalesBoardSpecialInstructions: nvarchar   
+    SalesBoardStatusId: uniqueidentifier <<fk>>   
+    SalesBoardTypeId: uniqueidentifier <<fk>>  
+    SalesBoardUpToDate: bit   
+    SellingReasonId: uniqueidentifier <<fk>>   
+    ServiceChargeAmount: decimal   
+    ServiceChargeNote: nvarchar   
+    ServiceLineId: uniqueidentifier <<fk>>   
+    ShortAskingMonthRent: decimal   
+    ShortAskingWeekRent: decimal   
+    ShortKfValuationMonthlyPrice: decimal   
+    ShortKfValuationWeeklyPrice: decimal   
+    SingleLetId: uniqueidentifier <<fk>>   
+    SourceDescription: nvarchar   
+    SourceId: uniqueidentifier <<fk>>   
+    StandardDisregardsId: uniqueidentifier <<fk>>   
+    StatusLastWriteTime: datetimeoffset   
+    SurrenderDate: date   
+    SurrenderFromId: uniqueidentifier <<fk>>   
+    SurrenderPremium: decimal   
+    SurrenderToId: uniqueidentifier <<fk>>   
+    TenancyConditions: nvarchar   
+    TenancyReviewId: uniqueidentifier <<fk>>   
+    TermYears: decimal   
+    TotalRentId: uniqueidentifier <<fk>>   
+    TransactionExplanation: nvarchar   
+    TreatmentOfRentFreePeriodsId: uniqueidentifier <<fk>>   
+    TypeOfLeaseId: uniqueidentifier <<fk>>   
+    UnderOfferDate: date   
+    UniqueReferenceCode: nvarchar   
+    UnitMix: nvarchar   
+    UserId: uniqueidentifier <<fk>>   
+    VacancyLevel: decimal   
+    VendorValuationPrice: decimal   
+    Version: int   
+    VirtualTourUrl: nvarchar   
+    VisibleClaimsId: binary   
+    WAULT: decimal   
+    WebsiteUrl: nvarchar   
+    Yield: decimal   
+    ZoneARentId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyReview) {   
+    AgreedMonthlyRent: decimal   
+    AgreedWeeklyRent: decimal   Date: date   
+    Id: uniqueidentifier <<pk>>   
+    IsZoneA: bit   
+    ReviewTypeId: uniqueidentifier <<fk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+    TermMonths: int   
+}  
+table(dbo.Tenancy) {   
+    ActivityId: uniqueidentifier <<fk>>   
+    AdHocCharge: decimal   
+    AdHocChargeDescription: nvarchar   
+    AdministrationFeeTds: decimal   
+    AgencyTypeId: uniqueidentifier <<fk>>   
+    AgreedMonthlyRent: decimal   
+    AgreedRentPa: decimal   
+    AgreedRentPerUnitMaxId: uniqueidentifier <<fk>>   
+    AgreedRentPerUnitMinId: uniqueidentifier <<fk>>   
+    AgreedWeeklyRent: decimal   
+    AlienationProvisionId: uniqueidentifier <<fk>>   
+    AssetId: uniqueidentifier <<fk>>   
+    BankChargesAmount: decimal   
+    BankChargesId: uniqueidentifier <<fk>>   
+    Capped: decimal   
+    Collared: decimal   
+    Comments: nvarchar   
+    CompletionDate: date   
+    CreatedByUserId: uniqueidentifier <<fk>>   
+    CreationTime: datetimeoffset   
+    CreditReferenceCheck: decimal   
+    CurrencyId: uniqueidentifier <<fk>>   
+    Deleted: bit   
+    DepositAmount: decimal   
+    DurationTypeId: uniqueidentifier <<fk>>   
+    EstimatedRatesId: uniqueidentifier <<fk>>   
+    EstimatedServiceChargeId: uniqueidentifier <<fk>>   
+    FallThroughReason: nvarchar   
+    FeeComment: nvarchar   
+    FeeLandlordTa: decimal   
+    FeePercentage: decimal   
+    FeeSplitValueTypeId: uniqueidentifier   
+    FeeTenantTa: decimal   
+    FeeTypeId: uniqueidentifier <<fk>>   
+    FeeValue: decimal   
+    FinancialNegotiatorId: uniqueidentifier <<fk>>   
+    HeadLeaseId: uniqueidentifier <<fk>>   
+    HmoLicenceRequired: bit   
+    Id: uniqueidentifier <<pk>>  
+    IncludesBillsId: uniqueidentifier   
+    InitialPremium: decimal   
+    InsideActId: uniqueidentifier <<fk>>   
+    InventoryCharge: decimal   
+    IsActivated: bit   
+    IsAreaBreakdownInAcres: bit   
+    IsFallenThrough: bit   
+    IsRepresented: bit   
+    IsZoneA: bit   
+    LastModifiedByUserId: uniqueidentifier <<fk>>   
+    LastWriteTime: datetimeoffset  
+    LeaseAdvisoryAgreedRentPa: decimal   
+    LeaseAdvisoryAgreedRentPerUnitMaxId: uniqueidentifier <<fk>>   
+    LeaseAdvisoryAgreedRentPerUnitMinId: uniqueidentifier <<fk>>   
+    LeaseCommencementDate: date   
+    LeaseExpiryDate: date   
+    LeaseTermPeriodTypeId: uniqueidentifier <<fk>>   
+    ManagementFeePercentage: decimal  
+    ManagementFeeTypeId: uniqueidentifier <<fk>>   
+    ManagementFeeValue: decimal   
+    ManagementTypeId: uniqueidentifier <<fk>>   
+    MaskedClaimsId: binary   
+    OccupierRightToRentCheck: decimal   
+    OptionsToRenewId: uniqueidentifier  
+    OtherBillsDescription: nvarchar   
+    PassedToQube: bit   
+    QubeErrorOccurred: bit   
+    QubeReferenceId: nvarchar   
+    QubeUrl: nvarchar   
+    entComment: nvarchar   
+    RentFreePeriod: int   
+    RentFrequencyId: uniqueidentifier <<fk>>   
+    RepairingObligationId: uniqueidentifier <<fk>>   
+    RequirementId: uniqueidentifier <<fk>>   
+    ReviewsComment: nvarchar  
+    SourceDescription: nvarchar   
+    SpecialRentArrangements: nvarchar   
+    SpecialTerms: nvarchar   
+    SurrenderDate: date   
+    TenancyAgreementTypeId: uniqueidentifier <<fk>>   
+    TenancyTypeId: uniqueidentifier <<fk>>   
+    UniqueReferenceCode: nvarchar 
+    UserId: uniqueidentifier <<fk>>   
+    Version: int   
+    isibleClaimsId: binary  
+}  
+table(dbo.TenancyBreak) {   
+    BreakTypeId: uniqueidentifier <<fk>>   
+    Date: date   
+    Id: uniqueidentifier <<pk>>   
+    IsRolling: bit   
+    NoticePeriod: int   NoticePeriodAfter: int   
+    NoticePeriodAfterFrequencyId: uniqueidentifier <<fk>>   
+    NoticePeriodFrequencyId: uniqueidentifier <<fk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyBillsDescription) {   
+    BillDescriptionId: uniqueidentifier <<fk>>   
+    Id: uniqueidentifier <<pk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+}  
+table(dbo.TenancyParty) {   
+    AddressId: uniqueidentifier <<fk>>   
+    CompanyId: uniqueidentifier <<fk>>   
+    ContactId: uniqueidentifier <<fk>>  
+    Discriminator: nvarchar   
+    GenericDescription: nvarchar   
+    HeadOfficeLocationId: uniqueidentifier <<fk>>   
+    Id: uniqueidentifier <<pk>>   
+    OtherName: nvarchar   
+    RentSplit: decimal   
+    RoleId: uniqueidentifier <<fk>>   
+    TenancyId: uniqueidentifier <<fk>>   
+    TenantTypeId: uniqueidentifier <<fk>>   
+}  
+
+'    dbo.TenancyPropertyArea -|> dbo.TenancyPropertyArea:FK  
+'    dbo.Notification -|> dbo.Activity:FK  
+'    dbo.Tenancy -|> dbo.Activity:FK  
+'    dbo.FeeSplit -|> dbo.Activity:FK  
+'    dbo.LeaseAdvisoryTenancies -|> dbo.Activity:FK  
+'    dbo.Activity -|> dbo.TenancyReview:FK  
+'    dbo.TenancyParty -|> dbo.Tenancy:FK  
+'   dbo.Tenancy -|> dbo.Tenancy:FK  
+'    dbo.Activity -|> dbo.Tenancy:FK  
+'    dbo.ExternalMessageTenancy -|> dbo.Tenancy:FK  
+'    dbo.FeeSplit -|> dbo.Tenancy:FK  
+'    dbo.LeaseAdvisoryTenancies -|> dbo.Tenancy:FK  
+'    dbo.Notification -|> dbo.Tenancy:FK  
+'    dbo.TenancyAppointment -|> dbo.Tenancy:FK  
+'    dbo.TenancyAreaHierarchy -|> dbo.Tenancy:FK  
+'    dbo.TenancyAttachment -|> dbo.Tenancy:FK  
+ '   dbo.TenancyBillsDescription -|> dbo.Tenancy:FK  
+'    dbo.TenancyBreak -|> dbo.Tenancy:FK  
+'    dbo.TenancyDepartment -|> dbo.Tenancy:FK  
+'    dbo.TenancyNegotiator -|> dbo.Tenancy:FK  
+'    dbo.TenancyNote -|> dbo.Tenancy:FK  
+'    dbo.TenancyPropertyArea -|> dbo.Tenancy:FK  
+'    dbo.TenancyReview -|> dbo.Tenancy:FK  
+
+link( dbo.Tenancy, dbo.Tenancy)
+link( dbo.Tenancy, dbo.TenancyBreak)
+link( dbo.Tenancy, dbo.TenancyAppointment)
+link( dbo.Tenancy, dbo.TenancyNote)
+link( dbo.Tenancy, dbo.TenancyDepartment)
+link( dbo.Tenancy, dbo.TenancyPropertyArea)
+link( dbo.Tenancy, dbo.TenancyNegotiator)
+link( dbo.Tenancy, dbo.TenancyReview)
+link( dbo.Tenancy, dbo.TenancyAttachment)
+
+link( dbo.Tenancy, dbo.TenancyParty)
+link( dbo.TenancyParty, dbo.Tenancy)
+
+
+link( dbo.TenancyAreaHierarchy, dbo.Tenancy)
+
+link( dbo.TenancyType, dbo.Tenancy)
+link( dbo.TenancyPropertyArea, dbo.TenancyPropertyArea)
+'link( dbo.TenancyType, dbo.TenancyTypeLocalised)
+
+link( dbo.Tenancy, dbo.TenancyBillsDescription)
+link( dbo.Tenancy, dbo.Notification)
+link( dbo.Tenancy, dbo.LeaseAdvisoryTenancies)
+link( dbo.Tenancy, dbo.FeeSplit)
+link( dbo.Tenancy, dbo.ExternalMessageTenancy)
+link( dbo.Tenancy, dbo.Activity)
+link( dbo.TenancyReview, dbo.Activity)
+link( dbo.Tenancy, dbo.Activity)
+link( dbo.FeeSplit, dbo.Activity)
+link( dbo.Notification, dbo.Activity)
+
+@enduml

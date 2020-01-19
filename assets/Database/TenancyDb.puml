@@ -1,0 +1,100 @@
+@startuml TenancyDb
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+'skinparam linetype ortho
+
+table(Tenancy) {
+    primary_key(Id)
+    foreign_key(TenancyBreakId)
+    foreign_key(TenancyAppointmentId)
+    foreign_key(TenancyNoteIdId)
+    foreign_key(TenancyDepartmentId)
+    foreign_key(TenancyPropertyAreaId)
+    foreign_key(TenancyNegotiatorId)
+    foreign_key(TenancyReviewId)
+    foreign_key(TenancyAttachmentId)
+    foreign_key(TenancyTypeId)
+}
+link( Tenancy, Tenancy)
+
+table( TenancyBreak) {
+    primary_key(Id)
+    TenancyId
+	Date
+	NoticePeriod
+	NoticePeriodFrequencyId
+	NoticePeriodAfter
+	NoticePeriodAfterFrequencyId
+	BreakTypeId
+	IsRolling
+}
+
+table( TenancyAppointment) {
+    primary_key(Id)
+}
+table( TenancyNote) {
+    primary_key(Id)
+}
+table( TenancyDepartment) {
+    primary_key(Id)
+}
+table( TenancyPropertyArea) {
+    primary_key(Id)
+}
+link( TenancyPropertyArea, TenancyPropertyArea)
+
+table( TenancyNegotiator) {
+    primary_key(Id)
+}
+table( TenancyReview) {
+    primary_key(Id)
+}
+table( TenacnyParty) {
+    primary_key(Id)
+}
+table( TenancyAttachment) {
+    primary_key(Id)
+}
+table( TenancyTypeLocalised) {
+    primary_key(Id)
+}
+table( TenancyType) {
+    primary_key(Id)
+}
+
+link( Tenancy, TenancyBreak)
+link( Tenancy, TenancyAppointment)
+link( Tenancy, TenancyNote)
+link( Tenancy, TenancyDepartment)
+link( Tenancy, TenancyPropertyArea)
+link( Tenancy, TenancyNegotiator)
+link( Tenancy, TenancyReview)
+link( Tenancy, TenacnyParty)
+link( Tenancy, TenancyAttachment)
+
+link( TenancyType, Tenancy)
+link( TenancyType, TenancyTypeLocalised)
+  
+
+@enduml
