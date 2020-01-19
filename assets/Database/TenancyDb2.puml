@@ -189,271 +189,271 @@ table(dbo.TenancyNote) {
     NoteId: uniqueidentifier <<pk>> <<fk>>   
     TenancyId: uniqueidentifier <<pk>> <<fk>>   
 }  
-table(dbo.Activity) {   
-    AcceptedOfferId: uniqueidentifier <<fk>>   
-    AcceptsSharers: bit  
-    AcceptsStudents: bit   
-    AccessArrangements: nvarchar   
-    ActivityAssetTypeId: uniqueidentifier <<fk>>   
-    ActivityInstructionCddStatusId: uniqueidentifier <<fk>>   
-    ActivityMainImageId: uniqueidentifier <<fk>>   
-    ActivityMarketingMainImageCreationTime: datetimeoffset  
-    ActivityPrice: decimal   
-    ActivityStatusId: uniqueidentifier <<fk>>   
-    ActivitySubTypeId: uniqueidentifier <<fk>>   
-    ActivityTypeId: uniqueidentifier <<fk>>   
-    AdvertisingNote: nvarchar   
-    AdvertisingPrContent: nvarchar   
-    AdvertisingPrPermittedTypeId: uniqueidentifier <<fk>>   
-    AdvertisingPublishToWeb: bit   
-    AdviceGivenDate: date   
-    AgencyExpiryDate: date   
-    AgencyExpiryDateComment: nvarchar   
-    AgencyTypeId: uniqueidentifier <<fk>>   
-    AgreedCapitalValueId: uniqueidentifier <<fk>>   
-    AgreedGrossInitialYield: decimal   
-    AgreedInitialMarketingPrice: decimal   
-    AgreedNetEquivalentYield: decimal   
-    AgreedNetInitialYield: decimal   
-    AgreedPrice: decimal   
-    AgreedPricePerBed: decimal   
-    AgreedPricePerRoomMax: decimal   
-    AgreedPricePerRoomMin: decimal   
-    AgreedRentMaxId: uniqueidentifier <<fk>>   
-    AgreedRentMinId: uniqueidentifier <<fk>>   
-    AgreedRentPA: decimal   
-    AgreedRentPAMax: decimal   
-    AgreedRentPAMin: decimal   
-    AgreedReversionaryYield: decimal   
-    AgreedSalePrice: decimal   
-    AgreedTaxEquivalentYield: decimal   
-    AlarmCodeIn: nvarchar   
-    AlarmCodeOut: nvarchar   
-    AlienationProvisionId: uniqueidentifier <<fk>>   
-    AnticipatedCompletionDate: date   
-    AssetId: uniqueidentifier <<fk>>   
-    AssumedBreakDate: date   
-    Assumptions: nvarchar   
-    AvailableDate: date   
-    BreakTypeId: uniqueidentifier <<fk>>   
-    ChainsExist: bit   
-    Comments: nvarchar   
-    CommercialSpace: nvarchar  
-    CompletionDate: date   
-    ConditionId: uniqueidentifier <<fk>>   
-    CreatedByUserId: uniqueidentifier <<fk>>   
-    CreationTime: datetimeoffset   
-    CurrencyId: uniqueidentifier <<fk>>   
-    DefinitionOfRent: nvarchar   
-    Deleted: bit   
-    DevPipelineComments: nvarchar   
-    DevPipelineCompletionDateQuarterId: uniqueidentifier <<fk>>   
-    DevPipelineCompletionDateYear: decimal   
-    DevPipelineConstructionStageId: uniqueidentifier <<fk>>   
-    DevPipelineConstructionStartQuarterId: uniqueidentifier <<fk>>   
-    DevPipelineConstructionStartYear: decimal   
-    DevPipelineDevelopmentProbabilityId: uniqueidentifier <<fk>>   
-    DevPipelineDevelopmentTypeId: uniqueidentifier <<fk>>   
-    DevPipelineRecordInfoId: uniqueidentifier <<fk>>   
-    DevPipelineSpeculativePreLetId: uniqueidentifier <<fk>>   
-    Discount: decimal   DiscountLevel: decimal   
-    DisposalTypeId: uniqueidentifier <<fk>>   
-    Disregards: nvarchar   
-    DurationTypeId: uniqueidentifier <<fk>>   
-    EbitdaCurrentYear: decimal   
-    EbitdaLastYear: decimal   
-    EbitdaNextYearForecast: decimal   
-    ElectronicBrochureUrl: nvarchar   
-    EstimatedRatesId: uniqueidentifier <<fk>>   
-    EstimatedRentalValueId: uniqueidentifier <<fk>>   
-    EstimatedRentalValuePA: decimal   
-    EstimatedServiceChargeId: uniqueidentifier <<fk>>   
-    ExchangedDate: date   
-    ExpectedMonthRent: decimal   
-    ExpectedWeekRent: decimal   
-    FeeComment: nvarchar   
-    FeePercentage: decimal   
-    FeeSplitValueTypeId: uniqueidentifier   
-    FeeTypeId: uniqueidentifier <<fk>>   
-    FeeValue: decimal   
-    FileReference: nvarchar   
-    FurnishingId: uniqueidentifier <<fk>>   
-    GearingPercentage: decimal   
-    GradeId: uniqueidentifier <<fk>>   
-    GroundRentAmount: decimal   
-    GroundRentNote: nvarchar   
-    HasSharedBathrooms: bit   
-    HasSharedKitchens: bit   
-    HeadLeaseCommencementDate: date   
-    HeadLeaseExpiryDate: date   
-    HeadLeaseId: uniqueidentifier <<fk>>  
-    HeadLeaseTermMonths: int   
-    HeadLeaseUnexpiredTerm: decimal   
-    HeadsOfTermsDate: date   
-    HelpToBuy: bit   
-    HmoLicenceRequired: bit   
-    HypotheticalTermDays: int   
-    HypotheticalTermMonths: int   
-    Id: uniqueidentifier <<pk>>   
-    ImportantInformation: nvarchar   
-    IncomeDate: date   
-    InformationQualityId: uniqueidentifier <<fk>>   
-    InstructedDate: date   
-    InternalCCTV: bit   
-    IsAreaBreakdownInAcres: bit   
-    IsFromDevelopmentPipeline: bit   
-    IsNewBuild: bit   
-    IsPeppercorn: bit   
-    IsSentToLonRes: bit   
-    IsServicedProperty: bit   
-    IsShariaCompliant: bit   
-    IsSurrenderPremiumWaived: bit   
-    IsUploaded: bit   
-    IsVacantProperty: bit   
-    ITZA: decimal   
-    KeyHolderDepartmentId: uniqueidentifier <<fk>>   
-    KeyHolderTypeId: uniqueidentifier <<fk>>   
-    KeyNumber: nvarchar   
-    KfValuationPrice: decimal   
-    LastModifiedByUserId: uniqueidentifier <<fk>>   
-    LastRefurbDate: date   
-    LastWriteTime: datetimeoffset   
-    LatestPublishToWebDate: datetimeoffset   
-    LeaseCommencementDate: date   
-    LeaseExpiryDate: date   
-    LeaseLengthMonths: int   
-    LicenceNumber: nvarchar   
-    LongAskingMonthRent: decimal   
-    LongAskingWeekRent: decimal   
-    LongKfValuationMonthlyPrice: decimal   
-    LongKfValuationWeeklyPrice: decimal   
-    LonResCommission: decimal   
-    LonResCommissionTypeId: uniqueidentifier <<fk>>   
-    LonResNegotiatorBonusFee: decimal   
-    LonResStatusId: uniqueidentifier <<fk>>   
-    LostFromId: uniqueidentifier <<fk>>   
-    ManagementFeePercentage: decimal   
-    ManagementFeeTypeId: uniqueidentifier <<fk>>   
-    ManagementFeeValue: decimal   
-    ManagementTypeId: uniqueidentifier <<fk>>   
-    MarketedDate: date   
-    MaskedClaimsId: binary   
-    Moneypenny: bit   
-    NetInitialYield: decimal   
-    NonContactKeyHolderDetails: nvarchar   
-    OriginalPropertyTypeId: uniqueidentifier <<fk>>   
-    OtherChargesGovtRatesPerQuarterAmount: decimal   
-    OtherChargesGovtRatesPerQuarterInclusive: bit   
-    OtherChargesGovtRatesPerQuarterToBeAdvised: bit   
-    OtherChargesGovtRentPerYearAmount: decimal   
-    OtherChargesGovtRentPerYearInclusive: bit   
-    OtherChargesGovtRentPerYearToBeAdvised: bit   
-    OtherChargesMonthlyAcFeeAmount: decimal   
-    OtherChargesMonthlyAcFeeInclusive: bit   
-    OtherChargesMonthlyAcFeeToBeAdvised: bit   
-    OtherChargesMonthlyCarParkFeeAmount: decimal   
-    OtherChargesMonthlyCarParkFeeInclusive: bit   
-    OtherChargesMonthlyCarParkFeeToBeAdvised: bit   
-    OtherChargesMonthlyManagementFeeAmount: decimal   
-    OtherChargesMonthlyManagementFeeInclusive: bit   
-    OtherChargesMonthlyManagementFeeToBeAdvised: bit   
-    OtherCondition: nvarchar   
-    OtherIncentives: nvarchar  
-    OwnershipTenureId: uniqueidentifier <<fk>>  
-    ParkingPriceMonth: decimal   
-    ParkingPriceWeek: decimal   
-    PetAllowed: bit   
-    PetSharersStudentsInfo: nvarchar  
-    PitchingThreats: nvarchar   
-    PremiumPaidById: uniqueidentifier <<fk>>   
-    PricePerDeskMax: decimal   
-    PricePerDeskMin: decimal   
-    PriceQualifierId: uniqueidentifier <<fk>>   
-    PriceTypeId: uniqueidentifier <<fk>>   
-    PriorAgreedRentMaxId: uniqueidentifier <<fk>>  
-    PriorAgreedRentMinId: uniqueidentifier <<fk>>   
-    PriorAgreedRentPA: decimal   
-    PropertyExtranet: nvarchar   
-    PropertyTypeId: uniqueidentifier <<fk>>   
-    PropertyVideoUrl: nvarchar   
-    PublishedToWeb: bit   
-    PurchaseCosts: decimal   
-    PurposeId: uniqueidentifier <<fk>>   
-    QubeErrorOccurred: bit   
-    QubeReferenceId: nvarchar   
-    QubeUrl: nvarchar   
-    QuotedCapitalValueId: uniqueidentifier <<fk>>   
-    QuotedGrossInitialYield: decimal   
-    QuotedNetEquivalentYield: decimal   
-    QuotedPrice: decimal   
-    QuotedPricePerBed: decimal   
-    QuotedPricePerRoom: decimal   
-    QuotedReversionaryYield: decimal   
-    QuotedTaxEquivalentYield: decimal   
-    QuotingRentMaxId: uniqueidentifier <<fk>>   
-    QuotingRentMinId: uniqueidentifier <<fk>>   
-    QuotingRentPAMax: decimal   
-    QuotingRentPAMin: decimal   
-    QuotingRentTypeId: uniqueidentifier <<fk>>   
-    QuotingTermsComments: nvarchar   
-    RateableValueMax: decimal   
-    RateableValueMin: decimal   
-    ReferralId: uniqueidentifier <<fk>>   
-    RegearDate: date   ReLet: bit   
-    RentFreePeriod: decimal   
-    RentFrequencyId: uniqueidentifier <<fk>>   
-    RentPA: decimal   
-    RepairingObligationId: uniqueidentifier <<fk>>   
-    RepresentingId: uniqueidentifier <<fk>>   
-    ResponsibleForSaleOrLetCompanyId: uniqueidentifier <<fk>>   
-    ResponsibleForSaleOrLetContactId: uniqueidentifier <<fk>>   
-    ResponsibleForSaleOrLetNegotiatorDepartmentId: uniqueidentifier <<fk>>   
-    ResponsibleForSaleOrLetNegotiatorId: uniqueidentifier <<fk>>  
-    RetirementHousingId: uniqueidentifier <<fk>>   
-    SalePotentialId: uniqueidentifier <<fk>>   
-    SalesBoardRemovalDate: date   
-    SalesBoardSpecialInstructions: nvarchar   
-    SalesBoardStatusId: uniqueidentifier <<fk>>   
-    SalesBoardTypeId: uniqueidentifier <<fk>>  
-    SalesBoardUpToDate: bit   
-    SellingReasonId: uniqueidentifier <<fk>>   
-    ServiceChargeAmount: decimal   
-    ServiceChargeNote: nvarchar   
-    ServiceLineId: uniqueidentifier <<fk>>   
-    ShortAskingMonthRent: decimal   
-    ShortAskingWeekRent: decimal   
-    ShortKfValuationMonthlyPrice: decimal   
-    ShortKfValuationWeeklyPrice: decimal   
-    SingleLetId: uniqueidentifier <<fk>>   
-    SourceDescription: nvarchar   
-    SourceId: uniqueidentifier <<fk>>   
-    StandardDisregardsId: uniqueidentifier <<fk>>   
-    StatusLastWriteTime: datetimeoffset   
-    SurrenderDate: date   
-    SurrenderFromId: uniqueidentifier <<fk>>   
-    SurrenderPremium: decimal   
-    SurrenderToId: uniqueidentifier <<fk>>   
-    TenancyConditions: nvarchar   
-    TenancyReviewId: uniqueidentifier <<fk>>   
-    TermYears: decimal   
-    TotalRentId: uniqueidentifier <<fk>>   
-    TransactionExplanation: nvarchar   
-    TreatmentOfRentFreePeriodsId: uniqueidentifier <<fk>>   
-    TypeOfLeaseId: uniqueidentifier <<fk>>   
-    UnderOfferDate: date   
-    UniqueReferenceCode: nvarchar   
-    UnitMix: nvarchar   
-    UserId: uniqueidentifier <<fk>>   
-    VacancyLevel: decimal   
-    VendorValuationPrice: decimal   
-    Version: int   
-    VirtualTourUrl: nvarchar   
-    VisibleClaimsId: binary   
-    WAULT: decimal   
-    WebsiteUrl: nvarchar   
-    Yield: decimal   
-    ZoneARentId: uniqueidentifier <<fk>>   
-}  
+'table(dbo.Activity) {   
+'    AcceptedOfferId: uniqueidentifier <<fk>>   
+'    AcceptsSharers: bit  
+'    AcceptsStudents: bit   
+'    AccessArrangements: nvarchar   
+'    ActivityAssetTypeId: uniqueidentifier <<fk>>   
+'    ActivityInstructionCddStatusId: uniqueidentifier <<fk>>   
+'    ActivityMainImageId: uniqueidentifier <<fk>>   
+'    ActivityMarketingMainImageCreationTime: datetimeoffset  
+'    ActivityPrice: decimal   
+'    ActivityStatusId: uniqueidentifier <<fk>>   
+'    ActivitySubTypeId: uniqueidentifier <<fk>>   
+'    ActivityTypeId: uniqueidentifier <<fk>>   
+'    AdvertisingNote: nvarchar   
+'    AdvertisingPrContent: nvarchar   
+'    AdvertisingPrPermittedTypeId: uniqueidentifier <<fk>>   
+'    AdvertisingPublishToWeb: bit   
+'    AdviceGivenDate: date   
+'    AgencyExpiryDate: date   
+'    AgencyExpiryDateComment: nvarchar   
+'    AgencyTypeId: uniqueidentifier <<fk>>   
+'    AgreedCapitalValueId: uniqueidentifier <<fk>>   
+'    AgreedGrossInitialYield: decimal   
+'    AgreedInitialMarketingPrice: decimal   
+'    AgreedNetEquivalentYield: decimal   
+'    AgreedNetInitialYield: decimal   
+'    AgreedPrice: decimal   
+'    AgreedPricePerBed: decimal   
+'    AgreedPricePerRoomMax: decimal   
+'    AgreedPricePerRoomMin: decimal   
+'    AgreedRentMaxId: uniqueidentifier <<fk>>   
+'    AgreedRentMinId: uniqueidentifier <<fk>>   
+'    AgreedRentPA: decimal   
+'    AgreedRentPAMax: decimal   
+'    AgreedRentPAMin: decimal   
+'    AgreedReversionaryYield: decimal   
+'    AgreedSalePrice: decimal   
+'    AgreedTaxEquivalentYield: decimal   
+'    AlarmCodeIn: nvarchar   
+'    AlarmCodeOut: nvarchar   
+'    AlienationProvisionId: uniqueidentifier <<fk>>   
+'    AnticipatedCompletionDate: date   
+'    AssetId: uniqueidentifier <<fk>>   
+'    AssumedBreakDate: date   
+'    Assumptions: nvarchar   
+'    AvailableDate: date   
+'    BreakTypeId: uniqueidentifier <<fk>>   
+'    ChainsExist: bit   
+'    Comments: nvarchar   
+'    CommercialSpace: nvarchar  
+'    CompletionDate: date   
+'    ConditionId: uniqueidentifier <<fk>>   
+'    CreatedByUserId: uniqueidentifier <<fk>>   
+'    CreationTime: datetimeoffset   
+'    CurrencyId: uniqueidentifier <<fk>>   
+'    DefinitionOfRent: nvarchar   
+'    Deleted: bit   
+'    DevPipelineComments: nvarchar   
+'    DevPipelineCompletionDateQuarterId: uniqueidentifier <<fk>>   
+'    DevPipelineCompletionDateYear: decimal   
+'    DevPipelineConstructionStageId: uniqueidentifier <<fk>>   
+'    DevPipelineConstructionStartQuarterId: uniqueidentifier <<fk>>   
+'    DevPipelineConstructionStartYear: decimal   
+'    DevPipelineDevelopmentProbabilityId: uniqueidentifier <<fk>>   
+'    DevPipelineDevelopmentTypeId: uniqueidentifier <<fk>>   
+'    DevPipelineRecordInfoId: uniqueidentifier <<fk>>   
+'    DevPipelineSpeculativePreLetId: uniqueidentifier <<fk>>   
+'    Discount: decimal   DiscountLevel: decimal   
+'    DisposalTypeId: uniqueidentifier <<fk>>   
+'    Disregards: nvarchar   
+'    DurationTypeId: uniqueidentifier <<fk>>   
+'    EbitdaCurrentYear: decimal   
+'    EbitdaLastYear: decimal   
+'    EbitdaNextYearForecast: decimal   
+'    ElectronicBrochureUrl: nvarchar   
+'    EstimatedRatesId: uniqueidentifier <<fk>>   
+'    EstimatedRentalValueId: uniqueidentifier <<fk>>   
+'    EstimatedRentalValuePA: decimal   
+'    EstimatedServiceChargeId: uniqueidentifier <<fk>>   
+'    ExchangedDate: date   
+'    ExpectedMonthRent: decimal   
+'    ExpectedWeekRent: decimal   
+'    FeeComment: nvarchar   
+'    FeePercentage: decimal   
+'    FeeSplitValueTypeId: uniqueidentifier   
+'    FeeTypeId: uniqueidentifier <<fk>>   
+'    FeeValue: decimal   
+'    FileReference: nvarchar   
+'    FurnishingId: uniqueidentifier <<fk>>   
+'    GearingPercentage: decimal   
+'    GradeId: uniqueidentifier <<fk>>   
+'    GroundRentAmount: decimal   
+'    GroundRentNote: nvarchar   
+'    HasSharedBathrooms: bit   
+'    HasSharedKitchens: bit   
+'    HeadLeaseCommencementDate: date   
+'    HeadLeaseExpiryDate: date   
+'    HeadLeaseId: uniqueidentifier <<fk>>  
+'    HeadLeaseTermMonths: int   
+'    HeadLeaseUnexpiredTerm: decimal   
+'    HeadsOfTermsDate: date   
+'    HelpToBuy: bit   
+'    HmoLicenceRequired: bit   
+'    HypotheticalTermDays: int   
+'    HypotheticalTermMonths: int   
+'    Id: uniqueidentifier <<pk>>   
+'    ImportantInformation: nvarchar   
+'    IncomeDate: date   
+'    InformationQualityId: uniqueidentifier <<fk>>   
+'    InstructedDate: date   
+'    InternalCCTV: bit   
+'    IsAreaBreakdownInAcres: bit   
+ '   IsFromDevelopmentPipeline: bit   
+ '   IsNewBuild: bit   
+ '   IsPeppercorn: bit   
+ '   IsSentToLonRes: bit   
+'    IsServicedProperty: bit   
+'    IsShariaCompliant: bit   
+'    IsSurrenderPremiumWaived: bit   
+'    IsUploaded: bit   
+'    IsVacantProperty: bit   
+'    ITZA: decimal   
+'    KeyHolderDepartmentId: uniqueidentifier <<fk>>   
+'    KeyHolderTypeId: uniqueidentifier <<fk>>   
+'    KeyNumber: nvarchar   
+'    KfValuationPrice: decimal   
+'    LastModifiedByUserId: uniqueidentifier <<fk>>   
+'    LastRefurbDate: date   
+'    LastWriteTime: datetimeoffset   
+'    LatestPublishToWebDate: datetimeoffset   
+'    LeaseCommencementDate: date   
+'    LeaseExpiryDate: date   
+'    LeaseLengthMonths: int   
+'    LicenceNumber: nvarchar   
+'    LongAskingMonthRent: decimal   
+'    LongAskingWeekRent: decimal   
+'    LongKfValuationMonthlyPrice: decimal   
+'    LongKfValuationWeeklyPrice: decimal   
+'    LonResCommission: decimal   
+'    LonResCommissionTypeId: uniqueidentifier <<fk>>   
+'    LonResNegotiatorBonusFee: decimal   
+'    LonResStatusId: uniqueidentifier <<fk>>   
+'    LostFromId: uniqueidentifier <<fk>>   
+'    ManagementFeePercentage: decimal   
+'    ManagementFeeTypeId: uniqueidentifier <<fk>>   
+'    ManagementFeeValue: decimal   
+'    ManagementTypeId: uniqueidentifier <<fk>>   
+'    MarketedDate: date   
+'    MaskedClaimsId: binary   
+'    Moneypenny: bit   
+'    NetInitialYield: decimal   
+'    NonContactKeyHolderDetails: nvarchar   
+'    OriginalPropertyTypeId: uniqueidentifier <<fk>>   
+'    OtherChargesGovtRatesPerQuarterAmount: decimal   
+'    OtherChargesGovtRatesPerQuarterInclusive: bit   
+'    OtherChargesGovtRatesPerQuarterToBeAdvised: bit   
+'    OtherChargesGovtRentPerYearAmount: decimal   
+'    OtherChargesGovtRentPerYearInclusive: bit   
+'    OtherChargesGovtRentPerYearToBeAdvised: bit   
+'    OtherChargesMonthlyAcFeeAmount: decimal   
+'    OtherChargesMonthlyAcFeeInclusive: bit   
+'    OtherChargesMonthlyAcFeeToBeAdvised: bit   
+'    OtherChargesMonthlyCarParkFeeAmount: decimal   
+'    OtherChargesMonthlyCarParkFeeInclusive: bit   
+'    OtherChargesMonthlyCarParkFeeToBeAdvised: bit   
+'    OtherChargesMonthlyManagementFeeAmount: decimal   
+'    OtherChargesMonthlyManagementFeeInclusive: bit   
+'    OtherChargesMonthlyManagementFeeToBeAdvised: bit   
+'    OtherCondition: nvarchar   
+'    OtherIncentives: nvarchar  
+'    OwnershipTenureId: uniqueidentifier <<fk>>  
+'    ParkingPriceMonth: decimal   
+'    ParkingPriceWeek: decimal   
+'    PetAllowed: bit   
+'    PetSharersStudentsInfo: nvarchar  
+'    PitchingThreats: nvarchar   
+'    PremiumPaidById: uniqueidentifier <<fk>>   
+'    PricePerDeskMax: decimal   
+'    PricePerDeskMin: decimal   
+'    PriceQualifierId: uniqueidentifier <<fk>>   
+'    PriceTypeId: uniqueidentifier <<fk>>   
+'    PriorAgreedRentMaxId: uniqueidentifier <<fk>>  
+'    PriorAgreedRentMinId: uniqueidentifier <<fk>>   
+'    PriorAgreedRentPA: decimal   
+'    PropertyExtranet: nvarchar   
+'    PropertyTypeId: uniqueidentifier <<fk>>   
+'    PropertyVideoUrl: nvarchar   
+'    PublishedToWeb: bit   
+'    PurchaseCosts: decimal   
+'    PurposeId: uniqueidentifier <<fk>>   
+'    QubeErrorOccurred: bit   
+'    QubeReferenceId: nvarchar   
+'    QubeUrl: nvarchar   
+'    QuotedCapitalValueId: uniqueidentifier <<fk>>   
+'    QuotedGrossInitialYield: decimal   
+'    QuotedNetEquivalentYield: decimal   
+'    QuotedPrice: decimal   
+'    QuotedPricePerBed: decimal   
+'    QuotedPricePerRoom: decimal   
+'    QuotedReversionaryYield: decimal   
+'    QuotedTaxEquivalentYield: decimal   
+'    QuotingRentMaxId: uniqueidentifier <<fk>>   
+'    QuotingRentMinId: uniqueidentifier <<fk>>   
+'    QuotingRentPAMax: decimal   
+'    QuotingRentPAMin: decimal   
+'    QuotingRentTypeId: uniqueidentifier <<fk>>   
+'    QuotingTermsComments: nvarchar   
+'    RateableValueMax: decimal   
+'    RateableValueMin: decimal   
+'    ReferralId: uniqueidentifier <<fk>>   
+'    RegearDate: date   ReLet: bit   
+'    RentFreePeriod: decimal   
+'    RentFrequencyId: uniqueidentifier <<fk>>   
+'    RentPA: decimal   
+'    RepairingObligationId: uniqueidentifier <<fk>>   
+'    RepresentingId: uniqueidentifier <<fk>>   
+'    ResponsibleForSaleOrLetCompanyId: uniqueidentifier <<fk>>   
+'    ResponsibleForSaleOrLetContactId: uniqueidentifier <<fk>>   
+'    ResponsibleForSaleOrLetNegotiatorDepartmentId: uniqueidentifier <<fk>>   
+'    ResponsibleForSaleOrLetNegotiatorId: uniqueidentifier <<fk>>  
+'    RetirementHousingId: uniqueidentifier <<fk>>   
+'    SalePotentialId: uniqueidentifier <<fk>>   
+'    SalesBoardRemovalDate: date   
+'    SalesBoardSpecialInstructions: nvarchar   
+'    SalesBoardStatusId: uniqueidentifier <<fk>>   
+'    SalesBoardTypeId: uniqueidentifier <<fk>>  
+'    SalesBoardUpToDate: bit   
+'    SellingReasonId: uniqueidentifier <<fk>>   
+'    ServiceChargeAmount: decimal   
+'    ServiceChargeNote: nvarchar   
+'    ServiceLineId: uniqueidentifier <<fk>>   
+'    ShortAskingMonthRent: decimal   
+'    ShortAskingWeekRent: decimal   
+'    ShortKfValuationMonthlyPrice: decimal   
+'    ShortKfValuationWeeklyPrice: decimal   
+'    SingleLetId: uniqueidentifier <<fk>>   
+'    SourceDescription: nvarchar   
+'    SourceId: uniqueidentifier <<fk>>   
+'    StandardDisregardsId: uniqueidentifier <<fk>>   
+'    StatusLastWriteTime: datetimeoffset   
+'    SurrenderDate: date   
+'    SurrenderFromId: uniqueidentifier <<fk>>   
+'    SurrenderPremium: decimal   
+'    SurrenderToId: uniqueidentifier <<fk>>   
+'    TenancyConditions: nvarchar   
+'    TenancyReviewId: uniqueidentifier <<fk>>   
+'    TermYears: decimal   
+'    TotalRentId: uniqueidentifier <<fk>>   
+'    TransactionExplanation: nvarchar   
+'    TreatmentOfRentFreePeriodsId: uniqueidentifier <<fk>>   
+'    TypeOfLeaseId: uniqueidentifier <<fk>>   
+'    UnderOfferDate: date   
+'    UniqueReferenceCode: nvarchar   
+'    UnitMix: nvarchar   
+'    UserId: uniqueidentifier <<fk>>   
+'    VacancyLevel: decimal   
+'    VendorValuationPrice: decimal   
+'    Version: int   
+'    VirtualTourUrl: nvarchar   
+'    VisibleClaimsId: binary   
+'    WAULT: decimal   
+'    WebsiteUrl: nvarchar   
+'    Yield: decimal   
+'    ZoneARentId: uniqueidentifier <<fk>>   
+'}  
 table(dbo.TenancyReview) {   
     AgreedMonthlyRent: decimal   
     AgreedWeeklyRent: decimal   Date: date   
