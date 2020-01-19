@@ -1,6 +1,6 @@
 @startuml TenancyDb
 
-'left to right direction
+left to right direction
 
 !define table(x) class x << (T,mistyrose) >>   
 !define view(x) class x << (V,lightblue) >>   
