@@ -1,0 +1,21 @@
+@startuml
+class TenancyQuery {
+}
+class "IRequest`1"<T> {
+}
+"IRequest`1" "<TenancyViewModel>" <|-- TenancyQuery
+
+
+class TenanciesQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<TenanciesQuery,IList<TenancyCardModel>>" <|-- TenanciesQueryHandler
+
+class TenancyViewModel {
+}
+IProtectedResourceViewModel <|-- TenancyViewModel
+IBaseTenancy <|-- TenancyViewModel
+
+@enduml
+
