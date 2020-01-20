@@ -1,0 +1,7 @@
+@startuml
+class SetPassedToQubeCommandHandler {
+}
+class "IRequestHandler`1"<T> {
+}
+"IRequestHandler`1" "<SetPassedToQubeCommand>" <|-- SetPassedToQubeCommandHandler
+@enduml

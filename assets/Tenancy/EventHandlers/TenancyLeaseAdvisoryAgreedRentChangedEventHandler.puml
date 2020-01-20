@@ -1,0 +1,7 @@
+@startuml
+class TenancyLeaseAdvisoryAgreedRentChangedEventHandler {
+}
+class "INotificationHandler`1"<T> {
+}
+"INotificationHandler`1" "<TenancyLeaseAdvisoryAgreedRentChangedEvent>" <|-- TenancyLeaseAdvisoryAgreedRentChangedEventHandler
+@enduml

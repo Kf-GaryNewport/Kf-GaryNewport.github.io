@@ -1,0 +1,7 @@
+@startuml
+class UpdateTenancyBreakValidator {
+}
+class "DateWithinLeasePeriodValidator`1"<T> {
+}
+"DateWithinLeasePeriodValidator`1" "<UpdateTenancyBreak>" <|-- UpdateTenancyBreakValidator
+@enduml

@@ -1,0 +1,5 @@
+@startuml
+class DeleteTenancyAttachmentCommand {
+}
+DeleteEntityAttachmentCommand <|-- DeleteTenancyAttachmentCommand
+@enduml

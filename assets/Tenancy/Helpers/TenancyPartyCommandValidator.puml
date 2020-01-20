@@ -1,0 +1,8 @@
+@startuml
+class TenancyPartyCommandValidator {
+}
+class "BasePartyCommandValidator`1"<T> {
+}
+"BasePartyCommandValidator`1" "<TenancyPartyCommand>" <|-- TenancyPartyCommandValidator
+ITenancyPartyCommandValidator <|-- TenancyPartyCommandValidator
+@enduml

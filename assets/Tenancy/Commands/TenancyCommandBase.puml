@@ -1,0 +1,18 @@
+@startuml
+class TenancyCommandBase {
+}
+class "IRequest`1"<T> {
+}
+class "ICommandWithNegotiators`1"<T> {
+}
+class "ICommandWithAreas`1"<T> {
+}
+class "ICommandWithFeeSplitCollections`1"<T> {
+}
+"IRequest`1" "<CreateOrUpdateTenancyCommandResult>" <|-- TenancyCommandBase
+"ICommandWithNegotiators`1" "<UpdateNegotiator>" <|-- TenancyCommandBase
+"ICommandWithAreas`1" "<TenancyAreaCommand>" <|-- TenancyCommandBase
+ICommandWithVersion <|-- TenancyCommandBase
+ICommandWithManagementFeeSplit <|-- TenancyCommandBase
+"ICommandWithFeeSplitCollections`1" "<TenancyPartyCommand>" <|-- TenancyCommandBase
+@enduml

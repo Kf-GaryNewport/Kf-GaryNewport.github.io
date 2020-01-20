@@ -1,0 +1,7 @@
+@startuml
+class TenanciesQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<TenanciesQuery,IList<TenancyCardModel>>" <|-- TenanciesQueryHandler
+@enduml

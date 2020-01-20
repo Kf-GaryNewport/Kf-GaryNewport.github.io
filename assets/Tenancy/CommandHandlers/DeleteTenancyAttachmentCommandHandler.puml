@@ -1,0 +1,10 @@
+@startuml
+class DeleteTenancyAttachmentCommandHandler {
+}
+class "DeleteEntityAttachmentCommandHandler`1"<T> {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"DeleteEntityAttachmentCommandHandler`1" "<Tenancy>" <|-- DeleteTenancyAttachmentCommandHandler
+"IRequestHandler`2" "<DeleteTenancyAttachmentCommand,Attachment>" <|-- DeleteTenancyAttachmentCommandHandler
+@enduml

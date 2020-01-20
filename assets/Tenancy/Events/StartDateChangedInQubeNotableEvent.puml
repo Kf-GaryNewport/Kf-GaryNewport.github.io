@@ -1,0 +1,5 @@
+@startuml
+class StartDateChangedInQubeNotableEvent {
+}
+ImmediateBaseNotableEvent <|-- StartDateChangedInQubeNotableEvent
+@enduml

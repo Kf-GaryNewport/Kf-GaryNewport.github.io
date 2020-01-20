@@ -1,0 +1,6 @@
+@startuml
+class UpdateTenancyBreak {
+}
+ITenancyEvent <|-- UpdateTenancyBreak
+ICommandWithTenancyBreakIdAndType <|-- UpdateTenancyBreak
+@enduml

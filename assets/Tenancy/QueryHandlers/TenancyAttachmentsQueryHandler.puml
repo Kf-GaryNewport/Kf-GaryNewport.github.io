@@ -1,0 +1,7 @@
+@startuml
+class TenancyAttachmentsQueryHandler {
+}
+class "AttachmentsQueryHandler`2"<T1,T2> {
+}
+"AttachmentsQueryHandler`2" "<Tenancy,TenancyAttachmentsQuery>" <|-- TenancyAttachmentsQueryHandler
+@enduml

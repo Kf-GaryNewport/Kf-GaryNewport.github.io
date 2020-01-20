@@ -1,0 +1,7 @@
+@startuml
+class "DateWithinLeasePeriodValidator`1"<TEvent> {
+}
+class "AbstractValidator`1"<T> {
+}
+"AbstractValidator`1" "<TEvent>" <|-- "DateWithinLeasePeriodValidator`1"
+@enduml

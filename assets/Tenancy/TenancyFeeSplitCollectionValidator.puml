@@ -1,0 +1,7 @@
+@startuml
+class TenancyFeeSplitCollectionValidator {
+}
+class "FeeSplitCollectionValidatorBase`3"<T1,T2,T3> {
+}
+"FeeSplitCollectionValidatorBase`3" "<TenancyCommandBase,TenancyPartyCommand,TenancyPartyRole>" <|-- TenancyFeeSplitCollectionValidator
+@enduml

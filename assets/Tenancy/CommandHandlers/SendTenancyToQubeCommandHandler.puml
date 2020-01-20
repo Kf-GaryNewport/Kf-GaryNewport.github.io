@@ -1,0 +1,7 @@
+@startuml
+class SendTenancyToQubeCommandHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<SendTenancyToQubeCommand,Unit>" <|-- SendTenancyToQubeCommandHandler
+@enduml

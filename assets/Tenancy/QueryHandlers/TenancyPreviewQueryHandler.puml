@@ -1,0 +1,7 @@
+@startuml
+class TenancyPreviewQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<TenancyPreviewQuery,TenancyPreviewViewModel>" <|-- TenancyPreviewQueryHandler
+@enduml

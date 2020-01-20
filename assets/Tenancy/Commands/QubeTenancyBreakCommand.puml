@@ -1,0 +1,5 @@
+@startuml
+class QubeTenancyBreakCommand {
+}
+ICommandWithTenancyBreakIdAndType <|-- QubeTenancyBreakCommand
+@enduml

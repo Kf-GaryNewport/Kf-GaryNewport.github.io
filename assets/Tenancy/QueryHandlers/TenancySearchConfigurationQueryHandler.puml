@@ -1,0 +1,7 @@
+@startuml
+class TenancySearchConfigurationQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<TenancySearchConfigurationQuery,TenancySearchConfigurationResult>" <|-- TenancySearchConfigurationQueryHandler
+@enduml

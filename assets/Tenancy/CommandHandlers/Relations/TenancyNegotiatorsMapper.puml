@@ -1,0 +1,10 @@
+@startuml
+class TenancyNegotiatorsMapper {
+}
+class "BaseNegotiatorsMapper`2"<T1,T2> {
+}
+class "ITenancyReferenceChangeMapper`1"<T> {
+}
+"BaseNegotiatorsMapper`2" "<TenancyNegotiator,UpdateNegotiator>" <|-- TenancyNegotiatorsMapper
+"ITenancyReferenceChangeMapper`1" "<TenancyNegotiator>" <|-- TenancyNegotiatorsMapper
+@enduml

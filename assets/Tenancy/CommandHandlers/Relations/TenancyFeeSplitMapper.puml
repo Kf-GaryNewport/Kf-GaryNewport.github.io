@@ -1,0 +1,7 @@
+@startuml
+class TenancyFeeSplitMapper {
+}
+class "BaseFeeSplitMapper`2"<T1,T2> {
+}
+"BaseFeeSplitMapper`2" "<TenancyCommandBase,Tenancy>" <|-- TenancyFeeSplitMapper
+@enduml

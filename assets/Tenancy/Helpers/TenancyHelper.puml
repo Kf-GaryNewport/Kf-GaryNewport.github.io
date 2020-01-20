@@ -1,0 +1,5 @@
+@startuml
+class TenancyHelper {
+}
+ITenancyHelper <|-- TenancyHelper
+@enduml

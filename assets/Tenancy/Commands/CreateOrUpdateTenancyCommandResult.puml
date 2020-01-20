@@ -1,0 +1,5 @@
+@startuml
+class CreateOrUpdateTenancyCommandResult {
+}
+IQubeSynchronizationCommandResult <|-- CreateOrUpdateTenancyCommandResult
+@enduml

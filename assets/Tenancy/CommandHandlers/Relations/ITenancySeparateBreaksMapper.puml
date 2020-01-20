@@ -1,0 +1,5 @@
+@startuml
+interface ITenancySeparateBreaksMapper {
+    ValidateAndAssignBreaks(breaksFromMessage:IList<TBreakCommand>, tenancy:Tenancy) : void
+}
+@enduml

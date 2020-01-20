@@ -1,0 +1,6 @@
+@startuml
+class UpdateTenancyPartyCommand {
+}
+TenancyPartyCommand <|-- UpdateTenancyPartyCommand
+ICommandWithVersion <|-- UpdateTenancyPartyCommand
+@enduml

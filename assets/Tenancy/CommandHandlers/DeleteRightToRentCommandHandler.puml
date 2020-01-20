@@ -1,0 +1,7 @@
+@startuml
+class DeleteRightToRentCommandHandler {
+}
+class "IRequestHandler`1"<T> {
+}
+"IRequestHandler`1" "<DeleteRightToRentCommand>" <|-- DeleteRightToRentCommandHandler
+@enduml

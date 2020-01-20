@@ -1,0 +1,7 @@
+@startuml
+class AssetTenanciesQueryResult {
+}
+class "PageableResult`1"<T> {
+}
+"PageableResult`1" "<AssetTenancyListItem>" <|-- AssetTenanciesQueryResult
+@enduml

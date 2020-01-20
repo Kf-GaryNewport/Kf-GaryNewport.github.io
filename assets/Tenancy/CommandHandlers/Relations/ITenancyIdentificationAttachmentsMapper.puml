@@ -1,0 +1,5 @@
+@startuml
+interface ITenancyIdentificationAttachmentsMapper {
+    ValidateAndAssign(command:RightToRentCommandBase, attachments:ICollection<Attachment>) : void
+}
+@enduml

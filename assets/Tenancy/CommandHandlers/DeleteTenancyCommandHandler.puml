@@ -1,0 +1,7 @@
+@startuml
+class DeleteTenancyCommandHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<DeleteTenancyCommand,Guid>" <|-- DeleteTenancyCommandHandler
+@enduml

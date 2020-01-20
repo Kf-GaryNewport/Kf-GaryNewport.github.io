@@ -1,0 +1,7 @@
+@startuml
+class CreateTenancyCommandHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<CreateTenancyCommand,CreateOrUpdateTenancyCommandResult>" <|-- CreateTenancyCommandHandler
+@enduml

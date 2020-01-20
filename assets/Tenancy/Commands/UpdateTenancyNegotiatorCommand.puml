@@ -1,0 +1,5 @@
+@startuml
+class UpdateTenancyNegotiatorCommand {
+}
+UpdateEntityNegotiatorCommand <|-- UpdateTenancyNegotiatorCommand
+@enduml

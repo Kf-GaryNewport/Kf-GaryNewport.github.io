@@ -1,0 +1,7 @@
+@startuml
+class PropertyCurrentTenanciesQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<PropertyCurrentTenanciesQuery,PropertyCurrentTenanciesQueryResult>" <|-- PropertyCurrentTenanciesQueryHandler
+@enduml

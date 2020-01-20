@@ -1,0 +1,5 @@
+@startuml
+class TenancyMapperProfile {
+}
+Profile <|-- TenancyMapperProfile
+@enduml

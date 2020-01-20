@@ -1,0 +1,5 @@
+@startuml
+class TenancyAttachmentsQuery {
+}
+BaseAttachmentsQuery <|-- TenancyAttachmentsQuery
+@enduml

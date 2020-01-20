@@ -1,0 +1,7 @@
+@startuml
+class TenancyAppointmentAttachmentsMapper {
+}
+class "BaseAppointmentAttachmentsMapper`1"<T> {
+}
+"BaseAppointmentAttachmentsMapper`1" "<Tenancy>" <|-- TenancyAppointmentAttachmentsMapper
+@enduml

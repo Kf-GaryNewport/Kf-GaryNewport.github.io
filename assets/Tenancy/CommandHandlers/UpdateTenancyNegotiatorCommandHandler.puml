@@ -1,0 +1,7 @@
+@startuml
+class UpdateTenancyNegotiatorCommandHandler {
+}
+class "UpdateNegotiatorCommandHandlerBase`3"<T1,T2,T3> {
+}
+"UpdateNegotiatorCommandHandlerBase`3" "<UpdateTenancyNegotiatorCommand,Tenancy,TenancyNegotiator>" <|-- UpdateTenancyNegotiatorCommandHandler
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class TenancyFeeValidator {
+}
+class "EntityManagementFeeValidatorBase`2"<T1,T2> {
+}
+class "IEntityFeeValidator`1"<T> {
+}
+"EntityManagementFeeValidatorBase`2" "<TenancyCommandBase,TenancyPartyRole>" <|-- TenancyFeeValidator
+"IEntityFeeValidator`1" "<TenancyCommandBase>" <|-- TenancyFeeValidator
+@enduml

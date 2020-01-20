@@ -1,0 +1,7 @@
+@startuml
+class UpdateTenancyAppointmentCommandHandler {
+}
+class "UpdateEntityAppointmentCommandHandler`2"<T1,T2> {
+}
+"UpdateEntityAppointmentCommandHandler`2" "<Tenancy,UpdateTenancyAppointmentCommand>" <|-- UpdateTenancyAppointmentCommandHandler
+@enduml

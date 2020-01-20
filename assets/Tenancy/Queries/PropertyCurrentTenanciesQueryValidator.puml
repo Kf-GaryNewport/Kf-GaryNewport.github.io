@@ -1,0 +1,7 @@
+@startuml
+class PropertyCurrentTenanciesQueryValidator {
+}
+class "AbstractValidator`1"<T> {
+}
+"AbstractValidator`1" "<PropertyCurrentTenanciesQuery>" <|-- PropertyCurrentTenanciesQueryValidator
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class TenancyAllowedAttachmentTypesQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<TenancyAllowedAttachmentTypesQuery,IEnumerable<Guid>>" <|-- TenancyAllowedAttachmentTypesQueryHandler
+@enduml

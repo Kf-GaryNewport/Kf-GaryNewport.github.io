@@ -1,0 +1,8 @@
+@startuml
+class DeleteTenancyCommand {
+}
+class "IRequest`1"<T> {
+}
+"IRequest`1" "<Guid>" <|-- DeleteTenancyCommand
+ICommandWithVersion <|-- DeleteTenancyCommand
+@enduml

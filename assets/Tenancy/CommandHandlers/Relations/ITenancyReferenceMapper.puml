@@ -1,0 +1,7 @@
+@startuml
+interface "ITenancyReferenceMapper`1"<TRelation> {
+}
+class "IReferenceMapper`3"<T1,T2,T3> {
+}
+"IReferenceMapper`3" "<TenancyCommandBase,Tenancy,TRelation>" <|-- "ITenancyReferenceMapper`1"
+@enduml

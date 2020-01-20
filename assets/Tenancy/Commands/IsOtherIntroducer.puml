@@ -1,0 +1,7 @@
+@startuml
+class IsOtherIntroducer {
+}
+class "Specification`1"<T> {
+}
+"Specification`1" "<IntroducerCommand>" <|-- IsOtherIntroducer
+@enduml

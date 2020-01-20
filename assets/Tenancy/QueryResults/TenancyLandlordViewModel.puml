@@ -1,0 +1,5 @@
+@startuml
+class TenancyLandlordViewModel {
+}
+PartyCardViewModel <|-- TenancyLandlordViewModel
+@enduml

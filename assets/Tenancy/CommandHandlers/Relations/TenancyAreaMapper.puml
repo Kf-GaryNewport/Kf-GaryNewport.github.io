@@ -1,0 +1,7 @@
+@startuml
+class TenancyAreaMapper {
+}
+class "EntityAreasMapper`2"<T1,T2> {
+}
+"EntityAreasMapper`2" "<TenancyPropertyArea,TenancyAreaCommand>" <|-- TenancyAreaMapper
+@enduml

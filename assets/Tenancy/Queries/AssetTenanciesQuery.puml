@@ -1,0 +1,7 @@
+@startuml
+class AssetTenanciesQuery {
+}
+class "BasePageableQuery`1"<T> {
+}
+"BasePageableQuery`1" "<AssetTenanciesQueryResult>" <|-- AssetTenanciesQuery
+@enduml

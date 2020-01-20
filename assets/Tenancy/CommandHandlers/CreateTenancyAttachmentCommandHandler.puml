@@ -1,0 +1,7 @@
+@startuml
+class CreateTenancyAttachmentCommandHandler {
+}
+class "CreateEntityAttachmentCommandHandler`2"<T1,T2> {
+}
+"CreateEntityAttachmentCommandHandler`2" "<Tenancy,CreateTenancyAttachmentCommand>" <|-- CreateTenancyAttachmentCommandHandler
+@enduml

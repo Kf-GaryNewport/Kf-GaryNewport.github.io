@@ -1,0 +1,7 @@
+@startuml
+class TenancyBillsDescriptionMapper {
+}
+class "ITenancyReferenceMapper`1"<T> {
+}
+"ITenancyReferenceMapper`1" "<TenancyBillsDescription>" <|-- TenancyBillsDescriptionMapper
+@enduml

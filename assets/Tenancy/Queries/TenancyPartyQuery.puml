@@ -1,0 +1,5 @@
+@startuml
+class TenancyPartyQuery {
+}
+PartyQuery <|-- TenancyPartyQuery
+@enduml

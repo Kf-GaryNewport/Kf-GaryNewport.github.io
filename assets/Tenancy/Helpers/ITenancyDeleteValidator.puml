@@ -1,0 +1,5 @@
+@startuml
+interface ITenancyDeleteValidator {
+    Validate(tenancy:Tenancy) : void
+}
+@enduml

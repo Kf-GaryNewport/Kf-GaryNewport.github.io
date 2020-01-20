@@ -1,0 +1,5 @@
+@startuml
+class TenancyUpdatedEvent {
+}
+EntityUpdatedEvent <|-- TenancyUpdatedEvent
+@enduml

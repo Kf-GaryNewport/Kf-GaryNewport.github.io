@@ -1,0 +1,10 @@
+@startuml
+class TenancyDepartmentsMapper {
+}
+class "BaseDepartmentsMapper`2"<T1,T2> {
+}
+class "ITenancyReferenceChangeMapper`1"<T> {
+}
+"BaseDepartmentsMapper`2" "<TenancyDepartment,UpdateDepartment>" <|-- TenancyDepartmentsMapper
+"ITenancyReferenceChangeMapper`1" "<TenancyDepartment>" <|-- TenancyDepartmentsMapper
+@enduml

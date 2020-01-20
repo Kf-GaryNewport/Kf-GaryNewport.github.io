@@ -1,0 +1,5 @@
+@startuml
+interface ITenancyNotificationsSendHelper {
+    PublishScheduledNotificationEvents(tenancy:Tenancy, tenancyTypeEnum:TenancyType) : void
+}
+@enduml

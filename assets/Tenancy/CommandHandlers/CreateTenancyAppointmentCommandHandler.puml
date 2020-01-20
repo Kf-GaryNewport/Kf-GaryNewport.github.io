@@ -1,0 +1,7 @@
+@startuml
+class CreateTenancyAppointmentCommandHandler {
+}
+class "CreateEntityAppointmentCommandHandler`2"<T1,T2> {
+}
+"CreateEntityAppointmentCommandHandler`2" "<Tenancy,CreateTenancyAppointmentCommand>" <|-- CreateTenancyAppointmentCommandHandler
+@enduml

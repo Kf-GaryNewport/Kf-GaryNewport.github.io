@@ -1,0 +1,8 @@
+@startuml
+class TenancyBreaksMapper {
+}
+class "ITenancyReferenceMapper`1"<T> {
+}
+"ITenancyReferenceMapper`1" "<TenancyBreak>" <|-- TenancyBreaksMapper
+ITenancySeparateBreaksMapper <|-- TenancyBreaksMapper
+@enduml

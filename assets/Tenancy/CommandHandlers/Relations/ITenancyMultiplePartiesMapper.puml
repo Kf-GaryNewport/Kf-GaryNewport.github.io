@@ -1,0 +1,5 @@
+@startuml
+interface "ITenancyMultiplePartiesMapper`1"<TRelation> {
+    ValidateAndAssign(command:TenancyCommandBase, entity:Tenancy) : void
+}
+@enduml

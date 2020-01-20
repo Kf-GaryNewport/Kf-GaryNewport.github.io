@@ -1,0 +1,10 @@
+@startuml
+class TenancyIntroducersMapper {
+}
+class "IntroducersMapper`2"<T1,T2> {
+}
+class "ITenancyReferenceMapper`1"<T> {
+}
+"IntroducersMapper`2" "<TenancyParty,TenancyIntroducer>" <|-- TenancyIntroducersMapper
+"ITenancyReferenceMapper`1" "<TenancyIntroducer>" <|-- TenancyIntroducersMapper
+@enduml

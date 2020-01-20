@@ -1,0 +1,5 @@
+@startuml
+class CreateTenancyCommand {
+}
+TenancyCommandBase <|-- CreateTenancyCommand
+@enduml

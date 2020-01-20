@@ -1,0 +1,10 @@
+@startuml
+class TenancyTenantMapper {
+}
+class "BaseMultiplePartyWithGenericDescriptionMapper`3"<T1,T2,T3> {
+}
+class "ITenancyMultiplePartiesMapper`1"<T> {
+}
+"BaseMultiplePartyWithGenericDescriptionMapper`3" "<TenancyPartyCommand,TenancyParty,TenancyTenant>" <|-- TenancyTenantMapper
+"ITenancyMultiplePartiesMapper`1" "<TenancyTenant>" <|-- TenancyTenantMapper
+@enduml

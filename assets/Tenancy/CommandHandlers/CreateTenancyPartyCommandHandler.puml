@@ -1,0 +1,7 @@
+@startuml
+class CreateTenancyPartyCommandHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<CreateTenancyPartyCommand,Guid>" <|-- CreateTenancyPartyCommandHandler
+@enduml

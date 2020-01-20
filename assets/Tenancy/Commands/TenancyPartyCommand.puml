@@ -1,0 +1,9 @@
+@startuml
+class TenancyPartyCommand {
+}
+class "IRequest`1"<T> {
+}
+BasePartyCommandWithGenericDescription <|-- TenancyPartyCommand
+"IRequest`1" "<Guid>" <|-- TenancyPartyCommand
+IPartyCommandWithUndisclosedAttributes <|-- TenancyPartyCommand
+@enduml

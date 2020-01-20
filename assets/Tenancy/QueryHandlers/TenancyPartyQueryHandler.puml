@@ -1,0 +1,7 @@
+@startuml
+class TenancyPartyQueryHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<TenancyPartyQuery,PartyViewModel>" <|-- TenancyPartyQueryHandler
+@enduml

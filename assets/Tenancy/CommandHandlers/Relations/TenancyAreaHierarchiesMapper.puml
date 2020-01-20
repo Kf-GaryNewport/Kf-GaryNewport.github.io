@@ -1,0 +1,7 @@
+@startuml
+class TenancyAreaHierarchiesMapper {
+}
+class "ITenancyReferenceMapper`1"<T> {
+}
+"ITenancyReferenceMapper`1" "<AreaHierarchy>" <|-- TenancyAreaHierarchiesMapper
+@enduml

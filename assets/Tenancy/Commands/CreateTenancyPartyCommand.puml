@@ -1,0 +1,7 @@
+@startuml
+class CreateTenancyPartyCommand {
+}
+TenancyPartyCommand <|-- CreateTenancyPartyCommand
+ICommandWithVersion <|-- CreateTenancyPartyCommand
+ICreateUndisclosedPartyCommand <|-- CreateTenancyPartyCommand
+@enduml

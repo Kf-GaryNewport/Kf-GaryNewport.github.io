@@ -1,0 +1,5 @@
+@startuml
+class TenancyDeleteValidator {
+}
+ITenancyDeleteValidator <|-- TenancyDeleteValidator
+@enduml

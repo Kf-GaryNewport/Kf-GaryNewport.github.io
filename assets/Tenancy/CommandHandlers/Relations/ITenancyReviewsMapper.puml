@@ -1,0 +1,5 @@
+@startuml
+interface ITenancyReviewsMapper {
+    ValidateAndAssign(message:TenancyCommandBase, entity:Tenancy) : bool
+}
+@enduml

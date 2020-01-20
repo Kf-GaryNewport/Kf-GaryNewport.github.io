@@ -1,0 +1,6 @@
+@startuml
+interface ITenancyHelper {
+    GetAllowedRoleIdsBasedOnConfiguration(tenancyType:TenancyType) : IList<Guid>
+    GetCommercialState(tenancy:IBaseTenancy, currentDate:DateTime) : TenancyState?
+}
+@enduml

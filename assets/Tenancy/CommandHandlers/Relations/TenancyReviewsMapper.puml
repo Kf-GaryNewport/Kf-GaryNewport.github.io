@@ -1,0 +1,5 @@
+@startuml
+class TenancyReviewsMapper {
+}
+ITenancyReviewsMapper <|-- TenancyReviewsMapper
+@enduml

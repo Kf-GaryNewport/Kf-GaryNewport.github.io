@@ -1,0 +1,5 @@
+@startuml
+interface ITenancyQubeHelper {
+    IsQubeTenancy(tenancy:Tenancy, tenancyTypeEnum:TenancyType, assetType:AssetType) : bool
+}
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class RightToRentCommandValidator {
+}
+class "AbstractValidator`1"<T> {
+}
+"AbstractValidator`1" "<RightToRentCommandBase>" <|-- RightToRentCommandValidator
+@enduml

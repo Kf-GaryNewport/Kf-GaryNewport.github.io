@@ -1,0 +1,7 @@
+@startuml
+class CreateRightToRentCommandHandler {
+}
+class "IRequestHandler`2"<T1,T2> {
+}
+"IRequestHandler`2" "<CreateRightToRentCommand,Guid>" <|-- CreateRightToRentCommandHandler
+@enduml

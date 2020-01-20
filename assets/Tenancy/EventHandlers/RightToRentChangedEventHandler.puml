@@ -1,0 +1,8 @@
+@startuml
+class RightToRentChangedEventHandler {
+}
+class "INotificationHandler`1"<T> {
+}
+"INotificationHandler`1" "<RightToRentCreatedEvent>" <|-- RightToRentChangedEventHandler
+"INotificationHandler`1" "<RightToRentUpdatedEvent>" <|-- RightToRentChangedEventHandler
+@enduml

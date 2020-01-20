@@ -1,0 +1,5 @@
+@startuml
+interface ITenancyPartyCommandValidator {
+    Validate(message:TenancyPartyCommand) : void
+}
+@enduml

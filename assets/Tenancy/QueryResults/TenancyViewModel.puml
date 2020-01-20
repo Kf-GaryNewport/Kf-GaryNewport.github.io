@@ -1,0 +1,6 @@
+@startuml
+class TenancyViewModel {
+}
+IProtectedResourceViewModel <|-- TenancyViewModel
+IBaseTenancy <|-- TenancyViewModel
+@enduml
