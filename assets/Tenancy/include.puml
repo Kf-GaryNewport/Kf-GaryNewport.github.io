@@ -85,7 +85,7 @@ left to right direction
 !include .\\Helpers\TenancyHelper.puml
 !include .\\Helpers\TenancyNotificationsSendHelper.puml
 !include .\\Helpers\TenancyPartyCommandValidator.puml
-!include .\\Helpers\TenancyQubeHelper.puml
+!include https://raw.github.com/Kf-GaryNewport/Kf-GaryNewport.github.io/master/assets/Tenancy/Helpers/TenancyQubeHelper.puml
 !include .\\Queries\AssetTenanciesQuery.puml
 !include .\\Queries\BuildingBreakdownPropertyQuery.puml
 !include .\\Queries\PropertyCurrentTenanciesQuery.puml
