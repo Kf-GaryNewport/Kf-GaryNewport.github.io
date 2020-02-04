@@ -1,0 +1,18 @@
+@startuml Image Generation
+!include <azure/AzureCommon.puml>
+!include <azure/Storage/AzureQueueStorage.puml>
+
+AzureQueueStorage(queue, "Api.Settings.Queue.AzureResource", "C#", "command-queue-azure-resource")
+agent BlobHandler
+agent QueueHandler
+agent ResourceHelper
+agent ResizeImage
+
+agent AzureResourceQueueMessageHandler
+BlobHandler -> QueueHandler
+QueueHandler -> queue
+queue -> AzureResourceQueueMessageHandler
+AzureResourceQueueMessageHandler -> ResourceHelper
+ResourceHelper -> ResizeImage
+
+@enduml

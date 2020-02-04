@@ -1,0 +1,69 @@
+@startuml Image Genration
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!include <azure/AzureCommon.puml>
+!include <azure/Storage/AzureQueueStorage.puml>
+
+agent queue
+
+Container_Boundary(webjob, "KnightFrank.Antares.ProcessNotResizedImages") {
+    
+    class BlobHandler {
+    + ProcessContainer()
+    + ProcessEntity()
+    + PrepareImageStructure()
+    + FindNotResizedImageAndAddToQueue()
+    + GetDocumentType()
+    + IsFileNotResized()
+    + DoesFileShouldBeResized()
+    + ExtractEntityId()
+    + IsImageFile()
+    + IsImageFolder()
+    + GetOriginalFileName()
+    }
+
+    class QueueHandler {
+        + AddQueueMessage()
+
+    }
+
+    BlobHandler -> QueueHandler
+    QueueHandler -> queue
+}
+
+Container_Boundary(Resource, "KnightFrank.Antares.WebJobs.AzureResource") {
+    class AzureResourceQueueMessage {
+        + ResourceActionType ActionType
+        + Guid EntityId
+        + Guid NewEntityId 
+        + string FileName
+        + Guid ExternalDocumentId 
+        + Guid DocumentTypeId
+        + string IsoCode
+    }
+
+    interface IResourceHelper {
+        + ResourceRename( AzureResourceQueueMessage)
+        + ResizeImage( AzureResourceQueueMessage)
+    }
+    IResourceHelper -> AzureResourceQueueMessage
+
+    class ResourceHelper {
+        + ResizeImage( AzureResourceQueueMessage)
+    }
+    IResourceHelper <|-- ResourceHelper
+    ResourceHelper -> AzureResourceQueueMessage
+
+    class AzureResourceQueueMessageHandler  {
+        + Handle()
+    }
+    interface INotificationHandler<T>
+
+    INotificationHandler <|-- AzureResourceQueueMessageHandler
+    AzureResourceQueueMessageHandler -> ResourceHelper
+}
+
+queue -> AzureResourceQueueMessageHandler
+
+
+
+@enduml
