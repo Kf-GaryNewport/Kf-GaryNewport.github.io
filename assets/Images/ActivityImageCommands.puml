@@ -1,6 +1,8 @@
 @startuml Activity Image Commands
 
 
+Left To Right Direction
+
 class ActivityMarketingImageCommandResult {
     + ShouldSynchronizeToQube : bool <<get>> <<set>>
 }
