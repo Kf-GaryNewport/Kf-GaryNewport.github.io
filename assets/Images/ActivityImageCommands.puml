@@ -1,0 +1,91 @@
+@startuml Activity Image Commands
+
+
+class ActivityMarketingImageCommandResult {
+    + ShouldSynchronizeToQube : bool <<get>> <<set>>
+}
+class "IEnumerable"<T> {
+}
+IQubeSynchronizationCommandResult <|-- ActivityMarketingImageCommandResult
+ActivityMarketingImageCommandResult --> "ActivityId" Guid
+ActivityMarketingImageCommandResult --> "ImagesIds<Guid>" "IEnumerable"
+
+class CreateActivityMarketingImageCommand {
+    + Version : int <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+class "IEnumerable"<T> {
+}
+"IRequest" "<ActivityMarketingImageCommandResult>" <|-- CreateActivityMarketingImageCommand
+ICommandWithVersion <|-- CreateActivityMarketingImageCommand
+CreateActivityMarketingImageCommand --> "ActivityId" Guid
+CreateActivityMarketingImageCommand --> "Images<CreateMarketingImageCommand>" "IEnumerable"
+CreateActivityMarketingImageCommand --> "CopiedImages<Guid>" "IEnumerable"
+
+class DeleteActivityMarketingImageCommand {
+    + Version : int <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+"IRequest" "<ActivityMarketingImageCommandResult>" <|-- DeleteActivityMarketingImageCommand
+ICommandWithVersion <|-- DeleteActivityMarketingImageCommand
+DeleteActivityMarketingImageCommand --> "ActivityId" Guid
+DeleteActivityMarketingImageCommand --> "ImageId" Guid
+
+class UpdateActivityMarketingImageOrderCommandValidator {
+    + UpdateActivityMarketingImageOrderCommandValidator()
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<UpdateActivityMarketingImageOrderCommand>" <|-- UpdateActivityMarketingImageOrderCommandValidator
+
+class UpdateActivityMarketingImageOrderCommand {
+    + Version : int <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+class "IEnumerable"<T> {
+}
+"IRequest" "<ActivityMarketingImageCommandResult>" <|-- UpdateActivityMarketingImageOrderCommand
+ICommandWithVersion <|-- UpdateActivityMarketingImageOrderCommand
+UpdateActivityMarketingImageOrderCommand --> "ActivityId" Guid
+UpdateActivityMarketingImageOrderCommand --> "Images<UpdateMarketingImageOrderCommand>" "IEnumerable"
+
+class UpdateActivityMarketingImageDescCommand {
+    + Description : string <<get>> <<set>>
+    + Version : int <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+"IRequest" "<Guid>" <|-- UpdateActivityMarketingImageDescCommand
+ICommandWithVersion <|-- UpdateActivityMarketingImageDescCommand
+UpdateActivityMarketingImageDescCommand --> "ActivityId" Guid
+UpdateActivityMarketingImageDescCommand --> "ImageId" Guid
+
+class UpdateMarketingImageOrderCommandValidator {
+    + UpdateMarketingImageOrderCommandValidator()
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<UpdateMarketingImageOrderCommand>" <|-- UpdateMarketingImageOrderCommandValidator
+class UpdateMarketingImageOrderCommand {
+    + Order : int <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+"IRequest" "<Guid>" <|-- UpdateMarketingImageOrderCommand
+UpdateMarketingImageOrderCommand --> "ImageId" Guid
+
+
+
+
+'Package KnightFrank.Antares
+'class ActivitiesController
+
+'Package KnightFrank.Antares.Domain
+'class ActivityMarketingImageDetailQueryHandler
+'class ActivityMapperProfile
+'class MarketingImageDetailQueryResult
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml EmailShredder
+
+hide empty description
+
+[*] --> Scheduler
+Scheduler --> GetEmails
+GetEmails --> Process
+Process --> AzFuncShredder
+AzFuncShredder --> EnQueue
+EnQueue --> DeleteEmail
+DeleteEmail --> Process
+Process -> [*]
+
+
+@enduml
+
