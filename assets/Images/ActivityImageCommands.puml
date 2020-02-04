@@ -80,7 +80,30 @@ class "IRequest"<T> {
 UpdateMarketingImageOrderCommand --> "ImageId" Guid
 
 
+class MarketingImageDetailQueryResult {
+    + ImageName : string <<get>> <<set>>
+    + Order : int <<get>> <<set>>
+    + Size : long <<get>> <<set>>
+    + SmallThumbnailUrl : string <<get>> <<set>>
+    + MediumThumbnailUrl : string <<get>> <<set>>
+    + ImageUrl : string <<get>> <<set>>
+    + Description : string <<get>> <<set>>
+}
+MarketingImageDetailQueryResult --> "Id" Guid
+MarketingImageDetailQueryResult --> "ExternalDocumentId" Guid
+MarketingImageDetailQueryResult --> "CreationTime" DateTimeOffset
+MarketingImageDetailQueryResult --> "User" UserCardViewModel
 
+class MarketingImageQueryResult {
+    + ImageName : string <<get>> <<set>>
+    + Order : int <<get>> <<set>>
+    + Size : long <<get>> <<set>>
+    + ThumbnailUrl : string <<get>> <<set>>
+}
+MarketingImageQueryResult --> "Id" Guid
+MarketingImageQueryResult --> "ImageId" Guid
+MarketingImageQueryResult --> "CreationTime" DateTimeOffset
+MarketingImageQueryResult --> "User" UserCardViewModel
 
 'Package KnightFrank.Antares
 'class ActivitiesController
