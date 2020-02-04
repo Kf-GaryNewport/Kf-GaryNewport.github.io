@@ -3,7 +3,9 @@
 !include <azure/AzureCommon.puml>
 !include <azure/Storage/AzureQueueStorage.puml>
 
-inerface queue{}
+interface queue { 
+    
+}
 
 Container_Boundary(webjob, "KnightFrank.Antares.ProcessNotResizedImages") {
     
