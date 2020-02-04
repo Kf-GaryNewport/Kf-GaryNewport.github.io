@@ -1,0 +1,65 @@
+@startuml   Activity Image Command Handler
+
+Left To Right Direction
+
+class CreateActivityMarketingImageCommandHandler {
+    + CreateActivityMarketingImageCommandHandler(currentUserProvider:ICurrentUserProvider, entityValidator:IEntityValidator, enumTypeItemValidator:IEnumTypeItemValidator, activityMarketingImageRepository:IGenericRepository<ActivityMarketingImage>, mediator:ISyncMediator, activityRepository:IGenericRepository<Activity>, businessEventHelper:IMarketingBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, securityValidator:ISecurityValidator, activityTypeValidator:IActivityTypeValidator)
+    + Handle(message:CreateActivityMarketingImageCommand) : ActivityMarketingImageCommandResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<CreateActivityMarketingImageCommand,ActivityMarketingImageCommandResult>" <|-- CreateActivityMarketingImageCommandHandler
+
+class DeleteActivityMarketingImageCommandHandler {
+    + DeleteActivityMarketingImageCommandHandler(entityValidator:IEntityValidator, activityMarketingImageRepository:IGenericRepository<ActivityMarketingImage>, mediator:ISyncMediator, activityRepository:IGenericRepository<Activity>, businessEventHelper:IMarketingBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, securityValidator:ISecurityValidator)
+    + Handle(message:DeleteActivityMarketingImageCommand) : ActivityMarketingImageCommandResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<DeleteActivityMarketingImageCommand,ActivityMarketingImageCommandResult>" <|-- DeleteActivityMarketingImageCommandHandler
+
+class UpdateActivityMarketingImageOrderCommandHandler {
+    + UpdateActivityMarketingImageOrderCommandHandler(entityValidator:IEntityValidator, activityMarketingImageRepository:IGenericRepository<ActivityMarketingImage>, mediator:ISyncMediator, activityRepository:IGenericRepository<Activity>, securityValidator:ISecurityValidator)
+    + Handle(message:UpdateActivityMarketingImageOrderCommand) : ActivityMarketingImageCommandResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<UpdateActivityMarketingImageOrderCommand,ActivityMarketingImageCommandResult>" <|-- UpdateActivityMarketingImageOrderCommandHandler
+
+class MarketingImagesOrderChangedEvent {
+}
+INotification <|-- MarketingImagesOrderChangedEvent
+MarketingImagesOrderChangedEvent --> "ActivityId" Guid
+
+class ActivityMarketingImageQuery {
+}
+class "IRequest"<T> {
+}
+"IRequest" "<IEnumerable<MarketingImageQueryResult>>" <|-- ActivityMarketingImageQuery
+ActivityMarketingImageQuery --> "ActivityId" Guid
+
+class ActivityMarketingImageDetailQuery {
+}
+class "IRequest"<T> {
+}
+"IRequest" "<MarketingImageDetailQueryResult>" <|-- ActivityMarketingImageDetailQuery
+ActivityMarketingImageDetailQuery --> "ActivityId" Guid
+ActivityMarketingImageDetailQuery --> "ImageId" Guid
+
+class ActivityMarketingImageDetailQueryHandler {
+    + ActivityMarketingImageDetailQueryHandler(marketingImageRepository:IReadGenericRepository<ActivityMarketingImage>, entityValidator:IEntityValidator, securityValidator:ISecurityValidator, marketingPhotoUrlResolver:IEntityPhotoUrlResolver<MarketingImage>)
+    + Handle(imageQuery:ActivityMarketingImageDetailQuery) : MarketingImageDetailQueryResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<ActivityMarketingImageDetailQuery,MarketingImageDetailQueryResult>" <|-- ActivityMarketingImageDetailQueryHandler
+
+class ActivityMarketingImageQueryHandler {
+    + ActivityMarketingImageQueryHandler(marketingImageRepository:IReadGenericRepository<ActivityMarketingImage>, entityValidator:IEntityValidator, securityValidator:ISecurityValidator, marketingPhotoUrlResolver:IEntityPhotoUrlResolver<MarketingImage>)
+    + Handle(imageQuery:ActivityMarketingImageQuery) : IEnumerable<MarketingImageQueryResult>
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<ActivityMarketingImageQuery,IEnumerable<MarketingImageQueryResult>>" <|-- ActivityMarketingImageQueryHandler
+
+@enduml
