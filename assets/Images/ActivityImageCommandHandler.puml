@@ -3,7 +3,7 @@
 Left To Right Direction
 
 class CreateActivityMarketingImageCommandHandler {
-    + CreateActivityMarketingImageCommandHandler(currentUserProvider:ICurrentUserProvider, entityValidator:IEntityValidator, enumTypeItemValidator:IEnumTypeItemValidator, activityMarketingImageRepository:IGenericRepository<ActivityMarketingImage>, mediator:ISyncMediator, activityRepository:IGenericRepository<Activity>, businessEventHelper:IMarketingBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, securityValidator:ISecurityValidator, activityTypeValidator:IActivityTypeValidator)
+    + CreateActivityMarketingImageCommandHandler()
     + Handle(message:CreateActivityMarketingImageCommand) : ActivityMarketingImageCommandResult
 }
 class "IRequestHandler"<T1,T2> {
@@ -11,7 +11,7 @@ class "IRequestHandler"<T1,T2> {
 "IRequestHandler" "<CreateActivityMarketingImageCommand,ActivityMarketingImageCommandResult>" <|-- CreateActivityMarketingImageCommandHandler
 
 class DeleteActivityMarketingImageCommandHandler {
-    + DeleteActivityMarketingImageCommandHandler(entityValidator:IEntityValidator, activityMarketingImageRepository:IGenericRepository<ActivityMarketingImage>, mediator:ISyncMediator, activityRepository:IGenericRepository<Activity>, businessEventHelper:IMarketingBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, securityValidator:ISecurityValidator)
+    + DeleteActivityMarketingImageCommandHandler()
     + Handle(message:DeleteActivityMarketingImageCommand) : ActivityMarketingImageCommandResult
 }
 class "IRequestHandler"<T1,T2> {
@@ -19,7 +19,7 @@ class "IRequestHandler"<T1,T2> {
 "IRequestHandler" "<DeleteActivityMarketingImageCommand,ActivityMarketingImageCommandResult>" <|-- DeleteActivityMarketingImageCommandHandler
 
 class UpdateActivityMarketingImageOrderCommandHandler {
-    + UpdateActivityMarketingImageOrderCommandHandler(entityValidator:IEntityValidator, activityMarketingImageRepository:IGenericRepository<ActivityMarketingImage>, mediator:ISyncMediator, activityRepository:IGenericRepository<Activity>, securityValidator:ISecurityValidator)
+    + UpdateActivityMarketingImageOrderCommandHandler()
     + Handle(message:UpdateActivityMarketingImageOrderCommand) : ActivityMarketingImageCommandResult
 }
 class "IRequestHandler"<T1,T2> {
@@ -47,7 +47,7 @@ ActivityMarketingImageDetailQuery --> "ActivityId" Guid
 ActivityMarketingImageDetailQuery --> "ImageId" Guid
 
 class ActivityMarketingImageDetailQueryHandler {
-    + ActivityMarketingImageDetailQueryHandler(marketingImageRepository:IReadGenericRepository<ActivityMarketingImage>, entityValidator:IEntityValidator, securityValidator:ISecurityValidator, marketingPhotoUrlResolver:IEntityPhotoUrlResolver<MarketingImage>)
+    + ActivityMarketingImageDetailQueryHandler()
     + Handle(imageQuery:ActivityMarketingImageDetailQuery) : MarketingImageDetailQueryResult
 }
 class "IRequestHandler"<T1,T2> {
@@ -55,7 +55,7 @@ class "IRequestHandler"<T1,T2> {
 "IRequestHandler" "<ActivityMarketingImageDetailQuery,MarketingImageDetailQueryResult>" <|-- ActivityMarketingImageDetailQueryHandler
 
 class ActivityMarketingImageQueryHandler {
-    + ActivityMarketingImageQueryHandler(marketingImageRepository:IReadGenericRepository<ActivityMarketingImage>, entityValidator:IEntityValidator, securityValidator:ISecurityValidator, marketingPhotoUrlResolver:IEntityPhotoUrlResolver<MarketingImage>)
+    + ActivityMarketingImageQueryHandler()
     + Handle(imageQuery:ActivityMarketingImageQuery) : IEnumerable<MarketingImageQueryResult>
 }
 class "IRequestHandler"<T1,T2> {
