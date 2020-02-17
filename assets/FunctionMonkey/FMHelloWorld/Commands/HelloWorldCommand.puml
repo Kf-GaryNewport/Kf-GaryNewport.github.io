@@ -1,0 +1,8 @@
+@startuml
+class HelloWorldCommand {
+    + Name : string <<get>> <<set>>
+}
+class "ICommand`1"<T> {
+}
+"ICommand`1" "<string>" <|-- HelloWorldCommand
+@enduml

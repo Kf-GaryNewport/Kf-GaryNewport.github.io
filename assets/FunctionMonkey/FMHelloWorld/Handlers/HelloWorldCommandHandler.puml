@@ -1,0 +1,10 @@
+@startuml
+class HelloWorldCommandHandler {
+    + HelloWorldCommandHandler(stringHasher:IStringHasher)
+    + ExecuteAsync(command:HelloWorldCommand, previousResult:string) : Task<string>
+}
+class "ICommandHandler`2"<T1,T2> {
+}
+"ICommandHandler`2" "<HelloWorldCommand,string>" <|-- HelloWorldCommandHandler
+HelloWorldCommandHandler --> "_stringHasher" IStringHasher
+@enduml

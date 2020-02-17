@@ -1,0 +1,6 @@
+@startuml
+class FunctionAppConfiguration {
+    + Build(builder:IFunctionHostBuilder) : void
+}
+IFunctionAppConfiguration <|-- FunctionAppConfiguration
+@enduml

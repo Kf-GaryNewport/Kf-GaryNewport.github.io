@@ -1,0 +1,19 @@
+@startuml Function Monkey
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+!include .\\FMHelloWorld\Validators\HelloWorldCommandValidator.puml
+!include .\\FMHelloWorld\Commands\HelloWorldCommand.puml
+!include .\\FMHelloWorld\Handlers\HelloWorldCommandHandler.puml
+
+' Set screen position
+"ICommand`1" <- "ICommandHandler`2" : mediator
+HelloWorldCommand -> HelloWorldCommandHandler
+HelloWorldCommand -left> HelloWorldCommandValidator
+
+!include .\\FMHelloWorld\Services\IStringHasher.puml
+!include .\\FMHelloWorld\Services\StringHasher.puml
+!include .\\FMHelloWorld\FunctionAppConfiguration.puml 
+
+@enduml

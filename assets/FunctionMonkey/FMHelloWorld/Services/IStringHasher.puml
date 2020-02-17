@@ -1,0 +1,5 @@
+@startuml
+interface IStringHasher {
+    Hash(value:string) : string
+}
+@enduml

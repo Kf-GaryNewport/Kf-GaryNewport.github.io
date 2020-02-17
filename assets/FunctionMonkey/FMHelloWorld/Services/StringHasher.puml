@@ -1,0 +1,6 @@
+@startuml
+class StringHasher {
+    + Hash(value:string) : string
+}
+IStringHasher <|-- StringHasher
+@enduml
