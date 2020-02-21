@@ -1,0 +1,97 @@
+@startuml Email Appointment WebJob
+
+interface IInvitationEmailSendingStrategy {
+    'SendInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+    'UpdateInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+    'CancelInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>) : void
+}
+interface IInvitationEmailSendingStrategyFactory {
+    'Get(emailServerType:EmailServerType) : IInvitationEmailSendingStrategy
+}
+interface IInvitationEmailStrategy {
+}
+IEmailStrategy <|--- IInvitationEmailStrategy
+class InvitationEmailExchangeSendingStrategy {
+    '+ InvitationEmailExchangeSendingStrategy(attachmentHelper:IAttachmentHelper, exchangeConfigurationProvider:IEmailServerConfigurationProvider, appointmentDataAdapter:IInvitationAppointmentDataAdapter)
+    '+ SendInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+    '+ UpdateInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+    '+ CancelInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>) : void
+}
+IInvitationEmailSendingStrategy <|-- InvitationEmailExchangeSendingStrategy
+class InvitationEmailSendingStrategyFactory {
+    '+ InvitationEmailSendingStrategyFactory(componentContext:IComponentContext)
+    '+ Get(emailServerType:EmailServerType) : IInvitationEmailSendingStrategy
+}
+IInvitationEmailSendingStrategyFactory <|-- InvitationEmailSendingStrategyFactory
+class InvitationEmailSmtpSendingStrategy {
+    '+ InvitationEmailSmtpSendingStrategy(emailServerConfigurationProvider:IEmailServerConfigurationProvider, appointmentDataAdapter:IInvitationAppointmentDataAdapter, attachmentHelper:IAttachmentHelper)
+    '+ SendInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+    '+ UpdateInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+    '+ CancelInvitation(email:Email, invitationData:InvitationData, recipients:List<EmailRecipient>) : void
+}
+IInvitationEmailSendingStrategy <|-- InvitationEmailSmtpSendingStrategy
+class InvitationEmailStrategy {
+    '+ InvitationEmailStrategy(appointmentDataAdapter:IInvitationAppointmentDataAdapter, invitationEmailSendingStrategyFactory:IInvitationEmailSendingStrategyFactory)
+    '+ Send(email:Email, emailServerType:EmailServerType, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+}
+IInvitationEmailStrategy <|-- InvitationEmailStrategy
+
+class EmailStrategyFactory {
+    '+ EmailStrategyFactory(enumTypeItemRepository:IEnumTypeItemRepository, ordinaryEmailStrategy:IOrdinaryEmailStrategy, invitationEmailSendingStrategy:IInvitationEmailStrategy)
+    '+ Get(emailTypeId:Guid) : IEmailStrategy
+}
+IEmailStrategyFactory <|-- EmailStrategyFactory
+interface IEmailStrategy {
+    'Send(email:Email, emailServerType:EmailServerType, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+}
+interface IEmailStrategyFactory {
+    'Get(emailTypeId:Guid) : IEmailStrategy
+}
+
+EmailStrategyFactory ..> OrdinaryEmailStrategy : Creates
+EmailStrategyFactory ..> InvitationEmailStrategy : Creates
+
+IInvitationEmailStrategy -[hidden]left-> IInvitationEmailSendingStrategy
+
+IInvitationEmailStrategy -> IInvitationEmailSendingStrategy
+InvitationEmailStrategy *-- IInvitationEmailSendingStrategyFactory : Composition
+InvitationEmailSendingStrategyFactory ..> InvitationEmailExchangeSendingStrategy : Creates
+InvitationEmailSendingStrategyFactory ..> InvitationEmailSmtpSendingStrategy : Creates
+
+interface IOrdinaryEmailSendingStrategy {
+    'Send(message:MailMessage) : void
+}
+interface IOrdinaryEmailSendingStrategyFactory {
+    'Get(emailServerType:EmailServerType) : IOrdinaryEmailSendingStrategy
+}
+interface IOrdinaryEmailStrategy {
+}
+IEmailStrategy <|--- IOrdinaryEmailStrategy
+class OrdinaryEmailExchangeSendingStrategy {
+    '+ OrdinaryEmailExchangeSendingStrategy(emailClientProvider:IEmailServerClientProvider, emailConfigurationProvider:IEmailServerConfigurationProvider)
+    '+ Send(message:MailMessage) : void
+}
+IOrdinaryEmailSendingStrategy <|-- OrdinaryEmailExchangeSendingStrategy
+class OrdinaryEmailSendingStrategyFactory {
+    '+ OrdinaryEmailSendingStrategyFactory(componentContext:IComponentContext)
+    '+ Get(emailServerType:EmailServerType) : IOrdinaryEmailSendingStrategy
+}
+IOrdinaryEmailSendingStrategyFactory <|-- OrdinaryEmailSendingStrategyFactory
+class OrdinaryEmailSmtpSendingStrategy {
+    '+ OrdinaryEmailSmtpSendingStrategy(emailClientProvider:IEmailServerClientProvider, emailConfigurationProvider:IEmailServerConfigurationProvider)
+    '+ Send(message:MailMessage) : void
+}
+IOrdinaryEmailSendingStrategy <|-- OrdinaryEmailSmtpSendingStrategy
+class OrdinaryEmailStrategy {
+    '+ OrdinaryEmailStrategy(messageBuilder:IMailMessageBuilder, ordinaryEmailSendingStrategyFactory:IOrdinaryEmailSendingStrategyFactory)
+    '+ Send(email:Email, emailServerType:EmailServerType, recipients:List<EmailRecipient>, streamsToDisposeAfterSending:List<Stream>) : void
+}
+IOrdinaryEmailStrategy <|-- OrdinaryEmailStrategy
+
+IOrdinaryEmailStrategy -left-> IOrdinaryEmailSendingStrategy
+OrdinaryEmailStrategy *-- IOrdinaryEmailSendingStrategyFactory : Composition
+OrdinaryEmailSendingStrategyFactory .down.> OrdinaryEmailExchangeSendingStrategy : Creates
+OrdinaryEmailSendingStrategyFactory .down.> OrdinaryEmailSmtpSendingStrategy : Creates
+
+
+@enduml
