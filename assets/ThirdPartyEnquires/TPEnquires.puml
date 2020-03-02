@@ -1,0 +1,60 @@
+@startuml TPEnquires rev.0.1
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+!include <tupadr3/common>
+!include <azure/AzureCommon.puml>
+
+!include <office/Clouds/cloud_exchange_online>
+!include <office/Concepts/email>
+!include <azure/Integration/AzureLogicApps>
+!include <azure/Storage/AzureQueueStorage>
+
+LAYOUT_LEFT_RIGHT
+
+System_Boundary(a1, "Azure"){
+    OFF_CLOUD_EXCHANGE_ONLINE(exch, Exchange Server)
+    Container(convJson, "Email2Json", "Convert email to json")
+    AzureLogicApps(la, "Logic App", "Email Shredder")
+
+
+'Internal Relationships
+    la <-> convJson
+    exch -> la : Event
+    la -> exch : Get Email
+
+}
+
+System_Boundary(c1, "hub"){
+    AzureQueueStorage( qs, "QueueStorage", "")
+    Container(hsvc, "QueueService", "C#", "Subscribes to queue")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "hub Database\nContact Staging Area")
+    Container(hub_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
+    Person(user, "Hub User")
+
+'Internal Relationships
+    Rel(qs, hsvc, "Reads From")
+    Rel_D(user, hub_app, "Uses", "HTTPS")
+    Rel(hub_app, rel_db, "Reads From\nWrites To")
+    Rel(hsvc, rel_db, "Writes To")  
+}
+
+System_Boundary(tp, "Third Party"){
+    Person( tpUser, "Third Party System")
+    OFF_EMAIL( enquiry, Enquiry)
+
+'Internal Relationships
+    tpUser --> enquiry
+}
+
+'Inter Relationships
+tp -[hidden]right-> a1
+'a1 -[hidden]down-> c1
+tp -[hidden]down-> c1
+
+enquiry --> exch
+la --> qs : Enqueue message
+
+
+
+@enduml
