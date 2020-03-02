@@ -1,0 +1,73 @@
+@startuml TPEnquires rev.0.2
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+!include <tupadr3/common>
+!include <azure/AzureCommon.puml>
+
+!include <office/Clouds/cloud_exchange_online>
+!include <office/Concepts/email>
+!include <azure/Integration/AzureLogicApps>
+!include <azure/Storage/AzureQueueStorage>
+!include <azure/Web/AzureWebApp>
+
+LAYOUT_LEFT_RIGHT
+
+System_Boundary(a1, "Azure"){
+    OFF_CLOUD_EXCHANGE_ONLINE(exch, Exchange Server)
+    Container(convJson, "Email2Json", "Convert email to json")
+    AzureLogicApps(la, "Logic App", "Email Shredder")
+
+
+'Internal Relationships
+    la <-> convJson
+    exch -> la : Event
+    la -> exch : Get Email
+
+}
+
+System_Boundary(c1, "hub"){
+
+    System_Boundary(hub_api, "Web Api"){
+        AzureWebApp( contact, "Contacts", "Web Api")
+        AzureWebApp( requirement, "Requirements", "Web Api")
+        'Container(hub_api, "hub Api", "C#", "Web Api")
+    }
+
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "hub Database\nContact Staging Area")
+    Container(hub_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
+
+
+'Internal Relationships
+    Rel(contact, hub_api, "Reads From")
+    Rel(requirement, hub_api, "Reads From")
+
+
+
+    Rel(hub_app, hub_api, "Reads From\nWrites To")
+    Rel(hub_api, rel_db, "Reads From\nWrites To")
+}
+
+System_Boundary(tp, "Third Party"){
+    Person( tpUser, "Third Party System")
+    OFF_EMAIL( enquiry, Enquiry)
+
+'Internal Relationships
+    tpUser --> enquiry
+}
+
+    Person(user, "Hub User")
+    Rel_D(user, hub_app, "Uses", "HTTPS")
+
+'Inter Relationships
+tp -[hidden]right-> a1
+'a1 -[hidden]down-> c1
+tp -[hidden]down-> c1
+
+enquiry --> exch
+la --> contact : Create\Update Contact
+la --> requirement : Create\Update Requirement
+
+
+
+@enduml
