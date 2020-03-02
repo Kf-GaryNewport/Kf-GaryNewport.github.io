@@ -33,7 +33,7 @@ System_Boundary(c1, "hub"){
     Person(user, "Hub User")
 
 'Internal Relationships
-    Rel(qs, hsvc, "Reads From")
+    Rel_U(hsvc, qs, "Reads From")
     Rel_D(user, hub_app, "Uses", "HTTPS")
     Rel(hub_app, rel_db, "Reads From\nWrites To")
     Rel(hsvc, rel_db, "Writes To")  
