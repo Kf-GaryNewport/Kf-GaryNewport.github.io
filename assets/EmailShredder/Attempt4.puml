@@ -1,4 +1,4 @@
-@startuml  Attemp4
+@startuml  Attempt4
 !include <azure/AzureCommon.puml>
 !include <azure/Integration/AzureEventGrid.puml>
 !include <azure/Integration/AzureLogicApps.puml>
@@ -16,7 +16,6 @@ AzureQueueStorage(u3, "Temp queue 3", "Email Messages")
 AzureEventGrid(eg, "Event Grid", "Topic Queue Names")
 AzureLogicApps(Dequeue, "Subscriber", "Collate Emails by User")
 OFF_CLOUD_EXCHANGE_ONLINE(exchg)
-
 
 qs --> dispatch
 dispatch --> u1
