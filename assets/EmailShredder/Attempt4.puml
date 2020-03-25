@@ -1,0 +1,32 @@
+@startuml 
+!include <azure/AzureCommon.puml>
+!include <azure/Integration/AzureEventGrid.puml>
+!include <azure/Integration/AzureLogicApps.puml>
+!include <azure/Storage/AzureQueueStorage.puml>
+!include <tupadr3/common>
+!include <office/Clouds/cloud_exchange_online.puml>
+
+left to right direction
+
+AzureQueueStorage(qs, "Label", "Email Messages")
+AzureLogicApps(dispatch, "Dispatcher", "Collate Emails by User")
+AzureQueueStorage(u1, "Temp queue 1", "Email Messages")
+AzureQueueStorage(u2, "Temp queue 2", "Email Messages")
+AzureQueueStorage(u3, "Temp queue 3", "Email Messages")
+AzureEventGrid(eg, "Event Grid", "Topic Queue Names")
+AzureLogicApps(Dequeue, "Subscriber", "Collate Emails by User")
+OFF_CLOUD_EXCHANGE_ONLINE(exchg)
+
+
+qs --> dispatch
+dispatch --> u1
+dispatch --> u2
+dispatch --> u3
+dispatch --> eg
+eg --> Dequeue : Trigger
+u1 <-- Dequeue : Connect
+u2 <-- Dequeue : Connect
+u3 <-- Dequeue : Connect
+Dequeue --> exchg : Send
+
+@enduml

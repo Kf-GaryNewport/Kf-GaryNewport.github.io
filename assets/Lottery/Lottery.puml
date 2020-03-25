@@ -1,0 +1,123 @@
+@startuml FMLottery
+
+'skinparam linetype polyline
+'skinparam linetype ortho
+
+class LotteryCommandValidator {
+    + LotteryCommandValidator()
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<LotteryCommand>" <|-- LotteryCommandValidator
+
+class LotteryCommand {
+    + Name : string <<get>> <<set>>
+}
+interface "ICommand"<T> {
+}
+"ICommand" "<string>" <|-- LotteryCommand
+
+'class LottoCommandHandler {
+'    + LottoCommandHandler(stringHasher:IStringHasher)
+'    + ExecuteAsync(command:LotteryCommand, previousResult:string) : Task<string>
+'}
+
+class ThunderBallCommandHandler {
+    - ThunderBallRepository repository
+    + ThunderBallCommandHandler(RepositoryConfig:config)
+ }
+
+interface "ICommandHandler"<T1,T2> {
+}
+'"ICommandHandler" "<LotteryCommand,string>" <|-- LottoCommandHandler
+"ICommandHandler" "<LotteryCommand,string>" <|-- ThunderBallCommandHandler
+
+' Set screen position
+"ICommand" <- "ICommandHandler" : mediator
+'LotteryCommand -> LottoCommandHandler
+LotteryCommand -> ThunderBallCommandHandler
+LotteryCommand -left> LotteryCommandValidator
+
+class FunctionAppConfiguration {
+    + Build(builder:IFunctionHostBuilder) : void
+}
+IFunctionAppConfiguration <|-- FunctionAppConfiguration
+
+
+class TableEntity
+'class LottoEntity
+class ThunderBallEntity {
+    +string DrawDate()
+    +string Ball1()
+    +string Ball2()
+    +string Ball3()
+    +string Ball4()
+    +string Ball5()
+    +string Thunderball()
+    +string BallSet()
+    +string Machine()
+}
+
+'TableEntity <|-- LottoEntity
+TableEntity <|-- ThunderBallEntity
+
+class RepositoryConfig {
+    RepositoryConfig(string connectionString, string tableName)
+    +string TableName()
+    +string ConnectionString())
+}
+
+interface "IRepository"<T> {
+    Task<List<T>> GetList();
+    Task<T> GetItem(string rowKey);
+    Task Insert(T item);
+    Task Update(T item);
+    Task Delete(string rowKey);
+}
+class "AzureStorageTable"<T> {
+    Task<List<T>> GetList()
+    Task<T> GetItem(string rowKey)
+    Task Insert(T item)
+    Task Update(T item)
+    Task Delete(string rowKey)
+    Task<CloudTable> GetTableAsync()
+}
+'class LottoRepository
+class ThunderBallRepository {
+    ThunderBallRepository(RepositoryConfig settings)
+    Task<List<ThunderBallTableEntity>> GetOrderedList()
+}
+
+"IRepository""<TableEntity>" <|-- AzureStorageTable
+'"AzureStorageTable""<LottoEntity>" <|-- LottoRepository
+"AzureStorageTable""<ThunderBallEntity>" <|-- ThunderBallRepository
+
+
+ThunderBallCommandHandler -> ThunderBallRepository
+'LottoCommandHandler --> LottoRepository : Creates
+'ThunderBallCommandHandler --> ThunderBallRepository : Creates
+
+
+interface ILottery {
+}
+class TBHandler {
+    IAnalysis analysis
+    IPrediction prediction
+}
+ILottery <|-- TBHandler
+
+interface IAnalysis
+class TBAnalysis
+IAnalysis <|-- TBAnalysis
+
+interface IPrediction
+class TBPrediction
+IPrediction <|-- TBPrediction
+
+TBHandler -> IAnalysis
+TBHandler -left> IPrediction
+TBHandler --> TBAnalysis : creates
+TBHandler --> TBPrediction : creates
+
+
+@enduml
