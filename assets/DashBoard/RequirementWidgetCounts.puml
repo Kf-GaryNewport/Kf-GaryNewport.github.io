@@ -7,8 +7,11 @@ class SearchModule {
 Module <|-- SearchModule
 
 class ElasticSearchExtensions <<static>> {
-    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, configuration:IDictionary<TCode, SearchDescriptor<TModel>>) : CounterResult<TCode>[]
-    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) : IDictionary<TCode, ISearchResponse<TModel>>
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
 }
 class RequirementCountersSearchDescriptor {
     + RequirementCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IRequirementCategoryQueryBuilder)
