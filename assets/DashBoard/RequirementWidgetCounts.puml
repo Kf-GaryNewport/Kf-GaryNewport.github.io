@@ -1,0 +1,84 @@
+@startuml
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, configuration:IDictionary<TCode, SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class RequirementCountersSearchDescriptor {
+    + RequirementCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IRequirementCategoryQueryBuilder)
+    + <<override>> Create(query:RequirementCategoryQuery) : SearchDescriptor<Requirement>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Requirement,RequirementCategoryQuery>" <|-- RequirementCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class RequirementCountersSearchDescriptorsConfigurationFactory {
+    + RequirementCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Requirement, 
+        RequirementCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<RequirementWidgetCategories, 
+        RequirementCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<RequirementWidgetCategories, SearchDescriptor<Requirement>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<RequirementWidgetCategories,Requirement>" <|-- RequirementCountersSearchDescriptorsConfigurationFactory
+
+class RequirementWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- RequirementWidgetQuery
+"IRequest" "<CounterResult<RequirementWidgetCategories>[]>" <|-- RequirementWidgetQuery
+'RequirementWidgetQuery --> "ServiceLineId" Guid
+
+class RequirementWidgetQueryHandler {
+'    + RequirementWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<RequirementWidgetCategories, Requirement>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:RequirementWidgetQuery) : CounterResult<RequirementWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<RequirementWidgetQuery,CounterResult<RequirementWidgetCategories>[]>" <|-- RequirementWidgetQueryHandler
+
+enum RequirementWidgetCategories {
+    None= 0,
+    ResidentialActiveApplicants= 1,
+    ResidentialPendingOffer= 2,
+    ResidentialViewingFollowUp= 3,
+    ResidentialLandlordVendorFeedback= 4,
+    ResidentialCallbacks= 5,
+    CommercialActive= 6,
+    CommercialPotential= 7,
+    CommercialUnderOffer= 8,
+    CommercialOnHold= 9,
+    CommercialCallbacks= 10,
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+RequirementWidgetQuery -> RequirementWidgetQueryHandler
+SearchModule ..> RequirementCountersSearchDescriptorsConfigurationFactory : Creates
+RequirementWidgetQueryHandler ..> RequirementCountersSearchDescriptorsConfigurationFactory : Uses
+RequirementWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> RequirementCountersSearchDescriptor
+
+@enduml
