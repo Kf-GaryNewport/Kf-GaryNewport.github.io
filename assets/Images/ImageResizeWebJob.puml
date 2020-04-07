@@ -1,4 +1,4 @@
-@startuml
+@startuml ImageRsizeWebJob
 class AzureResourceWebJobModule {
 }
 Module <|-- AzureResourceWebJobModule
