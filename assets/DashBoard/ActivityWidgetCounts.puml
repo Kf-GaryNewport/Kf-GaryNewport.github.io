@@ -1,0 +1,93 @@
+@startuml
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class ActivityCountersSearchDescriptor {
+    + ActivityCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IActivityCategoryQueryBuilder)
+    + <<override>> Create(query:ActivityCategoryQuery) : SearchDescriptor<Activity>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Activity,ActivityCategoryQuery>" <|-- ActivityCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class ActivityCountersSearchDescriptorsConfigurationFactory {
+    + ActivityCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Activity, 
+        ActivityCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<ActivityWidgetCategories, 
+        ActivityCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<ActivityWidgetCategories, SearchDescriptor<Activity>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<ActivityWidgetCategories,Activity>" <|-- ActivityCountersSearchDescriptorsConfigurationFactory
+
+class ActivityWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- ActivityWidgetQuery
+"IRequest" "<CounterResult<ActivityWidgetCategories>[]>" <|-- ActivityWidgetQuery
+'ActivityWidgetQuery --> "ServiceLineId" Guid
+
+class ActivityWidgetQueryHandler {
+'    + ActivityWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<ActivityWidgetCategories, Activity>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:ActivityWidgetQuery) : CounterResult<ActivityWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<ActivityWidgetQuery,CounterResult<ActivityWidgetCategories>[]>" <|-- ActivityWidgetQueryHandler
+
+enum ActivityWidgetCategories {
+        None = 0,
+        ResidentialActive = 1,
+        ResidentialMas = 2,
+        ResidentialLandlordVendorFeedback = 3,
+        ResidentialOffers = 4,
+        ResidentialPendingOffer = 5,
+        ResidentialUpcomingExchanges = 6,
+        ResidentialUpcomingCompletions = 7,
+        ResidentialUpcomingAnniversaries = 8,
+        ResidentialCallBacks = 9,
+        CommercialWip = 10,
+        CommercialActivePitches = 11,
+        CommercialOffers = 12,
+        CommercialCompleted = 13,
+        CommercialCallBacks = 14, 
+        CommercialExchanged = 15,
+        ResidentialUpcomingTenancies = 16
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+ActivityWidgetQuery -> ActivityWidgetQueryHandler
+SearchModule ..> ActivityCountersSearchDescriptorsConfigurationFactory : Creates
+ActivityWidgetQueryHandler ..> ActivityCountersSearchDescriptorsConfigurationFactory : Uses
+ActivityWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> ActivityCountersSearchDescriptor
+
+@enduml
