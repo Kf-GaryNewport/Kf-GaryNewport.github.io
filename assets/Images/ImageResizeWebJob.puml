@@ -1,0 +1,57 @@
+@startuml
+class AzureResourceWebJobModule {
+}
+Module <|-- AzureResourceWebJobModule
+class ConfigHelper {
+    <<const>> SmallImageSizeWidth : string = "Api.Settings.SmallImageSize.Width"
+    <<const>> SmallImageSizeHeight : string = "Api.Settings.SmallImageSize.Height"
+    <<const>> MediumImageSizeWidth : string = "Api.Settings.MediumImageSize.Width"
+    <<const>> MediumImageSizeHeight : string = "Api.Settings.MediumImageSize.Height"
+}
+class "Lazy"<T> {
+}
+ConfigHelper o-> "TargetImageSizes<TargetImageSize[]>" "Lazy"
+class ImageHelper <<static>> {
+    + {static} Resize(originalImageBytes:byte[], newWidth:int, newHeight:int) : byte[]
+}
+enum AnchorPosition {
+    Top,
+    Center,
+    Bottom,
+    Left,
+    Right,
+}
+ImageHelper +-- AnchorPosition
+interface IResourceHelper {
+    ResourceRename(message:AzureResourceQueueMessage) : void
+    ResizeImage(message:AzureResourceQueueMessage) : void
+}
+class ResourceHelper {
+    + ResourceHelper(documentTypeProvider:IDocumentTypeProvider, 
+    storageClient:IStorageClientWrapper, 
+    blobResourceFactory:IBlobResourceFactory, 
+    storageContainerProvider:IStorageContainerProvider)
+    + ResourceRename(message:AzureResourceQueueMessage) : void
+    + ResizeImage(message:AzureResourceQueueMessage) : void
+}
+IResourceHelper <|-- ResourceHelper
+class TargetImageSize {
+    + Height : int <<get>> <<set>>
+    + Width : int <<get>> <<set>>
+}
+TargetImageSize --> "Type" ImageSize
+class AzureResourceQueueMessageHandler {
+    + AzureResourceQueueMessageHandler(resourceHelper:IResourceHelper)
+    + Handle(message:AzureResourceQueueMessage) : void
+}
+class "INotificationHandler"<T> {
+}
+"INotificationHandler" "<AzureResourceQueueMessage>" <|-- AzureResourceQueueMessageHandler
+
+AzureResourceWebJobModule -> ResourceHelper : Loads
+AzureResourceQueueMessageHandler --> ResourceHelper : Uses
+ResourceHelper --> ImageHelper : Uses
+ImageHelper -> TargetImageSize : Uses
+ImageHelper -down-> ConfigHelper : Uses
+
+@enduml
