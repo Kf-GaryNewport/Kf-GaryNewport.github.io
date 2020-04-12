@@ -1,0 +1,93 @@
+@startuml ReferralWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class ReferralCountersSearchDescriptor {
+    + ReferralCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IReferralCategoryQueryBuilder)
+    + <<override>> Create(query:ReferralCategoryQuery) : SearchDescriptor<Referral>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Referral,ReferralCategoryQuery>" <|-- ReferralCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class ReferralCountersSearchDescriptorsConfigurationFactory {
+    + ReferralCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Referral, 
+        ReferralCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<ReferralWidgetCategories, 
+        ReferralCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<ReferralWidgetCategories, SearchDescriptor<Referral>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<ReferralWidgetCategories,Referral>" <|-- ReferralCountersSearchDescriptorsConfigurationFactory
+
+class ReferralWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- ReferralWidgetQuery
+"IRequest" "<CounterResult<ReferralWidgetCategories>[]>" <|-- ReferralWidgetQuery
+'ReferralWidgetQuery --> "ServiceLineId" Guid
+
+class ReferralWidgetQueryHandler {
+'    + ReferralWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<ReferralWidgetCategories, Referral>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:ReferralWidgetQuery) : CounterResult<ReferralWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<ReferralWidgetQuery,CounterResult<ReferralWidgetCategories>[]>" <|-- ReferralWidgetQueryHandler
+
+enum ReferralWidgetCategories {
+        None = 0,
+        ResidentialActive = 1,
+        ResidentialMas = 2,
+        ResidentialLandlordVendorFeedback = 3,
+        ResidentialOffers = 4,
+        ResidentialPendingOffer = 5,
+        ResidentialUpcomingExchanges = 6,
+        ResidentialUpcomingCompletions = 7,
+        ResidentialUpcomingAnniversaries = 8,
+        ResidentialCallBacks = 9,
+        CommercialWip = 10,
+        CommercialActivePitches = 11,
+        CommercialOffers = 12,
+        CommercialCompleted = 13,
+        CommercialCallBacks = 14, 
+        CommercialExchanged = 15,
+        ResidentialUpcomingTenancies = 16
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+ReferralWidgetQuery -> ReferralWidgetQueryHandler
+SearchModule ..> ReferralCountersSearchDescriptorsConfigurationFactory : Creates
+ReferralWidgetQueryHandler ..> ReferralCountersSearchDescriptorsConfigurationFactory : Uses
+ReferralWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> ReferralCountersSearchDescriptor
+
+@enduml
