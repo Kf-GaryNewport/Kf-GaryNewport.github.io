@@ -64,8 +64,14 @@ class "IRequestHandler"<T1,T2> {
 
 enum ContactsWidgetCategories {
         None = 0,
-        Alerts = 1,
-        MyContacts = 2
+        ToReview = 1,
+        WillFade = 2,
+        Faded = 3,
+        Target = 4,
+        KeyRelationship = 5,
+        CallForConsent = 6,
+        ActiveContacts = 7,
+        RequestsForAccess = 8
 }
 
 IRequest <- IRequestHandler : mediator
