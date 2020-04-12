@@ -1,0 +1,79 @@
+@startuml PitchesWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class PitchesCountersSearchDescriptor {
+    + PitchesCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IPitchesCategoryQueryBuilder)
+    + <<override>> Create(query:PitchesCategoryQuery) : SearchDescriptor<Pitches>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Pitches,PitchesCategoryQuery>" <|-- PitchesCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class PitchesCountersSearchDescriptorsConfigurationFactory {
+    + PitchesCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Pitches, 
+        PitchesCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<PitchesWidgetCategories, 
+        PitchesCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<PitchesWidgetCategories, SearchDescriptor<Pitches>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<PitchesWidgetCategories,Pitches>" <|-- PitchesCountersSearchDescriptorsConfigurationFactory
+
+class PitchesWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- PitchesWidgetQuery
+"IRequest" "<CounterResult<PitchesWidgetCategories>[]>" <|-- PitchesWidgetQuery
+'PitchesWidgetQuery --> "ServiceLineId" Guid
+
+class PitchesWidgetQueryHandler {
+'    + PitchesWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<PitchesWidgetCategories, Pitches>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:PitchesWidgetQuery) : CounterResult<PitchesWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<PitchesWidgetQuery,CounterResult<PitchesWidgetCategories>[]>" <|-- PitchesWidgetQueryHandler
+
+enum PitchesWidgetCategories {
+        None = 0,
+        Alerts = 1,
+        MyPitches = 2
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+PitchesWidgetQuery -> PitchesWidgetQueryHandler
+SearchModule ..> PitchesCountersSearchDescriptorsConfigurationFactory : Creates
+PitchesWidgetQueryHandler ..> PitchesCountersSearchDescriptorsConfigurationFactory : Uses
+PitchesWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> PitchesCountersSearchDescriptor
+
+@enduml
