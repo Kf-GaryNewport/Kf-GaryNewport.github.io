@@ -1,0 +1,79 @@
+@startuml ContactsWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class ContactsCountersSearchDescriptor {
+    + ContactsCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IContactsCategoryQueryBuilder)
+    + <<override>> Create(query:ContactsCategoryQuery) : SearchDescriptor<Contacts>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Contacts,ContactsCategoryQuery>" <|-- ContactsCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class ContactsCountersSearchDescriptorsConfigurationFactory {
+    + ContactsCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Contacts, 
+        ContactsCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<ContactsWidgetCategories, 
+        ContactsCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<ContactsWidgetCategories, SearchDescriptor<Contacts>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<ContactsWidgetCategories,Contacts>" <|-- ContactsCountersSearchDescriptorsConfigurationFactory
+
+class ContactsWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- ContactsWidgetQuery
+"IRequest" "<CounterResult<ContactsWidgetCategories>[]>" <|-- ContactsWidgetQuery
+'ContactsWidgetQuery --> "ServiceLineId" Guid
+
+class ContactsWidgetQueryHandler {
+'    + ContactsWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<ContactsWidgetCategories, Contacts>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:ContactsWidgetQuery) : CounterResult<ContactsWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<ContactsWidgetQuery,CounterResult<ContactsWidgetCategories>[]>" <|-- ContactsWidgetQueryHandler
+
+enum ContactsWidgetCategories {
+        None = 0,
+        Alerts = 1,
+        MyContacts = 2
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+ContactsWidgetQuery -> ContactsWidgetQueryHandler
+SearchModule ..> ContactsCountersSearchDescriptorsConfigurationFactory : Creates
+ContactsWidgetQueryHandler ..> ContactsCountersSearchDescriptorsConfigurationFactory : Uses
+ContactsWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> ContactsCountersSearchDescriptor
+
+@enduml
