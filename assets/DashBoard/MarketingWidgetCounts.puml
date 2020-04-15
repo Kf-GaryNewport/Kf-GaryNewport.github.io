@@ -1,0 +1,83 @@
+@startuml MarketingWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class MarketingCountersSearchDescriptor {
+    + MarketingCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IMarketingCategoryQueryBuilder)
+    + <<override>> Create(query:MarketingCategoryQuery) : SearchDescriptor<Marketing>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Marketing,MarketingCategoryQuery>" <|-- MarketingCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class MarketingCountersSearchDescriptorsConfigurationFactory {
+    + MarketingCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Marketing, 
+        MarketingCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<MarketingWidgetCategories, 
+        MarketingCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<MarketingWidgetCategories, SearchDescriptor<Marketing>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<MarketingWidgetCategories,Marketing>" <|-- MarketingCountersSearchDescriptorsConfigurationFactory
+
+class MarketingWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- MarketingWidgetQuery
+"IRequest" "<CounterResult<MarketingWidgetCategories>[]>" <|-- MarketingWidgetQuery
+'MarketingWidgetQuery --> "ServiceLineId" Guid
+
+class MarketingWidgetQueryHandler {
+'    + MarketingWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<MarketingWidgetCategories, Marketing>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:MarketingWidgetQuery) : CounterResult<MarketingWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<MarketingWidgetQuery,CounterResult<MarketingWidgetCategories>[]>" <|-- MarketingWidgetQueryHandler
+
+enum MarketingWidgetCategories {
+        Floorplan = 1,
+        Brochures = 2,
+        LaunchedToWeb = 3,
+        WebRefresh = 4,
+        Advertising = 5,
+        MarketingDeclaration = 6,
+        Photographs = 7
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+MarketingWidgetQuery -> MarketingWidgetQueryHandler
+SearchModule ..> MarketingCountersSearchDescriptorsConfigurationFactory : Creates
+MarketingWidgetQueryHandler ..> MarketingCountersSearchDescriptorsConfigurationFactory : Uses
+MarketingWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> MarketingCountersSearchDescriptor
+
+@enduml
