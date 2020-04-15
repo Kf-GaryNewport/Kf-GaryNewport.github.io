@@ -64,22 +64,9 @@ class "IRequestHandler"<T1,T2> {
 
 enum InstructionsWidgetCategories {
         None = 0,
-        ResidentialActive = 1,
-        ResidentialMas = 2,
-        ResidentialLandlordVendorFeedback = 3,
-        ResidentialOffers = 4,
-        ResidentialPendingOffer = 5,
-        ResidentialUpcomingExchanges = 6,
-        ResidentialUpcomingCompletions = 7,
-        ResidentialUpcomingAnniversaries = 8,
-        ResidentialCallBacks = 9,
-        CommercialWip = 10,
-        CommercialActivePitches = 11,
-        CommercialOffers = 12,
-        CommercialCompleted = 13,
-        CommercialCallBacks = 14, 
-        CommercialExchanged = 15,
-        ResidentialUpcomingTenancies = 16
+        Current = 1,
+        CddPending = 2,
+        Aborted = 3
 }
 
 IRequest <- IRequestHandler : mediator
