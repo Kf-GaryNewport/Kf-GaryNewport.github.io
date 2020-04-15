@@ -1,0 +1,93 @@
+@startuml InstructionsWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class InstructionsCountersSearchDescriptor {
+    + InstructionsCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IInstructionsCategoryQueryBuilder)
+    + <<override>> Create(query:InstructionsCategoryQuery) : SearchDescriptor<Instructions>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Instructions,InstructionsCategoryQuery>" <|-- InstructionsCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class InstructionsCountersSearchDescriptorsConfigurationFactory {
+    + InstructionsCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Instructions, 
+        InstructionsCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<InstructionsWidgetCategories, 
+        InstructionsCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<InstructionsWidgetCategories, SearchDescriptor<Instructions>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<InstructionsWidgetCategories,Instructions>" <|-- InstructionsCountersSearchDescriptorsConfigurationFactory
+
+class InstructionsWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- InstructionsWidgetQuery
+"IRequest" "<CounterResult<InstructionsWidgetCategories>[]>" <|-- InstructionsWidgetQuery
+'InstructionsWidgetQuery --> "ServiceLineId" Guid
+
+class InstructionsWidgetQueryHandler {
+'    + InstructionsWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<InstructionsWidgetCategories, Instructions>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:InstructionsWidgetQuery) : CounterResult<InstructionsWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<InstructionsWidgetQuery,CounterResult<InstructionsWidgetCategories>[]>" <|-- InstructionsWidgetQueryHandler
+
+enum InstructionsWidgetCategories {
+        None = 0,
+        ResidentialActive = 1,
+        ResidentialMas = 2,
+        ResidentialLandlordVendorFeedback = 3,
+        ResidentialOffers = 4,
+        ResidentialPendingOffer = 5,
+        ResidentialUpcomingExchanges = 6,
+        ResidentialUpcomingCompletions = 7,
+        ResidentialUpcomingAnniversaries = 8,
+        ResidentialCallBacks = 9,
+        CommercialWip = 10,
+        CommercialActivePitches = 11,
+        CommercialOffers = 12,
+        CommercialCompleted = 13,
+        CommercialCallBacks = 14, 
+        CommercialExchanged = 15,
+        ResidentialUpcomingTenancies = 16
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+InstructionsWidgetQuery -> InstructionsWidgetQueryHandler
+SearchModule ..> InstructionsCountersSearchDescriptorsConfigurationFactory : Creates
+InstructionsWidgetQueryHandler ..> InstructionsCountersSearchDescriptorsConfigurationFactory : Uses
+InstructionsWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> InstructionsCountersSearchDescriptor
+
+@enduml
