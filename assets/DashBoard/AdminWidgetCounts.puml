@@ -1,0 +1,107 @@
+@startuml AdminWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class AdminCountersSearchDescriptor {
+    + AdminCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:IAdminCategoryQueryBuilder)
+    + <<override>> Create(query:AdminCategoryQuery) : SearchDescriptor<Admin>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<Admin,AdminCategoryQuery>" <|-- AdminCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class AdminCountersSearchDescriptorsConfigurationFactory {
+    + AdminCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<Admin, 
+        AdminCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<AdminWidgetCategories, 
+        AdminCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<AdminWidgetCategories, SearchDescriptor<Admin>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<AdminWidgetCategories,Admin>" <|-- AdminCountersSearchDescriptorsConfigurationFactory
+
+class AdminWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- AdminWidgetQuery
+"IRequest" "<CounterResult<AdminWidgetCategories>[]>" <|-- AdminWidgetQuery
+'AdminWidgetQuery --> "ServiceLineId" Guid
+
+class AdminWidgetQueryHandler {
+'    + AdminWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<AdminWidgetCategories, Admin>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:AdminWidgetQuery) : CounterResult<AdminWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<AdminWidgetQuery,CounterResult<AdminWidgetCategories>[]>" <|-- AdminWidgetQueryHandler
+
+enum AdminWidgetCategories {
+        UpcomingMa = 0,
+        TitleDeed = 1,
+        MarketingReport = 2,
+        CddDocs = 3,
+        CddPending = 4,
+        ToB = 5,
+        Epc= 6,
+        Photographs = 7,
+        Floorplan = 8,
+        LaunchedToWeb = 9,
+        WebRefresh = 10,
+        Advertising = 11,
+        Comps = 12,
+        Memo = 13,
+        Unbilled = 14,
+        TbsDisclosure = 15,
+        TbsConflict = 16,
+        CommercialToB = 17,
+        CommercialCddDocs = 18,
+        CommercialCddPending = 19,
+        CommercialConflictCheckOnline = 20,
+        CommercialArchiveSearchClient = 21,
+        CommercialArchiveSearchProperty = 22,
+        CommercialMarketingDeclaration = 23,
+        CommercialPhotographs = 24,
+        CommercialBrochure = 25,
+        CommercialFloorplan = 26,
+        CommercialMeasurement = 27,
+        CommercialMarketingDetails = 28,
+        CommercialLaunchedToWeb = 29,
+        CommercialEpc = 30
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+AdminWidgetQuery -> AdminWidgetQueryHandler
+SearchModule ..> AdminCountersSearchDescriptorsConfigurationFactory : Creates
+AdminWidgetQueryHandler ..> AdminCountersSearchDescriptorsConfigurationFactory : Uses
+AdminWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> AdminCountersSearchDescriptor
+
+@enduml

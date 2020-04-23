@@ -1,0 +1,211 @@
+@startuml
+title Instruction Mediator Pattern
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+' classes
+'interface IRequest 
+'interface IRequestHandler
+
+' Set screen position
+'IRequest <- IRequestHandler : mediator
+
+' Relationship
+'ResubmitInstructionToSapCommand -> ResubmitInstructionToSapCommandHandler
+
+'!include .\\CommandHandlers\ResubmitInstructionToSapCommandHandler.puml
+'!include .\\CommandResults\ResubmitInstructionToSapResult.puml
+'!include .\\Commands\ResubmitInstructionToSapCommand.puml
+'!include .\\Mappers\ISapUniqueNumberCommonMapper.puml
+'!include .\\Mappers\SapUniqueNumberCommonMapper.puml
+'!include .\\QueriesHandlers\AddressSapPreviewQueryHandler.puml
+
+
+'!include .\\InstructionMapperProfile.puml
+
+'!include .\\Commands\CreateInstructionCommand.puml
+'!include .\\CommandHandlers\CreateInstructionCommandHandler.puml
+
+'!include .\\Commands\UpdateInstructionCommand.puml
+'!include .\\CommandHandlers\UpdateInstructionCommandHandler.puml
+
+'!include .\\CommandHandlers\IInstructionBillingContactValidator.puml
+'!include .\\CommandHandlers\InstructionBillingContactValidator.puml
+
+'!include .\\CommandHandlers\IInstructionClientContactValidator.puml
+'!include .\\CommandHandlers\InstructionClientContactValidator.puml
+
+'!include .\\CommandHandlers\IInstructionCommonValidator.puml
+'!include .\\CommandHandlers\InstructionCommonValidator.puml
+
+'!include .\\CommandHandlers\IInstructionValuationUserRoleMapper.puml
+'!include .\\CommandHandlers\InstructionValuationUserRoleMapper.puml
+
+'!include .\\CommandHandlers\InstructionContactBaseValidator.puml
+
+'!include .\\CommandHandlers\InstructionRegistrationCommandHandler.puml
+'!include .\\CommandResults\InstructionRegistrationRequiredResult.puml
+'!include .\\Commands\InstructionRegistrationRequiredCommand.puml
+
+'!include .\\CommandHandlers\RefreshPartOfInstructionForSearchCommandHandler.puml
+'!include .\\Commands\RefreshPartOfInstructionForSearchCommand.puml
+
+'!include .\\CommandHandlers\SynchronizeInstructionWithActivityCommandHandler.puml
+'!include .\\Commands\SynchronizeInstructionWithActivityCommand.puml
+
+
+
+'!include .\\Commands\BaseInstructionCommand.puml
+
+'!include .\\Commands\InstructionPartyCommand.puml
+
+'!include .\\Commands\InstructionSearchIndexProperty.puml
+
+
+
+'!include .\\EventHandlers\ActivityPartyChangedEventHandler.puml
+'!include .\\EventHandlers\ActivityTerminatedEventHandler.puml
+'!include .\\EventHandlers\CompanyUpdatedHandler.puml
+'!include .\\EventHandlers\CompanyValidatedEventHandler.puml
+'!include .\\EventHandlers\CompanyValidationFailEventHandler.puml
+'!include .\\EventHandlers\ContactUpdatedHandler.puml
+'!include .\\EventHandlers\PropertyUpdatedHandler.puml
+'!include .\\EventHandlers\UpdateInstructionContactAddressEventHandler.puml
+
+'!include .\\Events\InstructionCreatedEvent.puml
+'!include .\\Events\InstructionTerminatedEvent.puml
+'!include .\\Events\InstructionUpdatedEvent.puml
+'!include .\\Events\UpdateInstructionContactAddressEvent.puml
+
+'!include .\\Helpers\ActivityChangesInstructionDataResolver.puml
+'!include .\\Helpers\CddUpdateService.puml
+'!include .\\Helpers\ContactNegotiatorInstructionNotificationHelper.puml
+'!include .\\Helpers\IActivityChangesInstructionDataResolver.puml
+'!include .\\Helpers\ICddUpdateService.puml
+'!include .\\Helpers\IContactNegotiatorInstructionNotificationHelper.puml
+'!include .\\Helpers\IInstructionContactHelper.puml
+'!include .\\Helpers\IInstructionCopyBillingContactHelper.puml
+interface IInstructionEmailHelper {
+    SendCddQuestionnaireEmail(instruction:Instruction) : void
+    SendCddRequiredAgainEmail(instruction:Instruction, updatedFields:Dictionary<string, Tuple<string,string>>) : void
+}
+'!include .\\Helpers\IInstructionRegistrationSimulationService.puml
+'!include .\\Helpers\IInstructionSecurityHelper.puml
+'!include .\\Helpers\InstructionContactHelper.puml
+'!include .\\Helpers\InstructionCopyBillingContactHelper.puml
+'!include .\\Helpers\InstructionDrillDownFilterQueryBuilder.puml
+class InstructionEmailHelper {
+    + InstructionEmailHelper(internalEmailHelper:IInternalEmailHelper, configRepository:IConfigRepository)
+    + SendCddQuestionnaireEmail(instruction:Instruction) : void
+    + SendCddRequiredAgainEmail(instruction:Instruction, updatedFields:Dictionary<string, Tuple<string, string>>) : void
+    - GetEmailRecipients(instruction:Instruction) : List<Guid>
+}
+IInstructionEmailHelper <|-- InstructionEmailHelper
+InstructionEmailHelper --> "internalEmailHelper" IInternalEmailHelper
+InstructionEmailHelper --> "configRepository" IConfigRepository
+
+'!include .\\Helpers\InstructionRegistrationSimulationService.puml
+'!include .\\Helpers\InstructionSecurityHelper.puml
+'!include .\\Helpers\InstructionsFilter.puml
+'!include .\\Helpers\InstructionsFilterConfiguration.puml
+'!include .\\Helpers\InstructionState.puml
+'!include .\\Helpers\InstructionStatusHelper.puml
+'!include .\\Helpers\RegistrationAddress.puml
+'!include .\\Helpers\RegistrationCustomerData.puml
+'!include .\\Helpers\RegistrationData.puml
+
+'!include .\\Mappers\IInstructionActivityMapper.puml
+'!include .\\Mappers\InstructionActivityMapper.puml
+
+'!include .\\Mappers\IClientContactAddressMapper.puml
+'!include .\\Mappers\ClientContactAddressMapper.puml
+
+'!include .\\Mappers\IContactAddressPhoneMapper.puml
+'!include .\\Mappers\ContactAddressPhoneMapper.puml
+
+'!include .\\Mappers\IInstructionAssetMapper.puml
+'!include .\\Mappers\InstructionAssetMapper.puml
+
+'!include .\\Mappers\IInstructionContactMapper.puml
+'!include .\\Mappers\InstructionContactMapper.puml
+
+'!include .\\Mappers\IInstructionPartyMapper.puml
+'!include .\\Mappers\InstructionPartyMapper.puml
+
+'!include .\\Mappers\IInstructionPitchesMapper.puml
+'!include .\\Mappers\InstructionPitchesMapper.puml
+
+'!include .\\Mappers\IInstructionReferralMapper.puml
+'!include .\\Mappers\InstructionReferralMapper.puml
+
+interface IInstructionRegistrationMapper {
+    ValidateAndAssign(instruction:Instruction, command:InstructionRegistrationRequiredCommand) : Instruction
+}
+class InstructionRegistrationMapper {
+}
+class "IGenericRepository"<T> {
+}
+class "IReadGenericRepository"<T> {
+}
+
+IInstructionRegistrationMapper <|-- InstructionRegistrationMapper
+InstructionRegistrationMapper --> "instructionRegistrationSimulationService" IInstructionRegistrationSimulationService
+InstructionRegistrationMapper --> "sapService" ISAPService
+InstructionRegistrationMapper --> "enumTypeItemRepository" IEnumTypeItemRepository
+InstructionRegistrationMapper --> "systemAccountProvider" ISystemAccountProvider
+InstructionRegistrationMapper --> "organisationUnitServiceLineRepository<OrganisationUnitServiceLine>" "IReadGenericRepository"
+InstructionRegistrationMapper --> "mediator" ISyncMediator
+InstructionRegistrationMapper --> "emailHelper" IInstructionEmailHelper
+
+
+'!include .\\Mappers\IInstructionRequirementMapper.puml
+'!include .\\Mappers\InstructionRequirementMapper.puml
+
+'!include .\\Mappers\InstructionSecurityAttributesMapper.puml
+
+'!include .\\Queries\InstructionAddressFormatQuery.puml
+'!include .\\Queries\InstructionDrillDownQuery.puml
+'!include .\\Queries\InstructionPreviewQuery.puml
+'!include .\\Queries\InstructionQuery.puml
+'!include .\\Queries\InstructionRegistrationStatusesQuery.puml
+'!include .\\Queries\InstructionRegistrationSystemsQuery.puml
+'!include .\\Queries\InstructionsByFiltersQuery.puml
+'!include .\\QueriesHandlers\EntityInstructionQueryHandler.puml
+'!include .\\QueriesHandlers\InstructionDrillDownQueryHandler.puml
+'!include .\\QueriesHandlers\InstructionPreviewQueryHandler.puml
+'!include .\\QueriesHandlers\InstructionQueryHandler.puml
+class InstructionRegistrationStatusesQueryHandler {
+    + InstructionRegistrationStatusesQueryHandler(registrationStatusRepository:IReadGenericRepository<RegistrationStatus>)
+    + Handle(message:InstructionRegistrationStatusesQuery) : IEnumerable<RegistrationStatus>
+}
+class "IRequestHandler"<T1,T2> {
+}
+class "IReadGenericRepository"<T> {
+}
+"IRequestHandler" "<InstructionRegistrationStatusesQuery,IEnumerable<RegistrationStatus>>" <|-- InstructionRegistrationStatusesQueryHandler
+InstructionRegistrationStatusesQueryHandler --> "registrationStatusRepository<RegistrationStatus>" "IReadGenericRepository"
+
+class InstructionRegistrationSystemsQueryHandler {
+    + InstructionRegistrationSystemsQueryHandler(registrationSystemRepository:IReadGenericRepository<RegistrationSystem>)
+    + Handle(message:InstructionRegistrationSystemsQuery) : IEnumerable<RegistrationSystem>
+}
+class "IRequestHandler"<T1,T2> {
+}
+class "IReadGenericRepository"<T> {
+}
+"IRequestHandler" "<InstructionRegistrationSystemsQuery,IEnumerable<RegistrationSystem>>" <|-- InstructionRegistrationSystemsQueryHandler
+InstructionRegistrationSystemsQueryHandler --> "registrationSystemRepository<RegistrationSystem>" "IReadGenericRepository"
+
+'!include .\\QueriesHandlers\InstructionsByFiltersQueryHandler.puml
+'!include .\\QueryResults\InstructionCardViewModel.puml
+'!include .\\QueryResults\InstructionContactAddressViewModel.puml
+'!include .\\QueryResults\InstructionContactCompanyAddressViewModel.puml
+'!include .\\QueryResults\InstructionDrillDownQueryResult.puml
+'!include .\\QueryResults\InstructionDrillDownViewModel.puml
+'!include .\\QueryResults\InstructionNameViewModel.puml
+'!include .\\QueryResults\InstructionNegotiatorViewModel.puml
+'!include .\\QueryResults\InstructionPreviewViewModel.puml
+'!include .\\QueryResults\InstructionsWidgetCategories.puml
+'!include .\\QueryResults\InstructionViewModel.puml
+@enduml
