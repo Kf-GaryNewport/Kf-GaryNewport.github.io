@@ -1,0 +1,46 @@
+@startuml "hubcdd Container"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+
+LAYOUT_TOP_DOWN
+
+Person(user, "User")
+System_Boundary(hub, "Hub System") {
+    Container(web_app, "Web Application", "C#, ASP.NET Core 2.1 MVC", "Allows users to compare multiple Twitter timelines")
+    ContainerDb(SqlDb, "Hub Sql Database", "Sql Server")
+
+    System_Boundary(az, "Azure") {
+        ContainerDb(BlobDb, "Blob Storage", "Blob Storage")
+    }
+}
+
+System_Boundary(azs, "ImageAnlysis Service") {
+    ContainerDb(TableDb, "Table Storage", "Table Storage")
+
+    AzureFunction(fnSqlUpdate, "Image Update", "C#")
+    AzureEventGrid(eg, "Event New Image", "Event Grid")
+    AzureFunction(fnBlobDisco, "Get Blob", "C#", "Gets the image blob and converts to Base64")
+    AzureEventGrid(eg2, "Event Process Blob", "Event Grid")
+    AzureFunction(fnRestbai, "Image Analysis", "C#")
+}
+System(restbai, "Restb.ai")
+
+Rel(user, web_app, "Uses", "HTTPS")
+Rel(web_app, SqlDb, "Updates image Metadata", "HTTPS")
+Rel(web_app, BlobDb, "Updates image file", "HTTPS")
+
+fnSqlUpdate -Down-> SqlDb : Gets
+fnSqlUpdate -Down-> TableDb : Upsert
+fnSqlUpdate -Up-> eg
+eg -Down-> fnBlobDisco
+fnBlobDisco -Down-> TableDb : Update
+fnBlobDisco -Up-> eg2
+eg2 -Down-> fnRestbai
+fnRestbai -Down-> TableDb : Update
+fnRestbai -> restbai : Calls
+
+@enduml
