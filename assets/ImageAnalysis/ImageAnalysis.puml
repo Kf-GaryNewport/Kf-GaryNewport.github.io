@@ -36,11 +36,15 @@ Rel(web_app, BlobDb, "Updates image file", "HTTPS")
 fnSqlUpdate -Down-> SqlDb : Gets
 fnSqlUpdate -Down-> TableDb : Upsert
 fnSqlUpdate -Up-> eg
+
 eg -Down-> fnBlobDisco
 fnBlobDisco -Down-> TableDb : Update
+fnBlobDisco -Down-> BlobDb : Get
 fnBlobDisco -Up-> eg2
+
 eg2 -Down-> fnRestbai
 fnRestbai -Down-> TableDb : Update
 fnRestbai -> restbai : Calls
 
+web_app -Down->  TableDb : DashBoard
 @enduml
