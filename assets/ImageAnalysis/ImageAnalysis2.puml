@@ -5,6 +5,7 @@
 !includeurl AzurePuml/AzureCommon.puml
 !includeurl AzurePuml/Compute/AzureFunction.puml
 !includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
 
 LAYOUT_TOP_DOWN
 
@@ -22,9 +23,7 @@ System_Boundary(azs, "ImageAnlysis Service") {
     ContainerDb(TableDb, "Table Storage", "Table Storage")
 
     AzureFunction(fnSqlUpdate, "Image Update", "C#")
-    AzureEventGrid(eg, "Event New Image", "Event Grid")
-    AzureFunction(fnBlobDisco, "Get Blob", "C#", "Gets the image blob and converts to Base64")
-    AzureEventGrid(eg2, "Event Process Blob", "Event Grid")
+    AzureQueueStorage(queue, "Images to Process", "C#")
     AzureFunction(fnRestbai, "Image Analysis", "C#")
 }
 System(restbai, "Restb.ai")
@@ -35,16 +34,13 @@ Rel(web_app, BlobDb, "Updates image file", "HTTPS")
 
 fnSqlUpdate -Down-> SqlDb : Gets
 fnSqlUpdate -Down-> TableDb : Upsert
-fnSqlUpdate -Up-> eg
+fnSqlUpdate -Down-> BlobDb : Get
+fnSqlUpdate -Up-> queue
 
-eg -Down-> fnBlobDisco
-fnBlobDisco -Down-> TableDb : Update
-fnBlobDisco -Down-> BlobDb : Get
-fnBlobDisco -Up-> eg2
 
-eg2 -Down-> fnRestbai
+queue -Down-> fnRestbai
 fnRestbai -Down-> TableDb : Update
-fnRestbai -> restbai : Calls
+fnRestbai -> restbai : Calls /\n Rate Limited
 
 web_app -Down->  TableDb : DashBoard
 

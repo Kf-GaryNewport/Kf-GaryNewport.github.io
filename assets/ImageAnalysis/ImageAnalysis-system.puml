@@ -1,0 +1,53 @@
+@startuml "hubcdd Container"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+
+Person(Dashboard, "Hub Dashboard")
+Person(DataManager, "KF DataManager")
+Person(Admin, "KF Admin")
+Person(User, "KF User")
+
+'System_Boundary(hub, "Hub System") {
+    ContainerDb(SqlDb, "Hub Sql Database", "Sql Server")
+    ContainerDb(BlobDb, "Hub Blob Storage", "Blob Storage")
+'}
+
+'System_Boundary(ia, "Image Analysis") {
+    ContainerDb(TableDb, "IA Table Storage", "Table Storage")
+    AzureFunction(fnSqlUpdate, "Image Update", "C#")
+    AzureQueueStorage(Queue, "Images to Process", "C#")
+    AzureFunction(fnRestbai, "Image Analysis", "C#")
+'}
+
+System(restbai, "Restb.ai")
+Container( Email, "Alert Email", "Outlook")
+
+fnSqlUpdate -Down-> TableDb : Updates
+fnSqlUpdate -Down-> SqlDb : Gets
+fnSqlUpdate -Down-> BlobDb : Gets
+fnSqlUpdate -> Queue
+Queue -> fnRestbai
+fnRestbai -> restbai : Calls /\n Rate Limited
+fnRestbai -Down-> TableDb : Update
+fnRestbai <-Down- TableDb : Get Image
+
+TableDb -[Hidden]-> Dashboard
+Dashboard --> TableDb : Gets Results
+
+BlobDb -[Hidden]-> User
+User --> BlobDb : Saves New Image
+BlobDb --> fnSqlUpdate : Trigger
+
+Admin -[Hidden]-> fnSqlUpdate
+Admin --> fnSqlUpdate : Trigger/Force
+
+fnRestbai --> Email
+Email -[Hidden]-> DataManager
+Email --> DataManager : Alerts
+
+@enduml
