@@ -42,6 +42,7 @@ Dashboard -Down-> TableDb : Gets Results
 BlobDb -[Hidden]-> User
 User --> BlobDb : Saves New Image
 fnRestbai --> BlobDb : Get Blob
+BlobDb --> fnSqlUpdate : Trigger
 
 Admin -[Hidden]-> fnSqlUpdate
 Admin --> fnSqlUpdate : Trigger/Force
