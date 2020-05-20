@@ -1,0 +1,39 @@
+@startuml "ImageAnalysis Sequence"
+
+actor user
+box "hub"
+    User -> hub : Uploads\nImage
+    hub -> BlobStore : Saves
+database hubSql
+end box
+
+box "Image Analysis Collection"
+    BlobStore -> ImageAnalysisFn : Trigger
+    ImageAnalysisFn -> hubSql : Get Details
+    ImageAnalysisFn -> TableStore : Save Details
+    ImageAnalysisFn -> Queue : Save into queue
+end box
+box "Image Analysis Process"
+    Activate RestbAiFn
+    RestbAiFn -> Queue : Reads 
+    RestbAiFn -> BlobStore : Get image File
+    RestbAiFn -> ImageResize : Resize image\n800x600
+    RestbAiFn -> RestbAiSvc : Send to Restb.Ai
+    RestbAiSvc --> RestbAiFn : Response
+    RestbAiFn -> TableStore : Update 
+end box
+
+actor DataManager
+alt failure
+    RestbAiFn -> DataManager : Notify
+end
+
+
+
+' Need to failure route
+
+
+
+ 
+
+@enduml
