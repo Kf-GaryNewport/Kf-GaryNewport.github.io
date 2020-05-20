@@ -1,6 +1,6 @@
 @startuml "ImageAnalysis Sequence"
 
-actor user
+actor User
 box "hub"
     User -> hub : Uploads\nImage
     hub -> BlobStore : Saves
