@@ -1,10 +1,12 @@
 @startuml "ImageAnalysis Sequence"
+skinparam ParticipantPadding 20
+skinparam BoxPadding 10
 
 actor User
 box "hub"
     User -> hub : Uploads\nImage
     hub -> BlobStore : Saves
-database hubSql
+    database hubSql
 end box
 
 box "Image Analysis Collection"
@@ -15,11 +17,14 @@ box "Image Analysis Collection"
 end box
 box "Image Analysis Process"
     Activate RestbAiFn
-    RestbAiFn -> Queue : Reads 
-    RestbAiFn -> BlobStore : Get image File
-    RestbAiFn -> ImageResize : Resize image\n800x600
-    RestbAiFn -> RestbAiSvc : Send to Restb.Ai
-    RestbAiSvc --> RestbAiFn : Response
+        RestbAiFn -> Queue : Reads 
+        RestbAiFn -> BlobStore : Get image File
+        RestbAiFn -> ImageResize : Resize image\n800x600
+        activate RestbAiFn #DarkSalmon
+            RestbAiFn -> RestbAiSvc : Send to Restb.Ai
+            RestbAiSvc --> RestbAiFn : Response
+        deactivate RestbAiFn
+    deactivate RestbAiFn
     RestbAiFn -> TableStore : Update 
 end box
 
@@ -27,13 +32,5 @@ actor DataManager
 alt failure
     RestbAiFn -> DataManager : Notify
 end
-
-
-
-' Need to failure route
-
-
-
- 
 
 @enduml
