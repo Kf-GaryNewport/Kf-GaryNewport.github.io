@@ -1,0 +1,81 @@
+@startuml TenanciesWidgetCounts
+
+skinparam linetype polyline
+skinparam linetype ortho
+class SearchModule {
+}
+Module <|-- SearchModule
+
+class ElasticSearchExtensions <<static>> {
+    + {static} ExecuteMultiSearchCounters(elasticClient:IElasticClient, 
+    configuration:IDictionary<TCode, 
+    SearchDescriptor<TModel>>) : CounterResult<TCode>[]
+    + {static} ExecuteMultiSearch(elasticClient:IElasticClient, descriptors:IDictionary<TCode, SearchDescriptor<TModel>>) 
+     : IDictionary<TCode, ISearchResponse<TModel>>
+}
+class TenancyResidentialCountersSearchDescriptor {
+    + TenancyResidentialCountersSearchDescriptor(currentUserProvider:ICurrentUserProvider, queryBuilder:ITenancyResidentialCategoryQueryBuilder)
+    + <<override>> Create(query:TenancyResidentialCategoryQuery) : SearchDescriptor<TenancyResidential>
+}
+class "BaseSecureSearchDescriptor"<T1,T2> {
+}
+"BaseSecureSearchDescriptor" "<TenancyResidential,TenancyResidentialCategoryQuery>" <|-- TenancyResidentialCountersSearchDescriptor
+
+
+' !include .\\Common\Configurations\IWidgetFilterConfiguration.puml
+' !include .\\Common\Mappers\IWidgetAssociatedUsersMapper.puml
+' !include .\\Common\Mappers\WidgetAssociatedUsersMapper.puml
+' !include .\\Common\Queries\IWidgetFilterWithAssociatedUsers.puml
+' !include .\\Common\Queries\IWidgetQuery.puml
+interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
+    Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
+}
+ class TenancyResidentialCountersSearchDescriptorsConfigurationFactory {
+    + TenancyResidentialCountersSearchDescriptorsConfigurationFactory(
+        currentUserProvider:ICurrentUserProvider, 
+        userTeamHelper:IUserTeamHelper, 
+        enumTypeItemRepository:IEnumTypeItemRepository, 
+        searchDescriptor:ISearchDescriptor<TenancyResidential, 
+        TenancyResidentialCategoryQuery>, 
+        filterConfiguration:IWidgetFilterConfiguration<TenancyResidentialResidentialWidgetCategories, 
+        TenancyResidentialCategoryQuery>)
+    + Create(query:IWidgetQuery) : IDictionary<TenancyResidentialResidentialWidgetCategories, SearchDescriptor<TenancyResidential>>
+}
+class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
+}
+"IWidgetSearchDescriptorsConfigurationFactory" "<TenancyResidentialResidentialWidgetCategories,TenancyResidential>" <|-- TenancyResidentialCountersSearchDescriptorsConfigurationFactory
+
+class TenancyResidentialWidgetQuery {
+    + IsTeam : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+IWidgetQuery <|-- TenancyResidentialWidgetQuery
+"IRequest" "<CounterResult<TenancyResidentialResidentialWidgetCategories>[]>" <|-- TenancyResidentialWidgetQuery
+'TenancyResidentialWidgetQuery --> "ServiceLineId" Guid
+
+class TenancyResidentialWidgetQueryHandler {
+'    + TenancyResidentialWidgetQueryHandler(elasticClient:IElasticClient, counterSearchDescriptorsConfigurationFactory:IWidgetSearchDescriptorsConfigurationFactory<TenancyResidentialResidentialWidgetCategories, TenancyResidential>, enumTypeItemValidator:IEnumTypeItemValidator)
+    + Handle(message:TenancyResidentialWidgetQuery) : CounterResult<TenancyResidentialResidentialWidgetCategories>[]
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<TenancyResidentialWidgetQuery,CounterResult<TenancyResidentialResidentialWidgetCategories>[]>" <|-- TenancyResidentialWidgetQueryHandler
+
+enum TenancyResidentialWidgetCategories {
+        ResidentialLettingToActivate = 1,
+        ResidentialLettingUpcomingLeaseExpiry = 2,
+        ResidentialLettingRightToRent = 3,
+        ResidentialLettingCallbacks = 4,
+        ResidentialLettingOneWeekCall = 5
+}
+
+IRequest <- IRequestHandler : mediator
+IWidgetQuery <-[hidden]left- IRequest
+TenancyResidentialWidgetQuery -> TenancyResidentialWidgetQueryHandler
+SearchModule ..> TenancyResidentialCountersSearchDescriptorsConfigurationFactory : Creates
+TenancyResidentialWidgetQueryHandler ..> TenancyResidentialCountersSearchDescriptorsConfigurationFactory : Uses
+TenancyResidentialWidgetQueryHandler ..> ElasticSearchExtensions : Uses
+ElasticSearchExtensions --> TenancyResidentialCountersSearchDescriptor
+
+@enduml
