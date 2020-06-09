@@ -1,0 +1,13 @@
+@startuml FMLottery
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/release/1-0/C4_Context.puml
+
+Person(User, "User")
+System( Lottery, "Lottery", "A software system to collect, predict and report on lottery draw data")
+SystemDb(LotteryDb, "Data Store", "Stores lottery information for analysis")
+System_Ext(Camalot,"Camalot","UK Lottery Provider")
+
+User ..> Lottery : Views Results, Creates Predictions
+Lottery ..> LotteryDb : Stores DRaw Data, Predictions and Results
+Lottery .right.> Camalot : Gets Lottery Draw Data From
+  
+@enduml
