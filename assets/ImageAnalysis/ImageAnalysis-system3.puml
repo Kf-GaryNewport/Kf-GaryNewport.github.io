@@ -1,0 +1,35 @@
+@startuml "Image Analysis System"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+
+Person(User, "KF User")
+
+ContainerDb(SqlDb, "Hub Sql Database", "Sql Server")
+ContainerDb(BlobDb, "Hub Blob Storage", "Blob Storage")
+
+ContainerDb(TableDb, "IA Table Storage", "Table Storage")
+AzureFunction(fnSqlUpdate, "Image Update", "C#")
+AzureQueueStorage(Queue, "Images to Process", "C#")
+AzureFunction(fnRestbai, "Image Analysis", "C#")
+
+System(restbai, "Restb.ai")
+
+fnSqlUpdate -Up-> TableDb : Updates
+fnSqlUpdate -Down-> SqlDb : Gets
+
+fnSqlUpdate -> Queue
+Queue -> fnRestbai
+fnRestbai -> restbai : Calls /\n Rate Limited
+fnRestbai -Up-> TableDb : Update
+
+BlobDb -[Hidden]-> User
+User --> BlobDb : Saves New Image
+fnRestbai --> BlobDb : Get Blob
+BlobDb --> fnSqlUpdate : Trigger
+
+@enduml
