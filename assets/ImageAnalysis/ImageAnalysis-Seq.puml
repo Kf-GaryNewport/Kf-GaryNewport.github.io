@@ -28,9 +28,4 @@ box "Image Analysis Process"
     RestbAiFn -> TableStore : Update 
 end box
 
-actor DataManager
-alt failure
-    RestbAiFn -> DataManager : Notify
-end
-
 @enduml
