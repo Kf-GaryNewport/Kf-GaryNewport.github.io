@@ -10,11 +10,17 @@ Container(SPA, "Single Page Application", "Provides all the Lottery analysis via
 
 Container_Boundary(WebAPI, "Web API") {
 
-Container_Boundary( ThunderBall, "Thunderball") {
+
+    Component( API, "Client API","","")
     Component( TBU, "Update","","")
     Component( TBP, "Prediction","","")
     Component( TBC, "Collection","","")
-}
+
+    API --> TBU
+    API --> TBP
+    API --> TBC
+    TBU -[hidden]> TBP
+    TBP -[hidden]> TBC
 
     Component( TTS, "ThunderBall Repository","","")
     Component( TDS, "ThunderBall Data Service","","")
@@ -25,11 +31,13 @@ Component( TableStore, "TableStore","","")
 ContainerDb(LotteryDb, "Data Store", "Stores lottery information for analysis")
 System_Ext(Camalot,"Camalot","UK Lottery Provider")
 
-    Rel(SPA, ThunderBall, "Makes calls To", "HTTPS/JSON")
-    Rel(ThunderBall, TTS, "Uses", "HTTPS/JSON")
-    Rel(ThunderBall, TDS, "Uses", "HTTPS/JSON")
+    Rel(SPA, API, "Makes calls To", "HTTPS/JSON")
+    Rel_D(TBU, TTS, "Uses", "JSON")
+    Rel_D(TBP, TTS, "Uses", "JSON")
+    Rel_D(TBC, TDS, "Uses", "JSON")
+    Rel_D(TBC, TTS, "Uses", "JSON")
 
     Rel(TableStore, LotteryDb, "Reads From / Writes To", "ODBC")  
-    Rel_L(TTS, TableStore, "Uses", "HTTPS/JSON")  
+    Rel_D(TTS, TableStore, "Uses", "JSON")  
     Rel_R(TDS, Camalot, "Uses", "HTTPS/JSON")  
 @enduml
