@@ -35,8 +35,8 @@ namespace MyFunctionApp
 
 # Solution 
 The solution is simple but a little annoying :(
-Instead of using the ILogger use ILogger<> instead putting the namespace as the type.
-
+Instead of using the ILogger use ILogger<> instead putting the class name as the type.
+       
 ```c#
 public class MyFunctionClass
     {
@@ -50,7 +50,7 @@ public class MyFunctionClass
         ...
     }
 ```
-There is an additional gotcha, which has been raised to Microsoft as a bug, and that is you need to specify your NameSpaces that uses the ILogger in the hosts.json file
+There is an additional gotcha, which has been raised to Microsoft as a bug, and that is you need to specify your <b>NameSpaces</b> that uses the ILogger in the hosts.json file
 
 ```json
 {
@@ -63,4 +63,5 @@ There is an additional gotcha, which has been raised to Microsoft as a bug, and 
     }
 }
 ```
+
 
