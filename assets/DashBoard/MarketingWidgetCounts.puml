@@ -30,8 +30,8 @@ class "BaseSecureSearchDescriptor"<T1,T2> {
 interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
     Create(query:IWidgetQuery) : IDictionary<TCode, SearchDescriptor<TModel>>
 }
- class MarketingCountersSearchDescriptorsConfigurationFactory {
-    + MarketingCountersSearchDescriptorsConfigurationFactory(
+ class MarketingWidgetSearchDescriptorsConfigurationFactory {
+    + MarketingWidgetSearchDescriptorsConfigurationFactory(
         currentUserProvider:ICurrentUserProvider, 
         userTeamHelper:IUserTeamHelper, 
         enumTypeItemRepository:IEnumTypeItemRepository, 
@@ -43,7 +43,7 @@ interface "IWidgetSearchDescriptorsConfigurationFactory"<TCode,TModel> {
 }
 class "IWidgetSearchDescriptorsConfigurationFactory"<T1,T2> {
 }
-"IWidgetSearchDescriptorsConfigurationFactory" "<MarketingWidgetCategories,Marketing>" <|-- MarketingCountersSearchDescriptorsConfigurationFactory
+"IWidgetSearchDescriptorsConfigurationFactory" "<MarketingWidgetCategories,Marketing>" <|-- MarketingWidgetSearchDescriptorsConfigurationFactory
 
 class MarketingWidgetQuery {
     + IsTeam : bool <<get>> <<set>>
@@ -75,8 +75,8 @@ enum MarketingWidgetCategories {
 IRequest <- IRequestHandler : mediator
 IWidgetQuery <-[hidden]left- IRequest
 MarketingWidgetQuery -> MarketingWidgetQueryHandler
-SearchModule ..> MarketingCountersSearchDescriptorsConfigurationFactory : Creates
-MarketingWidgetQueryHandler ..> MarketingCountersSearchDescriptorsConfigurationFactory : Uses
+SearchModule ..> MarketingWidgetSearchDescriptorsConfigurationFactory : Creates
+MarketingWidgetQueryHandler ..> MarketingWidgetSearchDescriptorsConfigurationFactory : Uses
 MarketingWidgetQueryHandler ..> ElasticSearchExtensions : Uses
 ElasticSearchExtensions --> MarketingCountersSearchDescriptor
 
