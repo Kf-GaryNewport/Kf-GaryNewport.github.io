@@ -72,12 +72,21 @@ enum MarketingWidgetCategories {
         Photographs = 7
 }
 
+class MarketingWidgetFilterConfiguration {
+    + IDictionary<MarketingWidgetCategories, MarketingWidgetCategoryQuery> GetAll(Guid userId)
+}
+class "IFilterConfiguration"<T1,T2> {
+}
+"IFilterConfiguration" "<MarketingWidgetCategories, MarketingWidgetCategoryQuery>" <|-- MarketingWidgetFilterConfiguration
+
 IRequest <- IRequestHandler : mediator
 IWidgetQuery <-[hidden]left- IRequest
 MarketingWidgetQuery -> MarketingWidgetQueryHandler
 SearchModule ..> MarketingWidgetSearchDescriptorsConfigurationFactory : Creates
+SearchModule ..> MarketingWidgetFilterConfiguration : Uses
 MarketingWidgetQueryHandler ..> MarketingWidgetSearchDescriptorsConfigurationFactory : Uses
 MarketingWidgetQueryHandler ..> ElasticSearchExtensions : Uses
 ElasticSearchExtensions --> MarketingCountersSearchDescriptor
+
 
 @enduml
