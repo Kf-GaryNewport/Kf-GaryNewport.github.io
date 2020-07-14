@@ -5,7 +5,7 @@
 (Contact) as (Referred)
 
 (ClientParty) --> (Referral) : Referring Party
-(KfParty) --> (Referral) : KnightFrank Party
+(KfParty) --> (Referral) : KF Party
 (Referral) --> (Asset) : Referred Asset
 (Referral) --> (Referred) : Referred Contact
 

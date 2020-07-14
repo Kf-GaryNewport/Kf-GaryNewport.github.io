@@ -4,7 +4,7 @@
 (Contact) as (ClientParty)
 
 (ClientParty) --> (Pitch) : Pitched Party
-(KfParty) --> (Pitch) : KnightFrank Party
+(KfParty) --> (Pitch) : KF Party
 (Pitch) <-- (Asset) : Pitched Asset
  
 @enduml
