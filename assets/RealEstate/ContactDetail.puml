@@ -1,0 +1,19 @@
+@startuml Contact Detail
+
+(Attributes) - (Id)
+(Attributes) -left- (Associates)
+(Attributes) -up- (Salutation)
+(Attributes) -up- (Forename)
+(Attributes) -up- (Surname)
+(Attributes) -down- (Address)
+(Attributes) -down- (SocialMedia)
+(Attributes) -down- (Notes)
+
+(Persona) -up- (Buyer)
+(Persona) -up- (Seller)
+(Persona) -up- (Lessee)
+(Persona) -down- (Lessor)
+(Persona) -down- (Owner)
+(Persona) -down- (KfUser)
+
+@enduml
