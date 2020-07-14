@@ -8,6 +8,8 @@
 (Attributes) -down- (Address)
 (Attributes) -down- (SocialMedia)
 (Attributes) -down- (Notes)
+(Attributes) -down- (Language)
+(Attributes) -up- (Nationality)
 
 (Persona) -up- (Buyer)
 (Persona) -up- (Seller)
