@@ -8,7 +8,7 @@
 (Instruction) <-- (Contact) : From a Contact
 
 (Contact) --> (Transaction) : Party To
-(Contact) --> (Asset) : Owner/Seller/Tenant
+(Contact) --> (Asset) : Owner/Seller/Buyer/Tenant
 
 (Transaction) -> (Asset)
 
