@@ -1,0 +1,10 @@
+@startuml Requirement
+
+(Contact) as (KfParty)
+(Contact) as (ClientParty)
+
+(ClientParty) --> (Requirement) : Requiring Party
+(KfParty) --> (Requirement) : KF Party
+(Requirement) --> (Asset) : Required Synthetic\nAsset
+ 
+@enduml

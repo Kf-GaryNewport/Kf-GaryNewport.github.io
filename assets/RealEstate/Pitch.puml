@@ -1,0 +1,10 @@
+@startuml Pitch
+
+(Contact) as (KfParty)
+(Contact) as (ClientParty)
+
+(ClientParty) --> (Pitch) : Instructing Party
+(KfParty) --> (Pitch) : Pitched Party
+(Pitch) <-- (Asset) : Pitched Asset
+ 
+@enduml

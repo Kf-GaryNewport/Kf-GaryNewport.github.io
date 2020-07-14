@@ -1,0 +1,13 @@
+@startuml Referral
+
+(Contact) as (ClientParty)
+(Contact) as (KfParty)
+(Contact) as (Referred)
+
+(ClientParty) --> (Referral) : Referring Party
+(KfParty) --> (Referral) : KnightFrank Party
+(Referral) --> (Asset) : Referred Asset
+(Referral) --> (Referred) : Referred Contact
+
+
+@enduml

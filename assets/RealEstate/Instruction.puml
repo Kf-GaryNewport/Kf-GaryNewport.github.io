@@ -1,0 +1,10 @@
+@startuml Instruction
+
+(Contact) as (ClientParty)
+(Contact) as (KfParty)
+
+(ClientParty) --> (Instruction) : Instructing Party
+(KfParty) --> (Instruction) : KnightFrank Party
+(Instruction) --> (Asset) : Instructed Asset
+
+@enduml

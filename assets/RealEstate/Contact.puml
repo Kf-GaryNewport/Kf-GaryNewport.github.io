@@ -1,0 +1,15 @@
+@startuml Contact
+
+(Contact) -> (Contact) : Relationship With
+
+(Pitch) --> (Contact) : To a Contact
+(Referral) <-- (Contact) : By a Contact
+(Requirement) <-- (Contact) : From a Contact
+(Instruction) <-- (Contact) : From a Contact
+
+(Contact) --> (Transaction) : Party To
+(Contact) --> (Asset) : Owner/Seller/Tenant
+
+(Transaction) -> (Asset)
+
+@enduml
