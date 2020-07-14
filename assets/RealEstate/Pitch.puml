@@ -3,8 +3,8 @@
 (Contact) as (KfParty)
 (Contact) as (ClientParty)
 
-(ClientParty) --> (Pitch) : Instructing Party
-(KfParty) --> (Pitch) : Pitched Party
+(ClientParty) --> (Pitch) : Pitched Party
+(KfParty) --> (Pitch) : KnightFrank Party
 (Pitch) <-- (Asset) : Pitched Asset
  
 @enduml
