@@ -1,10 +1,10 @@
 @startuml Requirement
 
-(Contact) as (KfParty)
-(Contact) as (ClientParty)
+' (Contact) as (Agent)
+' (Contact) as (Buyer)
 
-(ClientParty) --> (Requirement) : Requiring Party
-(KfParty) --> (Requirement) : KF Party
+(Buyer) --> (Requirement) : Requiring Party
+(Agent) --> (Requirement) : KF Party
 (Requirement) --> (Asset) : Required Synthetic\nAsset
  
 @enduml

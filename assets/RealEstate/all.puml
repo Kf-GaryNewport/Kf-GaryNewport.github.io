@@ -1,0 +1,17 @@
+@startuml All
+
+skinparam usecase {
+BackgroundColor<< Contact >> Yellow
+}
+
+'!include Home.puml
+'!include Contact.puml
+
+!include Asset.puml
+!include Activity.puml
+!include Instruction.puml
+!include Pitch.puml
+!include Referral.puml
+!include Requirement.puml
+ 
+ @enduml

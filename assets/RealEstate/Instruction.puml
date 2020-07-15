@@ -1,10 +1,10 @@
 @startuml Instruction
 
-(Contact) as (ClientParty)
-(Contact) as (KfParty)
+(Buyer) << Contact >>
+(Agent) << Contact >>
 
-(ClientParty) --> (Instruction) : Instructing Party
-(KfParty) --> (Instruction) : KF Party
+(Buyer) --> (Instruction) : Instructing Party
+(Agent) --> (Instruction) : KF Party
 (Instruction) --> (Asset) : Instructed Asset
 
 @enduml

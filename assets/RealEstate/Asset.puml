@@ -1,12 +1,12 @@
 @startuml Asset
 
-(Contact) as (Buyer)
-(Contact) as (Seller)
-(Contact) as (Owner)
-(Contact) as (Agent)
+(Buyer) << Contact >>
+(Seller) << Contact >>
+(Owner) << Contact >>
+(Agent) << Contact >>
 
 (Asset) -> (Asset) : Sub-Asset
-(Asset) --> (Owner) : Has a\nOwner/Tenant
+(Asset) --> (Owner) : Has a\nOwner
 (Asset) -->  (Activity)
 (Activity) --> (Buyer) : Has a\nBuyer/Lessee
 (Activity) --> (Seller) : Has a\nSeller/Lessor

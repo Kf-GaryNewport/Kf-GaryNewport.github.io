@@ -1,10 +1,10 @@
 @startuml Pitch
 
-(Contact) as (KfParty)
-(Contact) as (ClientParty)
+(Agent) << Contact >>
+(Buyer) << Contact >>
 
-(ClientParty) --> (Pitch) : Pitched Party
-(KfParty) --> (Pitch) : KF Party
+(Buyer) <-- (Pitch) : Pitched Party
+(Agent) --> (Pitch) : KF Party
 (Pitch) <-- (Asset) : Pitched Asset
  
 @enduml

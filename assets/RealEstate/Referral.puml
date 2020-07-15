@@ -1,11 +1,11 @@
 @startuml Referral
 
-(Contact) as (ClientParty)
-(Contact) as (KfParty)
-(Contact) as (Referred)
+(Seller) << Contact >>
+(Agent) << Contact >>
+(Referred) << Contact >>
 
-(ClientParty) --> (Referral) : Referring Party
-(KfParty) --> (Referral) : KF Party
+(Seller) --> (Referral) : Referring Party
+(Agent) --> (Referral) : KF Party
 (Referral) --> (Asset) : Referred Asset
 (Referral) --> (Referred) : Referred Contact
 

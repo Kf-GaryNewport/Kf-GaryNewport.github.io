@@ -1,7 +1,6 @@
 @startuml Contact
 
 (Contact) -> (Contact) : Relationship With
-
 (Pitch) --> (Contact) : To a Contact
 (Referral) <-- (Contact) : By a Contact
 (Requirement) <-- (Contact) : From a Contact
