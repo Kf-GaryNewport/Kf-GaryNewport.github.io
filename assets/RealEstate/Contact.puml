@@ -7,9 +7,9 @@
 (Requirement) <-- (Contact) : From a Contact
 (Instruction) <-- (Contact) : From a Contact
 
-(Contact) --> (Transaction) : Party To
+(Contact) --> (Activity) : Party To
 (Contact) --> (Asset) : Owner/Seller/Buyer/Tenant
 
-(Transaction) -> (Asset)
+(Activity) -> (Asset)
 
 @enduml

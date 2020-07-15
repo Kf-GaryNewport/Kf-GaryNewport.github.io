@@ -1,8 +1,8 @@
 @startuml Real Estate
 
-(Contact) --> (Transaction) : Party To
+(Contact) --> (Activity) : Party To
 (Contact) --> (Asset) : Owner/Seller/Buyer/Tenant
-(Transaction) -> (Asset) : Acting On
+(Activity) -> (Asset) : Acting On
 
 (Contact) -> (Contact) : Relationship With
 (Asset) -> (Asset) : Sub-Asset
