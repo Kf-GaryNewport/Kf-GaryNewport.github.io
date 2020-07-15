@@ -1,0 +1,12 @@
+@startuml Activity
+
+(Contact) as (DisposingContact)
+(Contact) as (AcquiringContact)
+(Contact) as (Owner)
+
+(DisposingContact) -- (Activity) : Seller/Lessor/Landlord
+(AcquiringContact) -- (Activity) : Buyer/Lessee/Tenant
+(Activity) - (Asset)
+(Asset) - (Owner) : Owner
+
+@enduml

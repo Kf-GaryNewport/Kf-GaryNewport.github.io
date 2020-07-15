@@ -1,0 +1,21 @@
+@startuml Asset
+
+(Contact) as (Buyer)
+(Contact) as (Seller)
+(Contact) as (Owner)
+(Contact) as (Agent)
+
+(Asset) -> (Asset) : Sub-Asset
+(Asset) --> (Owner) : Has a\nOwner/Tenant
+(Asset) -->  (Activity)
+(Activity) --> (Buyer) : Has a\nBuyer/Lessee
+(Activity) --> (Seller) : Has a\nSeller/Lessor
+(Asset) -->  (Marketing) : Has Marketing
+(Asset) -->  (Management) : Is Managed
+
+(Activity) --> (Agent) : Has a\nAgent
+(Marketing) --> (Agent) : Has a\nAgent
+(Management) --> (Agent) : Has a\nAgent
+
+
+@enduml
