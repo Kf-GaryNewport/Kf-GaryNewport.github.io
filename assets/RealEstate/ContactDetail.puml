@@ -10,6 +10,8 @@
 (Attributes) -down- (Notes)
 (Attributes) -down- (Language)
 (Attributes) -up- (Nationality)
+' (Attributes) -up- (Person)
+' (Attributes) -up- (Company)
 
 (Persona) -up- (Buyer)
 (Persona) -up- (Seller)
