@@ -1,0 +1,39 @@
+@startuml Application annotation
+!include <c4/C4_Container.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+LAYOUT_TOP_DOWN
+
+title System Context diagram for KF hub Property Portfolio System
+
+Person(user  , KF User , "<$user> <$mobile_user>\n A User within KnightFrank" )
+
+System_Boundary(hub_system, "hub"){
+    Container(web_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
+    Container(filesystem, "Azure Storage", "Azure", "Stores system artifacts")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+    Container(webjob, "Webjob", "Azure c# webjob", "Updates content on a scheduled and triggered basis")
+}
+
+System_Ext(int_systems, "Internal Systems")
+System_Ext(ext_systems, "External Systems")
+
+' Relationships
+Rel(user, web_app, "Uses", "HTTPS")
+
+Rel(web_app, rel_db, "Reads from\nand writes to")
+Rel(web_app, filesystem, "Reads from\nand writes to")
+Rel(web_app, es, "Reads from")
+
+Rel_U(webjob, rel_db, "Reads from\nand writes to")
+Rel_U(webjob, filesystem, "Reads from\nand writes to")
+Rel_U(webjob, es, "Reads from\nand writes to")
+
+Rel_Back(user, int_systems, "Sends e-mails to")
+Rel(web_app, int_systems, "InternalSystem", "HTTPS/HTTP")
+Rel(webjob, int_systems, "InternalSystem", "HTTPS/HTTP")
+Rel(webjob, ext_systems, "ExternalSystem", "HTTPS")
+
+@enduml
+

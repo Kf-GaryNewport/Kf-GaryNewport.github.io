@@ -1,0 +1,95 @@
+@startuml Application Component
+!include <c4/C4_Component.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+LAYOUT_TOP_DOWN
+
+title System Context diagram for KF hub Property Portfolio System
+
+Person(user, KF User , "<$user>\n A User within KnightFrank" )
+Person(mob_user, KF Mobile User, "<$mobile_user>\n A User within KnightFrank" )
+
+System_Boundary(hub_system, "hub"){
+    Container_Boundary(web_app, "Web Application"){
+        Component( api, "Web API", "")
+        Component( act, "Activities", "")
+        Component( con, "Contacts", "")
+        Component( com, "Companies", "")
+        Component( ast, "Assets", "Properties")
+        Component( ins, "Instructions", "")        
+        Component( req, "Requirements", "") 
+        Component( ref, "Referrals", "")
+        Component( pit, "Pitches", "")
+        Component( ten, "Tenancies", "")
+        Component( mar, "Marketing Lists", "")
+        Component( rep, "Reports", "")
+         
+        Rel(api, act, "Uses")
+        Rel(api, con, "Uses")
+        Rel(api, com, "Uses")
+        Rel(api, ast, "Uses")
+        Rel(api, ins, "Uses")
+        Rel(api, req, "Uses")
+        Rel(api, ref, "Uses")
+        Rel(api, pit, "Uses")
+        Rel(api, ten, "Uses")
+        Rel(api, mar, "Uses")
+        Rel(api, rep, "Uses")
+    }
+    Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+    Container(webjob, "Webjob", "Azure c# webjob", "Updates content on a scheduled and triggered basis")
+
+    Rel(act, rel_db,"Uses")
+    Rel(con, rel_db,"Uses")
+    Rel(com, rel_db,"Uses")
+    Rel(ast, rel_db,"Uses")
+    Rel(ins, rel_db,"Uses")
+    Rel(req, rel_db,"Uses")
+    Rel(ref, rel_db,"Uses")
+    Rel(pit, rel_db,"Uses")
+    Rel(ten, rel_db,"Uses")
+    Rel(mar, rel_db,"Uses")
+    Rel(rep, rel_db,"Uses")
+
+    Rel(act, sto,"Uses")
+    Rel(con, sto,"Uses")
+    Rel(com, sto,"Uses")
+    Rel(ast, sto,"Uses")
+    Rel(ins, sto,"Uses")
+    Rel(req, sto,"Uses")
+    Rel(ref, sto,"Uses")
+    Rel(pit, sto,"Uses")
+    Rel(ten, sto,"Uses")
+    Rel(mar, sto,"Uses")
+    Rel(rep, sto,"Uses")
+
+    Rel(act, es,"Uses")
+    Rel(con, es,"Uses")
+    Rel(com, es,"Uses")
+    Rel(ast, es,"Uses")
+    Rel(ins, es,"Uses")
+    Rel(req, es,"Uses")
+    Rel(ref, es,"Uses")
+    Rel(pit, es,"Uses")
+    Rel(ten, es,"Uses")
+    Rel(mar, es,"Uses")
+    Rel(rep, es,"Uses")
+}
+
+System_Ext(int_systems, "Internal Systems")
+
+' Relationships
+Rel(user, api, "Uses", "HTTPS")
+Rel(mob_user, api, "Uses", "HTTPS")
+
+Rel_U(webjob, rel_db, "Reads from\nand writes to")
+Rel_U(webjob, sto, "Reads from\nand writes to")
+Rel_U(webjob, es, "Reads from\nand writes to")
+
+'Rel(web_app, int_systems, "InternalSystem", "HTTPS/HTTP")
+
+
+@enduml
+

@@ -1,13 +1,13 @@
 @startuml "Hub Container"
-
-!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!include <c4/C4_Container.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
 
 LAYOUT_TOP_DOWN
 'LAYOUT_AS_SKETCH
 'LAYOUT_WITH_LEGEND
 
-Person(user, "User")
-Person(administration_user, "Administration User")
+Person(user, "<$user> <$mobile_user>\nUser")
 
 System_Boundary(c1, "hub"){
     Container(web_app, "Web Application", "Angular, C# MVC", "Allows users to view contacts, activities, properties, etc.")
@@ -43,7 +43,6 @@ System(InternalSystem, "Internal System\nClaims\nInstruction\nMyKfFeed\nUserFeed
 
 ' Relationships
 Rel(user, web_app, "Uses", "HTTPS")
-Rel(administration_user, web_app, "Uses", "HTTPS")
 
 Rel(web_app, rel_db, "Reads from\nand writes to")
 Rel(web_app, filesystem, "Reads from\nand writes to")
