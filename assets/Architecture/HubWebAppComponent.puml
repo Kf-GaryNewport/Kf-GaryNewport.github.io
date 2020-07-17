@@ -11,7 +11,7 @@ Person(mob_user, KF Mobile User, "<$mobile_user>\n A User within KnightFrank" )
 
 System_Boundary(hub_system, "hub"){
     Container_Boundary(web_app, "Web Application"){
-        Component( api, "Web API", "")
+        Component( api, "Web API", "")  [[http://plantuml.com]]
         Component( act, "Activities", "")
         Component( con, "Contacts", "")
         Component( com, "Companies", "")
@@ -78,7 +78,7 @@ System_Boundary(hub_system, "hub"){
     Rel(rep, es,"Uses")
 }
 
-System_Ext(int_systems, "Internal Systems")
+'System_Ext(int_systems, "Internal Systems")
 
 ' Relationships
 Rel(user, api, "Uses", "HTTPS")
