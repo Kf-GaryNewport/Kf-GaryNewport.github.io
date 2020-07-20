@@ -4,7 +4,7 @@
 !include <office/Users/mobile_user.puml>
 LAYOUT_TOP_DOWN
 
-title System Context diagram for KF hub Property Portfolio System
+title System Component diagram for KF hub Property Portfolio System
 
 Person(user, KF User , "<$user>\n A User within KnightFrank" )
 Person(mob_user, KF Mobile User, "<$mobile_user>\n A User within KnightFrank" )

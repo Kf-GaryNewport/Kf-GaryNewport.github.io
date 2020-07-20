@@ -1,13 +1,44 @@
-@startuml Activity
+@startuml Application Component
+!include <c4/C4_Component.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+LAYOUT_TOP_DOWN
 
-(Activity) --> (Appointment)
-(Activity) --> (Attachment)
-(Activity) --> (Instruction)
-(Activity) --> (Match)
-(Activity) --> (Note)
-(Activity) --> (Offer)
-(Activity) --> (Contact)
-(Activity) --> (Property)
-(Activity) --> (Requirement)
+Container_Boundary(web_app, "Web Application"){
+    Component( api, "Web API", "link") 
+    Component( act, "Activities", "")
+    Component( app, "Appointments", "")
+    Component( att, "Attachments", "")
+    Component( ins, "Instructions", "")   
+    Component( mat, "Matches", "")
+    Component( not, "Notes", "")
+    Component( off, "Offers", "")
+    Component( con, "Contacts", "")
+    Component( ast, "Assets", "Properties")
+    Component( req, "Requirements", "") 
+
+    Rel(api, act, "Uses")
+    Rel(act, app, "Uses")
+    Rel(act, att, "Uses")
+    Rel(act, ins, "Uses")
+    Rel(act, mat, "Uses")
+    Rel(act, not, "Uses")
+    Rel(act, off, "Uses")
+    Rel(act, con, "Uses")
+    Rel(act, ast, "Uses")
+    Rel(act, req, "Uses")
+}
+
+Container_Boundary(data, "Data Layer"){
+    Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+
+    sto -[hidden]right- rel_db
+    rel_db -[hidden]right- es
+}
+
+app -[hidden]- data
+req -[hidden]- data
 
 @enduml
