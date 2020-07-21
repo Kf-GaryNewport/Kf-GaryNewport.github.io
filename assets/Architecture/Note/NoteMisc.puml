@@ -1,0 +1,38 @@
+@startuml Note Misc
+
+class CreateEntityNoteCommandValidator {
+    + CreateEntityNoteCommandValidator()
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<CreateEntityNoteCommand>" <|-- CreateEntityNoteCommandValidator
+
+class NoteQueryValidator {
+    + NoteQueryValidator()
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<NoteQuery>" <|-- NoteQueryValidator
+
+class NoteMapperProfile {
+    + NoteMapperProfile()
+}
+Profile <|-- NoteMapperProfile
+
+interface ILatestNotesHelper {
+    GetLatestNotes(entityRepository:IReadGenericRepository<T>, entityId:Guid, numberOfLatestNotes:int) : QueryFutureEnumerable<NoteViewModel>
+}
+
+class LatestNotesHelper {
+    + GetLatestNotes(repository:IReadGenericRepository<T>, entityId:Guid, numberOfLatestNotes:int) : QueryFutureEnumerable<NoteViewModel>
+}
+ILatestNotesHelper <|-- LatestNotesHelper
+
+class NoteViewModel {
+    + Description : string <<get>> <<set>>
+}
+NoteViewModel --> "Id" Guid
+NoteViewModel --> "CreationTime" DateTimeOffset
+NoteViewModel --> "User" UserCardViewModel
+
+@enduml

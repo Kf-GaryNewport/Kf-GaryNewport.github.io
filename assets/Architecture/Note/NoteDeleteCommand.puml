@@ -1,0 +1,18 @@
+@startuml Delete Note Command
+
+abstract class "DeleteEntityNoteCommandHandler"<TDeleteEntityNoteCommand> {
+    + Handle(command:TDeleteEntityNoteCommand) : void
+}
+class "IRequestHandler"<T> {
+}
+"IRequestHandler" "<TDeleteEntityNoteCommand>" <|-- "DeleteEntityNoteCommandHandler"
+
+abstract class DeleteEntityNoteCommand {
+}
+"IRequest" <|-- DeleteEntityNoteCommand
+'DeleteEntityNoteCommand --> "Id" Guid
+
+"IRequest" <- "IRequestHandler" : mediator
+DeleteEntityNoteCommand ->DeleteEntityNoteCommandHandler
+
+@enduml

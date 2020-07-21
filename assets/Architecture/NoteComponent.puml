@@ -1,0 +1,24 @@
+@startuml Note Component
+
+' Interfaces, Classes, Methods
+Interface IRequest 
+interface IRequestHandler
+Class TextMessageCommandBase
+Class TextMessageQueryHandler
+Class CreateTextMessageCommandHandler
+
+IRequest : mediate()
+CreateTextMessageCommandHandler : Handle()
+
+' Relationship
+IRequest <- IRequestHandler : mediator
+IRequest -[hidden]-> TextMessageQueryHandler
+
+IRequest <|-- TextMessageCommandBase
+IRequestHandler <|-- TextMessageQueryHandler : Implements
+CreateTextMessageCommand -up-> CreateTextMessageCommandHandler
+TextMessageQueryHandler <|-- CreateTextMessageCommandHandler : Implements
+TextMessageCommand -up-> TextMessageCommandBase
+TextMessageCommand -right-> CreateTextMessageCommandHandler
+
+@enduml

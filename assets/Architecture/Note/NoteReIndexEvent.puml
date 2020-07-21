@@ -1,0 +1,22 @@
+@startuml ReIndex Note Event
+
+class EntityNotesNeedReindexEventHandler {
+    + EntityNotesNeedReindexEventHandler(elasticFeedQueueMessageClient:IQueueMessageClient<ElasticSearchQueueMessage>)
+    + Handle(@event:EntityNotesNeedReindexEvent) : void
+}
+class "INotificationHandler"<T> {
+}
+"INotificationHandler" "<EntityNotesNeedReindexEvent>" <|-- EntityNotesNeedReindexEventHandler
+
+class EntityNotesNeedReindexEvent {
+    + EntityNotesNeedReindexEvent(entityId:Guid, entityType:EntityType)
+}
+INotification <|-- EntityNotesNeedReindexEvent
+'EntityNotesNeedReindexEvent --> "Id" Guid
+'EntityNotesNeedReindexEvent --> "EntityType" EntityType
+
+INotification <- INotificationHandler : mediator
+EntityNotesNeedReindexEvent -> EntityNotesNeedReindexEventHandler
+
+
+@enduml

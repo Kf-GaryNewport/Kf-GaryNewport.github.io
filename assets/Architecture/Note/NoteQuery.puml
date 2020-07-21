@@ -1,0 +1,21 @@
+@startuml Note Query
+
+class NoteQueryHandler {
+    + NoteQueryHandler(noteRepository:IReadGenericRepository<Note>)
+    + Handle(query:NoteQuery) : NoteViewModel
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<NoteQuery,NoteViewModel>" <|-- NoteQueryHandler
+
+class NoteQuery {
+}
+class "IRequest"<T> {
+}
+"IRequest" "<NoteViewModel>" <|-- NoteQuery
+'NoteQuery --> "Id" Guid
+
+IRequest <-left- IRequestHandler : mediator
+NoteQuery -> NoteQueryHandler
+
+@enduml

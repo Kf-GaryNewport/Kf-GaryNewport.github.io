@@ -1,0 +1,27 @@
+@startuml Create Note Command
+
+abstract class "CreateEntityNoteCommandHandler"<TEntity,TCreateEntityNoteCommand> {
+    + Handle(message:TCreateEntityNoteCommand) : Guid
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<TCreateEntityNoteCommand,Guid>" <|-- "CreateEntityNoteCommandHandler"
+
+abstract class CreateEntityNoteCommand {
+}
+EntityNoteCommandBase <|-- CreateEntityNoteCommand
+
+abstract class EntityNoteCommandBase {
+    + Description : string <<get>> <<set>>
+    + Version : int <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+"IRequest" "<Guid>" <|-- EntityNoteCommandBase
+'ICommandWithVersion <|-- EntityNoteCommandBase
+'EntityNoteCommandBase --> "EntityId" Guid
+
+IRequest <-left- IRequestHandler : mediator
+CreateEntityNoteCommand -> CreateEntityNoteCommandHandler
+
+@enduml

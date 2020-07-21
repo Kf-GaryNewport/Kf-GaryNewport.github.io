@@ -1,0 +1,15 @@
+@startuml Entity with notes deleted event
+
+class EntityWithNotesDeletedEventHandler {
+    + EntityWithNotesDeletedEventHandler(elasticFeedQueueMessageClient:IQueueMessageClient<ElasticSearchQueueMessage>)
+    + Handle(@event:EntityDeletedEvent) : void
+}
+class "INotificationHandler"<T> {
+}
+"INotificationHandler" "<EntityDeletedEvent>" <|-- EntityWithNotesDeletedEventHandler
+
+INotification <- INotificationHandler : mediator
+EntityDeletedEvent -> EntityWithNotesDeletedEventHandler
+INotification <|-- EntityDeletedEvent
+
+@enduml

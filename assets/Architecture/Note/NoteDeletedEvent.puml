@@ -1,0 +1,23 @@
+@startuml Deleted Note Event
+
+class NoteCreatedDeletedEventHandler {
+    + NoteCreatedDeletedEventHandler(elasticFeedQueueMessageClient:IQueueMessageClient<ElasticSearchQueueMessage>)
+    + Handle(@event:NoteCreatedEvent) : void
+    + Handle(@event:NoteDeletedEvent) : void
+}
+class "INotificationHandler"<T> {
+}
+'"INotificationHandler" "<NoteCreatedEvent>" <|-- NoteCreatedDeletedEventHandler
+"INotificationHandler" "<NoteDeletedEvent>" <|-- NoteCreatedDeletedEventHandler
+
+class NoteDeletedEvent {
+    + NoteDeletedEvent(note:Note, relatedEntityType:EntityType)
+}
+INotification <|-- NoteDeletedEvent
+'NoteDeletedEvent --> "Id" Guid
+'NoteDeletedEvent --> "RelatedEntityType" EntityType
+
+INotification <- INotificationHandler : mediator
+NoteDeletedEvent -> NoteCreatedDeletedEventHandler
+
+@enduml
