@@ -11,7 +11,7 @@ Container_Boundary(web_app, "Web Application"){
         Component( app, "Appointments", "")
         Component( are, "AreaBreakdown", "")
         Component( att, "Attachments", "")
-        Component( not, "Note", "")
+        Component( not, "Notes", "")
         Component( off, "Offer", "")
         Component( own, "Ownership", "")
         Component( ast, "Asset", "")

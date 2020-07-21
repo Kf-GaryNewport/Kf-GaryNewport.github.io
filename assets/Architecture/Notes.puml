@@ -8,13 +8,16 @@ Container_Boundary(web_app, "Web Application"){
     Component( api, "Web API", "link") 
     Component( act, "Activities", "")
     Component( con, "Contacts", "")
+    Component( pro, "Properties", "")
     Component( not, "Notes", "")
 
     Rel(api, act, "Uses")
     Rel(api, con, "Uses")
+    Rel(api, pro, "Uses")
 
     Rel(act, not, "Uses")
     Rel(con, not, "Uses")
+    Rel(pro, not, "Uses")
 
 }
 
