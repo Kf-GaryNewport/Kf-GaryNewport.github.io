@@ -14,7 +14,7 @@ Container_Boundary(web_app, "Web Application"){
     Component( not, "Notes", "")
     Component( off, "Offers", "")
     Component( con, "Contacts", "")
-    Component( ast, "Assets", "Properties")
+    Component( pro, "Properties", "")
     Component( req, "Requirements", "") 
 
     Rel(api, act, "Uses")
@@ -25,7 +25,7 @@ Container_Boundary(web_app, "Web Application"){
     Rel(act, not, "Uses")
     Rel(act, off, "Uses")
     Rel(act, con, "Uses")
-    Rel(act, ast, "Uses")
+    Rel(act, pro, "Uses")
     Rel(act, req, "Uses")
 }
 

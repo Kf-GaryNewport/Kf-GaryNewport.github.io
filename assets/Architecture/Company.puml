@@ -9,12 +9,12 @@ Container_Boundary(web_app, "Web Application"){
     Component( com, "Companies", "")
     Component( att, "Attachments", "")
     Component( not, "Notes", "")
-    Component( ast, "Assets", "Properties")
+    Component( pro, "Properties", "")
 
     Rel(api, com, "Uses") 
     Rel(com, att, "Uses")
     Rel(com, not, "Uses")
-    Rel(com, ast, "Uses")
+    Rel(com, pro, "Uses")
 }
 
 Container_Boundary(data, "Data Layer"){
@@ -27,6 +27,6 @@ Container_Boundary(data, "Data Layer"){
 }
 
 att -[hidden]- sto
-ast -[hidden]- es
+pro -[hidden]- es
   
 @enduml
