@@ -30,4 +30,7 @@ Container_Boundary(data, "Data Layer"){
 
 app -[hidden]- rel_db
 
+System_Ext(int_systems, "Internal Systems")
+Rel_R(app, int_systems, "Qube", "HTTPS")
+
 @enduml
