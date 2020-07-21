@@ -78,7 +78,7 @@ System_Boundary(hub_system, "hub"){
     Rel(rep, es,"Uses")
 }
 
-'System_Ext(int_systems, "Internal Systems")
+'System(int_systems, "Internal Systems")
 
 ' Relationships
 Rel(user, api, "Uses", "HTTPS")

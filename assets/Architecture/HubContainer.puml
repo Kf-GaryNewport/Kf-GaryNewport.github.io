@@ -16,7 +16,7 @@ System_Boundary(hub_system, "hub"){
     Container(webjob, "Webjob", "Azure c# webjob", "Updates content on a scheduled and triggered basis")
 }
 
-System_Ext(int_systems, "Internal Systems")
+System(int_systems, "Internal Systems")
 System_Ext(ext_systems, "External Systems")
 
 ' Relationships
