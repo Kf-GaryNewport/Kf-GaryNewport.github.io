@@ -12,7 +12,6 @@ Container_Boundary(web_app, "Web Application"){
 
     Rel(api, act, "Uses")
     Rel(api, con, "Uses")
-    Rel(api, not, "Uses")
 
     Rel(act, not, "Uses")
     Rel(con, not, "Uses")
