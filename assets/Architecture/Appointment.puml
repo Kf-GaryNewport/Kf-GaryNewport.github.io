@@ -7,18 +7,15 @@ LAYOUT_TOP_DOWN
 Container_Boundary(web_app, "Web Application"){
     Component( api, "Web API", "link") 
     Component( act, "Activities", "")
-    Component( att, "Attachments", "")
-    Component( ins, "Instructions", "")   
+    Component( app, "Appointments", "")
     Component( con, "Contacts", "")
 
     Rel(api, act, "Uses")
-    Rel(api, att, "Uses")
-    Rel(api, ins, "Uses")
+    Rel(api, app, "Uses")
     Rel(api, con, "Uses")
 
-    Rel(act, att, "Uses")
-    Rel(ins, att, "Uses")
-    Rel(con, att, "Uses")
+    Rel(act, app, "Uses")
+    Rel(con, app, "Uses")
 
 }
 
@@ -31,6 +28,6 @@ Container_Boundary(data, "Data Layer"){
     rel_db -[hidden]right- es
 }
 
-att -[hidden]- rel_db
+app -[hidden]- rel_db
 
 @enduml
