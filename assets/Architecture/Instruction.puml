@@ -13,6 +13,13 @@ Container_Boundary(web_app, "Web Application"){
     Rel(ins, att, "Uses")
 }
 
+Container_Boundary(search, "Search"){
+    Component( sins, "Instruction", "")
+    Component( snot, "Note", "")
+
+    sins -[hidden]right- snot
+}
+
 Container_Boundary(data, "Data Layer"){
     Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
     ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
@@ -22,7 +29,8 @@ Container_Boundary(data, "Data Layer"){
     rel_db -[hidden]right- es
 }
 
-att -[hidden]- rel_db
+search -[hidden]right- data
+att -[hidden]- sto
 
   
 @enduml
