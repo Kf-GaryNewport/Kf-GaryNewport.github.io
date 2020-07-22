@@ -29,6 +29,15 @@ Container_Boundary(web_app, "Web Application"){
 
 }
 
+Container_Boundary(search, "Search"){
+    Component( sreq, "Requirement", "")
+    Component( snot, "Note", "")
+    Component( sstf, "SearchToFile", "")
+
+    sreq -[hidden]right- snot
+    snot -[hidden]right- sstf
+}
+
 Container_Boundary(data, "Data Layer"){
     Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
     ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
@@ -38,9 +47,10 @@ Container_Boundary(data, "Data Layer"){
     rel_db -[hidden]right- es
 }
 
-act -[hidden]- sto
-cha -[hidden]- rel_db
-stf -[hidden]- es
+search -[hidden]right- data
+
+act -[hidden]- snot
+off -[hidden]- rel_db
 
 System(int_systems, "Qube")
 Rel_L(app, int_systems, "Qube", "HTTPS")

@@ -1,0 +1,30 @@
+@startuml Application Component
+!include <c4/C4_Component.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+LAYOUT_TOP_DOWN
+
+Container_Boundary(web_app, "Web Application"){
+        Component( api, "Web API", "link") 
+        Component( pit, "Pitches", "")
+
+        Rel(api, pit, "Uses")
+}
+
+Container_Boundary(search, "Search"){
+    Component( spit, "Pitch", "")
+}
+
+Container_Boundary(data, "Data Layer"){
+    Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+
+    sto -[hidden]right- rel_db
+    rel_db -[hidden]right- es
+}
+
+search -[hidden]right- data
+pit -[hidden]- es
+
+@enduml
