@@ -52,7 +52,7 @@ act -[hidden]- sast
 ten -[hidden]- es
 
 System(int_systems, "Qube")
-Rel_R(app, int_systems, "Qube", "HTTPS")
+Rel_L(app, int_systems, "Qube", "HTTPS")
 
   
 @enduml
