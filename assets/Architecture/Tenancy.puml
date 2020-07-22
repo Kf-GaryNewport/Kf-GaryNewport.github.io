@@ -1,0 +1,49 @@
+@startuml Application Component
+!include <c4/C4_Component.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+LAYOUT_TOP_DOWN
+
+Container_Boundary(web_app, "Web Application"){
+        Component( api, "Web API", "link")  
+        Component( ten, "Tenancies", "")
+        Component( app, "Appointments", "")
+        Component( att, "Attachments", "")
+        Component( not, "Notes", "")
+        Component( pro, "Property", "")
+
+        Rel(api, ten, "Uses")
+        Rel(ten, app, "Uses")
+        Rel(ten, att, "Uses")
+        Rel(ten, not, "Uses")
+        Rel(ten, pro, "Uses")
+
+}
+
+Container_Boundary(search, "Search"){
+    Component( sten, "Tenancy", "")
+    Component( snot, "Note", "")
+
+    sten -[hidden]right- snot
+}
+
+Container_Boundary(data, "Data Layer"){
+    Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+
+    sto -[hidden]right- rel_db
+    rel_db -[hidden]right- es
+}
+
+search -[hidden]right- data
+
+app -[hidden]- sten
+'not -[hidden]- rel_db
+pro -[hidden]- es
+
+System(int_systems, "Qube")
+Rel_L(app, int_systems, "Qube", "HTTPS")
+
+  
+@enduml
