@@ -1,0 +1,49 @@
+@startuml Application Component
+!include <c4/C4_Component.puml>  
+!include <office/Users/user.puml>
+!include <office/Users/mobile_user.puml>
+LAYOUT_TOP_DOWN
+
+Container_Boundary(web_app, "Web Application"){
+        Component( api, "Web API", "link") 
+        Component( req, "Requirements", "")
+        Component( act, "Activities", "")
+        Component( app, "Appointments", "")
+        Component( att, "Attachments", "")
+        Component( cha, "Chain Transaction", "")
+        Component( ins, "Instructions", "")
+        Component( not, "Notes", "")
+        Component( off, "Offer", "")
+        Component( stf, "SearchToFile", "")
+
+
+        Rel(api, req, "Uses")
+        Rel(req, act, "Uses")
+        Rel(req, app, "Uses")
+        Rel(req, att, "Uses")
+        Rel(req, cha, "Uses")
+        Rel(req, ins, "Uses")
+        Rel(req, not, "Uses")
+        Rel(req, off, "Uses")
+        Rel(req, stf, "Uses")
+
+}
+
+Container_Boundary(data, "Data Layer"){
+    Container(sto, "Azure Storage", "Azure", "Stores system artifacts")
+    ContainerDb(rel_db, "Relational Database", "SQL x.x.x", "Stores Entities")
+    ContainerDb(es, "ElasticSearch", "ES x.x.x", "Search Indexing")
+
+    sto -[hidden]right- rel_db
+    rel_db -[hidden]right- es
+}
+
+act -[hidden]- sto
+cha -[hidden]- rel_db
+stf -[hidden]- es
+
+System(int_systems, "Qube")
+Rel_L(app, int_systems, "Qube", "HTTPS")
+
+  
+@enduml
