@@ -13,6 +13,8 @@ Container_Boundary(web_app, "Web Application"){
 
 Container_Boundary(search, "Search"){
     Component( spit, "Pitch", "")
+
+    spit -[hidden]right- spit
 }
 
 Container_Boundary(data, "Data Layer"){
@@ -25,6 +27,6 @@ Container_Boundary(data, "Data Layer"){
 }
 
 search -[hidden]right- data
-pit -[hidden]- es
-
+pit -[hidden]- sto
+  
 @enduml
