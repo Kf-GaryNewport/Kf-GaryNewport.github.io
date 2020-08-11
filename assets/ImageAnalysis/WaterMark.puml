@@ -1,0 +1,40 @@
+@startuml "WaterMark System"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+!includeurl AzurePuml/Web/AzureWebApp.puml
+
+AzureWebApp( int, "Api Requst", "Force")
+
+ContainerDb(SqlDb, "Hub Sql Database", "Sql Server")
+ContainerDb(BlobDb, "Hub Blob Storage", "Images")
+ContainerDb(TableDb, "Table Storage", "Results")
+
+AzureFunction(fnLoader, "Loader", "C#")
+AzureFunction(fnSqlSubscriber, "Sql Q Subscriber", "C#")
+AzureFunction(fnImgSubscriber, "Image Q Subscriber", "C#")
+
+AzureQueueStorage(SqlQueue, "Sql Batch Queue", "C#")
+AzureQueueStorage(ImgQueue, "Image Queue", "C#")
+
+System(restbai, "Restb.ai")
+
+int -> fnLoader
+fnLoader -> SqlQueue
+fnLoader <-- SqlDb : Count
+
+SqlQueue -> fnSqlSubscriber
+TableDb <-- fnSqlSubscriber : Update
+fnSqlSubscriber <-- SqlDb : Get
+fnSqlSubscriber -> ImgQueue
+
+ImgQueue -> fnImgSubscriber
+TableDb <-- fnImgSubscriber : Update
+fnImgSubscriber <-- BlobDb : Get
+fnImgSubscriber -> restbai
+
+@enduml
