@@ -1,0 +1,1028 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vaults_WaterMark_kv_vse_ne_name": {
+            "defaultValue": "WaterMark-kv-vse-ne",
+            "type": "String"
+        },
+        "serverfarms_WaterMark_sp_vse_ne_name": {
+            "defaultValue": "WaterMark-sp-vse-ne",
+            "type": "String"
+        },
+        "sites_WaterMarkLoader_fn_vse_ne_name": {
+            "defaultValue": "WaterMarkLoader-fn-vse-ne",
+            "type": "String"
+        },
+        "components_WaterMark_ai_vse_ne_name": {
+            "defaultValue": "WaterMark-ai-vse-ne",
+            "type": "String"
+        },
+        "storageAccounts_watermarkstvsene_name": {
+            "defaultValue": "watermarkstvsene",
+            "type": "String"
+        },
+        "sites_WaterMarkSubscribers_fn_vse_ne_name": {
+            "defaultValue": "WaterMarkSubscribers-fn-vse-ne",
+            "type": "String"
+        },
+        "smartdetectoralertrules_failure_anomalies___watermark_ai_vse_ne_name": {
+            "defaultValue": "failure anomalies - watermark-ai-vse-ne",
+            "type": "String"
+        },
+        "actiongroups_application_insights_smart_detection_externalid": {
+            "defaultValue": "/subscriptions/121c53d3-e96d-4890-af9a-58b104da7215/resourceGroups/antares-charlie-neu-rg/providers/microsoft.insights/actiongroups/application insights smart detection",
+            "type": "String"
+        },
+        "virtualNetworks_Antares_Bravo_NEU_Common_VN_externalid": {
+            "defaultValue": "/subscriptions/121c53d3-e96d-4890-af9a-58b104da7215/resourceGroups/Antares-Bravo-NEU-RG/providers/Microsoft.Network/virtualNetworks/Antares-Bravo-NEU-Common-VN",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "microsoft.insights/components",
+            "apiVersion": "2018-05-01-preview",
+            "name": "[parameters('components_WaterMark_ai_vse_ne_name')]",
+            "location": "northeurope",
+            "tags": {
+                "displayName": "AppInsightsComponent"
+            },
+            "kind": "app",
+            "properties": {
+                "Application_Type": "web",
+                "RetentionInDays": 90,
+                "publicNetworkAccessForIngestion": "Enabled",
+                "publicNetworkAccessForQuery": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults",
+            "apiVersion": "2016-10-01",
+            "name": "[parameters('vaults_WaterMark_kv_vse_ne_name')]",
+            "location": "northeurope",
+            "tags": {
+                "displayName": "Key Vault"
+            },
+            "properties": {
+                "sku": {
+                    "family": "A",
+                    "name": "standard"
+                },
+                "tenantId": "55a71488-bbff-4451-a18d-a1bfa479293b",
+                "accessPolicies": [
+                    {
+                        "tenantId": "55a71488-bbff-4451-a18d-a1bfa479293b",
+                        "objectId": "cb3baa6a-f545-4caf-bd91-ba457692cbb9",
+                        "permissions": {
+                            "certificates": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "ManageContacts",
+                                "ManageIssuers",
+                                "GetIssuers",
+                                "ListIssuers",
+                                "SetIssuers",
+                                "DeleteIssuers"
+                            ],
+                            "keys": [
+                                "Get",
+                                "List",
+                                "Update",
+                                "Create",
+                                "Import",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "Decrypt",
+                                "Encrypt",
+                                "UnwrapKey",
+                                "WrapKey",
+                                "Verify",
+                                "Sign",
+                                "Purge"
+                            ],
+                            "secrets": [
+                                "Get",
+                                "List",
+                                "Set",
+                                "Delete",
+                                "Recover",
+                                "Backup",
+                                "Restore",
+                                "Purge"
+                            ]
+                        }
+                    },
+                    {
+                        "tenantId": "55a71488-bbff-4451-a18d-a1bfa479293b",
+                        "objectId": "df81b48c-d4dc-4957-89e1-f26f314fba0c",
+                        "permissions": {
+                            "certificates": [
+                                "get",
+                                "list",
+                                "update",
+                                "create",
+                                "import",
+                                "delete",
+                                "recover",
+                                "managecontacts",
+                                "manageissuers",
+                                "getissuers",
+                                "listissuers",
+                                "setissuers",
+                                "deleteissuers"
+                            ],
+                            "keys": [
+                                "get",
+                                "list",
+                                "update",
+                                "create",
+                                "import",
+                                "delete",
+                                "recover",
+                                "backup",
+                                "restore",
+                                "decrypt",
+                                "encrypt",
+                                "unwrapKey",
+                                "wrapKey",
+                                "verify",
+                                "sign",
+                                "purge"
+                            ],
+                            "secrets": [
+                                "get",
+                                "list",
+                                "set",
+                                "delete",
+                                "recover",
+                                "backup",
+                                "restore",
+                                "purge"
+                            ]
+                        }
+                    },
+                    {
+                        "tenantId": "55a71488-bbff-4451-a18d-a1bfa479293b",
+                        "objectId": "0be52f4b-6bbb-4f0e-ad8b-c505c65a7be6",
+                        "permissions": {
+                            "certificates": [
+                                "get",
+                                "list",
+                                "update",
+                                "create",
+                                "import",
+                                "delete",
+                                "recover",
+                                "managecontacts",
+                                "manageissuers",
+                                "getissuers",
+                                "listissuers",
+                                "setissuers",
+                                "deleteissuers"
+                            ],
+                            "keys": [
+                                "get",
+                                "list",
+                                "update",
+                                "create",
+                                "import",
+                                "delete",
+                                "recover",
+                                "backup",
+                                "restore",
+                                "decrypt",
+                                "encrypt",
+                                "unwrapKey",
+                                "wrapKey",
+                                "verify",
+                                "sign",
+                                "purge"
+                            ],
+                            "secrets": [
+                                "get",
+                                "list",
+                                "set",
+                                "delete",
+                                "recover",
+                                "backup",
+                                "restore",
+                                "purge"
+                            ]
+                        }
+                    }
+                ],
+                "enabledForDeployment": false,
+                "enabledForDiskEncryption": false,
+                "enabledForTemplateDeployment": true
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-06-01",
+            "name": "[parameters('storageAccounts_watermarkstvsene_name')]",
+            "location": "northeurope",
+            "tags": {
+                "displayName": "StorageAcct"
+            },
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "properties": {
+                "networkAcls": {
+                    "bypass": "AzureServices",
+                    "virtualNetworkRules": [],
+                    "ipRules": [],
+                    "defaultAction": "Allow"
+                },
+                "supportsHttpsTrafficOnly": false,
+                "encryption": {
+                    "services": {
+                        "file": {
+                            "keyType": "Account",
+                            "enabled": true
+                        },
+                        "blob": {
+                            "keyType": "Account",
+                            "enabled": true
+                        }
+                    },
+                    "keySource": "Microsoft.Storage"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "name": "[parameters('serverfarms_WaterMark_sp_vse_ne_name')]",
+            "location": "North Europe",
+            "tags": {
+                "displayName": "Service Plan/ Farm"
+            },
+            "sku": {
+                "name": "S3",
+                "tier": "Standard",
+                "size": "S3",
+                "family": "S",
+                "capacity": 1
+            },
+            "kind": "app",
+            "properties": {
+                "perSiteScaling": false,
+                "maximumElasticWorkerCount": 1,
+                "isSpot": false,
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "targetWorkerCount": 0,
+                "targetWorkerSizeId": 0
+            }
+        },
+        {
+            "type": "microsoft.alertsmanagement/smartdetectoralertrules",
+            "apiVersion": "2019-06-01",
+            "name": "[parameters('smartdetectoralertrules_failure_anomalies___watermark_ai_vse_ne_name')]",
+            "location": "global",
+            "dependsOn": [
+                "[resourceId('microsoft.insights/components', parameters('components_WaterMark_ai_vse_ne_name'))]"
+            ],
+            "properties": {
+                "description": "Failure Anomalies notifies you of an unusual rise in the rate of failed HTTP requests or dependency calls.",
+                "state": "Enabled",
+                "severity": "Sev3",
+                "frequency": "PT1M",
+                "detector": {
+                    "id": "FailureAnomaliesDetector",
+                    "name": "Failure Anomalies",
+                    "description": "Detects if your application experiences an abnormal rise in the rate of HTTP requests or dependency calls that are reported as failed. The anomaly detection uses machine learning algorithms and occurs in near real time, therefore there's no need to define a frequency for this signal.<br/></br/>To help you triage and diagnose the problem, an analysis of the characteristics of the failures and related telemetry is provided with the detection. This feature works for any app, hosted in the cloud or on your own servers, that generates request or dependency telemetry - for example, if you have a worker role that calls <a class=\"ext-smartDetecor-link\" href=\\\"https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackrequest\\\" target=\\\"_blank\\\">TrackRequest()</a> or <a class=\"ext-smartDetecor-link\" href=\\\"https://docs.microsoft.com/azure/application-insights/app-insights-api-custom-events-metrics#trackdependency\\\" target=\\\"_blank\\\">TrackDependency()</a>.<br/><br/><a class=\"ext-smartDetecor-link\" href=\\\"https://docs.microsoft.com/azure/azure-monitor/app/proactive-failure-diagnostics\\\" target=\\\"_blank\\\">Learn more about Failure Anomalies</a>",
+                    "supportedResourceTypes": [
+                        "ApplicationInsights"
+                    ]
+                },
+                "scope": [
+                    "[resourceId('microsoft.insights/components', parameters('components_WaterMark_ai_vse_ne_name'))]"
+                ],
+                "actionGroups": {
+                    "groupIds": [
+                        "[parameters('actiongroups_application_insights_smart_detection_externalid')]"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/BlobContainers')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/HubBlobConnection')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/HubSqlConnection')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/QueueName')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/RestbAiKey')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/RestbAiPwd')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/SqlCountQuery')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/SqlGetQuery')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/SqlTables')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/StorageConnectionString')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secret"
+            },
+            "properties": {
+                "contentType": "text/plain",
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.KeyVault/vaults/secrets",
+            "apiVersion": "2016-10-01",
+            "name": "[concat(parameters('vaults_WaterMark_kv_vse_ne_name'), '/TableContainers')]",
+            "location": "northeurope",
+            "dependsOn": [
+                "[resourceId('Microsoft.KeyVault/vaults', parameters('vaults_WaterMark_kv_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Key Vault Secrets"
+            },
+            "properties": {
+                "attributes": {
+                    "enabled": true
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(parameters('storageAccounts_watermarkstvsene_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_watermarkstvsene_name'))]"
+            ],
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                },
+                "deleteRetentionPolicy": {
+                    "enabled": false
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/fileServices",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(parameters('storageAccounts_watermarkstvsene_name'), '/default')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_watermarkstvsene_name'))]"
+            ],
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "properties": {
+                "cors": {
+                    "corsRules": []
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2018-11-01",
+            "name": "[parameters('sites_WaterMarkLoader_fn_vse_ne_name')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_WaterMark_sp_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Az Function"
+            },
+            "kind": "functionapp",
+            "identity": {
+                "principalId": "df81b48c-d4dc-4957-89e1-f26f314fba0c",
+                "tenantId": "55a71488-bbff-4451-a18d-a1bfa479293b",
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "watermarkloader-fn-vse-ne.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "watermarkloader-fn-vse-ne.scm.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_WaterMark_sp_vse_ne_name'))]",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "siteConfig": {},
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 1536,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2018-11-01",
+            "name": "[parameters('sites_WaterMarkSubscribers_fn_vse_ne_name')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_WaterMark_sp_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Az Function"
+            },
+            "kind": "functionapp",
+            "identity": {
+                "principalId": "0be52f4b-6bbb-4f0e-ad8b-c505c65a7be6",
+                "tenantId": "55a71488-bbff-4451-a18d-a1bfa479293b",
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "enabled": true,
+                "hostNameSslStates": [
+                    {
+                        "name": "watermarksubscribers-fn-vse-ne.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Standard"
+                    },
+                    {
+                        "name": "watermarksubscribers-fn-vse-ne.scm.azurewebsites.net",
+                        "sslState": "Disabled",
+                        "hostType": "Repository"
+                    }
+                ],
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('serverfarms_WaterMark_sp_vse_ne_name'))]",
+                "reserved": false,
+                "isXenon": false,
+                "hyperV": false,
+                "siteConfig": {},
+                "scmSiteAlsoStopped": false,
+                "clientAffinityEnabled": false,
+                "clientCertEnabled": false,
+                "hostNamesDisabled": false,
+                "containerSize": 1536,
+                "dailyMemoryTimeQuota": 0,
+                "httpsOnly": false,
+                "redundancyMode": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/web')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Az Function"
+            },
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$WaterMarkLoader-fn-vse-ne",
+                "azureStorageAccounts": {},
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetName": "Antares-Bravo-NEU-Common-VN",
+                "cors": {
+                    "allowedOrigins": [
+                        "https://functions.azure.com",
+                        "https://functions-staging.azure.com",
+                        "https://functions-next.azure.com"
+                    ],
+                    "supportCredentials": false
+                },
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": 19371,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/web')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "tags": {
+                "displayName": "Az Function"
+            },
+            "properties": {
+                "numberOfWorkers": 1,
+                "defaultDocuments": [
+                    "Default.htm",
+                    "Default.html",
+                    "Default.asp",
+                    "index.htm",
+                    "index.html",
+                    "iisstart.htm",
+                    "default.aspx",
+                    "index.php"
+                ],
+                "netFrameworkVersion": "v4.0",
+                "phpVersion": "5.6",
+                "requestTracingEnabled": false,
+                "remoteDebuggingEnabled": false,
+                "httpLoggingEnabled": false,
+                "logsDirectorySizeLimit": 35,
+                "detailedErrorLoggingEnabled": false,
+                "publishingUsername": "$WaterMarkSubscribers-fn-vse-ne",
+                "azureStorageAccounts": {},
+                "scmType": "None",
+                "use32BitWorkerProcess": true,
+                "webSocketsEnabled": false,
+                "alwaysOn": false,
+                "managedPipelineMode": "Integrated",
+                "virtualApplications": [
+                    {
+                        "virtualPath": "/",
+                        "physicalPath": "site\\wwwroot",
+                        "preloadEnabled": false
+                    }
+                ],
+                "loadBalancing": "LeastRequests",
+                "experiments": {
+                    "rampUpRules": []
+                },
+                "autoHealEnabled": false,
+                "vnetName": "Antares-Bravo-NEU-Common-VN",
+                "cors": {
+                    "allowedOrigins": [
+                        "https://functions.azure.com",
+                        "https://functions-staging.azure.com",
+                        "https://functions-next.azure.com"
+                    ],
+                    "supportCredentials": false
+                },
+                "localMySqlEnabled": false,
+                "managedServiceIdentityId": 19370,
+                "ipSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictions": [
+                    {
+                        "ipAddress": "Any",
+                        "action": "Allow",
+                        "priority": 1,
+                        "name": "Allow all",
+                        "description": "Allow all access"
+                    }
+                ],
+                "scmIpSecurityRestrictionsUseMain": false,
+                "http20Enabled": false,
+                "minTlsVersion": "1.2",
+                "ftpsState": "AllAllowed",
+                "reservedInstanceCount": 0
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/1b1ffa502d324d3aad2b43b06ee6937d')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "ZipDeploy",
+                "message": "Created via a push deployment",
+                "start_time": "2020-08-12T08:37:20.0962357Z",
+                "end_time": "2020-08-12T08:37:20.6743644Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/33ad6661747341b292ac72320a26e42a')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "ZipDeploy",
+                "message": "Created via a push deployment",
+                "start_time": "2020-08-12T08:35:11.5852488Z",
+                "end_time": "2020-08-12T08:35:12.2258768Z",
+                "active": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/776ca295499c4c79b7c26481f495ad4b')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "ZipDeploy",
+                "message": "Created via a push deployment",
+                "start_time": "2020-08-12T08:58:58.6674462Z",
+                "end_time": "2020-08-12T08:58:59.2767959Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/deployments",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/b0b14201673d401b8b2ff5cdf49428f2')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "status": 4,
+                "author_email": "N/A",
+                "author": "N/A",
+                "deployer": "ZipDeploy",
+                "message": "Created via a push deployment",
+                "start_time": "2020-08-12T08:57:54.7946072Z",
+                "end_time": "2020-08-12T08:57:55.4045878Z",
+                "active": true
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/functions",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/BatchQueueSubscriber')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "script_root_path_href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/BatchQueueSubscriber/",
+                "script_href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/bin/WaterMarkSubscribers.dll",
+                "config_href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/BatchQueueSubscriber/function.json",
+                "href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/functions/BatchQueueSubscriber",
+                "config": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/functions",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/GetImageBlob')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "script_root_path_href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/GetImageBlob/",
+                "script_href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/bin/WaterMarkLoader.dll",
+                "config_href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/GetImageBlob/function.json",
+                "href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/functions/GetImageBlob",
+                "config": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/functions",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/ImageQueueSubscriber')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "script_root_path_href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/ImageQueueSubscriber/",
+                "script_href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/bin/WaterMarkSubscribers.dll",
+                "config_href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/ImageQueueSubscriber/function.json",
+                "href": "https://watermarksubscribers-fn-vse-ne.azurewebsites.net/admin/functions/ImageQueueSubscriber",
+                "config": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/functions",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/Loader')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "script_root_path_href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/Loader/",
+                "script_href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/bin/WaterMarkLoader.dll",
+                "config_href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/vfs/site/wwwroot/Loader/function.json",
+                "href": "https://watermarkloader-fn-vse-ne.azurewebsites.net/admin/functions/Loader",
+                "config": {}
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/', parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '.azurewebsites.net')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "siteName": "WaterMarkLoader-fn-vse-ne",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/hostNameBindings",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '.azurewebsites.net')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "siteName": "WaterMarkSubscribers-fn-vse-ne",
+                "hostNameType": "Verified"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/virtualNetworkConnections",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkLoader_fn_vse_ne_name'), '/Antares-Bravo-NEU-Common-VN')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkLoader_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "vnetResourceId": "[parameters('virtualNetworks_Antares_Bravo_NEU_Common_VN_externalid')]",
+                "certBlob": "MIIDYjCCAk6gAwIBAgIQ90tqZXdL+5lJ1dM4OckdfjAJBgUrDgMCHQUAMDkxNzA1BgNVBAMTLldlYnNpdGVzQ2VydGlmaWNhdGVBbnRhcmVzLUJyYXZvLU5FVS1Db21tb24tVk4wHhcNMTcxMTAzMDgxNTA3WhcNMzkxMjMxMjM1OTU5WjA5MTcwNQYDVQQDEy5XZWJzaXRlc0NlcnRpZmljYXRlQW50YXJlcy1CcmF2by1ORVUtQ29tbW9uLVZOMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiADRfi+FfJBhLsPbcZ2dOyIvmo5pys1P5Jf5PZO2w9nlG23ftd39S+XY9SZukY/62Zfg88KqctKS3EN1Cg0FkIg/1Mf4IKUViFyQXMDMlsTh1qHOfz8m+AEbgPSjbYfjrZPZMqIoibBty6CPjtVMx1MbpxcGx09Gn8OzvahAr+/e6dkWcmykNIxsavfhM0OyjXF6oUdc1y0odXQChd9c90jxf4g2PvpGtkwN49qlF4R8VB+wmzn0XrzAW7cd2IrRbPxO/3oo8/l/X6+zm7se82ealURBgD0sV17j2tqDQAnr1s0P4qugfyNTpeHCLIoTZJTaWK+oSuppslAbIMp69QIDAQABo24wbDBqBgNVHQEEYzBhgBBcL6DzYVDwaoQcI8V8ZcVFoTswOTE3MDUGA1UEAxMuV2Vic2l0ZXNDZXJ0aWZpY2F0ZUFudGFyZXMtQnJhdm8tTkVVLUNvbW1vbi1WToIQ90tqZXdL+5lJ1dM4OckdfjAJBgUrDgMCHQUAA4IBAQBw/JglhVGhVGzFhNeIRUvubMTx6odPyVpwWDPDlsBuOUt4qwW/wsXzUyrYI/fmfy0Pz8dIpNNydP0+RrRU1WsB23HzcKBfiat/eUwwhvPDlzF0Ssp2dNMsYgCtpifArLFbApn2aoWiXaQ5WhyRJ1sUPMHGT9l/6HFs4CAM5ib8yfgIeuad5lus6vevyKPRwLgpCecbySURvN2VEWGP0Kdqn5iNSVQ6qWca54DjalTzwbwIc6MMUM+7taQFxNwg5Hr8RpKfEg1gJs+fdfDLq2yVcA45sD1DkV8yXCkzkYjwtGuKzq2ZwdEBJlcVw35h4cNELPh1yXnLG4GpD3NERmeS",
+                "isSwift": false
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/virtualNetworkConnections",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'), '/Antares-Bravo-NEU-Common-VN')]",
+            "location": "North Europe",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites', parameters('sites_WaterMarkSubscribers_fn_vse_ne_name'))]"
+            ],
+            "properties": {
+                "vnetResourceId": "[parameters('virtualNetworks_Antares_Bravo_NEU_Common_VN_externalid')]",
+                "certBlob": "MIIDYjCCAk6gAwIBAgIQ90tqZXdL+5lJ1dM4OckdfjAJBgUrDgMCHQUAMDkxNzA1BgNVBAMTLldlYnNpdGVzQ2VydGlmaWNhdGVBbnRhcmVzLUJyYXZvLU5FVS1Db21tb24tVk4wHhcNMTcxMTAzMDgxNTA3WhcNMzkxMjMxMjM1OTU5WjA5MTcwNQYDVQQDEy5XZWJzaXRlc0NlcnRpZmljYXRlQW50YXJlcy1CcmF2by1ORVUtQ29tbW9uLVZOMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiADRfi+FfJBhLsPbcZ2dOyIvmo5pys1P5Jf5PZO2w9nlG23ftd39S+XY9SZukY/62Zfg88KqctKS3EN1Cg0FkIg/1Mf4IKUViFyQXMDMlsTh1qHOfz8m+AEbgPSjbYfjrZPZMqIoibBty6CPjtVMx1MbpxcGx09Gn8OzvahAr+/e6dkWcmykNIxsavfhM0OyjXF6oUdc1y0odXQChd9c90jxf4g2PvpGtkwN49qlF4R8VB+wmzn0XrzAW7cd2IrRbPxO/3oo8/l/X6+zm7se82ealURBgD0sV17j2tqDQAnr1s0P4qugfyNTpeHCLIoTZJTaWK+oSuppslAbIMp69QIDAQABo24wbDBqBgNVHQEEYzBhgBBcL6DzYVDwaoQcI8V8ZcVFoTswOTE3MDUGA1UEAxMuV2Vic2l0ZXNDZXJ0aWZpY2F0ZUFudGFyZXMtQnJhdm8tTkVVLUNvbW1vbi1WToIQ90tqZXdL+5lJ1dM4OckdfjAJBgUrDgMCHQUAA4IBAQBw/JglhVGhVGzFhNeIRUvubMTx6odPyVpwWDPDlsBuOUt4qwW/wsXzUyrYI/fmfy0Pz8dIpNNydP0+RrRU1WsB23HzcKBfiat/eUwwhvPDlzF0Ssp2dNMsYgCtpifArLFbApn2aoWiXaQ5WhyRJ1sUPMHGT9l/6HFs4CAM5ib8yfgIeuad5lus6vevyKPRwLgpCecbySURvN2VEWGP0Kdqn5iNSVQ6qWca54DjalTzwbwIc6MMUM+7taQFxNwg5Hr8RpKfEg1gJs+fdfDLq2yVcA45sD1DkV8yXCkzkYjwtGuKzq2ZwdEBJlcVw35h4cNELPh1yXnLG4GpD3NERmeS",
+                "isSwift": false
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(parameters('storageAccounts_watermarkstvsene_name'), '/default/azure-webjobs-hosts')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_watermarkstvsene_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_watermarkstvsene_name'))]"
+            ],
+            "properties": {
+                "publicAccess": "None"
+            }
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
+            "apiVersion": "2019-06-01",
+            "name": "[concat(parameters('storageAccounts_watermarkstvsene_name'), '/default/azure-webjobs-secrets')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccounts_watermarkstvsene_name'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccounts_watermarkstvsene_name'))]"
+            ],
+            "properties": {
+                "publicAccess": "None"
+            }
+        }
+    ]
+}

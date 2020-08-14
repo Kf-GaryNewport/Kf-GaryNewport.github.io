@@ -1,0 +1,39 @@
+@startuml Integration
+!include <c4/C4_Context.puml>  
+LAYOUT_TOP_DOWN
+
+System(hub_system, "hub", "Allows users to manage the buying/selling and letting of retail and commercial properties")
+
+System(Exchange, "Exchange", "Int System")
+System(ElasticSearch, "ElasticSearch", "Int System")
+System(OOS, "Office Online Server", "Int System")
+System(FeedCentre, "FeedCentre", "Int System")
+System(SAP, "SAP", "Int System")
+
+System(WebJob, "KF People\nFileConversion\nNegotiatorRelationship\nNotifications\nWebJob\nInstruction\nMyKfFeed\nUserFeed\nTemplates\nSearchToFile", "WebJobs")
+
+System_Ext(Docusign, "Docusign", "TP Service")
+System_Ext(DataHug, "DataHug", "TP Service")
+System_Ext(Dotmailer, "Dotmailer", "TP Service")
+System_Ext(MCS, "Microsoft Conitive Services", "TP Service")
+System_Ext(PCA, "PCA Address Service", "TP Service")
+System_Ext(SMS, "SMS SpeedWay", "TP Service")
+System_Ext(RestbAi, "Restb.Ai", "TP Service")
+
+hub_system --> Exchange : Https
+hub_system --> ElasticSearch : Https
+hub_system --> OOS : Https
+hub_system --> FeedCentre : Https
+hub_system --> SAP : Http
+
+WebJob -> hub_system
+
+Docusign <-- hub_system : Https
+DataHug <-- hub_system : Https
+Dotmailer <-- hub_system : Https
+MCS <-- hub_system : Https
+PCA <-- hub_system : Https
+SMS <-- hub_system : Https
+RestbAi <-- hub_system : Https
+
+@enduml
