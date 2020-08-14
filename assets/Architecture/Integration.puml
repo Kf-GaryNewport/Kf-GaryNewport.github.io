@@ -24,7 +24,7 @@ hub_system --> Exchange : Https
 hub_system --> ElasticSearch : Https
 hub_system --> OOS : Https
 hub_system --> FeedCentre : Https
-hub_system --> SAP : Http
+hub_system --> SAP #Red: Http
 
 WebJob -> hub_system
 
