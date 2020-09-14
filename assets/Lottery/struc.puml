@@ -1,0 +1,94 @@
+@startuml lottery
+
+
+'Lottery 
+'Games
+'Draws
+'Draw
+'    Type
+'    Details
+'    Balls
+'    BonusBalls
+
+'Lotto -map-> Draw
+'ThunderBal -map-> Draw
+
+'Lotto 
+'    pick 6 numbers (1-59)
+'    Win
+'        Main 2,3,4,5,6
+'        Main+BB 5+1
+'     Data
+'       DrawDate
+'       Balls
+'       BonusBall
+'       Ballset
+'       Machine
+'       DrawNumber
+'ThunderBall
+'    pick 5 numbers (1-39)
+'    pick 1 ThunderBall (1-14)
+'    Win 
+'        Main 3,4,5
+'        Main+BB 0+1, 1+1, 2+1, 3+1, 4+1 5+1
+'    Data
+'       DrawDate
+'       Balls
+'       BonusBall
+'       Ballset
+'       Machine
+'       DrawNumber
+'EuroMillions
+'    pick 5 numbers (1-50)
+'    pick 2 LuckStars (1-12)
+'    Win 
+'        Main 2,3,4,5,
+'        Main+BB 2+1, 2+2, 3+1, 3+2, 4+1, 4+2, 5+1, 5+2
+'   Data
+'       DrawDate
+'       Balls
+'       BonusBalls
+'       UK Millionaire Maker
+'       DrawNumber
+
+Draw  o-- Prediction
+Draw  *-- Data
+
+class Draw {
+    String Type
+    int DrawNumber 
+
+    Match[] Matches
+}
+
+class Prediction {
+    Selection[] Selections
+    Get()
+}
+class Selection {
+    int[] Balls
+    int[] BonusBalls
+}
+Prediction <|-- Selection
+
+class Data {
+    DateTime DrawDate
+    int[] Balls
+    int[] BonusBalls
+    string BallSet
+    string Machine
+    string UkMM
+
+    Get()
+}
+
+'LotteryType  (Lotto,ThunderBall,Euromillions) <-- PartitionKey
+'DrawNumber <-- RowNumber
+'DrawDate
+'Ball[]
+'BonusBall[]
+'BallSet - optional
+'Machine - optional
+'UK Millionaire Maker - optional
+
+@enduml
