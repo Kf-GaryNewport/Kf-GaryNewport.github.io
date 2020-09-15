@@ -1,0 +1,41 @@
+@startuml System
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+LAYOUT_TOP_DOWN
+LAYOUT_WITH_LEGEND()
+
+Person(user, User, "A hub User")
+
+System_Boundary(c1, "Knight Frank") {
+    System_Boundary(c2, "hub") {
+     Container( hub, hub Web App, "hub")
+     Container( hubApi, hubApi,  "hub")
+    }
+    ContainerDb( sql,Sql,"hub Sql database")
+    ContainerDb( sndQ, sndQ,"HomePpl Queue")
+    ContainerDb( rcvQ, rcvQ,"hub Queue")
+
+    System_Ext( blob, Blob Storage, "Azure Blob Storage")
+
+    System_Boundary(c3, "Web Job") {
+        Container( svc, svc, "HomePpl Service")
+    }
+}
+
+System_Ext( hppl, HomePpl, "HomePpl : Tenant validation")
+System_Ext( blob, Blob Storage, "Azure Blob Storage")
+
+user --> hub
+hub --> hubApi
+hubApi --> sndQ
+sndQ --> svc
+
+svc --> hppl
+hppl --> svc
+rcvQ <-- svc
+
+hubApi <-- rcvQ
+
+hubApi --> blob
+hubApi --> sql
+
+@enduml

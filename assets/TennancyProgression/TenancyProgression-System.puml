@@ -1,0 +1,20 @@
+@startuml System
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_TOP_DOWN
+LAYOUT_WITH_LEGEND()
+
+Person(user, User, "A hub User")
+
+System( hub, hub, "hub Tenancy Progression")
+SystemDb( sql,Sql,"hub Sql database")
+System_Ext( hppl, HomePpl, "HomePpl : Tenant validation")
+System_Ext( blob, Blob Storage, "Azure Blob Storage")
+
+user -> hub
+hub -> hppl
+hppl --> hub
+hub -> sql
+hub --> blob
+
+@enduml
