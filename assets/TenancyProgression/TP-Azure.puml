@@ -10,6 +10,9 @@
 LAYOUT_LEFT_RIGHT
 LAYOUT_WITH_LEGEND()
 
+Container(hub, Hub, "Hub Web API")
+Container(WebJob, WebJob, "Hub Web Job")
+
 ContainerDb(BlobDb, "HubBlob Storage", "Blob Storage")
 AzureQueueStorage(InQ, "InBound Queue", "C#")
 AzureQueueStorage(OutQ, "OutBound Queue", "C#")
@@ -28,5 +31,8 @@ BlobDb <-- fnDetail
 BlobDb <-- fnRisk
 
 OutQ <-- fnRisk
+
+hub --> InQ
+WebJob <-- OutQ
 
 @enduml
