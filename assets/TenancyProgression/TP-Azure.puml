@@ -1,0 +1,32 @@
+@startuml "Image Analysis System"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+ContainerDb(BlobDb, "HubBlob Storage", "Blob Storage")
+AzureQueueStorage(InQ, "InBound Queue", "C#")
+AzureQueueStorage(OutQ, "OutBound Queue", "C#")
+AzureFunction(fnCreate, "Create Validation", "C#")
+AzureFunction(fnDetail, "Get User Detail", "C#")
+AzureFunction(fnRisk, "Get Risk Report", "C#")
+System_Ext(hppl, "HomePpl")
+
+InQ --> fnCreate
+fnCreate --> hppl
+fnDetail --> hppl
+fnRisk --> hppl
+
+BlobDb <-- fnCreate
+BlobDb <-- fnDetail
+BlobDb <-- fnRisk
+
+OutQ <-- fnRisk
+
+@enduml
