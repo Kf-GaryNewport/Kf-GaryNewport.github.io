@@ -1,0 +1,62 @@
+@startuml System
+'!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+'!includeurl https://raw.githubusercontent.com/aheil/EIP-PlantUML/master/dist/EIP-PlantUML.puml
+
+!include ../tools/EIP-PlantUML.puml
+
+LAYOUT_LEFT_RIGHT
+'LAYOUT_WITH_LEGEND()
+
+'MessageEndpoint(alias ,label)
+'EventDrivenConsumer(consumer ,label)
+'SelectiveConsumer(selective ,label)
+
+MsgChannel(channel1, "Channel 1")
+MsgChannel(channel2, "Channel 2")
+Message(msg, "Message")
+
+'Send(msg, channel1)
+
+
+'Person(user, User, "A hub User")
+
+'System_Boundary(c1, "Knight Frank") {
+'    System_Boundary(c2, "hub") {
+'     Container( hub, hub Web App, "hub")
+'     Container_Boundary(hubApi, "hub API Application") {
+'         Component( sub, Subscriber, "Queue Subscriber")
+'         Component( note, Notification, "Notification")
+
+'         Component( dis, Dispatcher, "Queue Dispatcher")
+'     }
+'    }
+'    ContainerDb( sql,Sql,"hub Sql database")
+'    ContainerDb( sndQ, sndQ,"HomePpl Queue")
+'    ContainerDb( rcvQ, rcvQ,"hub Queue")
+
+'    System_Ext( blob, Blob Storage, "Azure Blob Storage")
+
+'    System_Boundary(c3, "Web Job") {
+'        Container( svc, svc, "HomePpl Service")
+'    }
+'}
+
+'System_Ext( hppl, HomePpl, "HomePpl : Tenant validation")
+'System_Ext( blob, Blob Storage, "Azure Blob Storage")
+
+'user --> hub
+'hub --> hubApi
+'hubApi --> dis
+'dis --> sndQ
+'sndQ --> svc
+
+'svc --> hppl
+'hppl --> svc
+'rcvQ <-- svc
+
+'sub <-- rcvQ
+'sub -> note
+'sub -> sql
+'sub --> blob
+
+@enduml
