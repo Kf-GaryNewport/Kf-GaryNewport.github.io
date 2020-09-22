@@ -35,7 +35,7 @@ table(EnumTypeItem) {
     SecondarySortOrder
     }
 
-    table(AddressForm) {
+table(AddressForm) {
     primary_key(Id)
     foreign_key(CountryId)
     foreign_key(AddressFormTypeId)

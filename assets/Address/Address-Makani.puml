@@ -1,0 +1,94 @@
+@startuml AddressDb
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table(EnumType) {
+    primary_key(Id)
+    Code
+}
+
+table(EnumTypeItem) {
+    primary_key(Id)
+    Code
+    foreign_key(EnumTypeId)
+    PrimarySortOrder
+    SecondarySortOrder
+    }
+
+table(Address) {
+    primary_key(Id)
+    foreign_key(CountryId)
+    foreign_key(AddressFormId)
+    foreign_key(GeoCodingId)
+    PropertyName
+    PropertyNumber
+    Line1
+    Line2
+    Line3
+    Postcode
+    City
+    County
+    ShortAddressFormated
+    Marker
+    AlternativePropertyName
+    AlternativePropertyNumber
+    AlternativeLine1
+    AlternativeLine2
+    AlternativeLine3
+    AlternativePostcode
+    AlternativeCity
+    AlternativeCounty
+    UdprnKey
+    UmrrnKey
+    UprnKey
+    QubeSynchronized
+    QubeErrorOccurred
+}
+
+table(Country) {
+    primary_key(Id)
+    IsoCode
+    DiallingCode
+    foreign_key(CurrencyId)
+    foreign_key(DefaultLivingAreaUnitId)
+}
+
+table(GeoCoding) {
+    primary_key(Id)
+    foreign_key(CountryId)
+    Marker
+    LocalCoding
+    foreign_key(LocalCodingTypeId)
+
+}
+
+link(Address,GeoCoding) : GeoCodingId
+link(Address,Country) : CountryId
+link(GeoCoding,EnumTypeItem) : LocalCodingTypeId
+link(GeoCoding,Country) : CountryId
+link(Country,EnumTypeItem) : CurrencyId
+link(Country,EnumTypeItem) : DefaultLivingAreaUnitId
+link(EnumTypeItem,EnumType) : EnumTypeId
+
+
+@enduml
