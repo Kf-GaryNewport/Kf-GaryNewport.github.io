@@ -75,14 +75,16 @@ table(Country) {
 
 table(GeoCoding) {
     primary_key(Id)
+    foreign_key(AddressId)
     foreign_key(CountryId)
+    foreign_key(LocalCodingTypeId)
     Marker
     LocalCoding
-    foreign_key(LocalCodingTypeId)
+
 
 }
 
-link(Address,GeoCoding) : GeoCodingId
+link(GeoCoding,Address) : AddressId
 link(Address,Country) : CountryId
 link(GeoCoding,EnumTypeItem) : LocalCodingTypeId
 link(GeoCoding,Country) : CountryId
