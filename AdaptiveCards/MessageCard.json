@@ -1,0 +1,34 @@
+{
+    "@@type": "MessageCard",
+    "@@context": "https://schema.org/extensions",
+    "summary": "WaterMark Exception",
+    "themeColor": "0075FF",
+    "sections": [
+        {
+            "heroImage": {
+                "image": "https://www.knightfrank.com/library/v3.0/images/knightfranklogo.png"
+            }
+        },
+        {
+            "startGroup": true,
+            "title": "**Image WaterMark Exception**",
+            "activityImage": "https://content.knightfrank.com/property/cbm190150/images/b2bee1c5-3dfa-4bbd-9d13-94cde2044822-0.jpg?cio=true&w=730",
+            "activityTitle": "**WaterMark Validator**",
+            "activitySubtitle": "Created {{DATE(2017-02-14T06:08:39Z,SHORT)}}",
+            "facts": [],
+
+            "potentialAction": [
+                {
+                    "@@type": "OpenUri",
+                    "name": "View",
+                    "targets": [
+                        {
+                            "os": "default",
+                            "uri": "https://hub.knightfrank.com/#/app/activity/view/60c1d8fb-1bd7-ea11-a95a-000d3ab2efee?tabname=Marketing"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
