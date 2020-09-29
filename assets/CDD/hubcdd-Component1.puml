@@ -19,11 +19,14 @@ Container_Boundary(c1, "hub"){
         Component(ins, "Instruction", "C#", "")
     }
 
+    Container(nrSvc, "NorthRow Service", "Northrow Service Handler")
+
     Rel( con, cdds,"Uses")
     Rel( com, cdds,"Uses")
     Rel( ins, cdds,"Uses")
 
-    Rel_R( cdds, nr,"Uses", "JSON/HTTPS")
+    Rel_D( cdds, nrSvc,"Uses", "JSON/HTTPS")
+    Rel_D( nrSvc, nr,"Uses", "JSON/HTTPS")
 
     Rel_U( con, hds, "Secure\nAttachment")
     Rel_U( com, hds, "Secure\nAttachment")
