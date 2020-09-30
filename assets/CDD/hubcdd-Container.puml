@@ -7,25 +7,18 @@ LAYOUT_TOP_DOWN
 System_Ext(nr, "Northrow", "Automated Due Diligence service")
 
 Container_Boundary(c1, "hub"){
-    Container(cdd, "CDD", "C#", "Manages Automated Client Due Diligence")
-    Container(tim, "Scheduler", "C# Azure Function", "A Scheduled maintenance task to clean up expired information")
 
     Container(hubWapp, "hub Web Application", "C#", "Allows users to view contacts, activities, properties, etc.")
-    ContainerDb(cdb, "DataStore", "Azure TableStorage", "Stores information regarding the due diligence of contacts and companies")
-    ContainerDb(hdb, "Database", "SQL", "Central hub database")
     ContainerDb(hds, "File Storage", "Azure BlobStore", "Stores files")
+
     Container(hubApi, "hub Web API", "")
+    Container(nrSvc, "NorthRow Service", "Northrow Service Handler")
 
-    Rel( hubApi, cdd,"Uses") 
-    Rel_L( cdd, hubApi, "Uses", "JSON/HTTPS")
-    Rel_U( hubApi, hdb, "Uses")
-
+    Rel_D( hubApi, nrSvc,"Uses", "JSON/HTTPS")
+    Rel_D( nrSvc, nr,"Uses", "JSON/HTTPS")
     Rel_U( hubApi, hds, "Secure\nAttachment")
-
     Rel( hubWapp, hubApi,"Uses", "JSON/HTTPS")
-    Rel( cdd, nr, "Uses", "JSON/HTTPS")
-    Rel_L( cdd, cdb, "Reads from\nand Writes to")
-    Rel_L( tim, cdd, "Uses", "JSON/HTTPS")
+
 }
 
 @enduml
