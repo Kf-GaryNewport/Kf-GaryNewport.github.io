@@ -1,0 +1,46 @@
+@startuml HomePpl Service
+
+Details -> hub
+hub -> SvcQueue
+SvcQueue -> Svc
+Activate Svc
+Svc -> Tds : Post Create Validation
+alt Success
+Svc <-- Tds : Response 201 AssetId and UserId
+Svc -> Table : Store details in a table
+else HttpStatus 403
+Svc <-- Tds : Respond 403
+Svc -> DevOps : Alert Token Error
+Svc -> SvcQueue : STOP QUEUE
+end
+Deactivate Svc
+
+== Every Hour ==
+Svc -> Table : Get UserIs's with incomplete status
+Activate Svc
+Loop Through UserIds
+    Svc -> Tds : Get User Detail
+    alt Success
+        Svc <-- Tds : Response 200
+        Svc -> Table : Store details in a table
+    else HttpStatus 403
+        Svc <-- Tds : Respond 403
+        Svc -> DevOps : Alert Token Error
+        Svc -> SvcQueue : STOP QUEUE
+    end
+        Group Check_Status = Approved
+            Svc -> Tds : Get PDF Risk Report
+            alt Success
+                Svc <-- Tds : Respond 200
+                Svc -> Blob : Store report in a Blob Store
+            else HttpStatus 403
+                Svc <-- Tds : Respond 403
+                Svc -> DevOps : Alert Token Error
+                Svc -> SvcQueue : STOP QUEUE
+            end
+        End
+End
+Deactivate Svc
+
+
+@enduml
