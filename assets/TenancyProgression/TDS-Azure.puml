@@ -1,0 +1,35 @@
+@startuml "Image Analysis System"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+Container(hub, Hub, "Hub Web API")
+Container(WebJob, WebJob, "Hub Web Job")
+
+ContainerDb(BlobDb, "HubBlob Storage", "Blob Storage")
+AzureQueueStorage(InQ, "InBound Queue", "C#")
+AzureQueueStorage(OutQ, "OutBound Queue", "C#")
+AzureFunction(fnCreate, "Create Validation", "C#")
+AzureFunction(fnRisk, "Get Risk Report", "C#")
+System_Ext(Tds, "Tenancy Deposit Scheme")
+
+InQ --> fnCreate
+fnCreate --> Tds
+fnRisk --> Tds
+
+BlobDb <-- fnCreate
+BlobDb <-- fnRisk
+
+OutQ <-- fnRisk
+
+hub --> InQ
+WebJob <-- OutQ
+
+@enduml
