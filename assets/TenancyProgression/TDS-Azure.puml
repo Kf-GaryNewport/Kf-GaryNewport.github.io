@@ -12,24 +12,37 @@ LAYOUT_WITH_LEGEND()
 
 Container(hub, Hub, "Hub Web API")
 Container(WebJob, WebJob, "Hub Web Job")
+ContainerDb(Sql, Sql, "Hub Sql")
+Container(hubNote, Notification, "Hub Notification")
 
-ContainerDb(BlobDb, "HubBlob Storage", "Blob Storage")
-AzureQueueStorage(InQ, "InBound Queue", "C#")
-AzureQueueStorage(OutQ, "OutBound Queue", "C#")
-AzureFunction(fnCreate, "Create Validation", "C#")
-AzureFunction(fnRisk, "Get Risk Report", "C#")
+ContainerDb(TdsDb, "TDS Service Storage", "Table Storage")
+
+AzureQueueStorage(InQ, "InBound Queue", "Storage Queue")
+AzureQueueStorage(OutQ, "OutBound Queue", "Storage Queue")
+
+AzureFunction(fnCreate, "Create", "Queue Trigger")
+AzureFunction(fnStatus, "Status", "Timer Trigger")
+AzureFunction(fnCert, "Get Deposit Protection Cert", "C#")
+
 System_Ext(Tds, "Tenancy Deposit Scheme")
 
 InQ --> fnCreate
-fnCreate --> Tds
-fnRisk --> Tds
+fnCreate --> Tds : Create Request
+fnStatus --> Tds : Status Request
+fnCert --> Tds : Deposit Protection certificate Request 
 
-BlobDb <-- fnCreate
-BlobDb <-- fnRisk
+TdsDb <-- fnCreate : Insert
+TdsDb --> fnStatus : Status - Pending
+TdsDb <-- fnStatus : Update
+TdsDb --> fnCert : Status - Complete
 
-OutQ <-- fnRisk
+OutQ <-- fnCert
 
 hub --> InQ
 WebJob <-- OutQ
+
+hubNote <-- WebJob
+Sql <-- WebJob
+
 
 @enduml
