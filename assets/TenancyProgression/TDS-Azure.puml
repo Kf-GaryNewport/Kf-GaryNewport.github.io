@@ -15,10 +15,10 @@ Container(WebJob, WebJob, "Hub Web Job")
 ContainerDb(Sql, Sql, "Hub Sql")
 Container(hubNote, Notification, "Hub Notification")
 
-ContainerDb(TdsDb, "TDS Service Storage", "Table Storage")
-
 AzureQueueStorage(InQ, "InBound Queue", "Storage Queue")
 AzureQueueStorage(OutQ, "OutBound Queue", "Storage Queue")
+AzureQueueStorage(PeQ, "Pending Queue", "Storage Queue")
+AzureQueueStorage(CoQ, "Complete Queue", "Storage Queue")
 
 AzureFunction(fnCreate, "Create", "Queue Trigger")
 AzureFunction(fnStatus, "Status", "Timer Trigger")
@@ -29,15 +29,15 @@ System_Ext(Tds, "Tenancy Deposit Scheme")
 InQ --> fnCreate
 fnCreate --> Tds : Create Request
 fnStatus --> Tds : Status Request
-fnCert --> Tds : Deposit Protection certificate Request 
+fnCert --> Tds : Deposit Protection Certificate Request 
 
-TdsDb <-- fnCreate : Insert
-TdsDb --> fnStatus : Status - Pending
-TdsDb <-- fnStatus : Update
-TdsDb --> fnCert : Status - Complete
+fnCreate -> PeQ
+PeQ -> fnStatus : Status - Pending
+PeQ <- fnStatus : Insert
+fnStatus -> CoQ : Complete
+CoQ -> fnCert : Status - Complete
 
 OutQ <-- fnCert
-
 hub --> InQ
 WebJob <-- OutQ
 
