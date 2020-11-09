@@ -4,41 +4,49 @@ Details -> hub
 hub -> SvcQueue
 SvcQueue -> Svc
 Activate Svc
-Svc -> Tds : Post Create Validation
-alt Success
-Svc <-- Tds : Response 201 AssetId and UserId
-Svc -> Table : Store details in a table
-else HttpStatus 403
-Svc <-- Tds : Respond 403
-Svc -> DevOps : Alert Token Error
-Svc -> SvcQueue : STOP QUEUE
+
+alt Creation
+Svc -> Tds : Post Deposit protection Create
+else Update
+Svc -> Tds : Post Deposit protection Update
+end
+
+alt Success=True
+Svc <-- Tds : Response 2xx Success
+Svc -> Table : Update details in Table Store
+else Success=False
+Svc <-- Tds : Response 2xx Data Error
+Svc -> Table : Update details in Table Store
+Svc -> SvcQueue : Return Data Error to hub
 end
 Deactivate Svc
 
 == Every Hour ==
-Svc -> Table : Get UserIs's with incomplete status
+Svc -> Table : Get Messages in non Compete state
 Activate Svc
-Loop Through UserIds
-    Svc -> Tds : Get User Detail
-    alt Success
+Loop Through Messages
+    Svc -> Tds : Get Status Update
+    group Success=True
         Svc <-- Tds : Response 200
         Svc -> Table : Store details in a table
-    else HttpStatus 403
-        Svc <-- Tds : Respond 403
-        Svc -> DevOps : Alert Token Error
-        Svc -> SvcQueue : STOP QUEUE
-    end
-        Group Check_Status = Approved
-            Svc -> Tds : Get PDF Risk Report
-            alt Success
+        group Status = Complete
+            Svc -> Tds : Get Certificate URL
+            group Success=True
                 Svc <-- Tds : Respond 200
-                Svc -> Blob : Store report in a Blob Store
-            else HttpStatus 403
-                Svc <-- Tds : Respond 403
-                Svc -> DevOps : Alert Token Error
-                Svc -> SvcQueue : STOP QUEUE
+                Svc -> Table : Store details in a table
+                Svc -> SvcQueue : Return Data to hub
+            else Success=False
+                Svc <-- Tds : Respond 200
+                Svc -> Table : Store details in a table
+                Svc -> SvcQueue : Return Data Error to hub
             end
-        End
+        end
+    else Success=False
+        Svc <-- Tds : Respond 200
+        Svc -> Table : Store details in a table
+        Svc -> SvcQueue : Return Data Error to hub
+    end
+
 End
 Deactivate Svc
 
