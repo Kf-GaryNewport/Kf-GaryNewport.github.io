@@ -46,9 +46,7 @@ In order to send Adaptive Card structures to Teams webhooks, you need to surroun
 
 ## Result
 
-![aah1](/images/aah1.png)
-![Teams-AdaptiveCard](/images/teams-adaptivecard.png)
-![Teams-AdaptiveCard](https://github.com/Kf-GaryNewport/Kf-GaryNewport.github.io/blob/master/images/teams-adaptivecard.png)
+![Teams-AdaptiveCard](/images/teamsadaptivecard.png)
 
 
 
