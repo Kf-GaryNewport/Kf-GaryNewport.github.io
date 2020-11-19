@@ -76,7 +76,6 @@
         {
             "type": "Action.OpenUrl",
             "title": "View",
-            "__url__": "https://www.knightfrank.com/",
             "url": "https://hub.knightfrank.com/#/app/activity/view/60c1d8fb-1bd7-ea11-a95a-000d3ab2efee?tabname=Marketing"
 
         }
