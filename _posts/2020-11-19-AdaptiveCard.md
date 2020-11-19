@@ -41,6 +41,7 @@ In order to send Adaptive Card structures to Teams webhooks, you need to surroun
 # Reference
 * [Adaptive Cards](https://adaptivecards.io/)
 * [Microsoft Teams WebHook](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#send-adaptive-cards-using-an-incoming-webhook)
+* [Adative Cards for Blazor](https://www.adaptivecardsblazor.com/gettingstarted.html)
 
 # Useful Example
 
