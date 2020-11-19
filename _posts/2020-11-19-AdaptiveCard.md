@@ -38,14 +38,14 @@ In order to send Adaptive Card structures to Teams webhooks, you need to surroun
 }
 ```
 
-# Refernece
+# Reference
 [Adaptive Cards](https://adaptivecards.io/)
 [Microsoft Teams WebHook](https://docs.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/connectors-using#send-adaptive-cards-using-an-incoming-webhook)
 
 # Useful Example
 
 ## Result
-![Teams-AdaptiveCard](/Images/Teams-AdaptiveCard.png)
+![Teams-AdaptiveCard](/images/Teams-AdaptiveCard.png)
 ## Json
 ```Json
 {
