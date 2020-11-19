@@ -33,7 +33,7 @@ Documentation is task that is best shared among all the relevant people, each su
     * Refactor
 
 * The same principals of Test,Code,Refactor should be applied to the Requirement gathering process
-* 
+
 
 
 
