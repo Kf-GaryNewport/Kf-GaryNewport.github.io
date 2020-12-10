@@ -2,7 +2,7 @@
 
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
-LAYOUT_TOP_DOWN
+'LAYOUT_TOP_DOWN
 
 System_Ext(nr, "Northrow", "Automated Due Diligence service")
 
@@ -41,5 +41,4 @@ Container_Boundary(c1, "hub"){
     Rel_L( cdds, cdb, "Reads from\nand Writes to")
     Rel_L( tim, cdds, "Uses", "JSON/HTTPS")
 }
-
 @enduml

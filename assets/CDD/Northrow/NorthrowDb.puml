@@ -1,4 +1,4 @@
-@startuml TennancyProgressionDb
+@startuml NorthrowDb
 
 left to right direction
 
@@ -22,22 +22,6 @@ hide methods
 hide stereotypes  
 skinparam classarrowcolor gray  
 
-table( Tenancy)
-{
-    primary_key(Id)
-    ActivityId
-}
-
-table( Asset)
-{
-    primary_key(Id)
-    AddressId
-}
-
-table( Activity)
-{
-    primary_key(Id)
-}
 
 table( Address)
 {
@@ -75,14 +59,6 @@ table( EnumType)
     primary_key(Id)
 }
 
-table( TenancyParty)
-{
-    primary_key(Id)
-    TenancyId
-    TenantTypeId
-    ContactId
-}
-
 table( Contact)
 {
     primary_key(Id)
@@ -113,21 +89,37 @@ table( ContactEmail)
     Email
 }
 
-Activity --> Tenancy: ActivityId
-Tenancy <-- Asset : AssetId
-Asset <-- Address : AddressId
-Address <-- Country : CountryId
-Country <-- EnumTypeItem : CurrencyId
-EnumTypeItem <-- EnumType : EnumTypeId
+table( Company)
+{
+    primary_key(Id)
+    Name
+    Description
+    RegistrationNumber
+    WebSiteUrl
+    Email
+}
 
-TenancyParty <-- Tenancy : TenancyId
-TenancyParty <-- Contact : ContactId
+table( CompanyAddress)
+{
+    primary_key(Id)
+    CompanyId
+    AddressId
+    Switchboard
+}
 
-ContactPhone <-- EnumTypeItem : PhoneTypeId
-ContactPhone <-- Contact : ContactId
+EnumTypeItem --> EnumType : EnumTypeId
+Country --> EnumTypeItem : CurrencyId
+ContactPhone --> EnumTypeItem : PhoneTypeId
 
-ContactAddress <-- Contact : ContactId
-ContactAddress <-- Address : AddressId
+Address --> Country : CountryId
 
-ContactEmail <-- Contact : ContactId
+ContactAddress --> Address : AddressId
+
+Contact --> ContactPhone : ContactId
+Contact --> ContactAddress : ContactId
+Contact --> ContactEmail : ContactId
+
+Company --> CompanyAddress : CompanyId
+CompanyAddress --> Address : AddressId
+
 @enduml
