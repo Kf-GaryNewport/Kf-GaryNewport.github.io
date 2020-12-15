@@ -1,0 +1,137 @@
+@startuml DbNext
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( EnumTypeItem)
+{
+    primary_key(Id)
+    Code
+    EnumTypeId
+    PrimarySortOrder
+    SecondarySortOrder
+}
+
+table( EnumType)
+{
+    primary_key(Id)
+}
+
+' A Person can be many types User,Client,TitleHolder etc
+table( PersonType)
+{
+    primary_key(Id)
+    PersonId
+    PersonTypeId 
+}
+
+table( Person)
+{
+    primary_key(Id)
+    FirstName
+    LastName
+    AddressId
+    PersonTypeId 
+}
+
+table( Address)
+{
+    primary_key(Id)
+    PropertyName
+    PropertyNumber
+    Line1
+    Line2
+    Line3
+    PostCode
+    County
+    CountryId
+}
+
+table( Country)
+{
+    primary_key(Id)
+    IsoCode
+    DiallingCode
+    CurrencyId
+    DeafultLivingAreaUnitId
+}
+
+table( Comms)
+{
+    primary_key(Id)
+    PersonId
+    EmailId
+    PhoneId
+}
+
+table(Email)
+{
+    primary_key(Id)
+    CommsId
+    Address
+}
+
+table(Phone)
+{
+    primary_key(Id)
+    CommsId
+    CountryId
+    Number
+    PhoneTypeId
+}
+
+table( Asset)
+{
+    primary_key(Id)
+    PartyId
+}
+
+table( Title)
+{
+    primary_key(Id)
+}
+
+table( Party)
+{
+    primary_key(Id)
+     
+}
+
+PersonType --> Person : PersonTypeId
+PersonType --> EnumTypeItem : PersonTypeId
+
+Person --> Address : AddressId
+
+EnumTypeItem --> EnumType : EnumTypeId
+Address --> Country : CountryId
+Country --> EnumTypeItem : CurrencyId
+
+Comms --> Person : PersonId
+Comms --> Email : EmailId
+Comms --> Phone : PhoneId
+Phone --> Country : CountryId
+Phone --> EnumTypeItem : PhoneTypeId
+
+Asset --> Title : AssetId
+Asset --> Party : OwnerId
+
+@enduml
