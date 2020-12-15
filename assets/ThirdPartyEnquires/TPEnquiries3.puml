@@ -47,7 +47,7 @@ System_Boundary(c3, "Azure"){
         Rel( func, graph, "Subscribes to")
         Rel( graph, func, "Notifies")
         Rel( func, ts, "Writes To")
-        Rel( enquiryApi, ts, "Reads From")
+        Rel( enquiriesApi, ts, "Reads From")
     }
 
     System_Boundary(c1, "hub"){
