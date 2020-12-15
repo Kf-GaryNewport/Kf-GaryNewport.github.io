@@ -39,7 +39,7 @@ System_Boundary(c3, "Azure"){
 
         Container( func, "Graph Subscriber", "C#", "", "AzureFunction")
         'Container( shred, "Email Shredder", "C#", "", "AzureFunction")
-        Container( enquiryApi, "Enquiry API", "C#", "", "AzureFunction")
+        Container( enquiriesApi, "Enquiries API", "C#", "", "AzureFunction")
         ContainerDb(ts, "Database", "Table Storage", "Contact Staging Area", "AzureStorage")
 
         'Internal Relationships
@@ -62,7 +62,7 @@ System_Boundary(c3, "Azure"){
         Rel_D(user, hub_app, "Uses", "HTTPS")
         Rel(hub_app, hub_api, "Reads From\nWrites To")
         Rel(hub_api, rel_db, "Reads From\nWrites To")
-        Rel(hub_api, enquiryApi, "Reads From")
+        Rel(hub_api, enquiriesApi, "Reads From")
 
         'Rel(hsvc, qs, "Reads From")
         'Rel(hsvc, rel_db, "Writes To")  
