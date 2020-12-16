@@ -27,9 +27,16 @@ table( Contact)
     primary_key(Id)
     FileName
     LastName
-
 }
 
+table( CDD)
+{
+    primary_key(Id)
+    ContactId
+    CompanyId
+    NorthRowRAG
+    NorthRowUuId
+}
 table( Company)
 {
     primary_key(Id)
@@ -50,18 +57,16 @@ table( AssetTitle)
 {
     primary_key(Id)
     AssetId
-    ContactId
-    CompanyId
+    CDDId
     FileName
     LastName
     EmailAddress
     CompanyName
-    NorthRowRAG
-    NorthRowUuId
 }
 
-AssetTitle --> Asset
-AssetTitle --> Contact : ContactId (nullable)
-AssetTitle --> Company : ContactId (nullable)
+AssetTitle --> Asset : AssetId
+AssetTitle --> CDD : CDDId
+CDD --> Contact : ContactId (nullable)
+CDD --> Company : ContactId (nullable)
 
 @enduml
