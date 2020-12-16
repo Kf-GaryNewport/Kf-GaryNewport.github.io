@@ -54,6 +54,7 @@ table( AssetTitle)
     CompanyId
     FileName
     LastName
+    EmailAddress
     CompanyName
     NorthRowRAG
     NorthRowUuId
