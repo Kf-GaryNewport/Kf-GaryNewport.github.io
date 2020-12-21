@@ -15,7 +15,7 @@
 LAYOUT_TOP_DOWN
 LAYOUT_WITH_LEGEND()
 
-Title Current Hub<->SAP Configuration (Modified)
+Title Hub<->SAP Configuration (Modified rev-01)
 
 Person( wipUser, "Wip\nUser", "")
 Person( repUser, "Reporting\nUser", "")
