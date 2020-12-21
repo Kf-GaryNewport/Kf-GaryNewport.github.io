@@ -31,9 +31,6 @@ System_Boundary(c1, "hub"){
     Container( sapOutQueue, "Sap UpSert Queue", "", "", "AzureQueueStorage")
     Container( sapInQueue, "Sap Notification Queue", "", "", "AzureQueueStorage")
 
-   ' hub_api -[hidden]-> db
-   ' db -[hidden]-> webjob
-
     hub_app --> hub_api 
     hub_api -right-> db
     hub_api --> sapOutQueue
@@ -55,10 +52,5 @@ sapSvc <--> sap
 
 wipUser --> hub_app
 repUser --> hub_app
-
-
-
-
-
 
 @enduml
