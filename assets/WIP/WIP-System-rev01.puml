@@ -39,10 +39,11 @@ System_Boundary(c2, "Azure"){
 }
 
 c1 -[hidden]-> c2
-sapOutQueue --> sap
-db <-- sapSvc
 
-sapSvc <--> sap
+sapOutQueue -down--> sap
+db <-down-- sapSvc
+
+sapSvc <-down-> sap
 
 wipUser --> hub_app
 repUser --> hub_app
