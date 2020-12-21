@@ -34,10 +34,9 @@ System_Boundary(c1, "hub"){
 
     hub_api --> InQ : Send Message Key
     hub_api --> Mst : Store Message
-
+ 
     WebJob --> OutQ : Get Message Key
     WebJob --> Mst : Get Message
-    WebJob -> hub_api : Notification
     Sql <--> hub_api 
     Sql <-- WebJob
 }
@@ -60,12 +59,6 @@ fnCreate --> sap : Create/Update Request
 
 fnNotify <-- sap : SAP Notification 
 Mst <-- fnNotify : Set Message
-
-OutQ <- fnNotify : Message Store Key
-
-
-
-
-
+OutQ <-- fnNotify : Message Store Key
 
 @enduml
