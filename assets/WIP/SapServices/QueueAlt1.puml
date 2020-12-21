@@ -1,0 +1,50 @@
+@startuml "Hub WebJob Alternate"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+
+!include <azure/AzureCommon.puml>
+!include <azure/Storage/AzureStorage>
+!include <azure/Storage/AzureQueueStorage>
+!include <azure/Web/AzureWebApp>
+!include <azure/Compute/AzureFunction>
+!include <azure/Identity/AzureActiveDirectory>
+!include <azure/Security/AzureKeyVault>
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/angular.puml
+!include DEVICONS/msql_server.puml
+!include FONTAWESOME/users.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+Title Hub WebJob Alternate
+
+System_Boundary(c1, "hub"){
+
+    AzureFunction(WebJob, "Notification Process", "C#")
+    ContainerDb(Sql, "Database", "Microsoft SQL", "hub Database", "msql_server")
+
+    AzureQueueStorage(OutQ, "Hub InBound Queue", "Storage Queue")
+    AzureStorage(Mst, "Hub Message Store", "Storage Table")
+
+    WebJob --> OutQ : Get Message Key
+    WebJob --> Mst : Get Message
+    Sql <-- WebJob
+}
+
+System_Boundary(a1, "Azure"){
+    System_Boundary(a2, "SAP Service Resource Group"){
+        AzureFunction(fnNotify, "SAP Notification", "C#")
+    }
+}
+
+System_Ext(sap, "SAP Working Life")
+
+fnNotify <-- sap : SAP Notification 
+Mst <-- fnNotify : Set Message
+OutQ <-- fnNotify : Message Store Key
+
+@enduml
