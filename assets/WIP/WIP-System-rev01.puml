@@ -25,6 +25,7 @@ System_Ext( sap, "SAP Working Life", "")
 System_Boundary(c1, "hub"){
     Container(hub_app, "Web Application", "Angular", "Allows users to view contacts, activities, properties, etc.", "angular")
     Container(hub_api, "Web Application", "C#", "Allows users to view contacts, activities, properties, etc.", "AzureWebApp")
+    Container(webjob, "Web Job", "", "", "AzureWebApp")
     ContainerDb(db, "Database", "Microsoft SQL", "hub Database", "msql_server")
 
     Container( sapOutQueue, "Sap UpSert Queue", "", "WebJob", "AzureQueueStorage")
@@ -32,16 +33,17 @@ System_Boundary(c1, "hub"){
     hub_app --> hub_api 
     hub_api -right-> db
     hub_api --> sapOutQueue
+    sapOutQueue --> webjob
 
 }
 System_Boundary(c2, "Azure"){
     Container( sapSvc, "SapService", "", "")
 }
 
-c1 -[hidden]-> c2
+'c1 -[hidden]-> c2
 
-sapOutQueue -down--> sap
-db <-down-- sapSvc
+webjob -down--> sap
+db <-down--- sapSvc
 
 sapSvc <-down-> sap
 
