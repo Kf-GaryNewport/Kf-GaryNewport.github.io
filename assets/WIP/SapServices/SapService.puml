@@ -1,0 +1,71 @@
+@startuml "SAP Service"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+
+!include <azure/AzureCommon.puml>
+!include <azure/Storage/AzureStorage>
+!include <azure/Storage/AzureQueueStorage>
+!include <azure/Web/AzureWebApp>
+!include <azure/Compute/AzureFunction>
+!include <azure/Identity/AzureActiveDirectory>
+!include <azure/Security/AzureKeyVault>
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/angular.puml
+!include DEVICONS/msql_server.puml
+!include FONTAWESOME/users.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+Title Hub <-> SAP Service
+
+System_Boundary(c1, "hub"){
+
+    Container(hub_api, "Web Application", "C#", "Allows users to view contacts, activities, properties, etc.", "AzureWebApp")
+    Container(WebJob, "Web Job", "C#", "hub external interfaces", "AzureWebApp")
+    ContainerDb(Sql, "Database", "Microsoft SQL", "hub Database", "msql_server")
+
+    AzureQueueStorage(InQ, "Hub OutBound Queue", "Storage Queue")
+    AzureQueueStorage(OutQ, "Hub InBound Queue", "Storage Queue")
+    AzureStorage(Mst, "Hub Message Store", "Storage Table")
+
+    hub_api --> InQ : Send Message Key
+    hub_api --> Mst : Store Message
+
+    WebJob --> OutQ : Get Message Key
+    WebJob --> Mst : Get Message
+    WebJob -> hub_api : Notification
+    Sql <--> hub_api 
+    Sql <-- WebJob
+}
+
+System_Boundary(a1, "Azure"){
+    System_Boundary(a2, "SAP Service Resource Group"){
+        AzureFunction(fnCreate, "SAP UpSert", "Queue Trigger")
+        AzureFunction(fnNotify, "SAP Notification", "C#")
+    }
+
+    AzureKeyVault(kv, "Key Vault", "Service Secrets")
+    AzureActiveDirectory(ad, "Active Directory", "Service Registration")
+}
+
+System_Ext(sap, "SAP Working Life")
+
+InQ --> fnCreate : Subscribe - Get Key
+Mst --> fnCreate : Get Message by Key
+fnCreate --> sap : Create/Update Request
+
+fnNotify <-- sap : SAP Notification 
+Mst <-- fnNotify : Set Message
+
+OutQ <- fnNotify : Message Store Key
+
+
+
+
+
+
+@enduml
