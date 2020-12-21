@@ -34,7 +34,6 @@ System_Boundary(c1, "hub"){
     hub_app --> hub_api 
     hub_api -right-> db
     hub_api --> sapOutQueue
-    sapOutQueue --> webjob
 
     webjob <-- sapInQueue
     webjob -left-> db
@@ -45,7 +44,7 @@ System_Boundary(c2, "Azure"){
 }
 
 c1 -[hidden]-> c2
-webjob --> sapSvc
+sapOutQueue --> sapSvc
 sapInQueue <-- sapSvc
 
 sapSvc <--> sap
