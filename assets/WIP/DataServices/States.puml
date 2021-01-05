@@ -1,0 +1,12 @@
+@startuml
+
+state "New Work Item" as nwi
+state "Complete" as com
+
+[*] --> nwi
+nwi --> com
+com --> [*]
+
+
+
+@enduml

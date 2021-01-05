@@ -1,0 +1,157 @@
+@startuml WipDb
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Company)
+{
+    primary_key(Id)
+}
+
+table( Asset)
+{
+    primary_key(Id)
+}
+
+table( Contact)
+{
+    primary_key(Id)
+}
+
+table( Requirement)
+{
+    primary_key(Id)
+    SellingPropertyId
+    ReferralId
+    SellingAgentId
+
+}
+
+table( Referral)
+{
+    primary_key(Id)
+    CompanyId
+    ContactId
+    WorkItemId
+}
+
+table( Instruction)
+{
+    primary_key(Id)
+}
+
+table( Activity)
+{
+    primary_key(Id)
+}
+
+table( WorkItem)
+{
+    primary_key(Id)
+    InstructionId
+}
+
+table( Valuation)
+{
+    primary_key(Id)
+}
+
+table( Pitch)
+{
+    primary_key(Id)
+    UserId
+    PotentialFeeIncome
+}
+
+table( PitchCompany)
+{
+    primary_key(Id)
+    PitchId
+    CompanyId
+}
+
+table( PitchInstruction)
+{
+    primary_key(Id)
+    PitchId
+    InstructionId
+} 
+
+table( PitchUser)
+{
+    primary_key(Id)
+    PitchId
+    UserId
+}
+
+table( PitchServiceLine)
+{
+    primary_key(Id)
+    PitchId
+    ServiceLineId
+}
+
+table( ServiceLine)
+{
+    primary_key(Id)
+}
+
+table( FeeIncome)
+{
+    primary_key(Id)
+}
+
+table( User)
+{
+    primary_key(Id)
+}
+
+'Requirement --> Referral
+'Requirement --> Asset
+'Requirement --> User : SellingAgentId
+
+'Referral --> Contact : ContactId
+'Referral --> User : ReferrerId
+
+Pitch --> User
+Pitch --> FeeIncome
+'Pitch --> PitchCompany
+'Company --> PitchCompany
+
+PitchCompany --> Pitch
+PitchCompany --> Company
+PitchInstruction --> Pitch
+PitchInstruction --> Instruction
+PitchUser --> Pitch
+PitchUser --> User
+PitchServiceLine --> Pitch
+PitchServiceLine --> ServiceLine
+
+'Referral --> WorkItem
+
+'WorkItem --> Instruction
+'Instruction --> Activity
+'Instruction --> Requirement
+'Instruction --> Valuation
+'Instruction --> Pitch 
+
+@enduml

@@ -1,0 +1,41 @@
+@startuml fred
+
+User --> (Create)
+User --> (Read)
+User --> (Update)
+User --> (Delete)
+
+Actor :Pitch: as upitch
+Actor :Instruction: as uins
+Actor :Referral: as uref
+
+(Create) --> (Work Item)
+(Read) --> (Work Item)
+(Update) --> (Work Item)
+(Delete) --> (Work Item)
+
+upitch --> (Create)
+uins --> (Create)
+uref --> (Create)
+
+'(Work Item) --> (Valuation Details)
+'(Work Item) --> (Agency Details)
+'(Work Item) --> (Capital Markets Details)
+'(Work Item) --> (Consultancy Details)
+'(Work Item) --> (Lease Advisory Details)
+'(Work Item) --> (Management Details)
+'(Work Item) --> (Other Service Line Details)
+
+(Sort Config) --> (Read)
+(Filter Config) --> (Read)
+
+(Work Item) --> (Instruction) : Create
+(Work Item) --> (Pitch) : Create
+(Work Item) --> (Activity) : Create
+(Work Item) --> (Requirement) : Create
+
+uins --> (Activity) : Create
+uins --> (Requirement) : Create
+
+(Work Item) --> (Calculate)
+@enduml

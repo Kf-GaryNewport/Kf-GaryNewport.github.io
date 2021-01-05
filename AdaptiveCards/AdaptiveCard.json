@@ -1,85 +1,115 @@
 {
-    "type": "AdaptiveCard",
-    "body": [
-        {
-            "type": "TextBlock",
-            "size": "Medium",
-            "weight": "Bolder",
-            "text": "Image WaterMark Exception"
-        },
-        {
-            "type": "ColumnSet",
-            "columns": [
+    "attachments": [
+      {
+        "content": {
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+          "body": [
+            {
+              "size": "Medium",
+              "text": "Image WaterMark Execution Report",
+              "type": "TextBlock",
+              "weight": "Bolder"
+            },
+            {
+              "columns": [
                 {
-                    "type": "Column",
-                    "items": [
-                        {
-                            "type": "Image",
-                            "style": "Default",
-                            "url": "https://www.knightfrank.com/library/v3.0/images/knightfranklogo.png",
-                            "size": "Large"
-                        }
-                    ],
-                    "width": "auto"
+                  "items": [
+                    {
+                      "size": "Large",
+                      "style": "Default",
+                      "type": "Image",
+                      "url": "https://www.knightfrank.com/library/v3.0/images/knightfranklogo.png"
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "auto"
                 },
                 {
-                    "type": "Column",
-                    "items": [
-                        {
-                            "type": "TextBlock",
-                            "weight": "Bolder",
-                            "text": "WaterMark Validator",
-                            "wrap": true
-                        },
-                        {
-                            "type": "TextBlock",
-                            "spacing": "None",
-                            "text": "Created {{DATE(2017-02-14T06:08:39Z,SHORT)}}",
-                            "isSubtle": true,
-                            "wrap": true
-                        }
-                    ],
-                    "width": "stretch"
+                  "items": [
+                    {
+                      "text": "WaterMark Validator",
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "wrap": true
+                    },
+                    {
+                      "isSubtle": true,
+                      "spacing": "None",
+                      "text": "Created @{formatDateTime(utcNow(), 'ddd, dd, MMM, yyyy')}",
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "wrap": true
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
                 }
-            ]
-        },
-        {
-            "type": "ColumnSet",
-            "columns": [
+              ],
+              "type": "ColumnSet"
+            },
+            {
+              "columns": [
                 {
-                    "type": "Column",
-                    "items": [
-                        {
-                            "type": "Image",
-                            "style": "Default",
-                            "url": "https://content.knightfrank.com/property/cbm190150/images/b2bee1c5-3dfa-4bbd-9d13-94cde2044822-0.jpg?cio=true&w=730",
-                            "size": "Large"
-                        }
-                    ],
-                    "width": "auto"
+                  "items": [
+                    {
+                      "text": "@{length(body('Get_entities')?['value'])},",
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "wrap": false
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
                 },
-                {
-                    "type": "Column",
-                    "items": [
-                        {
-                            "type": "TextBlock",
-                            "text": "A Watermark has been detected in this image",
-                            "wrap": true
-                        }
-                    ],
-                    "width": "stretch"
+                                {
+                  "items": [
+                    {
+                      "text": "record have been processed in the last 7 days",
+                      "type": "TextBlock",
+                      "wrap": false
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
                 }
-            ]
-        }
+              ],
+              "type": "ColumnSet"
+            },
+            {
+              "columns": [
+                {
+                  "items": [
+                    {
+                      "text": "@{length(body('Get_entities_2')?['value'])},",
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "wrap": false
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
+                },
+                                {
+                  "items": [
+                    {
+                      "text": "have been found to contain a WaterMark",
+                      "type": "TextBlock",
+                      "wrap": false
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
+                }
+              ],
+              "type": "ColumnSet"
+            }
+        ],
+          "type": "AdaptiveCard",
+          "version": "1.2"
+        },
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null
+      }
     ],
-    "actions": [
-        {
-            "type": "Action.OpenUrl",
-            "title": "View",
-            "url": "https://hub.knightfrank.com/#/app/activity/view/60c1d8fb-1bd7-ea11-a95a-000d3ab2efee?tabname=Marketing"
-
-        }
-    ],
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-    "version": "1.2"
-}
+    "type": "message"
+  }

@@ -1,0 +1,81 @@
+{
+    "attachments": [
+      {
+        "content": {
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+          "actions": [
+            {
+              "title": "View",
+              "type": "Action.OpenUrl",
+              "url": "https://hub.knightfrank.com/#/app/activity/view/60c1d8fb-1bd7-ea11-a95a-000d3ab2efee?tabname=Marketing"
+            }
+          ],
+          "body": [
+            {
+              "size": "Medium",
+              "text": "Image WaterMark Exception",
+              "type": "TextBlock",
+              "weight": "Bolder"
+            },
+            {
+              "columns": [
+                {
+                  "items": [
+                    {
+                      "text": "WaterMark Validator",
+                      "type": "TextBlock",
+                      "weight": "Bolder",
+                      "wrap": true
+                    },
+                    {
+                      "isSubtle": true,
+                      "spacing": "None",
+                      "text": "Created {{DATE(2017-02-14T06:08:39Z,SHORT)}}",
+                      "type": "TextBlock",
+                      "wrap": true
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
+                }
+              ],
+              "type": "ColumnSet"
+            },
+            {
+              "columns": [
+                {
+                  "items": [
+                    {
+                      "size": "Large",
+                      "style": "Default",
+                      "type": "Image",
+                      "url": "https://content.knightfrank.com/property/cbm190150/images/b2bee1c5-3dfa-4bbd-9d13-94cde2044822-0.jpg?cio=true&w=730"
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "auto"
+                },
+                {
+                  "items": [
+                    {
+                      "text": "A eagle has been detected in this image",
+                      "type": "TextBlock",
+                      "wrap": true
+                    }
+                  ],
+                  "type": "Column",
+                  "width": "stretch"
+                }
+              ],
+              "type": "ColumnSet"
+            }
+          ],
+          "type": "AdaptiveCard",
+          "version": "1.2"
+        },
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null
+      }
+    ],
+    "type": "message"
+  }

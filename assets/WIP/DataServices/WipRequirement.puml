@@ -1,0 +1,215 @@
+@startuml WipDb
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Company)
+{
+    primary_key(Id)
+}
+
+table( Asset)
+{
+    primary_key(Id)
+}
+
+table( Requirement)
+{
+    primary_key(Id)
+    SellingPropertyId
+    ReferralId
+    SellingAgentId
+    ResponsibleForDealCompanyId
+    ResponsibleForDealNegotiatorDepartmentId
+}
+
+table( Referral)
+{
+    primary_key(Id)
+}
+
+table( User)
+{
+    primary_key(Id)
+}
+
+table( EnumTypeItem)
+{
+    primary_key(Id)
+}
+
+table( OrganisationalUnit)
+{
+    primary_key(Id)
+}
+table( RequirementType)
+{
+    primary_key(Id)
+}
+
+Requirement --> Referral
+Requirement --> Asset
+Requirement --> Company :ResponsibleForDealCompanyId
+Requirement --> EnumTypeItem : Various
+Requirement --> OrganisationalUnit : ResponsibleForDealNegotiatorDepartmentId
+Requirement --> RequirementType: RequirementTypeId
+Requirement --> User : SellingAgentId
+Requirement --> User : ResponsibleForDealNegotiatorId
+Requirement --> User : UserId
+
+table( RequirementAppointment)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementArea)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementAreaHierarchy)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementAttachment)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementAttributeValue)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementCharacteristic)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementCountry)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementDealStructure)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementDepartment)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementDocumentTypeUsage)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementNegotiator)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementNote)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementOtherMotivation)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementParty)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementPropertyType)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementSalutation)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementSecurityAttribute)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementType)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementTypeLocalised)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementTypePropertyType)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementUndisclosed)
+{
+    primary_key(Id)
+    RequirementId
+}
+table( RequirementUniqueNumber)
+{
+    primary_key(Id)
+    RequirementId
+}
+
+RequirementAppointment --> Requirement
+RequirementArea --> Requirement
+RequirementAreaHierarchy --> Requirement
+RequirementAttachment --> Requirement
+RequirementAttributeValue --> Requirement
+RequirementCharacteristic --> Requirement
+RequirementCountry --> Requirement
+RequirementDealStructure --> Requirement
+RequirementDepartment --> Requirement
+RequirementDocumentTypeUsage --> Requirement
+RequirementNegotiator --> Requirement
+RequirementNote --> Requirement
+RequirementOtherMotivation --> Requirement
+RequirementParty --> Requirement
+RequirementPropertyType --> Requirement
+RequirementSalutation --> Requirement
+RequirementSecurityAttribute --> Requirement
+RequirementType --> Requirement
+RequirementTypeLocalised --> Requirement
+RequirementTypePropertyType --> Requirement
+RequirementUndisclosed --> Requirement
+RequirementUniqueNumber --> Requirement
+
+
+
+@enduml
