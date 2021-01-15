@@ -1,0 +1,53 @@
+@startuml "HM Land Registry"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+!includeurl AzurePuml/Storage/AzureStorage.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+Container(hub, Hub, "Hub Web API")
+Container(WebJob, WebJob, "Hub Web Job")
+ContainerDb(Sql, Sql, "Hub Sql")
+Container(hubNote, Notification, "Hub Notification")
+
+AzureQueueStorage(InQ, "Hub OutBound Queue", "Storage Queue")
+AzureQueueStorage(OutQ, "Hub InBound Queue", "Storage Queue")
+AzureStorage(Mst, "Hub Message Store", "Storage Table")
+
+AzureFunction(fnCreate, "Create", "Queue Trigger")
+AzureFunction(fnStatus, "Status", "Timer Trigger")
+AzureFunction(fnCert, "Get Deposit Protection Cert", "C#")
+
+System_Ext(Tds, "HM Land Registry")
+
+hub --> InQ : Send Message Key
+hub --> Mst : Store Message
+
+InQ --> fnCreate : Subscribe
+Mst --> fnCreate : Get Messgae
+fnCreate --> Tds : Create Request
+Mst <-- fnCreate : Update Message
+
+Mst --> fnStatus : Status - Pending
+fnStatus --> Tds : Status Request
+Mst <-- fnStatus : Update Message
+
+Mst --> fnCert : Status - Complete
+fnCert --> Tds : Deposit Protection Certificate Request 
+Mst <-- fnCert : Complete
+
+OutQ <-- fnCert : Message Store Key
+WebJob <-- OutQ : Get Message Key
+WebJob <-- Mst : Get Message
+
+hubNote <-- WebJob
+Sql <-- WebJob
+
+
+@enduml
