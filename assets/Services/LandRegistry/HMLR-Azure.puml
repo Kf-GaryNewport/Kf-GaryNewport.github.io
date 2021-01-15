@@ -39,7 +39,7 @@ fnStatus --> Tds : Status Request
 Mst <-- fnStatus : Update Message
 
 Mst --> fnCert : Status - Complete
-fnCert --> Tds : Deposit Protection Certificate Request 
+fnCert --> Tds : Title Certificate Request 
 Mst <-- fnCert : Complete
 
 OutQ <-- fnCert : Message Store Key
