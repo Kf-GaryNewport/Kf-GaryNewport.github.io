@@ -1,6 +1,5 @@
 @startuml Integration
-!include <c4/C4_Context.puml>  
-LAYOUT_TOP_DOWN
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
 System(hub_system, "hub", "Allows users to manage the buying/selling and letting of retail and commercial properties")
 

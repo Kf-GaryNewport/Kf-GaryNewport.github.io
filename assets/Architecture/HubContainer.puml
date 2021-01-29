@@ -1,8 +1,5 @@
 @startuml Application annotation
-!include <c4/C4_Container.puml>  
-!include <office/Users/user.puml>
-!include <office/Users/mobile_user.puml>
-LAYOUT_TOP_DOWN
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
 title System Context diagram for KF hub Property Portfolio System
 

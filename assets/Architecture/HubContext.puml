@@ -1,7 +1,5 @@
 @startuml Application Context
-!include <c4/C4_Context.puml>  
-!include <office/Users/user.puml>
-!include <office/Users/mobile_user.puml>
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
 'LAYOUT_WITH_LEGEND
 
