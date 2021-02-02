@@ -1,0 +1,8 @@
+@startuml
+class UpdateNotificationRecipientStatusValidator {
+'    + UpdateNotificationRecipientStatusValidator(enumTypeItemRepository:IEnumTypeItemRepository)
+    + UpdateNotificationRecipientStatusValidator(....)
+    + CanUpdateStatus(sourceStatusId:Guid, destinationStatusId:Guid) : bool
+}
+IUpdateNotificationRecipientStatusValidator <|-- UpdateNotificationRecipientStatusValidator
+@enduml

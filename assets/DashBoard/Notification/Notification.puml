@@ -1,0 +1,83 @@
+@startuml
+
+interface INotification {}
+Interface INotificationHandler{}
+INotification <-right- INotificationHandler
+
+class BaseNotableEvent {}
+class ImmediateBaseNotableEvent {
+    + NotificationType
+}
+class ContactNewDealEvent {}
+class PotentialSaleRequirementNotableEvent {}
+
+
+INotification --> BaseNotableEvent
+BaseNotableEvent --> ImmediateBaseNotableEvent
+ImmediateBaseNotableEvent --> ContactNewDealEvent
+ImmediateBaseNotableEvent --> PotentialSaleRequirementNotableEvent
+
+class ImmediateNotableEventHandler {}
+INotificationHandler ---> ImmediateNotableEventHandler
+ImmediateBaseNotableEvent -> ImmediateNotableEventHandler
+
+class ActivityPartyCommandHandlerBase {
+    + PublishNewDealEvent(....)
+}
+
+Interface IContactNewDealNotificationHelper {
+    + Notify(....)
+}
+
+class ContactNewDealNotificationHelper {
+    + Notify(....)
+}
+
+IContactNewDealNotificationHelper --> ContactNewDealNotificationHelper
+ActivityPartyCommandHandlerBase --> IContactNewDealNotificationHelper
+ContactNewDealNotificationHelper --> ContactNewDealEvent
+
+class CreateRequirementCommandHandler{}
+CreateRequirementCommandHandler --> PotentialSaleRequirementNotableEvent
+
+enum NotificationType
+{
+    UpcomingCommercialTenancyRentReview,
+    UpcomingCommercialTenancyLeaseExpiry,
+    UpcomingCommercialTenancyBreak,
+    UpcomingResidentialTenancyRentReview,
+    UpcomingResidentialTenancyLeaseExpiry,
+    UpcomingResidentialTenancyBreak,
+    PotentialSaleRequirement,
+    DocumentSignedOnline,
+    DocumentSignedOnlineDeclined,
+    ActivityStateChanged,
+    EntityAssignment,
+    ContactAddedAsNegotiator,
+    ContactNewDeal,
+    ContactAccessRequest,
+    ContactAccessDeny,
+    CompanyMove,
+    OfferStateChanged,
+    ActivityPriceChanged,
+    FlexibleReportGenerated,
+    MarketingListExportedToDotmailer,
+    RentChangedInQube,
+    FallThroughRecordInQube,
+    StartDateChangedInQube,
+    EndDateChangedInQube,
+    SubscriptionRequested,
+    SubscriptionRequestAccepted,
+    SubscriptionRequestDenied,
+    ReferralCreated,
+    ReferralReviewDateChanged,
+    ReferralReviewOverdue,
+    ReferralForwarded,
+    ReferralStatusAccepted,
+    ReferralStatusRegretted,
+    ReferralStatusAborted,
+    ReferralStatusInstructed,
+    ReferralStatusClientPaidInFull,
+    ReferralStatusFinished
+}
+@enduml

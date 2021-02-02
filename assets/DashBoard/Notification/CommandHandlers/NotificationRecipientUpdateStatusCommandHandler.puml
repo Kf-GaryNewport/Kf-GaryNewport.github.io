@@ -1,0 +1,10 @@
+@startuml
+class NotificationRecipientUpdateStatusCommandHandler {
+'    + NotificationRecipientUpdateStatusCommandHandler(notificationRecipientRepository:IGenericRepository<NotificationRecipient>, enumTypeItemRepository:IEnumTypeItemRepository, updateNotificationRecipientStatusValidator:IUpdateNotificationRecipientStatusValidator)
+    + NotificationRecipientUpdateStatusCommandHandler(....)
+    + Handle(message:NotificationRecipientUpdateStatusCommand) : Unit
+}
+class "IRequestHandler'2"<T1,T2> {
+}
+"IRequestHandler'2" "<NotificationRecipientUpdateStatusCommand,Unit>" <|-- NotificationRecipientUpdateStatusCommandHandler
+@enduml

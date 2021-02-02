@@ -1,0 +1,6 @@
+@startuml
+class NotificationMapperProfile {
+    + NotificationMapperProfile()
+}
+Profile <|-- NotificationMapperProfile
+@enduml

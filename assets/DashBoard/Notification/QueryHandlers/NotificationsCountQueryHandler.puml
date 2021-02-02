@@ -1,0 +1,10 @@
+@startuml
+class NotificationsCountQueryHandler {
+'    + NotificationsCountQueryHandler(notificationRecipientRepository:IReadGenericRepository<NotificationRecipient>, enumTypeItemRepository:IEnumTypeItemRepository)
+    + NotificationsCountQueryHandler(....)
+    + Handle(message:NotificationsCountQuery) : int
+}
+class "IRequestHandler'5"<T1,T2> {
+}
+"IRequestHandler'5" "<NotificationsCountQuery,int>" <|-- NotificationsCountQueryHandler
+@enduml

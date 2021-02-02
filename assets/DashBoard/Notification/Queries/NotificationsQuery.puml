@@ -1,0 +1,8 @@
+@startuml
+class NotificationsQuery {
+}
+class "BasePageableQuery"<T> {
+}
+"BasePageableQuery" "<NotificationsQueryResult>" <|-- NotificationsQuery
+'NotificationsQuery --> "RecipientId" Guid
+@enduml

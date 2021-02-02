@@ -1,0 +1,10 @@
+@startuml
+class BroadcastNotificationsCommandHandler {
+'    + BroadcastNotificationsCommandHandler(notificationRecipientRepository:IGenericRepository<NotificationRecipient>, signalrConnectionRepository:IReadGenericRepository<SignalRConnection>, notificationsService:INotificationsService, enumTypeItemRepository:IEnumTypeItemRepository, entityValidator:IEntityValidator, mediator:ISyncMediator)
+    + BroadcastNotificationsCommandHandler(....)
+    + Handle(message:BroadcastNotificationsCommand) : Guid
+}
+class "IRequestHandler'1"<T1,T2> {
+}
+"IRequestHandler'1" "<BroadcastNotificationsCommand,Guid>" <|-- BroadcastNotificationsCommandHandler
+@enduml

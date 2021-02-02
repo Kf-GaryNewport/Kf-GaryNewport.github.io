@@ -1,0 +1,8 @@
+@startuml
+class NotificationsCountQuery {
+}
+class "IRequest'5"<T> {
+}
+"IRequest'5" "<int>" <|-- NotificationsCountQuery
+'NotificationsCountQuery --> "RecipientId" Guid
+@enduml

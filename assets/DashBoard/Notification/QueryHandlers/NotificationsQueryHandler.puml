@@ -1,0 +1,10 @@
+@startuml
+class NotificationsQueryHandler {
+'    + NotificationsQueryHandler(notificationRecipientRepository:IReadGenericRepository<NotificationRecipient>, enumTypeItemRepository:IEnumTypeItemRepository, currentUserProvider:ICurrentUserProvider)
+    + NotificationsQueryHandler(....)
+    + Handle(query:NotificationsQuery) : NotificationsQueryResult
+}
+class "IRequestHandler'4"<T1,T2> {
+}
+"IRequestHandler'4" "<NotificationsQuery,NotificationsQueryResult>" <|-- NotificationsQueryHandler
+@enduml

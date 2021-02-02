@@ -1,0 +1,5 @@
+@startuml
+interface INotificationBlacklistHelper {
+    ExcludeRecipientsWithDisabledNotification(notificationTypeId:Guid, recipients:List<Guid>) : List<Guid>
+}
+@enduml

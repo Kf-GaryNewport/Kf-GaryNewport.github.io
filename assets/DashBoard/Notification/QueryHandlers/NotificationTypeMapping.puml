@@ -1,0 +1,9 @@
+@startuml
+class NotificationTypeMapping <<static>> {
+}
+class "Dictionary"<T1,T2> {
+}
+NotificationTypeMapping o-> "ResidentialFilterTypes<NotificationFilterType,NotificationType>" "Dictionary"
+NotificationTypeMapping o-> "CommercialFilterTypes<NotificationFilterType,NotificationType>" "Dictionary"
+NotificationTypeMapping o-> "OtherFilterTypes<NotificationFilterType,NotificationType[]>" "Dictionary"
+@enduml

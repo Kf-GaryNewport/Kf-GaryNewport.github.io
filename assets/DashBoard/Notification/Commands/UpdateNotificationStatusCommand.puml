@@ -1,0 +1,7 @@
+@startuml
+class UpdateNotificationStatusCommand {
+    + Status : string <<get>> <<set>>
+}
+"IRequest'3" <|-- UpdateNotificationStatusCommand
+'UpdateNotificationStatusCommand --> "NotificationId" Guid
+@enduml

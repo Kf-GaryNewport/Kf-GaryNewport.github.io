@@ -1,0 +1,12 @@
+@startuml
+class NotificationRecipientUpdateStatusCommand {
+    + NotificationRecipientUpdateStatusCommand(notificationRecipientsIds:Guid[])
+}
+class "IRequest'2"<T> {
+}
+'class "List"<T> {
+'}
+"IRequest'2" "<Unit>" <|-- NotificationRecipientUpdateStatusCommand
+'NotificationRecipientUpdateStatusCommand --> "NotificationRecipientIds<Guid>" "List"
+'NotificationRecipientUpdateStatusCommand --> "StatusId" Guid
+@enduml

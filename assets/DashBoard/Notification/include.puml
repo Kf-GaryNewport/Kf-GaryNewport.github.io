@@ -1,0 +1,47 @@
+@startuml
+
+'left to right direction
+
+'!include .\\NotificationMapperProfile.puml
+
+'!include .\\CommandHandlers\BroadcastNotificationsCommandHandler.puml
+'!include .\\Commands\BroadcastNotificationsCommand.puml
+'"IRequest'1" <-right- "IRequestHandler'1"
+'BroadcastNotificationsCommand -right-> BroadcastNotificationsCommandHandler
+
+'!include .\\CommandHandlers\NotificationRecipientUpdateStatusCommandHandler.puml
+'!include .\\Commands\NotificationRecipientUpdateStatusCommand.puml
+'"IRequest'2" <-right- "IRequestHandler'2"
+'NotificationRecipientUpdateStatusCommand -right-> NotificationRecipientUpdateStatusCommandHandler
+
+'!include .\\CommandHandlers\UpdateNotificationStatusCommandHandler.puml
+'!include .\\Commands\UpdateNotificationStatusCommand.puml
+'"IRequest'3" <-right- "IRequestHandler'3"
+'UpdateNotificationStatusCommand -right-> UpdateNotificationStatusCommandHandler
+
+'!include .\\CommandHandlers\IUpdateNotificationRecipientStatusValidator.puml
+'!include .\\CommandHandlers\UpdateNotificationRecipientStatusValidator.puml
+
+'!include .\\Commands\UpdateNotificationStatusCommandValidator.puml
+
+'!include .\\Helpers\INotificationBlacklistHelper.puml
+'!include .\\Helpers\NotificationBlacklistHelper.puml
+
+'!include .\\Queries\NotificationsQuery.puml
+'!include .\\QueryHandlers\NotificationsQueryHandler.puml
+'"BasePageableQuery" <-right- "IRequestHandler'4"
+'NotificationsQuery -right-> NotificationsQueryHandler
+
+'!include .\\QueryHandlers\NotificationsCountQueryHandler.puml
+'!include .\\Queries\NotificationsCountQuery.puml
+'"IRequest'5" <-right- "IRequestHandler'5"
+'NotificationsCountQuery -right-> NotificationsCountQueryHandler
+
+'!include .\\QueryHandlers\NotificationsQueryableExtension.puml
+
+'!include .\\QueryHandlers\NotificationTypeMapping.puml
+
+'!include .\\QueryResults\NotificationsQueryResult.puml
+'!include .\\QueryResults\NotificationViewModel.puml
+
+@enduml

@@ -1,0 +1,7 @@
+@startuml
+class NotificationsQueryResult {
+}
+class "PageableResult"<T> {
+}
+"PageableResult" "<NotificationViewModel>" <|-- NotificationsQueryResult
+@enduml

@@ -1,0 +1,6 @@
+@startuml
+class NotificationsQueryableExtension <<static>> {
+    + {static} FilterByDates(queryable:IQueryable<NotificationRecipient>, dateFrom:DateTimeOffset?, dateTo:DateTimeOffset?) : IQueryable<NotificationRecipient>
+    + {static} FilterByNotificationType(queryable:IQueryable<NotificationRecipient>, notificationTypeIds:List<Guid>) : IQueryable<NotificationRecipient>
+}
+@enduml

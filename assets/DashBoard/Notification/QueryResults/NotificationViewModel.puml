@@ -1,0 +1,12 @@
+@startuml
+class NotificationViewModel {
+    + Title : string <<get>> <<set>>
+}
+INotification <|-- NotificationViewModel
+NotificationViewModel --> "Id" Guid
+NotificationViewModel --> "TypeId" Guid
+NotificationViewModel --> "DateOccurred" DateTimeOffset
+NotificationViewModel --> "NotificationRecipientId" Guid
+NotificationViewModel --> "EntityTypeId" Guid
+NotificationViewModel --> "StatusId" Guid
+@enduml

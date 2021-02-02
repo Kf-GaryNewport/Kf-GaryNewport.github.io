@@ -1,0 +1,7 @@
+@startuml
+class NotificationBlacklistHelper {
+    + NotificationBlacklistHelper(notificationBlacklistRepository:IReadGenericRepository<NotificationBlacklist>)
+    + ExcludeRecipientsWithDisabledNotification(notificationTypeId:Guid, recipients:List<Guid>) : List<Guid>
+}
+INotificationBlacklistHelper <|-- NotificationBlacklistHelper
+@enduml

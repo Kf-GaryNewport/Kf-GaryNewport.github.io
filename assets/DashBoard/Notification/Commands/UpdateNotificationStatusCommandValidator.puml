@@ -1,0 +1,8 @@
+@startuml
+class UpdateNotificationStatusCommandValidator {
+    + UpdateNotificationStatusCommandValidator()
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<UpdateNotificationStatusCommand>" <|-- UpdateNotificationStatusCommandValidator
+@enduml
