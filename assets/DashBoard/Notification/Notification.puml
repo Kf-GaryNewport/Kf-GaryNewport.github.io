@@ -8,37 +8,22 @@ class BaseNotableEvent {}
 class ImmediateBaseNotableEvent {
     + NotificationType
 }
-class ContactNewDealEvent {}
-class PotentialSaleRequirementNotableEvent {}
-
 
 INotification --> BaseNotableEvent
 BaseNotableEvent --> ImmediateBaseNotableEvent
-ImmediateBaseNotableEvent --> ContactNewDealEvent
-ImmediateBaseNotableEvent --> PotentialSaleRequirementNotableEvent
 
 class ImmediateNotableEventHandler {}
 INotificationHandler ---> ImmediateNotableEventHandler
 ImmediateBaseNotableEvent -> ImmediateNotableEventHandler
 
-class ActivityPartyCommandHandlerBase {
-    + PublishNewDealEvent(....)
-}
+'---------------------------
+class NotificationNotableEvent {}
+class NotificationCommandHandler{}
+NotificationCommandHandler --> NotificationNotableEvent
+ImmediateBaseNotableEvent --> NotificationNotableEvent
 
-Interface IContactNewDealNotificationHelper {
-    + Notify(....)
-}
 
-class ContactNewDealNotificationHelper {
-    + Notify(....)
-}
-
-IContactNewDealNotificationHelper --> ContactNewDealNotificationHelper
-ActivityPartyCommandHandlerBase --> IContactNewDealNotificationHelper
-ContactNewDealNotificationHelper --> ContactNewDealEvent
-
-class CreateRequirementCommandHandler{}
-CreateRequirementCommandHandler --> PotentialSaleRequirementNotableEvent
+'---------------------------
 
 enum NotificationType
 {
