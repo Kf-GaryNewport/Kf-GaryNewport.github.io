@@ -1,0 +1,82 @@
+@startuml
+
+interface INotification {}
+Interface INotificationHandler{}
+INotification <-right- INotificationHandler
+
+class BaseNotableEvent {}
+class ImmediateBaseNotableEvent {
+    + NotificationType
+}
+
+INotification --> BaseNotableEvent
+BaseNotableEvent --> ImmediateBaseNotableEvent
+
+class ImmediateNotableEventHandler {}
+INotificationHandler ---> ImmediateNotableEventHandler
+ImmediateBaseNotableEvent -> ImmediateNotableEventHandler
+
+'---------------------------
+
+class ActivityPartyCommandHandlerBase {
+    + PublishNewDealEvent(....)
+}
+
+Interface IContactNewDealNotificationHelper {
+    + Notify(....)
+}
+
+class ContactNewDealNotificationHelper {
+    + Notify(....)
+}
+
+class ContactNewDealEvent {}
+
+IContactNewDealNotificationHelper --> ContactNewDealNotificationHelper
+ActivityPartyCommandHandlerBase --> IContactNewDealNotificationHelper
+ContactNewDealNotificationHelper --> ContactNewDealEvent
+ImmediateBaseNotableEvent --> ContactNewDealEvent
+
+'---------------------------
+
+enum NotificationType
+{
+    UpcomingCommercialTenancyRentReview,
+    UpcomingCommercialTenancyLeaseExpiry,
+    UpcomingCommercialTenancyBreak,
+    UpcomingResidentialTenancyRentReview,
+    UpcomingResidentialTenancyLeaseExpiry,
+    UpcomingResidentialTenancyBreak,
+    PotentialSaleRequirement,
+    DocumentSignedOnline,
+    DocumentSignedOnlineDeclined,
+    ActivityStateChanged,
+    EntityAssignment,
+    ContactAddedAsNegotiator,
+    ContactNewDeal,
+    ContactAccessRequest,
+    ContactAccessDeny,
+    CompanyMove,
+    OfferStateChanged,
+    ActivityPriceChanged,
+    FlexibleReportGenerated,
+    MarketingListExportedToDotmailer,
+    RentChangedInQube,
+    FallThroughRecordInQube,
+    StartDateChangedInQube,
+    EndDateChangedInQube,
+    SubscriptionRequested,
+    SubscriptionRequestAccepted,
+    SubscriptionRequestDenied,
+    ReferralCreated,
+    ReferralReviewDateChanged,
+    ReferralReviewOverdue,
+    ReferralForwarded,
+    ReferralStatusAccepted,
+    ReferralStatusRegretted,
+    ReferralStatusAborted,
+    ReferralStatusInstructed,
+    ReferralStatusClientPaidInFull,
+    ReferralStatusFinished
+}
+@enduml
