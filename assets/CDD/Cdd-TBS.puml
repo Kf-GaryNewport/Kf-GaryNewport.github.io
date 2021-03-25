@@ -1,0 +1,24 @@
+@startuml Cdd Tbs
+
+(start) --> Party
+(start) --> ThirdParty
+(start) --> CounterParty
+
+Party --> (Instruction)
+ThirdParty --> (Contact)
+(Contact) --> (Referral)
+CounterParty --> (Requirement)
+
+(Referral) --> (Instruction) : Creates Instruction
+
+(Instruction) --> (Asset)
+(Asset) --> (LandRegistry) 
+(LandRegistry)  --> (Title)
+(Title) --> (Asset)
+(Asset) <--> (Contact)
+(Contact) --> (CDD)
+(CDD) --> (CDD) : Until Complete
+
+
+
+@enduml

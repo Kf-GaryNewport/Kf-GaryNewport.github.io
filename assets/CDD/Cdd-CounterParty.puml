@@ -1,0 +1,33 @@
+@startuml cdd CounterParty
+
+
+(start) --> Party
+(start) --> CounterParty
+
+Party --> (Instruction)
+CounterParty --> (Requirement)
+
+(Requirement) --> (Contact) : create if not exist
+
+(Instruction) --> (Asset)
+(Asset) --> (LandRegistry) 
+(LandRegistry)  --> (Title)
+(Title) --> (Asset)
+(Asset) <--> (Contact) : Asset may have many contacts
+(Contact) --> (CDD)
+(CDD) --> (CDD) : Until Complete
+
+(Instruction) --> (Activity)
+(Asset) --> (Activity)
+(Contact) --> (Activity) : Party
+(Contact) --> (Activity) : CounterParty
+(Activity) --> (CDD Questionaire)
+
+(CDD Questionaire) ..> (Contact) #blue;line.dotted;text:blue : Ref. Party
+(CDD Questionaire) ..> (Contact) #blue;line.dotted;text:blue : Ref. CounterParty
+
+(Activity) ..> (CDD) #green;line.dashed;text:green : CounterParty Trigger\n On Offer
+
+(Activity) --> (stop)
+
+@enduml

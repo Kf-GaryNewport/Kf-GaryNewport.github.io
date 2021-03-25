@@ -1,0 +1,35 @@
+@startuml cdd
+
+(start) --> Party
+(start) --> ThirdParty
+Party --> (Instruction)
+ThirdParty --> (Contact)
+(Contact) --> (Referral)
+
+(Instruction) --> (Contact) : Create if not exist
+
+(Referral) --> (Instruction) : Creates Instruction
+(Instruction) --> (Asset)
+(Asset) --> (LandRegistry) 
+(LandRegistry)  --> (Title)
+(Title) --> (Asset)
+(Asset) <--> (Contact)
+(Contact) --> (CDD)
+(CDD) --> (CDD) : Until Complete
+(Instruction) --> (Activity)
+'(Instruction) --> (CDD Questionaire) : TBS
+
+(Activity) --> (Asset)
+(Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. Party
+(Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. CounterParty
+(Activity) --> (CDD Questionaire)
+
+
+(CDD Questionaire) ..> (Contact) #blue;line.dotted;text:blue : Ref. Party
+(CDD Questionaire) ..> (Contact) #blue;line.dotted;text:blue : Ref. CounterParty
+
+'(Activity) ..> (CDD) #green;line.dashed;text:green  : Tenancy Trigger
+(Instruction) ..> (CDD) #green;line.dashed;text:green  : PARTY Instruction Trigger
+
+@enduml
+
