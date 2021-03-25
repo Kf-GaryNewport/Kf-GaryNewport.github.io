@@ -31,5 +31,6 @@ ThirdParty --> (Contact)
 '(Activity) ..> (CDD) #green;line.dashed;text:green  : Tenancy Trigger
 (Instruction) ..> (CDD) #green;line.dashed;text:green  : PARTY Instruction Trigger
 
+(Activity) --> (stop)
 @enduml
 
