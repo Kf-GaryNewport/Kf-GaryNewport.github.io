@@ -2,9 +2,12 @@
 
 
 (start) --> Party
+(start) --> ThirdParty
 (start) --> CounterParty
 
 Party --> (Instruction)
+ThirdParty --> (Referral) : via Contact
+(Referral) --> (Instruction) : Creates Instruction
 CounterParty --> (Requirement)
 
 (Requirement) --> (Contact) : create if not exist
@@ -18,7 +21,9 @@ CounterParty --> (Requirement)
 (CDD) --> (CDD) : Until Complete
 
 (Instruction) --> (Activity)
-(Asset) --> (Activity)
+(Requirement) --> (Activity)
+
+(Activity) --> (Asset) #blue;line.dotted;text:blue
 (Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. Party
 (Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. CounterParty
 (Activity) --> (CDD Questionaire)

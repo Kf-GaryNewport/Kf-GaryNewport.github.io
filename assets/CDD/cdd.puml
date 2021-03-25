@@ -4,7 +4,7 @@
 (start) --> ThirdParty
 Party --> (Instruction)
 ThirdParty --> (Contact)
-(Contact) --> (Referral)
+(Contact) --> (Referral) : Creates
 
 (Instruction) --> (Contact) : Create if not exist
 
@@ -19,7 +19,7 @@ ThirdParty --> (Contact)
 (Instruction) --> (Activity)
 '(Instruction) --> (CDD Questionaire) : TBS
 
-(Activity) --> (Asset)
+(Activity) --> (Asset) #blue;line.dotted;text:blue : Ref. Asset
 (Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. Party
 (Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. CounterParty
 (Activity) --> (CDD Questionaire)
