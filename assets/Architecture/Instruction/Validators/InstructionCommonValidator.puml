@@ -1,0 +1,16 @@
+@startuml
+class InstructionCommonValidator {
+'    + InstructionCommonValidator(entityValidator:IEntityValidator, userRepository:IGenericRepository<User>, departmentRepository:IGenericRepository<Department>, instructionBillingContactValidator:IInstructionBillingContactValidator, instructionClientContactValidator:IInstructionClientContactValidator, enumTypeItemRepository:IEnumTypeItemRepository, registrationSystemRepository:IReadGenericRepository<RegistrationSystem>)
+    + InstructionCommonValidator()
+    + ValidateNegotiatorDepartment(command:BaseInstructionCommand, currentDepartmentId:Guid) : void
+    + ValidateNegotiatorEmployeeNumber(command:BaseInstructionCommand) : void
+    + ValidateClientOrBillingContact(command:BaseInstructionCommand) : void
+    + ValidateTeamResponsibleForCdd(message:BaseInstructionCommand) : void
+    + ValidateReferenceNumber(message:BaseInstructionCommand, oldInstruction:Instruction) : void
+    + ValidateRegistrationSystem(instruction:Instruction, message:BaseInstructionCommand) : void
+    + ValidateServiceLine(command:BaseInstructionCommand) : void
+    + ValidateEntities(command:BaseInstructionCommand) : void
+    + ValidateAddresseeDetails(message:BaseInstructionCommand) : void
+}
+IInstructionCommonValidator <|-- InstructionCommonValidator
+@enduml

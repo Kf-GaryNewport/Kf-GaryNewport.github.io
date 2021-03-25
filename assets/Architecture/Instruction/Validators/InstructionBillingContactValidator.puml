@@ -1,0 +1,8 @@
+@startuml
+class InstructionBillingContactValidator {
+'    + InstructionBillingContactValidator(contactRepository:IReadGenericRepository<Contact>, addressRepository:IReadGenericRepository<Address>, addressValidator:IAddressValidator)
+    + InstructionBillingContactValidator()
+}
+InstructionContactBaseValidator <|-- InstructionBillingContactValidator
+IInstructionBillingContactValidator <|-- InstructionBillingContactValidator
+@enduml

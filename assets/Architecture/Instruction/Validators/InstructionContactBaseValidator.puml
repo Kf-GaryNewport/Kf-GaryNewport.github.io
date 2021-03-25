@@ -1,0 +1,5 @@
+@startuml
+abstract class InstructionContactBaseValidator {
+    + ValidateContact(command:InstructionPartyCommand) : void
+}
+@enduml

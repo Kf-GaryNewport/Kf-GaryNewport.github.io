@@ -1,0 +1,8 @@
+@startuml
+class InstructionClientContactValidator {
+'    + InstructionClientContactValidator(contactRepository:IReadGenericRepository<Contact>, addressRepository:IReadGenericRepository<Address>, addressValidator:IAddressValidator)
+    + InstructionClientContactValidator()
+}
+InstructionContactBaseValidator <|-- InstructionClientContactValidator
+IInstructionClientContactValidator <|-- InstructionClientContactValidator
+@enduml

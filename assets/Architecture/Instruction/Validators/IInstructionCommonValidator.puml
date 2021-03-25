@@ -1,0 +1,13 @@
+@startuml
+interface IInstructionCommonValidator {
+    ValidateEntities(command:BaseInstructionCommand) : void
+    ValidateServiceLine(command:BaseInstructionCommand) : void
+    ValidateNegotiatorDepartment(command:BaseInstructionCommand, currentDepartmentId:Guid) : void
+    ValidateNegotiatorEmployeeNumber(command:BaseInstructionCommand) : void
+    ValidateClientOrBillingContact(command:BaseInstructionCommand) : void
+    ValidateTeamResponsibleForCdd(message:BaseInstructionCommand) : void
+    ValidateReferenceNumber(message:BaseInstructionCommand, oldInstruction:Instruction) : void
+    ValidateRegistrationSystem(instruction:Instruction, message:BaseInstructionCommand) : void
+    ValidateAddresseeDetails(message:BaseInstructionCommand) : void
+}
+@enduml

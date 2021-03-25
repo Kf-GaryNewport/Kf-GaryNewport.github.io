@@ -1,0 +1,5 @@
+@startuml
+interface IInstructionClientContactValidator {
+    ValidateContact(command:InstructionPartyCommand) : void
+}
+@enduml
