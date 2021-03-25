@@ -1,9 +1,48 @@
 @startuml Validators
-!include .\IInstructionBillingContactValidator.puml
-!include .\IInstructionClientContactValidator.puml
-!include .\IInstructionCommonValidator.puml
-!include .\InstructionBillingContactValidator.puml
-!include .\InstructionClientContactValidator.puml
-!include .\InstructionCommonValidator.puml
-!include .\InstructionContactBaseValidator.puml
+interface IInstructionBillingContactValidator {
+    ValidateContact(command:InstructionPartyCommand) : void
+}
+interface IInstructionClientContactValidator {
+    ValidateContact(command:InstructionPartyCommand) : void
+}
+interface IInstructionCommonValidator {
+    ValidateEntities(command:BaseInstructionCommand) : void
+    ValidateServiceLine(command:BaseInstructionCommand) : void
+    ValidateNegotiatorDepartment(command:BaseInstructionCommand, currentDepartmentId:Guid) : void
+    ValidateNegotiatorEmployeeNumber(command:BaseInstructionCommand) : void
+    ValidateClientOrBillingContact(command:BaseInstructionCommand) : void
+    ValidateTeamResponsibleForCdd(message:BaseInstructionCommand) : void
+    ValidateReferenceNumber(message:BaseInstructionCommand, oldInstruction:Instruction) : void
+    ValidateRegistrationSystem(instruction:Instruction, message:BaseInstructionCommand) : void
+    ValidateAddresseeDetails(message:BaseInstructionCommand) : void
+}
+class InstructionBillingContactValidator {
+'    + InstructionBillingContactValidator(contactRepository:IReadGenericRepository<Contact>, addressRepository:IReadGenericRepository<Address>, addressValidator:IAddressValidator)
+    + InstructionBillingContactValidator()
+}
+InstructionContactBaseValidator <|-- InstructionBillingContactValidator
+IInstructionBillingContactValidator <|-- InstructionBillingContactValidator
+class InstructionClientContactValidator {
+'    + InstructionClientContactValidator(contactRepository:IReadGenericRepository<Contact>, addressRepository:IReadGenericRepository<Address>, addressValidator:IAddressValidator)
+    + InstructionClientContactValidator()
+}
+InstructionContactBaseValidator <|-- InstructionClientContactValidator
+IInstructionClientContactValidator <|-- InstructionClientContactValidator
+class InstructionCommonValidator {
+'    + InstructionCommonValidator(entityValidator:IEntityValidator, userRepository:IGenericRepository<User>, departmentRepository:IGenericRepository<Department>, instructionBillingContactValidator:IInstructionBillingContactValidator, instructionClientContactValidator:IInstructionClientContactValidator, enumTypeItemRepository:IEnumTypeItemRepository, registrationSystemRepository:IReadGenericRepository<RegistrationSystem>)
+    + InstructionCommonValidator()
+    + ValidateNegotiatorDepartment(command:BaseInstructionCommand, currentDepartmentId:Guid) : void
+    + ValidateNegotiatorEmployeeNumber(command:BaseInstructionCommand) : void
+    + ValidateClientOrBillingContact(command:BaseInstructionCommand) : void
+    + ValidateTeamResponsibleForCdd(message:BaseInstructionCommand) : void
+    + ValidateReferenceNumber(message:BaseInstructionCommand, oldInstruction:Instruction) : void
+    + ValidateRegistrationSystem(instruction:Instruction, message:BaseInstructionCommand) : void
+    + ValidateServiceLine(command:BaseInstructionCommand) : void
+    + ValidateEntities(command:BaseInstructionCommand) : void
+    + ValidateAddresseeDetails(message:BaseInstructionCommand) : void
+}
+IInstructionCommonValidator <|-- InstructionCommonValidator
+abstract class InstructionContactBaseValidator {
+    + ValidateContact(command:InstructionPartyCommand) : void
+}
 @enduml
