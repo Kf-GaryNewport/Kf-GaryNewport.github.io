@@ -19,8 +19,8 @@ CounterParty --> (Requirement)
 
 (Instruction) --> (Activity)
 (Asset) --> (Activity)
-(Contact) --> (Activity) : Party
-(Contact) --> (Activity) : CounterParty
+(Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. Party
+(Activity) --> (Contact) #blue;line.dotted;text:blue : Ref. CounterParty
 (Activity) --> (CDD Questionaire)
 
 (CDD Questionaire) ..> (Contact) #blue;line.dotted;text:blue : Ref. Party
