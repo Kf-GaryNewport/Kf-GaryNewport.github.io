@@ -34,10 +34,29 @@ table( Contact)
     primary_key(Id)
 }
 
-table( ContactConsent)
+table( ContactAddress)
 {
     primary_key(Id)
     ContactId
+}
+
+table( ContactCompanyAddress)
+{
+    primary_key(Id)
+    ContactId
+}
+
+table( ContactEmail)
+{
+    primary_key(Id)
+    ContactId
+}
+
+table( ContactConsent)
+{
+    primary_key(Id)
+    ContactAddressId 
+    ContactCompanyAddressId
     ContactEmailId
     HasReceivedFpnEmail
     DirectMarketingConsentId
@@ -61,15 +80,6 @@ table( OrganisationUnitConsent)
     IsImpliedBusinessConsentEnabled
 }
 
-OrganisationUnit <-- OrganisationUnitConsent : OrganisationUnitId
-Contact <-- ContactConsent : ContactId
-OrganisationUnitConsent <-- ContactConsent
-ContactConsent --> ConsentScript : ConsentScriptId
-EnumTypeItem <-- ContactConsent : ConsentMethodId
-EnumTypeItem <-- ContactConsent : DirectMarketingConsentId
-
-
-
 table( EnumTypeItem)
 {
     primary_key(Id)
@@ -79,7 +89,18 @@ table( EnumTypeItem)
     SecondarySortOrder
 }
 
+OrganisationUnit <-- OrganisationUnitConsent : OrganisationUnitId
+Contact <-- ContactAddress : ContactId
+Contact <-- ContactCompanyAddress : ContactId
+Contact <-- ContactEmail : ContactId
 
+ContactAddress <-- ContactConsent : ContactAddressId
+ContactCompanyAddress <-- ContactConsent : ContactCompanyAddressId
+ContactEmail <-- ContactConsent : ContactEmailId
 
+OrganisationUnitConsent <-- ContactConsent
+ContactConsent --> ConsentScript : ConsentScriptId
+EnumTypeItem <-- ContactConsent : ConsentMethodId
+EnumTypeItem <-- ContactConsent : DirectMarketingConsentId
 
 @enduml
