@@ -34,10 +34,23 @@ table( Contact)
     primary_key(Id)
 }
 
+table( ContactAddress)
+{
+    primary_key(Id)
+    ContactId
+}
+
+table( ContactCompanyAddress)
+{
+    primary_key(Id)
+    ContactId
+}
+
 table( ContactAddressDirectMarketingConsent)
 {
     primary_key(Id)
     OrganisationUnitId
+    ContactAddressId
     DirectMarketingConsentId
     ConsentMethodId
     ConsentScriptId
@@ -46,10 +59,11 @@ table( ContactAddressDirectMarketingConsent)
 table( ContactCompanyAddressDirectMarketingConsent)
 {
     primary_key(Id)
-      OrganisationUnitId
-      DirectMarketingConsentId
-      ConsentMethodId
-      ConsentScriptId
+    OrganisationUnitId
+    ContactCompanyAddressId
+    DirectMarketingConsentId
+    ConsentMethodId
+    ConsentScriptId
 }
 
 table( ContactEmail)
@@ -89,12 +103,16 @@ table( EnumTypeItem)
 }
 
 Contact <-- ContactEmail : ContactId
+Contact <-- ContactCompanyAddress : ContactId
+Contact <-- ContactAddress : ContactId
 
+ContactAddress <-- ContactAddressDirectMarketingConsent : ContactAddressId
 EnumTypeItem <-- ContactAddressDirectMarketingConsent : ConsentMethodId
 EnumTypeItem <-- ContactAddressDirectMarketingConsent : DirectMarketingConsentId
 OrganisationUnit <-- ContactAddressDirectMarketingConsent : OrganisationUnitId
 ContactAddressDirectMarketingConsent --> ConsentScript : ConsentScriptId
 
+ContactCompanyAddress <-- ContactEmailDirectMarketingConsent : ContactCompanyAddressId
 EnumTypeItem <-- ContactCompanyAddressDirectMarketingConsent : ConsentMethodId
 EnumTypeItem <-- ContactCompanyAddressDirectMarketingConsent : DirectMarketingConsentId
 OrganisationUnit <-- ContactCompanyAddressDirectMarketingConsent : OrganisationUnitId
