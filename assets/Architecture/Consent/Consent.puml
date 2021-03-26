@@ -1,0 +1,110 @@
+@startuml DbNext
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( ConsentScript)
+{
+    primary_key(Id)
+    Content
+    CreationDate
+}
+
+table( Contact)
+{
+    primary_key(Id)
+}
+
+table( ContactAddressDirectMarketingConsent)
+{
+    primary_key(Id)
+    OrganisationUnitId
+    DirectMarketingConsentId
+    ConsentMethodId
+    ConsentScriptId
+}
+
+table( ContactCompanyAddressDirectMarketingConsent)
+{
+    primary_key(Id)
+      OrganisationUnitId
+      DirectMarketingConsentId
+      ConsentMethodId
+      ConsentScriptId
+}
+
+table( ContactEmail)
+{
+    primary_key(Id)
+    ContactId
+    HasReceivedFpnEmail
+}
+
+table( OrganisationUnit)
+{
+    primary_key(Id)
+    IsFpnEmailEnabled
+    IsConsentEnabled
+    IsConsentScriptAndEmailsEnabled
+    IsImpliedPrivateConsentEnabled
+    IsImpliedBusinessConsentEnabled
+}
+
+table( ContactEmailDirectMarketingConsent)
+{
+    primary_key(Id)
+    ContactEmailId
+    OrganisationUnitId
+    DirectMarketingConsentId
+    ConsentMethodId
+    ConsentScriptId
+}
+
+table( EnumTypeItem)
+{
+    primary_key(Id)
+    Code
+    EnumTypeId
+    PrimarySortOrder
+    SecondarySortOrder
+}
+
+Contact <-- ContactEmail : ContactId
+
+EnumTypeItem <-- ContactAddressDirectMarketingConsent : ConsentMethodId
+EnumTypeItem <-- ContactAddressDirectMarketingConsent : DirectMarketingConsentId
+OrganisationUnit <-- ContactAddressDirectMarketingConsent : OrganisationUnitId
+ContactAddressDirectMarketingConsent --> ConsentScript : ConsentScriptId
+
+EnumTypeItem <-- ContactCompanyAddressDirectMarketingConsent : ConsentMethodId
+EnumTypeItem <-- ContactCompanyAddressDirectMarketingConsent : DirectMarketingConsentId
+OrganisationUnit <-- ContactCompanyAddressDirectMarketingConsent : OrganisationUnitId
+ContactCompanyAddressDirectMarketingConsent --> ConsentScript : ConsentScriptId
+
+ContactEmail <-- ContactEmailDirectMarketingConsent : ContactEmailId
+OrganisationUnit <-- ContactEmailDirectMarketingConsent : OrganisationUnitId
+EnumTypeItem <-- ContactEmailDirectMarketingConsent : ConsentMethodId
+EnumTypeItem <-- ContactEmailDirectMarketingConsent : DirectMarketingConsentId
+ContactEmailDirectMarketingConsent --> ConsentScript : ConsentScriptId
+
+
+@enduml
