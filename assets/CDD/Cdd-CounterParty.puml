@@ -1,6 +1,5 @@
 @startuml cdd CounterParty
 
-
 (start) --> Party
 (start) --> ThirdParty
 (start) --> CounterParty
