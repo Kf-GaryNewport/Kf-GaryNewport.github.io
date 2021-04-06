@@ -25,6 +25,7 @@ skinparam classarrowcolor gray
 table( ConsentScript)
 {
     primary_key(Id)
+    OrganisationUnitId
     Content
     CreationDate
 }
@@ -124,5 +125,5 @@ EnumTypeItem <-- ContactEmailDirectMarketingConsent : ConsentMethodId
 EnumTypeItem <-- ContactEmailDirectMarketingConsent : DirectMarketingConsentId
 ContactEmailDirectMarketingConsent --> ConsentScript : ConsentScriptId
 
-
+OrganisationUnit <-- ConsentScript #red;line.dashed;text:red : OrganisationUnitId(New Link)
 @enduml
