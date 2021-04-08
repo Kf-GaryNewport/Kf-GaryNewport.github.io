@@ -76,7 +76,7 @@ table( QuestionAnswer)
     ContactDueDiligenceId
 }
 
-Contact ||--|{ ContactDueDiligence : A contact can have many Questionnaires
+Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
 
 ContactDueDiligence ||--|| Questionnaire 
 ContactDueDiligence ||--|{ ContactCDDDocuments
