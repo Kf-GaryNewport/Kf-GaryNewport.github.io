@@ -73,14 +73,14 @@ table( QuestionAnswer)
     primary_key(Id)
     QuestionnaireId 
     QuestionId
-    ContactId
+    ContactDueDiligenceId
 }
 
 Contact ||--|{ ContactDueDiligence : A contact can have many Questionnaires
-Contact ||--|{ QuestionAnswer : A Contact has many Answers \n A Answer has 1 contact
 
 ContactDueDiligence ||--|| Questionnaire 
 ContactDueDiligence ||--|{ ContactCDDDocuments
+ContactDueDiligence ||--|{ QuestionAnswer : A ContactCDD has many Answers \n A Answer has 1 contact
 
 
 Activity ||--|{ ActivityQuestionnaire : A Activity has many Questionnaires \n A Questionnaire has 1 Activity
