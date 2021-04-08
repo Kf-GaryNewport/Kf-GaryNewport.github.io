@@ -46,6 +46,7 @@ table(ContactDueDiligence)
 {
     primary_key(Id)
     ContactId
+    ExpiryDate
     QuestionnaireId
 }
 
