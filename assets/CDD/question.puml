@@ -70,6 +70,7 @@ table( Questionnaire)
 table( Question)
 {
     primary_key(Id)
+    QuestionnaireTypeId
     QuestionnaireId
 }
 
