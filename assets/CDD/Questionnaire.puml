@@ -35,21 +35,21 @@ table( Activity)
     primary_key(Id)
 }
 
-table( ActivityQuestionaire)
+table( ActivityQuestionnaire)
 {
     primary_key(Id)
     ActivityId
-    QuestionaireId
+    QuestionnaireId
 }
 
-table(ContactQuestionaire)
+table(ContactQuestionnaire)
 {
     primary_key(Id)
     ContactId
-    QuestionaireId
+    QuestionnaireId
 }
 
-table( Questionaire)
+table( Questionnaire)
 {
     primary_key(Id)
 }
@@ -57,26 +57,26 @@ table( Questionaire)
 table( Question)
 {
     primary_key(Id)
-    QuestionaireId
+    QuestionnaireId
 }
 
 table( QuestionAnswer)
 {
     primary_key(Id)
-    QuestionaireId 
+    QuestionnaireId 
     QuestionId
     ContactId
 }
 
-Contact ||--|{ ContactQuestionaire : A contact can have many questionaires
-ContactQuestionaire ||--|| Questionaire 
+Contact ||--|{ ContactQuestionnaire : A contact can have many Questionnaires
+ContactQuestionnaire ||--|| Questionnaire 
 Contact ||--|{ QuestionAnswer : A Contact has many Answers \n A Answer has 1 contact
 
-Activity ||--|{ ActivityQuestionaire : A Activity has many Questionaires \n A Questionaire has 1 Activity
-ActivityQuestionaire ||--|| Questionaire
+Activity ||--|{ ActivityQuestionnaire : A Activity has many Questionnaires \n A Questionnaire has 1 Activity
+ActivityQuestionnaire ||--|| Questionnaire
 
-Questionaire ||--|{ Question : Questionaire has Questions(New Link)
-Questionaire ||--|{ QuestionAnswer : A Questionaire has many Answers \n A Answer has 1 Questionaire
+Questionnaire ||--|{ Question : Questionnaire has Questions(New Link)
+Questionnaire ||--|{ QuestionAnswer : A Questionnaire has many Answers \n A Answer has 1 Questionnaire
 Question ||--|{ QuestionAnswer : A Question has Many Answers \n A Answer has 1 Question
 
 @enduml
