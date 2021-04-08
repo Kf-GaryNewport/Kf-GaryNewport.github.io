@@ -1,0 +1,27 @@
+@startuml Cdd Client Process
+
+title CDD-Process
+
+(start) --> Client
+Client --> (Contact) : 1, Create / Update Contact
+Client --> (Instruction) : 2, Instructs
+(Instruction) --> (ClientCdd) : 3, Client Cdd Questionaire
+(ClientCdd) --> (ClientCdd) : 4, CDD Team Process
+(ClientCdd) --> (External CDD Service)
+(ClientCdd) --> (Contact) : 5, Contact Updated
+
+(Instruction) --> (Activity)
+(Instruction) --> (Activity)
+(Instruction) --> (Activity)
+
+(Instruction) --> (Asset)
+(Activity) --> (Asset)
+(Contact) --> (Asset)
+(Contact) --> (Asset) 
+(Contact) --> (Asset)
+
+
+(Activity) --> (Stop) : On Market
+
+@enduml
+

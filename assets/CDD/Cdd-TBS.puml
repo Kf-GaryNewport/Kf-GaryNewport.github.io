@@ -1,15 +1,15 @@
 @startuml Cdd Tbs
 
 (start) --> Party
-(start) --> ThirdParty
+'(start) --> ThirdParty
 (start) --> CounterParty
 
 Party --> (Instruction)
-ThirdParty --> (Contact)
-(Contact) --> (Referral)
+'ThirdParty --> (Contact)
+'(Contact) --> (Referral)
 CounterParty --> (Requirement)
 
-(Referral) --> (Instruction) : Creates Instruction
+'(Referral) --> (Instruction) : Creates Instruction
 
 (Instruction) --> (Asset)
 (Asset) --> (LandRegistry) 

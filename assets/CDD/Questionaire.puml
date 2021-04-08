@@ -1,0 +1,82 @@
+@startuml
+
+title CDD ERD 
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+
+table(Contact)
+{
+    primary_key(Id)
+}
+
+table( Activity)
+{
+    primary_key(Id)
+}
+
+table( ActivityQuestionaire)
+{
+    primary_key(Id)
+    ActivityId
+    QuestionaireId
+}
+
+table(ContactQuestionaire)
+{
+    primary_key(Id)
+    ContactId
+    QuestionaireId
+}
+
+table( Questionaire)
+{
+    primary_key(Id)
+}
+
+table( Question)
+{
+    primary_key(Id)
+    QuestionaireId
+}
+
+table( QuestionAnswer)
+{
+    primary_key(Id)
+    QuestionaireId 
+    QuestionId
+    ContactId
+}
+
+Contact ||--|{ ContactQuestionaire : A contact can have many questionaires
+ContactQuestionaire ||--|| Questionaire 
+Contact ||--|{ QuestionAnswer : A Contact has many Answers \n A Answer has 1 contact
+
+Activity ||--|{ ActivityQuestionaire : A Activity has many Questionaires \n A Questionaire has 1 Activity
+ActivityQuestionaire ||--|| Questionaire
+
+Questionaire ||--|{ Question : Questionaire has Questions(New Link)
+Questionaire ||--|{ QuestionAnswer : A Questionaire has many Answers \n A Answer has 1 Questionaire
+Question ||--|{ QuestionAnswer : A Question has Many Answers \n A Answer has 1 Question
+
+@enduml

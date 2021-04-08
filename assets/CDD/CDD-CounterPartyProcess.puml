@@ -1,0 +1,22 @@
+@startuml CDD CounterParty Process
+
+title CDD CounterParty Process
+
+(start) --> CounterParty
+CounterParty --> (Requirement) : 1, Issue Requirement
+(Requirement) --> (Contact) : 2, Create / Update Contact
+
+(Requirement) --> (Activity) : 3, Makes Offer
+(Activity) --> Client : 4, Offer Passed to Client
+
+Client --> (Activity) : 5, Client Accepts
+Client --> (Stop) : 5a, Client Rejects
+
+(Activity) --> (CounterPartyCdd) : 6, CounterParty Questionaire
+(CounterPartyCdd) --> (CounterPartyCdd)
+(CounterPartyCdd) --> (External CDD Service)
+(CounterPartyCdd) --> (Contact) : 4, Contact Updated
+
+(Activity) --> (Stop) : 7, Activity Complete
+
+ @enduml

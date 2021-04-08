@@ -1,0 +1,106 @@
+@startuml
+
+title CDD ERD 
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Contact)
+{
+    primary_key(Id)
+}
+
+table( Company)
+{
+    primary_key(Id)
+}
+
+table( Instruction)
+{
+    primary_key(Id)
+}
+
+table( Requirement)
+{
+    primary_key(Id)
+}
+
+table( InstructionRequirement)
+{
+    primary_key(Id)
+    InstructionId
+    RequirementId
+}
+
+table( InstructionActivity)
+{
+    primary_key(Id)
+    InstructionId
+    ActivityId
+}
+
+table( InstructionAsset)
+{
+    primary_key(Id)
+    InstructionId
+    AssetId
+}
+
+
+table( Offer)
+{
+    primary_key(Id)
+}
+
+table( Asset)
+{
+    primary_key(Id)
+}
+
+table( Tenancy)
+{
+    primary_key(Id)
+}
+
+table( Activity)
+{
+    primary_key(Id)
+    AssetId
+    ResponsibleForSaleOrLetCompanyId
+    ResponsibleForSaleOrLetContactId
+}
+
+Activity --> Asset : AssetId
+Activity --> Company : ResponsibleForSaleOrLetCompanyId
+Activity --> Contact : ResponsibleForSaleOrLetContactId
+
+InstructionRequirement --> Instruction : InstructionId
+InstructionRequirement --> Requirement : RequirementId
+
+InstructionActivity --> Instruction : InstructionId
+InstructionActivity --> Activity : ActivityId
+
+InstructionAsset --> Instruction : InstructionId
+InstructionAsset --> Asset : AssetId
+
+
+@enduml
