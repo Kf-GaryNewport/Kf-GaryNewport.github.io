@@ -1,0 +1,101 @@
+@startuml DbNext
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Activity)
+{
+    primary_key(Id)
+    ResponsibleForSaleOrLetCompanyId
+}
+
+table( Instruction)
+{
+    primary_key(Id)
+    ActivityId
+}
+
+table( ActivityParty)
+{
+    primary_key(Id)
+    ActivityId
+    CompanyId
+    AddressId
+    ContactId
+}
+
+table( ChainTransaction)
+{
+    primary_key(Id)
+    ActivityId
+}
+
+table( ChainTransactionParty)
+{
+    primary_key(Id)
+    ChainTransactionId
+}
+
+table( Address)
+{
+    primary_key(Id)
+    CountryId
+}
+
+table( Country)
+{
+    primary_key(Id)
+}
+table( Contact)
+{
+    primary_key(Id)
+    CountryId
+}
+table( Company)
+{
+    primary_key(Id)
+    OwningCompanyId
+    ActivityPartyId
+}
+
+Company ||--|{ Company
+Company ||--|{ Activity
+
+Activity ||--|{ Activity
+Activity ||--|{ Instruction
+Activity ||--|{ ActivityParty
+Activity ||--|{ ChainTransaction
+Activity ||--|| Contact
+
+ActivityParty ||--|| Company
+ActivityParty ||--|| Address
+ActivityParty ||--|| Contact
+
+Company ||--|| Country
+
+Country ||--|| Address
+Country ||--|| Contact
+
+ChainTransaction ||--|{ ChainTransaction
+ChainTransaction ||--|{ ChainTransactionParty
+
+@enduml

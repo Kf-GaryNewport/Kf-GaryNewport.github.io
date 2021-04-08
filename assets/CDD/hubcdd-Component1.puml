@@ -2,7 +2,7 @@
 
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
-LAYOUT_TOP_DOWN
+'LAYOUT_TOP_DOWN
 
 System_Ext(nr, "Northrow", "Automated Due Diligence service")
 
