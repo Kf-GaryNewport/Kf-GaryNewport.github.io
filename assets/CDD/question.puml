@@ -71,7 +71,6 @@ table( Question)
 {
     primary_key(Id)
     QuestionnaireTypeId
-    QuestionnaireId
 }
 
 table( QuestionAnswer)
@@ -92,7 +91,6 @@ ContactDueDiligence ||--|{ QuestionAnswer : A ContactCDD has many Answers \n A A
 Activity ||--|{ ActivityQuestionnaire : A Activity has many Questionnaires \n A Questionnaire has 1 Activity
 ActivityQuestionnaire ||--|| Questionnaire
 
-Questionnaire ||--|{ Question : Questionnaire has Questions(New Link)
 Questionnaire ||--|{ QuestionAnswer : A Questionnaire has many Answers \n A Answer has 1 Questionnaire
 Question ||--|{ QuestionAnswer : A Question has Many Answers \n A Answer has 1 Question
 
