@@ -65,6 +65,7 @@ table( QuestionnaireType)
 table( Questionnaire)
 {
     primary_key(Id)
+    QuestionnaireTypeId
 }
 
 table( Question)
@@ -94,6 +95,6 @@ ActivityQuestionnaire ||--|| Questionnaire
 Questionnaire ||--|{ QuestionAnswer : A Questionnaire has many Answers \n A Answer has 1 Questionnaire
 Question ||--|{ QuestionAnswer : A Question has Many Answers \n A Answer has 1 Question
 
-QuestionnaireType ||--|{ Question 
+QuestionnaireType ||--|{ Question : QuestionnaireType has many Questions
 QuestionnaireType ||--|{ Questionnaire : A Questionnaire is a instance of a QuestionnaireType
 @enduml
