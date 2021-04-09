@@ -78,6 +78,7 @@ User ||--|{ CddJob : A User can have many Cdd Jobs
 CddJob ||--|| ContactDueDiligence : A CddJob has a ContactDueDiligence
 CddJob ||--|{ EnumTypeItem : ActionType
 CddJob ||--|{ Action : A CddJob has a Action
+CddJob ||--|{ EnumTypeItem : CDDStatus
 
 Action ||--|| User : A Action has a User 
 Action ||--|{ Notify : A Action has many Notifications
