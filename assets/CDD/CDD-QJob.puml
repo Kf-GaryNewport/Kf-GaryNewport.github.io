@@ -1,0 +1,167 @@
+@startuml
+
+title CDD ERD 
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table(User)
+{
+    primary_key(Id)
+}
+
+table(Contact)
+{
+    primary_key(Id)
+}
+
+table( Activity)
+{
+    primary_key(Id)
+}
+
+table( ActivityQuestionnaire)
+{
+    primary_key(Id)
+    ActivityId
+    QuestionnaireId
+}
+
+table(ContactDueDiligence)
+{
+    primary_key(Id)
+    ContactId
+    ExpiryDate
+    QuestionnaireId
+}
+
+table(ContactCDDDocuments)
+{
+    primary_key(Id)
+    ContactDueDiligenceId
+    DocumentId
+}
+
+table( QuestionnaireType)
+{
+    primary_key(Id)
+}
+
+table( Questionnaire)
+{
+    primary_key(Id)
+    QuestionnaireTypeId
+}
+
+table( Question)
+{
+    primary_key(Id)
+    QuestionnaireTypeId
+}
+
+table( QuestionAnswer)
+{
+    primary_key(Id)
+    QuestionnaireId 
+    QuestionId
+    ContactDueDiligenceId
+}
+
+table( CddJob)
+{
+    primary_key(Id)
+    UserId
+    ContactDueDiligenceId
+    NextActionId
+    ActionTypeId
+    Priority
+    CDDStatus
+}
+
+table( CddJobQuality)
+{
+    primary_key(Id)
+    CheckedById
+    Quality
+}
+
+table( CddJobDefects)
+{
+    primary_key(Id)
+    Defect
+}
+
+table(Action)
+{
+    primary_key(Id)
+    ActionOwnerId
+    Action
+    ActionCreatedDateTime
+    ExpectedCompletionDateTime 
+}
+
+table(Notify)
+{
+    primary_key(Id)
+    NotifyUserId
+    NotifiedDateTime
+}
+
+table(EnumTypeItem)
+{
+    primary_key(Id)
+}
+
+Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
+
+ContactDueDiligence ||--|| Questionnaire 
+ContactDueDiligence ||--|{ ContactCDDDocuments
+ContactDueDiligence ||--|{ QuestionAnswer : A ContactCDD has many Answers \n A Answer has 1 contact
+
+
+Activity ||--|{ ActivityQuestionnaire : A Activity has many Questionnaires \n A Questionnaire has 1 Activity
+ActivityQuestionnaire ||--|| Questionnaire
+
+Questionnaire ||--|{ QuestionAnswer : A Questionnaire has many Answers \n A Answer has 1 Questionnaire
+Question ||--|{ QuestionAnswer : A Question has Many Answers \n A Answer has 1 Question
+
+QuestionnaireType ||--|{ Question : QuestionnaireType has many Questions
+QuestionnaireType ||--|{ Questionnaire : A Questionnaire is a instance of a QuestionnaireType
+
+User ||--|{ CddJob : A User can have many Cdd Jobs
+CddJob ||--|| ContactDueDiligence : A CddJob has a ContactDueDiligence
+CddJob ||--|{ EnumTypeItem : ActionType
+CddJob ||--|{ Action : A CddJob has a Action
+CddJob ||--|{ EnumTypeItem : CDDStatus
+CddJob ||--|| CddJobQuality
+
+Action ||--|| User : A Action has a User 
+Action ||--|{ Notify : A Action has many Notifications
+Notify ||--|| User : Notify has a User
+
+Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
+
+CddJobQuality ||--|{ User : User perfomring quality check
+CddJobQuality ||--|{ CddJobDefects : Quality has many defects
+CddJobQuality ||--|{ EnumTypeItem : Quality
+
+@enduml
