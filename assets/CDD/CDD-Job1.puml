@@ -1,0 +1,80 @@
+@startuml
+
+title CDD ERD 
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table(User)
+{
+    primary_key(Id)
+}
+
+table(Contact)
+{
+    primary_key(Id)
+}
+
+table(ContactDueDiligence)
+{
+    primary_key(Id)
+    ContactId
+    ExpiryDate
+    QuestionnaireId
+}
+
+table( CddJob)
+{
+    primary_key(Id)
+    UserId
+    ContactDueDiligenceId
+    NextActionId
+    ActionTypeId
+
+}
+
+table(Action)
+{
+    primary_key(Id)
+    ActionOwnerId
+    Action
+    ExpectedCompletionDate
+    
+}
+
+
+table(EnumItemType)
+{
+    primary_key(Id)
+}
+
+User ||--|{ CddJob : A User can have many Cdd Jobs
+CddJob ||--|{ ContactDueDiligence : A CddJob has a ContactDueDiligence
+CddJob ||--|{ EnumItemType : ActionType
+CddJob ||--|{ Action : A CddJob has a Action
+
+Action ||--|| User : A Action has a User 
+Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
+
+
+@enduml
+
