@@ -1,6 +1,6 @@
 @startuml
 
-title CDD Job Priority ERD
+title CDD Job Notify ERD
 
 left to right direction
 
@@ -49,7 +49,7 @@ table( CddJob)
     ContactDueDiligenceId
     NextActionId
     ActionTypeId
-    - Priority
+    Priority
 }
 
 table(Action)
@@ -59,6 +59,13 @@ table(Action)
     Action
     ActionCreatedDateTime
     ExpectedCompletionDateTime 
+}
+
+table(Notify)
+{
+    -primary_key(Id)
+    -NotifyUserId
+    -NotifiedDateTime
 }
 
 table(EnumItemType)
@@ -72,6 +79,8 @@ CddJob ||--|{ EnumItemType : ActionType
 CddJob ||--|{ Action : A CddJob has a Action
 
 Action ||--|| User : A Action has a User 
+Action ||--|{ Notify : A Action has many Notifications
+Notify ||--|| User : Notify has a User
 
 Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
 
