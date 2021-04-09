@@ -61,14 +61,14 @@ table(Action)
     ExpectedCompletionDateTime 
 }
 
-table(EnumItemType)
+table(EnumTypeItem)
 {
     primary_key(Id)
 }
 
 User ||--|{ CddJob : A User can have many Cdd Jobs
 CddJob ||--|| ContactDueDiligence : A CddJob has a ContactDueDiligence
-CddJob ||--|{ EnumItemType : ActionType
+CddJob ||--|{ EnumTypeItem : ActionType
 CddJob ||--|{ Action : A CddJob has a Action
 
 Action ||--|| User : A Action has a User 

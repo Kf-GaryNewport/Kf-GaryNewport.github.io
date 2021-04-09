@@ -1,6 +1,6 @@
 @startuml
 
-title CDD Job Notify ERD
+title CDD Job Cancel ERD
 
 left to right direction
 
@@ -50,6 +50,7 @@ table( CddJob)
     NextActionId
     ActionTypeId
     Priority
+    -CDDStatus
 }
 
 table(Action)
