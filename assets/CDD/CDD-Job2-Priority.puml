@@ -1,6 +1,6 @@
 @startuml
 
-title CDD Job ERD 
+title CDD Job Priority ERD
 
 left to right direction
 
@@ -49,7 +49,7 @@ table( CddJob)
     ContactDueDiligenceId
     NextActionId
     ActionTypeId
-
+    - Priority
 }
 
 table(Action)
@@ -57,8 +57,7 @@ table(Action)
     primary_key(Id)
     ActionOwnerId
     Action
-    ExpectedCompletionDate
-    
+    ExpectedCompletionDate   
 }
 
 
