@@ -69,6 +69,9 @@ table( InstructionAsset)
 table( Offer)
 {
     primary_key(Id)
+    RequirementId
+    ActivityId
+    ResponsibleForSaleCompanyId
 }
 
 table( Asset)
@@ -79,6 +82,9 @@ table( Asset)
 table( Tenancy)
 {
     primary_key(Id)
+    ActivityId
+    AssetId
+    RequirementId
 }
 
 table( Activity)
@@ -89,18 +95,24 @@ table( Activity)
     ResponsibleForSaleOrLetContactId
 }
 
-Activity --> Asset : AssetId
-Activity --> Company : ResponsibleForSaleOrLetCompanyId
-Activity --> Contact : ResponsibleForSaleOrLetContactId
+Activity ||--|| Asset : AssetId
+Activity ||--|| Company : ResponsibleForSaleOrLetCompanyId
+Activity ||--|{ Contact : ResponsibleForSaleOrLetContactId
 
-InstructionRequirement --> Instruction : InstructionId
-InstructionRequirement --> Requirement : RequirementId
+InstructionRequirement ||--|{ Instruction : InstructionId
+InstructionRequirement ||--|{ Requirement : RequirementId
 
-InstructionActivity --> Instruction : InstructionId
-InstructionActivity --> Activity : ActivityId
+InstructionActivity ||--|{ Instruction : InstructionId
+InstructionActivity ||--|{ Activity : ActivityId
 
-InstructionAsset --> Instruction : InstructionId
-InstructionAsset --> Asset : AssetId
+InstructionAsset ||--|{ Instruction : InstructionId
+InstructionAsset ||--|{ Asset : AssetId
 
+Offer ||--|{ Company : ResponsibleForSaleCompanyId
+Offer ||--|{ Requirement : RequirementId
+Offer ||--|{ Activity : ActivityId
 
+Tenancy ||--|{ Activity : ActivityId
+Tenancy ||--|| Asset : AssetId
+Tenancy ||--|{ Requirement : RequirementId
 @enduml
