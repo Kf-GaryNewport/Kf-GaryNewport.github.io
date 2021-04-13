@@ -105,8 +105,11 @@ InstructionRequirement ||--|{ Requirement : RequirementId
 InstructionActivity ||--|{ Instruction : InstructionId
 InstructionActivity ||--|{ Activity : ActivityId
 
-InstructionAsset ||--|{ Instruction : InstructionId
-InstructionAsset ||--|{ Asset : AssetId
+'InstructionAsset ||--|{ Instruction : InstructionId
+'InstructionAsset ||--|{ Asset : AssetId
+
+Instruction }|--|| InstructionAsset
+Asset }|--|| InstructionAsset
 
 Offer ||--|{ Company : ResponsibleForSaleCompanyId
 Offer ||--|{ Requirement : RequirementId

@@ -1,0 +1,48 @@
+@startuml ehouse Order Sequence
+
+hub -> SvcQueue
+SvcQueue -> Svc
+Activate Svc
+
+alt Creation
+Svc -> ehouse : Get Key Invoice items
+Svc <-- ehouse : Response 2xx Success
+
+
+Svc -> ehouse : Post Create Order 
+Svc <-- ehouse : Response 2xx Success
+Svc --> ehouse : Post Get Available Photographer Bookings
+Svc <-- ehouse : Response 2xx Success
+Svc --> ehouse : Post Book Photographer
+Svc <-- ehouse : Response 2xx Success
+Svc --> ehouse : Post Create WebHook
+Svc <-- ehouse : Response 2xx Success
+
+Svc -> Table : Update details in Table Store
+
+else Update
+Svc -> ehouse : Post Update Order
+end
+
+
+
+alt WebHook
+ehouse -> Svc : Artifacts ready
+Svc -> ehouse : Get Stills
+Svc <-- ehouse : Response 2xx Success
+Svc -> ehouse : Get Videos
+Svc <-- ehouse : Response 2xx Success
+Svc -> ehouse : Get Floorplans
+Svc <-- ehouse : Response 2xx Success
+Svc -> ehouse : Get VirtualTours
+Svc <-- ehouse : Response 2xx Success
+
+Svc -> Table : Update details in Table Store
+Svc -> SvcQueue : Return Data Error to hub
+end
+
+Deactivate Svc
+
+
+
+@enduml
