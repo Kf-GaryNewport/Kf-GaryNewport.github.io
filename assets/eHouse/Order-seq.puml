@@ -1,5 +1,19 @@
 @startuml ehouse Order Sequence
 
+participant hub
+participant SvcQueue
+participant Svc
+participant ehouse
+participant Table
+
+alt Register Webhooks
+Svc -> ehouse : register stills webhook
+Svc -> ehouse : register Videos webhook
+Svc -> ehouse : register Floorplans webhook
+Svc -> ehouse : register VirtualTours webhook
+end 
+
+
 hub -> SvcQueue
 SvcQueue -> Svc
 Activate Svc
@@ -25,21 +39,33 @@ Svc -> ehouse : Post Update Order
 end
 
 
-
-alt WebHook
-ehouse -> Svc : Artifacts ready
+alt WebHook Stills
+ehouse -> Svc : Stills ready
 Svc -> ehouse : Get Stills
 Svc <-- ehouse : Response 2xx Success
+end
+
+alt WebHook Videos
+ehouse -> Svc : Videos ready
 Svc -> ehouse : Get Videos
 Svc <-- ehouse : Response 2xx Success
+end
+
+alt WebHook Floorplans
+ehouse -> Svc : Floorplans ready
 Svc -> ehouse : Get Floorplans
 Svc <-- ehouse : Response 2xx Success
+end
+
+alt WebHook VirtualTours
+ehouse -> Svc : VirtualTours ready
 Svc -> ehouse : Get VirtualTours
 Svc <-- ehouse : Response 2xx Success
+end
 
 Svc -> Table : Update details in Table Store
 Svc -> SvcQueue : Return Data Error to hub
-end
+
 
 Deactivate Svc
 
