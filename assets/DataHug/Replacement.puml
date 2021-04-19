@@ -1,22 +1,32 @@
 @startuml
 
-usecase Client
-usecase Company
-usecase Colleague
-usecase Contact
+rectangle DataHug {
+    usecase dhContact
+    usecase dhCompany
+    dhContact --> dhContact
+    dhContact --> dhCompany
+}
 
-Contact -> Contact
-Contact -> Company
-Company -> Contact
+rectangle FeedStock {
+usecase fsColleague
+usecase fsClient
+usecase fsContact
+usecase fsCompany
 
+fsColleague --> fsContact #line:green;
+fsColleague --> fsClient #line:green;
+fsCompany --> fsContact #line:green;
+fsCompany --> fsClient #line:green;
+}
 
-Colleague --> Contact #line:green;
-Colleague --> Client #line:green;
-Company --> Contact #line:green;
-Company --> Client #line:green;
+rectangle IntroHive {
+usecase ihClient
+usecase ihUser
+usecase ihCompany
+ihUser --> ihClient #line:blue;
+ihClient --> ihCompany #line:blue;
+}
 
-Colleague --> Client #line:blue;
-Client --> Colleague  #line:blue;
 
 @enduml
 
