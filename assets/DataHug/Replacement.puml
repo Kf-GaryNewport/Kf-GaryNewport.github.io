@@ -1,0 +1,22 @@
+@startuml
+
+usecase Client
+usecase Company
+usecase Colleague
+usecase Contact
+
+Contact -> Contact
+Contact -> Company
+Company -> Contact
+
+
+Colleague --> Contact #line:green;
+Colleague --> Client #line:green;
+Company --> Contact #line:green;
+Company --> Client #line:green;
+
+Colleague --> Client #line:blue;
+Client --> Colleague  #line:blue;
+
+@enduml
+
