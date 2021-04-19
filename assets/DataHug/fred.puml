@@ -1,0 +1,32 @@
+@startuml
+
+rectangle DataHug {
+    usecase dhContact
+    usecase dhCompany
+    dhContact --> dhContact
+    dhContact --> dhCompany
+}
+
+rectangle FeedStock {
+usecase fsColleague
+usecase fsClient
+usecase fsContact
+usecase fsCompany
+
+fsColleague --> fsContact #line:green;
+fsColleague --> fsClient #line:green;
+fsCompany --> fsContact #line:green;
+fsCompany --> fsClient #line:green;
+}
+
+rectangle IntroHive {
+usecase ihClient
+usecase ihUser
+usecase ihCompany
+ihUser --> ihClient #line:blue;
+ihClient --> ihCompany #line:blue;
+}
+
+
+@enduml
+
