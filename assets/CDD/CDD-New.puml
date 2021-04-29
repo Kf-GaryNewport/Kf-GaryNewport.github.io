@@ -49,7 +49,7 @@ table(EnumTypeItem)
     primary_key(Id)
 }
 
-newtable( Quiz)
+newtable( QuestionTemplate)
 {
     primary_key(Id)
     QuestionnaireTypeId
@@ -98,9 +98,18 @@ newtable( CDD)
     RequireCdd
 }
 
-Activity ||--|{ CDD
-Instruction ||--|{ CDD
-Requirement ||--|{ CDD
+newtable( CDDEntity)
+{
+    EntityId
+    EntityTypeId
+    CDDId
+}
+
+Activity ||--|{ CDDEntity
+Instruction ||--|{ CDDEntity
+Requirement ||--|{ CDDEntity
+
+CDDEntity }|--|| CDD
 
 CDD ||--|{ EnumTypeItem #line:green; : CddStatusId (Pending, Complete...)
 CDD ||--|{ Questionnaire : A CDD can have Many Questionnaires
@@ -113,8 +122,10 @@ Questionnaire ||--|{ QuestionNote : A Questionnaire can have many Notes
 Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
 Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
 
-Quiz ||--|{ Question #line:red : A Questionnaire can have many Questions
-Quiz ||--|{ Questionnaire #line:red;
-Quiz ||--|{ EnumTypeItem #line:red; : QuestionnaireTypeId (Disposal, Acquisition)
+QuestionTemplate ||--|{ Question #line:red : A Questionnaire can have many Questions
+QuestionTemplate ||--|{ Questionnaire #line:red;
+QuestionTemplate ||--|{ EnumTypeItem #line:red; : QuestionnaireTypeId (Disposal, Acquisition)
+
+CDDEntity ||--|{ EnumTypeItem #line:green; : EntityTypeId (Activity,Instruction...)
 @enduml
 
