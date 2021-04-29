@@ -26,19 +26,19 @@ hide methods
 hide stereotypes  
 skinparam classarrowcolor gray  
 
-newtable( Activity)
+table( Activity)
 {
     primary_key(Id)
     CddId
 }
 
-newtable( Instruction)
+table( Instruction)
 {
     primary_key(Id)
     CddId
 }
 
-newtable( Requirement)
+table( Requirement)
 {
     primary_key(Id)
     CddId
@@ -106,16 +106,16 @@ newtable( CDDEntity)
     CddId
 }
 
-Activity ||--|{ CDDEntity
-Instruction ||--|{ CDDEntity
-Requirement ||--|{ CDDEntity
+Activity ||--|{ CDDEntity #line:green
+Instruction ||--|{ CDDEntity #line:green
+Requirement ||--|{ CDDEntity #line:green
 
-CDDEntity }|--|| CDD
+CDDEntity }|--|| CDD #line:green
 
-CDD ||--|{ EnumTypeItem #line:green; : CddStatusId (Pending, Complete...)
-CDD ||--|| Questionnaire : A CDD has a Questionnaire
-CDD ||--|{ EnumTypeItem #line:green; : TeamResponsibleForCddId (CentralCdd,Office)
-CDD ||--|{ EnumTypeItem #line:green; : CddCompleteId (Yes,No,preCentralisation)
+CDD ||--|{ EnumTypeItem #line:red; : CddStatusId (Pending, Complete...)
+CDD ||--|| Questionnaire #line:green : A CDD has a Questionnaire
+CDD ||--|{ EnumTypeItem #line:red; : TeamResponsibleForCddId (CentralCdd,Office)
+CDD ||--|{ EnumTypeItem #line:red; : CddCompleteId (Yes,No,preCentralisation)
 
 
 Questionnaire ||--|{ QuestionAnswer : A Question has Many QuestionAnswer
@@ -123,10 +123,10 @@ Questionnaire ||--|{ QuestionNote : A Questionnaire can have many Notes
 Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
 Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
 
-QuestionTemplate ||--|{ Question #line:red : A Questionnaire can have many Questions
-QuestionTemplate }|--|| Questionnaire #line:red; : QuestionnaireTemplateId
-QuestionTemplate ||--|{ EnumTypeItem #line:red; : QuestionnaireTypeId (Disposal, Acquisition)
+QuestionTemplate ||--|{ Question #line:green : A Questionnaire can have many Questions
+QuestionTemplate }|--|| Questionnaire #line:green; : QuestionnaireTemplateId
+QuestionTemplate ||--|{ EnumTypeItem #line:green; : QuestionnaireTypeId (Disposal, Acquisition)
 
-CDDEntity ||--|{ EnumTypeItem #line:green; : EntityTypeId (Activity,Instruction...)
+CDDEntity ||--|{ EnumTypeItem #line:red; : EntityTypeId (Activity,Instruction...)
 @enduml
 
