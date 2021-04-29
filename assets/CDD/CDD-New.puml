@@ -113,7 +113,7 @@ Requirement ||--|{ CDDEntity
 CDDEntity }|--|| CDD
 
 CDD ||--|{ EnumTypeItem #line:green; : CddStatusId (Pending, Complete...)
-CDD ||--|{ Questionnaire : A CDD can have Many Questionnaires
+CDD ||--|| Questionnaire : A CDD has a Questionnaire
 CDD ||--|{ EnumTypeItem #line:green; : TeamResponsibleForCddId (CentralCdd,Office)
 CDD ||--|{ EnumTypeItem #line:green; : CddCompleteId (Yes,No,preCentralisation)
 
