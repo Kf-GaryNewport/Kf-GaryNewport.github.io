@@ -29,19 +29,19 @@ skinparam classarrowcolor gray
 table( Activity)
 {
     primary_key(Id)
-    CddId
+    CddEntityId
 }
 
 table( Instruction)
 {
     primary_key(Id)
-    CddId
+    CddEntityId
 }
 
 table( Requirement)
 {
     primary_key(Id)
-    CddId
+    CddEntityId
 }
 
 table(EnumTypeItem)
@@ -101,6 +101,7 @@ newtable( CDD)
 
 newtable( CDDEntity)
 {
+    primary_key(Id)
     EntityId
     EntityTypeId
     CddId
