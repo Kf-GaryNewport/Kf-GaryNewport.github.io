@@ -64,6 +64,7 @@ table( Questionnaire)
     SubmittedByUserId
     Version
     SubmittedTime
+    QuestionnaireTemplateId
 }
 
 table( Question)
@@ -123,7 +124,7 @@ Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
 Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
 
 QuestionTemplate ||--|{ Question #line:red : A Questionnaire can have many Questions
-QuestionTemplate ||--|{ Questionnaire #line:red;
+QuestionTemplate }|--|| Questionnaire #line:red; : QuestionnaireTemplateId
 QuestionTemplate ||--|{ EnumTypeItem #line:red; : QuestionnaireTypeId (Disposal, Acquisition)
 
 CDDEntity ||--|{ EnumTypeItem #line:green; : EntityTypeId (Activity,Instruction...)
