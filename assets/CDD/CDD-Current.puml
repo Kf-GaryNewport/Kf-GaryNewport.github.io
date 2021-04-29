@@ -1,0 +1,98 @@
+@startuml
+
+title CDD Current 
+
+left to right direction
+
+!define newtable(x) class x << (T,LimeGreen) >> 
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Activity)
+{
+    primary_key(Id)
+    ActivityInstructionCddStatusId
+}
+
+table( Instruction)
+{
+    primary_key(Id)
+    TeamResponsibleForCddId
+    CddCompleteId
+    RequireCdd
+}
+
+table(EnumTypeItem)
+{
+    primary_key(Id)
+}
+
+table( Questionnaire)
+{
+    primary_key(Id)
+    EntityId
+    EntityTypeId
+    StatusId
+    SubmittedByUserId
+    Version
+    SubmittedTime
+}
+
+table( Question)
+{
+    primary_key(Id)
+    TitleId
+    SectionTitleId
+    TranslationId
+    AnswerTypeId
+}
+
+table( QuestionAnswer)
+{
+    primary_key(Id)
+    QuestionnaireId 
+    QuestionId
+}
+
+table( QuestionNote)
+{
+    primary_key(QuestionnaireId)
+    NoteId
+}
+
+'newtable( fred){}
+
+'Questionnaire ||--|{ Question #line:red : (NEW) A Questionnaire can have many Questions
+Questionnaire ||--|{ QuestionAnswer : A Question has Many QuestionAnswer
+Questionnaire ||--|{ QuestionNote : A Questionnaire can have many Notes
+Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
+
+Activity  ||--|{ EnumTypeItem : ActivityInstructionCddStatusId (Pending, Complete)
+Instruction ||--|{ EnumTypeItem : TeamResponsibleForCddId (CentralCdd,Office)
+Instruction ||--|{ EnumTypeItem : CddCompleteId (Yes,No,preCentralisation)
+Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
+Questionnaire ||--|{ EnumTypeItem : EntityTypeId (Activity,Instruction...)
+
+Questionnaire ..> Activity #line:red; : EntityId (Reference)
+Questionnaire ..> Instruction #line:red; : EntityId (Reference)
+
+@enduml
+
