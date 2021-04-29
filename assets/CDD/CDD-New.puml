@@ -102,7 +102,7 @@ newtable( CDDEntity)
 {
     EntityId
     EntityTypeId
-    CDDId
+    CddId
 }
 
 Activity ||--|{ CDDEntity
