@@ -1,0 +1,120 @@
+@startuml
+
+title CDD New 
+
+left to right direction
+
+!define newtable(x) class x << (T,LimeGreen) >> 
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+newtable( Activity)
+{
+    primary_key(Id)
+    CddId
+}
+
+newtable( Instruction)
+{
+    primary_key(Id)
+    CddId
+}
+
+newtable( Requirement)
+{
+    primary_key(Id)
+    CddId
+}
+
+table(EnumTypeItem)
+{
+    primary_key(Id)
+}
+
+newtable( Quiz)
+{
+    primary_key(Id)
+    QuestionnaireTypeId
+    ActiveDate
+    Version
+}
+
+table( Questionnaire)
+{
+    primary_key(Id)
+    StatusId
+    SubmittedByUserId
+    Version
+    SubmittedTime
+}
+
+table( Question)
+{
+    primary_key(Id)
+    TitleId
+    SectionTitleId
+    TranslationId
+    AnswerTypeId
+}
+
+table( QuestionAnswer)
+{
+    primary_key(Id)
+    QuestionnaireId 
+    QuestionId
+}
+
+table( QuestionNote)
+{
+    primary_key(QuestionnaireId)
+    NoteId
+}
+
+newtable( CDD)
+{
+    primary_key(Id)
+    CddStatusId
+    QuestionnaireId
+    TeamResponsibleForCddId
+    CddCompleteId
+    RequireCdd
+}
+
+Activity ||--|{ CDD
+Instruction ||--|{ CDD
+Requirement ||--|{ CDD
+
+CDD ||--|{ EnumTypeItem #line:green; : CddStatusId (Pending, Complete...)
+CDD ||--|{ Questionnaire : A CDD can have Many Questionnaires
+CDD ||--|{ EnumTypeItem #line:green; : TeamResponsibleForCddId (CentralCdd,Office)
+CDD ||--|{ EnumTypeItem #line:green; : CddCompleteId (Yes,No,preCentralisation)
+
+
+Questionnaire ||--|{ QuestionAnswer : A Question has Many QuestionAnswer
+Questionnaire ||--|{ QuestionNote : A Questionnaire can have many Notes
+Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
+Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
+
+Quiz ||--|{ Question #line:red : A Questionnaire can have many Questions
+Quiz ||--|{ Questionnaire
+Quiz ||--|{ EnumTypeItem #line:green; : QuestionnaireTypeId (Disposal, Acquisition)
+@enduml
+
