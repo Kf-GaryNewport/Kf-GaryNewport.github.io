@@ -114,7 +114,7 @@ Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
 Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
 
 Quiz ||--|{ Question #line:red : A Questionnaire can have many Questions
-Quiz ||--|{ Questionnaire
-Quiz ||--|{ EnumTypeItem #line:green; : QuestionnaireTypeId (Disposal, Acquisition)
+Quiz ||--|{ Questionnaire #line:red;
+Quiz ||--|{ EnumTypeItem #line:red; : QuestionnaireTypeId (Disposal, Acquisition)
 @enduml
 
