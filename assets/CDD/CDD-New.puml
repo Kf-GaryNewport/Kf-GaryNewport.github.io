@@ -49,13 +49,13 @@ table(EnumTypeItem)
     primary_key(Id)
 }
 
-newtable( QuestionTemplate)
-{
-    primary_key(Id)
-    QuestionnaireTypeId
-    ActiveDate
-    Version
-}
+'newtable( QuestionTemplate)
+'{
+'    primary_key(Id)
+'    QuestionnaireTypeId
+'    ActiveDate
+'    Version
+'}
 
 table( Questionnaire)
 {
@@ -124,9 +124,9 @@ Questionnaire ||--|{ QuestionNote : A Questionnaire can have many Notes
 Question ||--|{ QuestionAnswer : A Question has Many QuestionAnswers
 Questionnaire ||--|{ EnumTypeItem : StatusId (None,NotSubmitted,Submitted)
 
-QuestionTemplate ||--|{ Question #line:green : A Questionnaire can have many Questions
-QuestionTemplate }|--|| Questionnaire #line:green; : QuestionnaireTemplateId
-QuestionTemplate ||--|{ EnumTypeItem #line:green; : QuestionnaireTypeId (Disposal, Acquisition)
+'QuestionTemplate ||--|{ Question #line:green : A Questionnaire can have many Questions
+'QuestionTemplate }|--|| Questionnaire #line:green; : QuestionnaireTemplateId
+'QuestionTemplate ||--|{ EnumTypeItem #line:green; : QuestionnaireTypeId (Disposal, Acquisition)
 
 
 @enduml
