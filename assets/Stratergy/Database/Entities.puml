@@ -6,7 +6,7 @@ title Entities
 
 !includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
 
-Component( Activity, "Activity", "[[http://google.com]]") 
+Component( Activity, "Activity", "") 
 Component( Appointment, "Appointment", "") 
 Component( Attachment, "Attachment", "") 
 Component( Department, "Department", "") 
@@ -33,6 +33,7 @@ Activity --> RequirementNote
 System(google[[https://google.com]], "Google", "An internet search engine")
 /' or '/
 Container(example, "Example", "Example", "Example") [[https://google.com]]
+Rel(Activity, RequirementNote, "Gets tweets from", "HTTPS", $link="https://plantuml.com/link")
 
 
 @enduml
