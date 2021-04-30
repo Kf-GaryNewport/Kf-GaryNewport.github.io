@@ -29,19 +29,19 @@ skinparam classarrowcolor gray
 table( Activity)
 {
     primary_key(Id)
-    CddEntityId
+    CddId
 }
 
 table( Instruction)
 {
     primary_key(Id)
-    CddEntityId
+    CddId
 }
 
 table( Requirement)
 {
     primary_key(Id)
-    CddEntityId
+    CddId
 }
 
 table(EnumTypeItem)
@@ -97,27 +97,27 @@ newtable( CDD)
     TeamResponsibleForCddId
     CddCompleteId
     RequireCdd
-}
-
-newtable( CDDEntity)
-{
-    primary_key(Id)
     EntityId
     EntityTypeId
-    CddId
 }
 
-Activity ||--|{ CDDEntity #line:green
-Instruction ||--|{ CDDEntity #line:green
-Requirement ||--|{ CDDEntity #line:green
+'newtable( CDDEntity)
+'{
+'    primary_key(Id)
+'    EntityId
+'    EntityTypeId
+'    CddId
+'}
 
-CDDEntity }|--|| CDD #line:green
+Activity ||--|| CDD #line:green
+Instruction ||--|| CDD #line:green
+Requirement ||--|| CDD #line:green
 
 CDD ||--|{ EnumTypeItem #line:red; : CddStatusId (Pending, Complete...)
 CDD ||--|| Questionnaire #line:green : A CDD has a Questionnaire
 CDD ||--|{ EnumTypeItem #line:red; : TeamResponsibleForCddId (CentralCdd,Office)
 CDD ||--|{ EnumTypeItem #line:red; : CddCompleteId (Yes,No,preCentralisation)
-
+CDD ||--|{ EnumTypeItem #line:red; : EntityTypeId (Activity,Instruction...)
 
 Questionnaire ||--|{ QuestionAnswer : A Question has Many QuestionAnswer
 Questionnaire ||--|{ QuestionNote : A Questionnaire can have many Notes
@@ -128,6 +128,6 @@ QuestionTemplate ||--|{ Question #line:green : A Questionnaire can have many Que
 QuestionTemplate }|--|| Questionnaire #line:green; : QuestionnaireTemplateId
 QuestionTemplate ||--|{ EnumTypeItem #line:green; : QuestionnaireTypeId (Disposal, Acquisition)
 
-CDDEntity ||--|{ EnumTypeItem #line:red; : EntityTypeId (Activity,Instruction...)
+
 @enduml
 
