@@ -1,0 +1,175 @@
+@startuml
+
+title Activity 
+
+left to right direction
+
+!define newtable(x) class x << (T,LimeGreen) >> 
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Activity) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityAppointment) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityAreaHierarchy) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityAttachment) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityAttributeValue) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityCharacteristic) 
+{ 
+    primary_key(Id) 
+}  
+table( ActivityDealStructure) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityDepartment) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityDocumentTypeUsage) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityExternalLink) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityLocalised) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityMarketingImage) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityNegotiator) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityNote) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityParty) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityPortal) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityPropertyArea) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityReferral) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityRequirementNote) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivitySalutation) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivitySecurityAttribute) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityServiceLineDefinition) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityStatusDefinition) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityType) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityTypeDefinition) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityTypeLocalised) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityTypesConfigurationCache) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityWebNegotiator) 
+{ 
+    primary_key(Id) 
+} 
+table( ActivityWebPropertyType) 
+{ 
+    primary_key(Id) 
+} 
+
+Activity ||--|{ ActivityAppointment
+Activity ||--|{ ActivityAreaHierarchy
+Activity ||--|{ ActivityAttachment
+Activity ||--|{ ActivityAttributeValue
+Activity ||--|{ ActivityCharacteristic
+Activity ||--|{ ActivityDealStructure
+Activity ||--|{ ActivityDepartment
+Activity ||--|{ ActivityExternalLink
+Activity ||--|{ ActivityLocalised
+Activity ||--|{ ActivityMarketingImage
+Activity ||--|{ ActivityNegotiator
+Activity ||--|{ ActivityNote
+Activity ||--|{ ActivityParty
+Activity ||--|{ ActivityPortal
+Activity ||--|{ ActivityPropertyArea
+Activity ||--|{ ActivityReferral
+Activity ||--|{ ActivityRequirementNote
+Activity ||--|{ ActivitySalutation
+Activity ||--|{ ActivitySecurityAttribute
+Activity ||--|{ ActivityWebNegotiator
+Activity ||--|{ ActivityWebPropertyType
+
+ActivityType ||--|{ Activity
+
+ActivityType ||--|{ ActivityTypeDefinition
+ActivityType ||--|{ ActivityTypeLocalised
+ActivityType ||--|{ ActivityServiceLineDefinition
+ActivityType ||--|{ ActivityStatusDefinition
+
+@enduml
