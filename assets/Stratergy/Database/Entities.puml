@@ -1,0 +1,34 @@
+@startuml
+
+title Entities 
+
+'left to right direction
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+Component( Activity, "Activity", "[[http://google.com]]") 
+Component( Appointment, "Appointment", "") 
+Component( Attachment, "Attachment", "") 
+Component( Department, "Department", "") 
+Component( MarketingImage, "MarketingImage", "") 
+Component( Negotiator, "Negotiator", "") 
+Component( Note, "Note", "") 
+Component( Party, "Party", "") 
+Component( PropertyArea, "PropertyArea", "") 
+Component( Referral, "Referral", "") 
+Component( RequirementNote, "RequirementNote", "") 
+
+
+Activity --> Appointment
+Activity --> Attachment
+Activity --> Department
+Activity --> MarketingImage
+Activity --> Negotiator
+Activity --> Note
+Activity --> Party
+Activity --> PropertyArea
+Activity --> Referral
+Activity --> RequirementNote
+
+
+@enduml
