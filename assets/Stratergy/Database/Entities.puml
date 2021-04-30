@@ -30,5 +30,9 @@ Activity --> PropertyArea
 Activity --> Referral
 Activity --> RequirementNote
 
+System(google[[https://google.com]], "Google", "An internet search engine")
+/' or '/
+Container(example, "Example", "Example", "Example") [[https://google.com]]
+
 
 @enduml
