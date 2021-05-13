@@ -45,12 +45,6 @@ table( CDD)
     CompanyId
     RAG
     ExpiryDate
-}
-
-table(CDDDocuments)
-{
-    primary_key(Id)
-    CDDId
     DocumentId
 }
 
@@ -61,7 +55,7 @@ table( Asset)
     AssetTitleId
 }
 
-table( AssetTitle)
+table( AssetParty)
 {
     primary_key(Id)
     AssetId
@@ -72,11 +66,9 @@ table( AssetTitle)
 Contact ||--|{ CDD 
 Company ||--|{ CDD
 
-CDD ||--|{ CDDDocuments
-
-Asset ||--|{ AssetTitle
-AssetTitle ||--|{ Contact
-AssetTitle ||--|{ Company
+Asset ||--|{ AssetParty
+AssetParty ||--|{ Contact
+AssetParty ||--|{ Company
 
 
 

@@ -52,12 +52,6 @@ table(CDD)
     ContactId
     ExpiryDate
     QuestionnaireId
-}
-
-table(CDDDocuments)
-{
-    primary_key(Id)
-    CDDId
     DocumentId
 }
 
@@ -134,9 +128,7 @@ table(EnumTypeItem)
 Contact ||--|{ CDD : A contact can have many CDDs
 
 CDD ||--|| Questionnaire 
-CDD ||--|{ CDDDocuments
 CDD ||--|{ QuestionAnswer : A CDDD has many Answers \n A Answer has 1 contact
-
 
 Activity ||--|{ ActivityQuestionnaire : A Activity has many Questionnaires \n A Questionnaire has 1 Activity
 ActivityQuestionnaire ||--|| Questionnaire

@@ -42,18 +42,12 @@ table( ActivityQuestionnaire)
     QuestionnaireId
 }
 
-table(ContactDueDiligence)
+table(CDD)
 {
     primary_key(Id)
     ContactId
     ExpiryDate
     QuestionnaireId
-}
-
-table(ContactCDDDocuments)
-{
-    primary_key(Id)
-    ContactDueDiligenceId
     DocumentId
 }
 
@@ -79,15 +73,13 @@ table( QuestionAnswer)
     primary_key(Id)
     QuestionnaireId 
     QuestionId
-    ContactDueDiligenceId
+    CDDId
 }
 
-Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
+Contact ||--|{ CDD : A contact can have many CDDs
 
-ContactDueDiligence ||--|| Questionnaire 
-ContactDueDiligence ||--|{ ContactCDDDocuments
-ContactDueDiligence ||--|{ QuestionAnswer : A ContactCDD has many Answers \n A Answer has 1 contact
-
+CDD ||--|| Questionnaire 
+CDD ||--|{ QuestionAnswer : A ContactCDD has many Answers \n A Answer has 1 contact
 
 Activity ||--|{ ActivityQuestionnaire : A Activity has many Questionnaires \n A Questionnaire has 1 Activity
 ActivityQuestionnaire ||--|| Questionnaire

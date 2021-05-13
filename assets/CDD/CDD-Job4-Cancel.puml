@@ -34,19 +34,20 @@ table(Contact)
     primary_key(Id)
 }
 
-table(ContactDueDiligence)
+table(CDD)
 {
     primary_key(Id)
     ContactId
     ExpiryDate
     QuestionnaireId
+    DocumentId
 }
 
 table( CddJob)
 {
     primary_key(Id)
     UserId
-    ContactDueDiligenceId
+    CDDId
     NextActionId
     ActionTypeId
     Priority
@@ -75,7 +76,7 @@ table(EnumTypeItem)
 }
 
 User ||--|{ CddJob : A User can have many Cdd Jobs
-CddJob ||--|| ContactDueDiligence : A CddJob has a ContactDueDiligence
+CddJob ||--|| CDD : A CddJob has a CDD
 CddJob ||--|{ EnumTypeItem : ActionType
 CddJob ||--|{ Action : A CddJob has a Action
 CddJob ||--|{ EnumTypeItem : CDDStatus
@@ -84,7 +85,7 @@ Action ||--|| User : A Action has a User
 Action ||--|{ Notify : A Action has many Notifications
 Notify ||--|| User : Notify has a User
 
-Contact ||--|{ ContactDueDiligence : A contact can have many CDDs
+Contact ||--|{ CDD : A contact can have many CDDs
 
 
 @enduml
