@@ -29,14 +29,6 @@ table( Contact)
     LastName
 }
 
-table( CDD)
-{
-    primary_key(Id)
-    ContactId
-    CompanyId
-    NorthRowRAG
-    NorthRowUuId
-}
 table( Company)
 {
     primary_key(Id)
@@ -46,27 +38,46 @@ table( Company)
     WebSiteUrl
     Email
 }
+table( CDD)
+{
+    primary_key(Id)
+    ContactId
+    CompanyId
+    RAG
+    ExpiryDate
+}
+
+table(CDDDocuments)
+{
+    primary_key(Id)
+    CDDId
+    DocumentId
+}
 
 table( Asset)
 {
     primary_key(Id)
     AddressId
+    AssetTitleId
 }
 
 table( AssetTitle)
 {
     primary_key(Id)
     AssetId
-    CDDId
-    FileName
-    LastName
-    EmailAddress
-    CompanyName
+    ContactId
+    CompanyId
 }
 
-AssetTitle --> Asset : AssetId
-AssetTitle --> CDD : CDDId
-CDD --> Contact : ContactId (nullable)
-CDD --> Company : ContactId (nullable)
+Contact ||--|{ CDD 
+Company ||--|{ CDD
+
+CDD ||--|{ CDDDocuments
+
+Asset ||--|{ AssetTitle
+AssetTitle ||--|{ Contact
+AssetTitle ||--|{ Company
+
+
 
 @enduml
