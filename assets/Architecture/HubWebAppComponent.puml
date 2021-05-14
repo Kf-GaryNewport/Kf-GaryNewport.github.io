@@ -7,7 +7,8 @@ Person(user, KF User , "<$user>\n A User within KnightFrank" )
 Person(mob_user, KF Mobile User, "<$mobile_user>\n A User within KnightFrank" )
 
 System_Boundary(hub_system, "hub"){
-    Container_Boundary(web_app, "Web Application"){
+    Container_Boundary(web_api, "Web API"){
+        Component( app, "Web Application", "link")  [[http://plantuml.com]]
         Component( api, "Web API", "link")  [[http://plantuml.com]]
         Component( act, "Activities", "")
         Component( con, "Contacts", "")
@@ -78,8 +79,9 @@ System_Boundary(hub_system, "hub"){
 'System(int_systems, "Internal Systems")
 
 ' Relationships
-Rel(user, api, "Uses", "HTTPS")
-Rel(mob_user, api, "Uses", "HTTPS")
+Rel(user, app, "Uses", "HTTPS")
+Rel(mob_user, app, "Uses", "HTTPS")
+Rel(app, api, "Uses", "HTTPS")
 
 Rel_U(webjob, rel_db, "Reads from\nand writes to")
 Rel_U(webjob, sto, "Reads from\nand writes to")

@@ -5,13 +5,18 @@
 
 title System Context diagram for KF hub Property Portfolio System
 
-Person(user  , KF User , "<$user> <$mobile_user>\n A User within KnightFrank" )
+Person(user  , KF User , "A User within KnightFrank" )
+Person(mobile  , KF mobile User , "A User within KnightFrank" )
+Person(client  , Client , "public user" )
 
 System(hub_system, "hub", "Allows users to manage the buying/selling and letting of retail and commercial properties")
 System(int_systems, "Internal systems", "Exchange\nElasticSearch\nOffice Online Server\nFeedCentre\nSAP\nQube\nDocusign\n--------\nKF People\nFileConversion\nNegotiatorRelationship\nNotifications\nClaims\nInstruction\nMyKfFeed\nUserFeed\nTemplates\nSearchToFile")
 System_Ext(ext_systems, "External systems", "DataHug\nDotmailer\nMicrosoft Conitive Services\nPCA Address Service\nSMS SpeedWay\nRestb.Ai")
 
 Rel(user, hub_system, "Uses")
+Rel(mobile, hub_system, "Uses")
+Rel(client, hub_system, "Uses")
+
 Rel_Back(user, int_systems, "Sends e-mails to")
 Rel_Neighbor(hub_system, int_systems, "Uses")
 Rel(hub_system, ext_systems, "Uses")
