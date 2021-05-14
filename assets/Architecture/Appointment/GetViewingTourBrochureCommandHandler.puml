@@ -1,0 +1,23 @@
+@startuml
+class GetViewingTourBrochureCommandHandler {
+    + GetViewingTourBrochureCommandHandler(templatingHelper:ITemplatingHelper, templatingService:ITemplatingService, documentTemplateRepository:IReadGenericRepository<DocumentTemplate>, viewingRepository:IReadGenericRepository<Viewing>, enumTypeItemRepository:IEnumTypeItemRepository)
+    + Handle(command:GetViewingTourBrochureCommand) : DocumentTemplateContent
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<GetViewingTourBrochureCommand,DocumentTemplateContent>" <|-- GetViewingTourBrochureCommandHandler
+
+class GetViewingTourBrochureCommand {
+    + EmptyImageUrl : string <<get>> <<set>>
+    + DocumentName : string <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+GenerateTemplateContentCommand <|-- GetViewingTourBrochureCommand
+"IRequest" "<DocumentTemplateContent>" <|-- GetViewingTourBrochureCommand
+'GetViewingTourBrochureCommand --> "LocaleId" Guid
+
+IRequest <-Left- IRequestHandler
+GetViewingTourBrochureCommand --> GetViewingTourBrochureCommandHandler
+
+@enduml

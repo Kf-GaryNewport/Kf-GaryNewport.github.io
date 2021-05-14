@@ -1,0 +1,20 @@
+@startuml
+class DeleteAppointmentCommandHandler {
+    + DeleteAppointmentCommandHandler(appointmentRepository:IGenericRepository<Appointment>, viewingRepository:IReadGenericRepository<Viewing>, securityValidator:ISecurityValidator)
+    + Handle(message:DeleteAppointmentCommand) : EntityAppointmentCommandBaseResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<DeleteAppointmentCommand,EntityAppointmentCommandBaseResult>" <|-- DeleteAppointmentCommandHandler
+
+class DeleteAppointmentCommand {
+}
+class "IRequest"<T> {
+}
+"IRequest" "<EntityAppointmentCommandBaseResult>" <|-- DeleteAppointmentCommand
+'DeleteAppointmentCommand --> "Id" Guid
+
+IRequest <-Left- IRequestHandler
+DeleteAppointmentCommand --> DeleteAppointmentCommandHandler
+
+@enduml

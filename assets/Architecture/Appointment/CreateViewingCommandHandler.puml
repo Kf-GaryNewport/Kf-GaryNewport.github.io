@@ -1,0 +1,71 @@
+@startuml
+class CreateViewingCommandHandler {
+'    + CreateViewingCommandHandler(viewingRepository:IGenericRepository<Viewing>, entityValidator:IEntityValidator, requirementRepository:IGenericRepository<Requirement>, activityRepository:IGenericRepository<Activity>, contactsMapper:IEntityAppointmentReferenceMapper<AppointmentContact>, negotiatorsMapper:IEntityAppointmentReferenceMapper<User>, appointmentAttachmentsMapper:IMultiEntityAppointmentAttachmentsMapper<Activity, Requirement>, currentUserProvider:ICurrentUserProvider, mediator:ISyncMediator, windowsTimeZoneHelper:IWindowsTimeZoneHelper, activityBusinessEventHelper:IActivityBusinessEventHelper, requirementBusinessEventHelper:IRequirementBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, companyContactsResolver:ICompanyContactsResolver, securityValidator:ISecurityValidator, enumTypeItemRepository:IEnumTypeItemRepository, appointmentOtherAttendeesMapper:IEntityAppointmentOtherAttendeesMapper<AppointmentOtherAttendee>, appointmentMessageMapper:IEntityAppointmentReferenceMapper<AppointmentMessage>, appointmentCovidAssessmentMapper:IAppointmentCovidAssessmentMapper, viewingRequirementMapper:IViewingRequirementMapper)
+    + CreateViewingCommandHandler()
+    + Handle(message:CreateViewingCommand) : EntityAppointmentCommandBaseResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<CreateViewingCommand,EntityAppointmentCommandBaseResult>" <|-- CreateViewingCommandHandler
+
+
+abstract class EntityAppointmentCommandBase {
+    + Cancelled : bool <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+'class "IList"<T> {
+'}
+'class "List"<T> {
+'}
+"IRequest" "<EntityAppointmentCommandBaseResult>" <|-- EntityAppointmentCommandBase
+IAppointmentCommandWithAttachments <|-- EntityAppointmentCommandBase
+'EntityAppointmentCommandBase --> "EntityId" Guid
+'EntityAppointmentCommandBase --> "AttachmentEntityType" EntityType
+'EntityAppointmentCommandBase --> "StartDateTime" DateTimeOffset
+'EntityAppointmentCommandBase --> "EndDateTime" DateTimeOffset
+'EntityAppointmentCommandBase --> "Contacts<AppointmentContactCommand>" "IList"
+'EntityAppointmentCommandBase o-> "NegotiatorIds<Guid>" "IList"
+'EntityAppointmentCommandBase --> "AppointmentEventType" AppointmentEventType
+'EntityAppointmentCommandBase --> "Attachments<CreateAttachment>" "IList"
+'EntityAppointmentCommandBase o-> "CopiedAttachments<Guid>" "IList"
+'EntityAppointmentCommandBase --> "OtherAttendees<CreateUpdateAppointmentOtherAttendeeCommand>" "List"
+'EntityAppointmentCommandBase --> "TimeZoneId" Guid
+'EntityAppointmentCommandBase o-> "Messages<AppointmentMessageCommand>" "IList"
+EntityAppointmentCommandBase --> "AppointmentCovidAssessment" AppointmentCovidAssessmentCommand
+
+class CreateEntityAppointmentCommand {
+    + Version : int <<get>> <<set>>
+    + IgnoreVersion : bool <<get>> <<set>>
+}
+EntityAppointmentCommandBase <|-- CreateEntityAppointmentCommand
+ICommandWithVersion <|-- CreateEntityAppointmentCommand
+
+class CreateViewingCommand {
+    + IsEditedAsViewingTour : bool <<get>> <<set>>
+    + PreViewingNotes : string <<get>> <<set>>
+}
+CreateEntityAppointmentCommand <|-- CreateViewingCommand
+'CreateViewingCommand --> "RequirementId" Guid
+CreateViewingCommand --> "RequirementUndisclosed" RequirementUndisclosedCommand
+'CreateViewingCommand --> "ActivityId" Guid
+'CreateViewingCommand --> "ResponsibleNegotiatorId" Guid
+'CreateViewingCommand --> "ResponsibleNegotiatorDepartmentId" Guid
+
+abstract class "BaseViewingCommandValidator"<TCommand> {
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<TCommand>" <|-- "BaseViewingCommandValidator"
+
+class CreateViewingCommandValidator {
+    + CreateViewingCommandValidator(enumTypeItemRepository:IEnumTypeItemRepository)
+}
+class "BaseViewingCommandValidator"<T> {
+}
+"BaseViewingCommandValidator" "<CreateViewingCommand>" <|-- CreateViewingCommandValidator
+
+IRequest <-Left- IRequestHandler
+CreateViewingCommand --> CreateViewingCommandHandler
+@enduml
+
