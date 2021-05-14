@@ -1,0 +1,36 @@
+class UpdateViewingCommandHandler {
+'    + UpdateViewingCommandHandler(viewingRepository:IGenericRepository<Viewing>, entityValidator:IEntityValidator, contactsMapper:IEntityAppointmentReferenceMapper<AppointmentContact>, negotiatorsMapper:IEntityAppointmentReferenceMapper<User>, currentUserProvider:ICurrentUserProvider, mediator:ISyncMediator, windowsTimeZoneHelper:IWindowsTimeZoneHelper, activityBusinessEventHelper:IActivityBusinessEventHelper, requirementBusinessEventHelper:IRequirementBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, companyContactsResolver:ICompanyContactsResolver, securityValidator:ISecurityValidator, appointmentAttachmentsMapper:IMultiEntityAppointmentAttachmentsMapper<Activity, Requirement>, appointmentOtherAttendeesMapper:IEntityAppointmentOtherAttendeesMapper<AppointmentOtherAttendee>, appointmentCancelationHelper:IAppointmentCancelationHelper, appointmentMessageMapper:IEntityAppointmentReferenceMapper<AppointmentMessage>, appointmentCovidAssessmentMapper:IAppointmentCovidAssessmentMapper, viewingVendorFeedbackMapper:IViewingVendorFeedbackMapper)
+    + UpdateViewingCommandHandler()
+    + Handle(message:UpdateViewingCommand) : EntityAppointmentCommandBaseResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<UpdateViewingCommand,EntityAppointmentCommandBaseResult>" <|-- UpdateViewingCommandHandler
+
+class UpdateViewingCommand {
+    + IsEditedAsViewingTour : bool <<get>> <<set>>
+    + PreViewingNotes : string <<get>> <<set>>
+    + PostViewingComment : string <<get>> <<set>>
+    + VendorFeedback : string <<get>> <<set>>
+}
+UpdateEntityAppointmentCommand <|-- UpdateViewingCommand
+'UpdateViewingCommand --> "ResponsibleNegotiatorId" Guid
+'UpdateViewingCommand --> "ResponsibleNegotiatorDepartmentId" Guid
+
+abstract class "BaseViewingCommandValidator"<TCommand> {
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<TCommand>" <|-- "BaseViewingCommandValidator"
+
+class UpdateViewingCommandValidator {
+    + UpdateViewingCommandValidator(enumTypeItemRepository:IEnumTypeItemRepository)
+}
+class "BaseViewingCommandValidator"<T> {
+}
+"BaseViewingCommandValidator" "<UpdateViewingCommand>" <|-- UpdateViewingCommandValidator
+
+IRequest <-Left- IRequestHandler
+UpdateViewingCommand --> UpdateViewingCommandHandler
+
+@enduml

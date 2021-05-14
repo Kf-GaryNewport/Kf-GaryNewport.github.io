@@ -1,0 +1,57 @@
+@startuml
+class UpdateViewingTourCommandHandler {
+'    + UpdateViewingTourCommandHandler(viewingTourRepository:IGenericRepository<ViewingTour>, currentUserProvider:ICurrentUserProvider, viewingTourValidator:IViewingTourValidator, mediator:ISyncMediator, appointmentAttachmentsMapper:IAppointmentAttachmentsMapper<Requirement>, windowsTimeZoneHelper:IWindowsTimeZoneHelper, requirementBusinessEventHelper:IRequirementBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, entityValidator:IEntityValidator, securityValidator:ISecurityValidator)
+    + UpdateViewingTourCommandHandler()
+    + Handle(message:UpdateViewingTourCommand) : ViewingTourCommandBaseResult
+}
+class "IRequestHandler"<T1,T2> {
+}
+"IRequestHandler" "<UpdateViewingTourCommand,ViewingTourCommandBaseResult>" <|-- UpdateViewingTourCommandHandler
+
+abstract class ViewingTourCommandBase {
+    + AppointmentMessage : string <<get>> <<set>>
+    + AppointmentEmailMessage : string <<get>> <<set>>
+    + AppointmentTextMessage : string <<get>> <<set>>
+    + Cancelled : bool <<get>> <<set>>
+    + Subject : string <<get>> <<set>>
+    + Location : string <<get>> <<set>>
+}
+class "IRequest"<T> {
+}
+'class "IList"<T> {
+'}
+"IRequest" "<ViewingTourCommandBaseResult>" <|-- ViewingTourCommandBase
+IAppointmentCommandWithAttachments <|-- ViewingTourCommandBase
+'ViewingTourCommandBase --> "StartDateTime" DateTimeOffset
+'ViewingTourCommandBase --> "TimeZoneId" Guid
+'ViewingTourCommandBase --> "Attachments<CreateAttachment>" "IList"
+'ViewingTourCommandBase o-> "CopiedAttachments<Guid>" "IList"
+'ViewingTourCommandBase --> "EntityId" Guid
+'ViewingTourCommandBase --> "AttachmentEntityType" EntityType
+
+class UpdateViewingTourCommand {
+}
+'class "IList"<T> {
+'}
+ViewingTourCommandBase <|-- UpdateViewingTourCommand
+'UpdateViewingTourCommand --> "Id" Guid
+'UpdateViewingTourCommand o-> "NewlyAddedViewings<CreateViewingCommand>" "IList"
+'UpdateViewingTourCommand o-> "ExistingViewings<UpdateViewingCommand>" "IList"
+
+class UpdateViewingTourCommandValidator {
+    + UpdateViewingTourCommandValidator()
+}
+class "BaseViewingTourCommandValidator"<T> {
+}
+"BaseViewingTourCommandValidator" "<UpdateViewingTourCommand>" <|-- UpdateViewingTourCommandValidator
+
+abstract class "BaseViewingTourCommandValidator"<TCommand> {
+}
+class "AbstractValidator"<T> {
+}
+"AbstractValidator" "<TCommand>" <|-- "BaseViewingTourCommandValidator"
+
+IRequest <-Left- IRequestHandler
+UpdateViewingTourCommand --> UpdateViewingTourCommandHandler
+
+@enduml
