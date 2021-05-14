@@ -48,7 +48,14 @@ class "AbstractValidator"<T> {
 }
 "AbstractValidator" "<TCommand>" <|-- "EntityAppointmentCommandBaseValidator"
 
+class EntityAppointmentCommandBaseResult {
+    + ShouldSynchronizeToQube : bool <<get>> <<set>>
+}
+IQubeSynchronizationCommandResult <|-- EntityAppointmentCommandBaseResult
+'EntityAppointmentCommandBaseResult --> "AppointmentId" Guid
+
 IRequest <-Left- IRequestHandler
 CreateEntityAppointmentCommand --> CreateEntityAppointmentCommandHandler
+EntityAppointmentCommandBaseResult --> CreateEntityAppointmentCommandHandler
 
 @enduml

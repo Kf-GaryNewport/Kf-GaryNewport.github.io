@@ -1,4 +1,5 @@
 @startuml
+
 class UpdateViewingTourCommandHandler {
 '    + UpdateViewingTourCommandHandler(viewingTourRepository:IGenericRepository<ViewingTour>, currentUserProvider:ICurrentUserProvider, viewingTourValidator:IViewingTourValidator, mediator:ISyncMediator, appointmentAttachmentsMapper:IAppointmentAttachmentsMapper<Requirement>, windowsTimeZoneHelper:IWindowsTimeZoneHelper, requirementBusinessEventHelper:IRequirementBusinessEventHelper, auditEntityEventHelper:IAuditEntityEventHelper, entityValidator:IEntityValidator, securityValidator:ISecurityValidator)
     + UpdateViewingTourCommandHandler()
