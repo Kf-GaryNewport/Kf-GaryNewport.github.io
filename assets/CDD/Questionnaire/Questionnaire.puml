@@ -55,6 +55,7 @@ table( QuestionnaireAnswer)
     QuestionnaireId
     QuestionnaireRowId
     Answer
+    AutoPopulate
 }
 
 QuestionnaireTemplate ||--|{ QuestionnaireRow : Template has many Questions
