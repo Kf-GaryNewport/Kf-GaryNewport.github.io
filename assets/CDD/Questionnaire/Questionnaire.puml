@@ -57,9 +57,9 @@ table( QuestionnaireAnswer)
     Answer
 }
 
-QuestionnaireTemplate ||--|{ QuestionnaireRow
-Questionnaire ||--|| QuestionnaireTemplate 
-QuestionnaireAnswer ||--|| QuestionnaireRow
-QuestionnaireAnswer }|--|| Questionnaire 
+QuestionnaireTemplate ||--|{ QuestionnaireRow : Template has many Questions
+Questionnaire ||--|| QuestionnaireTemplate : Questionnaire has only one Template
+QuestionnaireAnswer ||--|| QuestionnaireRow : Answer has only one Question
+QuestionnaireAnswer }|--|| Questionnaire : Questionnaire has many Answers
  
 @enduml
