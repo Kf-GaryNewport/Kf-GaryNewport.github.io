@@ -60,6 +60,6 @@ table( QuestionnaireAnswer)
 QuestionnaireTemplate ||--|{ QuestionnaireRow
 Questionnaire ||--|| QuestionnaireTemplate 
 QuestionnaireAnswer ||--|| QuestionnaireRow
-QuestionnaireAnswer ||--|| Questionnaire 
+QuestionnaireAnswer }|--|| Questionnaire 
  
 @enduml
