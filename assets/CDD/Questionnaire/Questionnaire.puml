@@ -29,7 +29,7 @@ skinparam classarrowcolor gray
 table( QuestionnaireTemplate)
 {
     primary_key(Id)
-    Titled
+    Title
     EffectiveDate
 }
 
