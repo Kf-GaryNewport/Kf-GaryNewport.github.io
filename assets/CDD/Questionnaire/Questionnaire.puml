@@ -47,6 +47,7 @@ table( QuestionnaireRow)
     AnswerType
     AnswerLength
     AnswerValidation
+    AutoPopulate
 }
 
 table( QuestionnaireAnswer)
@@ -55,7 +56,6 @@ table( QuestionnaireAnswer)
     QuestionnaireId
     QuestionnaireRowId
     Answer
-    AutoPopulate
 }
 
 QuestionnaireTemplate ||--|{ QuestionnaireRow : Template has many Questions
