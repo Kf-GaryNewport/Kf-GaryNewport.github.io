@@ -1,0 +1,107 @@
+@startuml
+hide empty members
+set namespaceSeparator none
+
+interface "/viewings" {
+}
+
+class "PUT /viewings" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Appointment.Commands.UpdateViewingAndCallDateCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /viewings" ..> KnightFrank.Antares.Domain.Appointment.Commands.UpdateViewingAndCallDateCommand
+
+class "POST /viewings" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Appointment.Commands.CreateViewingCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /viewings" ..> KnightFrank.Antares.Domain.Appointment.Commands.CreateViewingCommand
+
+"/viewings" ..> "POST /viewings"
+"/viewings" ..> "PUT /viewings"
+
+
+
+interface "/viewingtours" {
+}
+
+class "PUT /viewingtours" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Appointment.Commands.UpdateViewingTourCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /viewingtours" ..> KnightFrank.Antares.Domain.Appointment.Commands.UpdateViewingTourCommand
+
+class "POST /viewingtours" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Appointment.Commands.CreateViewingTourCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /viewingtours" ..> KnightFrank.Antares.Domain.Appointment.Commands.CreateViewingTourCommand
+
+"/viewingtours" ..> "POST /viewingtours"
+"/viewingtours" ..> "PUT /viewingtours"
+
+
+
+interface "/viewingtours/{id}" {
+}
+
+class "GET /viewingtours/{id}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/viewingtours/{id}" ..> "GET /viewingtours/{id}"
+
+
+
+interface "/viewingtours/document" {
+}
+
+class "GET /viewingtours/document" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string command.localeId
+{field} string command.emptyImageUrl
+{field} string command.documentName
+{field} string command.entityId
+{field} string command.entityTypeId
+{field} string command.templateId
+{field} string command.businessId
+.. responses ..
+
+}
+
+
+
+"/viewingtours/document" ..> "GET /viewingtours/document"
+
+
+
+@enduml

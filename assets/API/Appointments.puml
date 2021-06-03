@@ -1,0 +1,111 @@
+@startuml
+hide empty members
+set namespaceSeparator none
+
+interface "/appointments/{id}" {
+}
+
+class "GET /appointments/{id}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+class "DELETE /appointments/{id}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/appointments/{id}" ..> "DELETE /appointments/{id}"
+"/appointments/{id}" ..> "GET /appointments/{id}"
+
+
+
+interface "/appointments/{id}/editData" {
+}
+
+class "GET /appointments/{id}/editData" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/appointments/{id}/editData" ..> "GET /appointments/{id}/editData"
+
+
+
+interface "/appointments/availability" {
+}
+
+class "POST /appointments/availability" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Appointment.Queries.AppointmentAvailabilityQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /appointments/availability" ..> KnightFrank.Antares.Domain.Appointment.Queries.AppointmentAvailabilityQuery
+
+"/appointments/availability" ..> "POST /appointments/availability"
+
+
+
+interface "/appointments/suggestedAttendees" {
+}
+
+class "GET /appointments/suggestedAttendees" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string query.requirementId
+{field} string query.activityId
+.. responses ..
+
+}
+
+
+
+"/appointments/suggestedAttendees" ..> "GET /appointments/suggestedAttendees"
+
+
+
+interface "/appointments/isCovidAssessmentRequired" {
+}
+
+class "GET /appointments/isCovidAssessmentRequired" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string command.assetId
+{field} string (date-time) command.appointmentTime
+{field} string[] command.negotiatorDepartmentIds
+{field} string command.appointmentId
+.. responses ..
+
+}
+
+
+
+"/appointments/isCovidAssessmentRequired" ..> "GET /appointments/isCovidAssessmentRequired"
+
+
+
+@enduml

@@ -1,0 +1,1540 @@
+@startuml
+hide empty members
+set namespaceSeparator none
+
+interface "/activities/portals" {
+}
+
+class "GET /activities/portals" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string query.countryCode
+{field} string query.serviceLineId
+.. responses ..
+
+}
+
+
+
+"/activities/portals" ..> "GET /activities/portals"
+
+
+
+interface "/activities" {
+}
+
+class "PUT /activities" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityCommand
+
+class "POST /activities" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityCommand
+
+"/activities" ..> "POST /activities"
+"/activities" ..> "PUT /activities"
+
+
+
+interface "/activities/createDuplicate" {
+}
+
+class "POST /activities/createDuplicate" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateDuplicateActivityCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/createDuplicate" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateDuplicateActivityCommand
+
+"/activities/createDuplicate" ..> "POST /activities/createDuplicate"
+
+
+
+interface "/activities/{id}" {
+}
+
+class "GET /activities/{id}" {
+.. header ..
+{field} string Current-User-Id
+{field} string X-Request-Entity-Configuration
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}" ..> "GET /activities/{id}"
+
+
+
+interface "/activities/{id}/preview" {
+}
+
+class "GET /activities/{id}/preview" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/preview" ..> "GET /activities/{id}/preview"
+
+
+
+interface "/activities/{id}/areas" {
+}
+
+class "GET /activities/{id}/areas" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/areas" ..> "GET /activities/{id}/areas"
+
+
+
+interface "/activities/{id}/{version}" {
+}
+
+class "DELETE /activities/{id}/{version}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} integer (int32) <b>version</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/{version}" ..> "DELETE /activities/{id}/{version}"
+
+
+
+interface "/activities/marketing" {
+}
+
+class "PUT /activities/marketing" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateMarketingDetailsCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/marketing" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateMarketingDetailsCommand
+
+"/activities/marketing" ..> "PUT /activities/marketing"
+
+
+
+interface "/activities/configuration/types" {
+}
+
+class "GET /activities/configuration/types" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string countryCode
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/types" ..> "GET /activities/configuration/types"
+
+
+
+interface "/activities/configuration/types/statuses" {
+}
+
+class "GET /activities/configuration/types/statuses" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string countryCode
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/types/statuses" ..> "GET /activities/configuration/types/statuses"
+
+
+
+interface "/activities/configuration/types/activity" {
+}
+
+class "GET /activities/configuration/types/activity" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string propertyTypeId
+{field} string serviceLineId
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/types/activity" ..> "GET /activities/configuration/types/activity"
+
+
+
+interface "/activities/configuration/statusesRequiringNote" {
+}
+
+class "GET /activities/configuration/statusesRequiringNote" {
+.. header ..
+{field} string Current-User-Id
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/statusesRequiringNote" ..> "GET /activities/configuration/statusesRequiringNote"
+
+
+
+interface "/activities/configuration/statusesRequiringLostToInformation/{agencyTypeId}" {
+}
+
+class "GET /activities/configuration/statusesRequiringLostToInformation/{agencyTypeId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>agencyTypeId</b>
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/statusesRequiringLostToInformation/{agencyTypeId}" ..> "GET /activities/configuration/statusesRequiringLostToInformation/{agencyTypeId}"
+
+
+
+interface "/activities/configuration/statusesRequiringCompletionDate" {
+}
+
+class "GET /activities/configuration/statusesRequiringCompletionDate" {
+.. header ..
+{field} string Current-User-Id
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/statusesRequiringCompletionDate" ..> "GET /activities/configuration/statusesRequiringCompletionDate"
+
+
+
+interface "/activities/configuration/statusesRequiringExchangedDate" {
+}
+
+class "GET /activities/configuration/statusesRequiringExchangedDate" {
+.. header ..
+{field} string Current-User-Id
+.. responses ..
+
+}
+
+
+
+"/activities/configuration/statusesRequiringExchangedDate" ..> "GET /activities/configuration/statusesRequiringExchangedDate"
+
+
+
+interface "/activities/{id}/attachments" {
+}
+
+class "POST /activities/{id}/attachments" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityAttachmentCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/attachments" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityAttachmentCommand
+
+"/activities/{id}/attachments" ..> "POST /activities/{id}/attachments"
+
+
+
+interface "/activities/{id}/epcGraph" {
+}
+
+class "POST /activities/{id}/epcGraph" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.DocumentTemplate.Commands.GenerateEpcGraphCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/epcGraph" ..> KnightFrank.Antares.Domain.DocumentTemplate.Commands.GenerateEpcGraphCommand
+
+"/activities/{id}/epcGraph" ..> "POST /activities/{id}/epcGraph"
+
+
+
+interface "/activities/{activityId}/attachments/{attachmentId}" {
+}
+
+class "PUT /activities/{activityId}/attachments/{attachmentId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>activityId</b>
+{field} string <b>attachmentId</b>
+.. body ..
+{field} integer <b>size</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{activityId}/attachments/{attachmentId}" ..> "PUT /activities/{activityId}/attachments/{attachmentId}"
+
+
+
+interface "/activities/{activityId}/attachments/search" {
+}
+
+class "POST /activities/{activityId}/attachments/search" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>activityId</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Queries.ActivityAttachmentsQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/{activityId}/attachments/search" ..> KnightFrank.Antares.Domain.Activity.Queries.ActivityAttachmentsQuery
+
+"/activities/{activityId}/attachments/search" ..> "POST /activities/{activityId}/attachments/search"
+
+
+
+interface "/activities/brochures" {
+}
+
+class "POST /activities/brochures" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Queries.ActivityBrochureAttachmentsQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/brochures" ..> KnightFrank.Antares.Domain.Activity.Queries.ActivityBrochureAttachmentsQuery
+
+"/activities/brochures" ..> "POST /activities/brochures"
+
+
+
+interface "/activities/{activityId}/attachments/{attachmentId}/{version}" {
+}
+
+class "DELETE /activities/{activityId}/attachments/{attachmentId}/{version}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>activityId</b>
+{field} string <b>attachmentId</b>
+{field} integer (int32) <b>version</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{activityId}/attachments/{attachmentId}/{version}" ..> "DELETE /activities/{activityId}/attachments/{attachmentId}/{version}"
+
+
+
+interface "/activities/{id}/negotiators" {
+}
+
+class "PUT /activities/{id}/negotiators" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityNegotiatorCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/{id}/negotiators" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityNegotiatorCommand
+
+"/activities/{id}/negotiators" ..> "PUT /activities/{id}/negotiators"
+
+
+
+interface "/activities/search" {
+}
+
+class "POST /activities/search" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery <b>pageableQuery</b>
+.. responses ..
+
+}
+
+"POST /activities/search" ..> KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery
+
+"/activities/search" ..> "POST /activities/search"
+
+
+
+interface "/activities/selection" {
+}
+
+class "POST /activities/selection" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Search.Common.Queries.ActualSelectionQuery[KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery] <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/selection" ..> KnightFrank.Antares.Search.Common.Queries.ActualSelectionQuery[KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery]
+
+"/activities/selection" ..> "POST /activities/selection"
+
+
+
+interface "/activities/match" {
+}
+
+class "POST /activities/match" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Search.Activity.Queries.ActivitiesMatchQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/match" ..> KnightFrank.Antares.Search.Activity.Queries.ActivitiesMatchQuery
+
+"/activities/match" ..> "POST /activities/match"
+
+
+
+interface "/activities/search/configuration" {
+}
+
+class "POST /activities/search/configuration" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Queries.ActivityConfigurationQuery <b>activityConfigurationQuery</b>
+.. responses ..
+
+}
+
+"POST /activities/search/configuration" ..> KnightFrank.Antares.Domain.Activity.Queries.ActivityConfigurationQuery
+
+"/activities/search/configuration" ..> "POST /activities/search/configuration"
+
+
+
+interface "/activities/{id}/offers" {
+}
+
+class "GET /activities/{id}/offers" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} string query.activityId
+{field} string query.offerStatusId
+{field} boolean query.reservations
+{field} boolean query.showHidden
+{field} boolean query.external
+{field} integer (int32) query.page
+{field} integer (int32) query.size
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/offers" ..> "GET /activities/{id}/offers"
+
+
+
+interface "/activities/{id}/notes" {
+}
+
+class "POST /activities/{id}/notes" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityNoteAndUpdateCallDateCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/notes" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityNoteAndUpdateCallDateCommand
+
+"/activities/{id}/notes" ..> "POST /activities/{id}/notes"
+
+
+
+interface "/activities/{id}/notes/{noteId}" {
+}
+
+class "DELETE /activities/{id}/notes/{noteId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>noteId</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/notes/{noteId}" ..> "DELETE /activities/{id}/notes/{noteId}"
+
+
+
+interface "/activities/{id}/notes/search" {
+}
+
+class "POST /activities/{id}/notes/search" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Search.Note.Queries.EntityNotesQuery <b>noteQuery</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/notes/search" ..> KnightFrank.Antares.Search.Note.Queries.EntityNotesQuery
+
+"/activities/{id}/notes/search" ..> "POST /activities/{id}/notes/search"
+
+
+
+interface "/activities/{id}/reviews" {
+}
+
+class "POST /activities/{id}/reviews" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityNoteAndUpdateCallDateCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/reviews" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityNoteAndUpdateCallDateCommand
+
+"/activities/{id}/reviews" ..> "POST /activities/{id}/reviews"
+
+
+
+interface "/activities/{id}/marketing/images" {
+}
+
+class "GET /activities/{id}/marketing/images" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+class "PUT /activities/{id}/marketing/images" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityMarketingImageOrderCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/{id}/marketing/images" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityMarketingImageOrderCommand
+
+class "POST /activities/{id}/marketing/images" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityMarketingImageCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/marketing/images" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityMarketingImageCommand
+
+"/activities/{id}/marketing/images" ..> "GET /activities/{id}/marketing/images"
+"/activities/{id}/marketing/images" ..> "POST /activities/{id}/marketing/images"
+"/activities/{id}/marketing/images" ..> "PUT /activities/{id}/marketing/images"
+
+
+
+interface "/activities/{id}/marketing/images/{imageId}" {
+}
+
+class "GET /activities/{id}/marketing/images/{imageId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>imageId</b>
+.. responses ..
+
+}
+
+
+
+class "POST /activities/{id}/marketing/images/{imageId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>imageId</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityMarketingImageDescCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/marketing/images/{imageId}" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityMarketingImageDescCommand
+
+"/activities/{id}/marketing/images/{imageId}" ..> "GET /activities/{id}/marketing/images/{imageId}"
+"/activities/{id}/marketing/images/{imageId}" ..> "POST /activities/{id}/marketing/images/{imageId}"
+
+
+
+interface "/activities/advertisements" {
+}
+
+class "GET /activities/advertisements" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string activityId
+{field} string currencyId
+{field} integer (int32) page
+{field} integer (int32) size
+.. responses ..
+
+}
+
+
+
+class "PUT /activities/advertisements" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateAdvertisementCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/advertisements" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateAdvertisementCommand
+
+class "POST /activities/advertisements" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateAdvertisementCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/advertisements" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateAdvertisementCommand
+
+"/activities/advertisements" ..> "GET /activities/advertisements"
+"/activities/advertisements" ..> "POST /activities/advertisements"
+"/activities/advertisements" ..> "PUT /activities/advertisements"
+
+
+
+interface "/activities/matches/{id}/advertisement" {
+}
+
+class "PUT /activities/matches/{id}/advertisement" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Match.Commands.UpdateMatchAdvertisementCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/matches/{id}/advertisement" ..> KnightFrank.Antares.Domain.Match.Commands.UpdateMatchAdvertisementCommand
+
+"/activities/matches/{id}/advertisement" ..> "PUT /activities/matches/{id}/advertisement"
+
+
+
+interface "/activities/advertisements/{id}/{version}" {
+}
+
+class "DELETE /activities/advertisements/{id}/{version}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} integer (int32) <b>version</b>
+.. responses ..
+
+}
+
+
+
+"/activities/advertisements/{id}/{version}" ..> "DELETE /activities/advertisements/{id}/{version}"
+
+
+
+interface "/activities/{id}/marketing/images/{imageId}/{version}" {
+}
+
+class "DELETE /activities/{id}/marketing/images/{imageId}/{version}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>imageId</b>
+{field} integer (int32) <b>version</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/marketing/images/{imageId}/{version}" ..> "DELETE /activities/{id}/marketing/images/{imageId}/{version}"
+
+
+
+interface "/activities/{id}/appointments" {
+}
+
+class "GET /activities/{id}/appointments" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} integer (int32) <b>page</b>
+{field} integer (int32) <b>size</b>
+.. responses ..
+
+}
+
+
+
+class "PUT /activities/{id}/appointments" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityAppointmentCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/{id}/appointments" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityAppointmentCommand
+
+class "POST /activities/{id}/appointments" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityAppointmentCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/appointments" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityAppointmentCommand
+
+"/activities/{id}/appointments" ..> "GET /activities/{id}/appointments"
+"/activities/{id}/appointments" ..> "POST /activities/{id}/appointments"
+"/activities/{id}/appointments" ..> "PUT /activities/{id}/appointments"
+
+
+
+interface "/activities/viewing/{id}/comment" {
+}
+
+class "PUT /activities/viewing/{id}/comment" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Appointment.Commands.UpdateEntityViewingCommentsCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/viewing/{id}/comment" ..> KnightFrank.Antares.Domain.Appointment.Commands.UpdateEntityViewingCommentsCommand
+
+"/activities/viewing/{id}/comment" ..> "PUT /activities/viewing/{id}/comment"
+
+
+
+interface "/activities/{id}/viewings" {
+}
+
+class "GET /activities/{id}/viewings" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} string query.entityId
+{field} string query.sortingCriteria
+{field} integer (int32) query.page
+{field} integer (int32) query.size
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/viewings" ..> "GET /activities/{id}/viewings"
+
+
+
+interface "/activities/{id}/matches" {
+}
+
+class "GET /activities/{id}/matches" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} integer (int32) <b>page</b>
+{field} integer (int32) <b>size</b>
+.. responses ..
+
+}
+
+
+
+class "POST /activities/{id}/matches" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Match.Commands.CreateActivityMatchesCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/matches" ..> KnightFrank.Antares.Domain.Match.Commands.CreateActivityMatchesCommand
+
+"/activities/{id}/matches" ..> "GET /activities/{id}/matches"
+"/activities/{id}/matches" ..> "POST /activities/{id}/matches"
+
+
+
+interface "/activities/{id}/discardedMatches" {
+}
+
+class "GET /activities/{id}/discardedMatches" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} integer (int32) <b>page</b>
+{field} integer (int32) <b>size</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/discardedMatches" ..> "GET /activities/{id}/discardedMatches"
+
+
+
+interface "/activities/matches/{id}" {
+}
+
+class "PUT /activities/matches/{id}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Match.Commands.UpdateActivityMatchCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/matches/{id}" ..> KnightFrank.Antares.Domain.Match.Commands.UpdateActivityMatchCommand
+
+class "DELETE /activities/matches/{id}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/activities/matches/{id}" ..> "DELETE /activities/matches/{id}"
+"/activities/matches/{id}" ..> "PUT /activities/matches/{id}"
+
+
+
+interface "/activities/matches/{id}/discardedComment" {
+}
+
+class "PUT /activities/matches/{id}/discardedComment" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Match.Commands.UpdateActivityMatchDiscardCommentCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/matches/{id}/discardedComment" ..> KnightFrank.Antares.Domain.Match.Commands.UpdateActivityMatchDiscardCommentCommand
+
+"/activities/matches/{id}/discardedComment" ..> "PUT /activities/matches/{id}/discardedComment"
+
+
+
+interface "/activities/matches/{id}/discard" {
+}
+
+class "PUT /activities/matches/{id}/discard" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Match.Commands.UpdateActivityMatchDiscardCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/matches/{id}/discard" ..> KnightFrank.Antares.Domain.Match.Commands.UpdateActivityMatchDiscardCommand
+
+"/activities/matches/{id}/discard" ..> "PUT /activities/matches/{id}/discard"
+
+
+
+interface "/activities/{id}/chains" {
+}
+
+class "GET /activities/{id}/chains" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+class "POST /activities/{id}/chains" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.ChainTransaction.Commands.CreateActivityChainTransactionCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/chains" ..> KnightFrank.Antares.Domain.ChainTransaction.Commands.CreateActivityChainTransactionCommand
+
+"/activities/{id}/chains" ..> "GET /activities/{id}/chains"
+"/activities/{id}/chains" ..> "POST /activities/{id}/chains"
+
+
+
+interface "/activities/{id}/chainExist/{chainExist}/{version}" {
+}
+
+class "PUT /activities/{id}/chainExist/{chainExist}/{version}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} boolean <b>chainExist</b>
+{field} integer (int32) <b>version</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/chainExist/{chainExist}/{version}" ..> "PUT /activities/{id}/chainExist/{chainExist}/{version}"
+
+
+
+interface "/activities/{id}/chains/{chainTransactionId}" {
+}
+
+class "PUT /activities/{id}/chains/{chainTransactionId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>chainTransactionId</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.ChainTransaction.Commands.UpdateActivityChainTransactionCommand <b>command</b>
+.. responses ..
+
+}
+
+"PUT /activities/{id}/chains/{chainTransactionId}" ..> KnightFrank.Antares.Domain.ChainTransaction.Commands.UpdateActivityChainTransactionCommand
+
+"/activities/{id}/chains/{chainTransactionId}" ..> "PUT /activities/{id}/chains/{chainTransactionId}"
+
+
+
+interface "/activities/{id}/chains/{chainTransactionId}/{version}/{offerId}" {
+}
+
+class "DELETE /activities/{id}/chains/{chainTransactionId}/{version}/{offerId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>chainTransactionId</b>
+{field} integer (int32) <b>version</b>
+{field} string <b>offerId</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/chains/{chainTransactionId}/{version}/{offerId}" ..> "DELETE /activities/{id}/chains/{chainTransactionId}/{version}/{offerId}"
+
+
+
+interface "/activities/{entityId}/parties" {
+}
+
+class "GET /activities/{entityId}/parties" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>entityId</b>
+.. query ..
+{field} string entityId
+{field} string[] allowedRolesIds
+.. responses ..
+
+}
+
+
+
+class "POST /activities/{entityId}/parties" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>entityId</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateActivityPartyCommand <b>partyCommand</b>
+.. responses ..
+
+}
+
+"POST /activities/{entityId}/parties" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateActivityPartyCommand
+
+class "DELETE /activities/{entityId}/parties" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>entityId</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.DeleteActivityPartiesCommand <b>partiesCommand</b>
+.. responses ..
+
+}
+
+"DELETE /activities/{entityId}/parties" ..> KnightFrank.Antares.Domain.Activity.Commands.DeleteActivityPartiesCommand
+
+"/activities/{entityId}/parties" ..> "DELETE /activities/{entityId}/parties"
+"/activities/{entityId}/parties" ..> "GET /activities/{entityId}/parties"
+"/activities/{entityId}/parties" ..> "POST /activities/{entityId}/parties"
+
+
+
+interface "/activities/{EntityId}/parties/{PartyId}" {
+}
+
+class "GET /activities/{EntityId}/parties/{PartyId}" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string <b>entityId</b>
+{field} string <b>partyId</b>
+{field} string entityId
+{field} string partyId
+.. responses ..
+
+}
+
+
+
+"/activities/{EntityId}/parties/{PartyId}" ..> "GET /activities/{EntityId}/parties/{PartyId}"
+
+
+
+interface "/activities/{entityId}/parties/{partyId}" {
+}
+
+class "PUT /activities/{entityId}/parties/{partyId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>entityId</b>
+{field} string <b>partyId</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityPartyCommand <b>partyCommand</b>
+.. responses ..
+
+}
+
+"PUT /activities/{entityId}/parties/{partyId}" ..> KnightFrank.Antares.Domain.Activity.Commands.UpdateActivityPartyCommand
+
+"/activities/{entityId}/parties/{partyId}" ..> "PUT /activities/{entityId}/parties/{partyId}"
+
+
+
+interface "/activities/{entityId}/previewUrl" {
+}
+
+class "GET /activities/{entityId}/previewUrl" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>entityId</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{entityId}/previewUrl" ..> "GET /activities/{entityId}/previewUrl"
+
+
+
+interface "/activities/{entityId}/unitActivities" {
+}
+
+class "GET /activities/{entityId}/unitActivities" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>entityId</b>
+.. query ..
+{field} string activityId
+{field} integer (int32) page
+{field} integer (int32) size
+.. responses ..
+
+}
+
+
+
+"/activities/{entityId}/unitActivities" ..> "GET /activities/{entityId}/unitActivities"
+
+
+
+interface "/activities/{id}/instruction/{instructionId}" {
+}
+
+class "PUT /activities/{id}/instruction/{instructionId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>instructionId</b>
+.. responses ..
+
+}
+
+
+
+class "POST /activities/{id}/instruction/{instructionId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>instructionId</b>
+.. responses ..
+
+}
+
+
+
+class "DELETE /activities/{id}/instruction/{instructionId}" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+{field} string <b>instructionId</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/instruction/{instructionId}" ..> "DELETE /activities/{id}/instruction/{instructionId}"
+"/activities/{id}/instruction/{instructionId}" ..> "POST /activities/{id}/instruction/{instructionId}"
+"/activities/{id}/instruction/{instructionId}" ..> "PUT /activities/{id}/instruction/{instructionId}"
+
+
+
+interface "/activities/{id}/tenancies" {
+}
+
+class "GET /activities/{id}/tenancies" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} string activityId
+{field} integer (int32) page
+{field} integer (int32) size
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/tenancies" ..> "GET /activities/{id}/tenancies"
+
+
+
+interface "/activities/{id}/instructions" {
+}
+
+class "GET /activities/{id}/instructions" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. query ..
+{field} string activityId
+{field} integer (int32) page
+{field} integer (int32) size
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/instructions" ..> "GET /activities/{id}/instructions"
+
+
+
+interface "/activities/{id}/webPropertyTypeDefinitions" {
+}
+
+class "GET /activities/{id}/webPropertyTypeDefinitions" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/webPropertyTypeDefinitions" ..> "GET /activities/{id}/webPropertyTypeDefinitions"
+
+
+
+interface "/activities/{id}/stateValidate" {
+}
+
+class "POST /activities/{id}/stateValidate" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.ValidateActivityStateCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/stateValidate" ..> KnightFrank.Antares.Domain.Activity.Commands.ValidateActivityStateCommand
+
+"/activities/{id}/stateValidate" ..> "POST /activities/{id}/stateValidate"
+
+
+
+interface "/activities/export" {
+}
+
+class "POST /activities/export" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Common.Queries.ExportQuery[KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery] <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/export" ..> KnightFrank.Antares.Domain.Common.Queries.ExportQuery[KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery]
+
+"/activities/export" ..> "POST /activities/export"
+
+
+
+interface "/activities/{id}/requirementApplicants" {
+}
+
+class "GET /activities/{id}/requirementApplicants" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. responses ..
+
+}
+
+
+
+"/activities/{id}/requirementApplicants" ..> "GET /activities/{id}/requirementApplicants"
+
+
+
+interface "/activities/feeSplitValidationConfig" {
+}
+
+class "GET /activities/feeSplitValidationConfig" {
+.. header ..
+{field} string Current-User-Id
+.. responses ..
+
+}
+
+
+
+"/activities/feeSplitValidationConfig" ..> "GET /activities/feeSplitValidationConfig"
+
+
+
+interface "/activities/allowedAttachmentTypes" {
+}
+
+class "GET /activities/allowedAttachmentTypes" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string query.countryId
+{field} string query.serviceLineId
+.. responses ..
+
+}
+
+
+
+"/activities/allowedAttachmentTypes" ..> "GET /activities/allowedAttachmentTypes"
+
+
+
+interface "/activities/{id}/relatedRequirements" {
+}
+
+class "POST /activities/{id}/relatedRequirements" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Search.Requirement.Queries.RequirementsRelatedToActivityQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/relatedRequirements" ..> KnightFrank.Antares.Search.Requirement.Queries.RequirementsRelatedToActivityQuery
+
+"/activities/{id}/relatedRequirements" ..> "POST /activities/{id}/relatedRequirements"
+
+
+
+interface "/activities/{id}/applicantsEmails" {
+}
+
+class "POST /activities/{id}/applicantsEmails" {
+.. header ..
+{field} string Current-User-Id
+.. path ..
+{field} string <b>id</b>
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CreateApplicantsEmailsCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/{id}/applicantsEmails" ..> KnightFrank.Antares.Domain.Activity.Commands.CreateApplicantsEmailsCommand
+
+"/activities/{id}/applicantsEmails" ..> "POST /activities/{id}/applicantsEmails"
+
+
+
+interface "/activities/generateActivitiesEmailContent" {
+}
+
+class "POST /activities/generateActivitiesEmailContent" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Search.Activity.Queries.ExportToEmailQuery[KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery] <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/generateActivitiesEmailContent" ..> KnightFrank.Antares.Search.Activity.Queries.ExportToEmailQuery[KnightFrank.Antares.Search.Activity.Queries.ActivitiesPageableQuery]
+
+"/activities/generateActivitiesEmailContent" ..> "POST /activities/generateActivitiesEmailContent"
+
+
+
+interface "/activities/copyInfoToUnits" {
+}
+
+class "POST /activities/copyInfoToUnits" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Domain.Activity.Commands.CopyActivityInfoToUnitsCommand <b>command</b>
+.. responses ..
+
+}
+
+"POST /activities/copyInfoToUnits" ..> KnightFrank.Antares.Domain.Activity.Commands.CopyActivityInfoToUnitsCommand
+
+"/activities/copyInfoToUnits" ..> "POST /activities/copyInfoToUnits"
+
+
+
+interface "/activities/latest" {
+}
+
+class "POST /activities/latest" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Search.Activity.Queries.LatestActivitiesQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/latest" ..> KnightFrank.Antares.Search.Activity.Queries.LatestActivitiesQuery
+
+"/activities/latest" ..> "POST /activities/latest"
+
+
+
+interface "/activities/latestMatch" {
+}
+
+class "POST /activities/latestMatch" {
+.. header ..
+{field} string Current-User-Id
+.. body ..
+{field} KnightFrank.Antares.Search.Activity.Queries.LatestActivitiesMatchQuery <b>query</b>
+.. responses ..
+
+}
+
+"POST /activities/latestMatch" ..> KnightFrank.Antares.Search.Activity.Queries.LatestActivitiesMatchQuery
+
+"/activities/latestMatch" ..> "POST /activities/latestMatch"
+
+
+
+@enduml

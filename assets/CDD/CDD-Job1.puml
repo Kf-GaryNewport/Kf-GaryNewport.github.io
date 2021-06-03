@@ -57,6 +57,7 @@ table(Action)
 {
     primary_key(Id)
     ActionOwnerId
+    CddJobId
     Action
     ExpectedCompletionDate
     
@@ -71,7 +72,7 @@ table(EnumTypeItem)
 User ||--|{ CddJob : A User can have many Cdd Jobs
 CddJob ||--|| CDD : A CddJob has a CDD
 CddJob ||--|{ EnumTypeItem : ActionType
-CddJob ||--|{ Action : A CddJob has a Action
+CddJob ||--|{ Action : A CddJob has Action's\n A Action has a CddJob
 
 Action ||--|| User : A Action has a User 
 Contact ||--|{ CDD : A contact can have many CDDs

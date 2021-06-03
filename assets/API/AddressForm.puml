@@ -1,0 +1,61 @@
+@startuml
+hide empty members
+set namespaceSeparator none
+
+interface "/addressforms/listforview" {
+}
+
+class "GET /addressforms/listforview" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string <b>countryId</b>
+{field} string <b>addressFormTypeId</b>
+{field} string[] <b>entityTypeIds</b>
+.. responses ..
+
+}
+
+
+
+"/addressforms/listforview" ..> "GET /addressforms/listforview"
+
+
+
+interface "/addressforms/listforedit" {
+}
+
+class "GET /addressforms/listforedit" {
+.. header ..
+{field} string Current-User-Id
+.. query ..
+{field} string <b>countryId</b>
+{field} string <b>addressFormTypeId</b>
+{field} string[] <b>entityTypeIds</b>
+.. responses ..
+
+}
+
+
+
+"/addressforms/listforedit" ..> "GET /addressforms/listforedit"
+
+
+
+interface "/addressforms/countries" {
+}
+
+class "GET /addressforms/countries" {
+.. header ..
+{field} string Current-User-Id
+.. responses ..
+
+}
+
+
+
+"/addressforms/countries" ..> "GET /addressforms/countries"
+
+
+
+@enduml

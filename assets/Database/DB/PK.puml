@@ -1,0 +1,579 @@
+@startuml
+
+ALTER TABLE [dbo].[Activity] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityAreaHierarchy] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityAttributeValue] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityCharacteristic] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityDealStructure] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityDocumentTypeUsage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityExternalLink] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityMarketingImage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityNetiator] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityParty] ADD  CONSTRAINT [DF_ActivityParty_IsFrozen]  DEFAULT ((0)) FOR [IsFrozen]
+
+ALTER TABLE [dbo].[ActivityPropertyArea] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityRequirementNote] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivitySalutation] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivitySecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityServiceLineDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityStatusDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityTypeDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityTypeLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityWebNetiator] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ActivityWebPropertyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Address] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Address] ADD  CONSTRAINT [DF_Address_QubeSynchronized]  DEFAULT ((0)) FOR [QubeSynchronized]
+
+ALTER TABLE [dbo].[AddressField] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AddressFieldDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AddressFieldLabel] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AddressForm] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AddressFormEntityType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Advertisement] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AgeBand] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AgeBandLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Appointment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AppointmentContact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AppointmentCovidAssessment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AppointmentMessage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AppointmentOtherAttendee] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AppointmentUser] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AreaHierarchy] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AreaHierarchyShape] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AreaTemplate] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Asset] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AssetAttributeValue] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AssetCharacteristic] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AssetDocumentTypeUsage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AssetParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AssetSecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AssetUniqueNumber] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Attachment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[AttachmentSigningParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Attribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[BuildingFloor] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[BusinessEvent] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[BusinessLanguage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ChainTransaction] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ChainTransactionParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Characteristic] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CharacteristicGroup] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CharacteristicGroupItem] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CharacteristicGroupLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CharacteristicGroupUsage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CharacteristicLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ClaimsRecalculationLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Company] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Company] ADD  CONSTRAINT [DF_Company_QubeSynchronized]  DEFAULT ((0)) FOR [QubeSynchronized]
+
+ALTER TABLE [dbo].[CompanyAddress] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CompanyContact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CompanyContactNote] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CompanyDomain] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CompanyDomainUser] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CompanyUser] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Config] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ConnectionWeight] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Contact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Contact] ADD  CONSTRAINT [DF_Contact_QubeSynchronized]  DEFAULT ((0)) FOR [QubeSynchronized]
+
+ALTER TABLE [dbo].[ContactAccessRequest] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactAddress] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactAddressDirectMarketingConsent] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactBusinessHistory] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactCompanyAddress] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactCompanyAddressDirectMarketingConsent] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactContactType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactEmail] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactEmailDirectMarketingConsent] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactEmailUser] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactMarketingCampaign] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactPhone] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactPropertyInterest] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactPropertyTypeInterest] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactPublicationEvent] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactRelationship] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactSecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactTitle] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactToBePhoned] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ContactUser] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Country] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[CountryLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Dashboard] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugJobApiError] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugJobConfig] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugJobLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugJobResultFile] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugManagement] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugPrivateEmailDomain] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugProcessingError] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DataHugUpdatedEntities] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DepartmentGroup] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DevelopmentDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DeviceRegistration] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DivisionServiceLineDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DocumentSigning] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DocumentTemplate] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DocumentTemplateField] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DocumentTemplateLegalText] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DocumentTemplateRole] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DocumentTypeCddRestriction] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerAccount] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerEmailsQueue] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerEmailTemplate] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerExportLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerExportLogContact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerImportedCampaign] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[DotmailerSuppressedEmail] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[EmailBlacklist] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[EnumLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[EnumType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[EnumTypeItem] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ExchangeRate] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ExportGridDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ExternalAddressServiceMapping] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ExternalMessage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ExternalMessageRecipient] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ExternalReservationInfo] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[FeeIncome] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[FeeIncomeLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[FeeSplit] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[FlexibleReport] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Grid] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[GridColumn] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[GridColumnDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[GridColumnServiceLine] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[GridColumnViewGroup] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[GridColumnViewGroupItem] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[GridDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[HoldingCompany] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Impersonation] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Instruction] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[InstructionActivity] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[InstructionAsset] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[InstructionParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[InstructionRequirement] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[InstructionSecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Invoice] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Ited] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[LatestView] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Locale] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[LocaleLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MarketingImage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MarketingList] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MarketingListContact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MarketingListEditor] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Match] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MatchDiscard] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MeasurementUnitConfiguration] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MeasurementUnitValue] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MyKfFeedDetails] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[MyKfFeedLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Nationality] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[NationalityLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Note] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Notification] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[NotificationBlacklist] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[NotificationRecipient] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Offer] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OfferParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OfferPropertyArea] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OfferType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OfferTypeLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OfficePatch] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OfficePatchThreshold] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OrganisationalSecurityRule] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OrganisationUnitCompany] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[OrganisationUnitServiceLine] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Ownership] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Pitch] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PitchSecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PitchUser] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Portal] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PortalDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PostCodeShape] ADD  CONSTRAINT [DF__PostCodeShap__Id__11EA7D3F]  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Profession] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ProfessionLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyArea] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyAttributeForm] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyCharacteristicWebPropertyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyFloor] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyManagementContact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyTypeDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyTypeLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PropertyTypeWebPropertyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PublicationEvent] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[PublicationEventManager] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[QubeSynchronization] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Referral] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReferralManagementRules] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReferralUniqueNumber] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RegistrationStatus] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RegistrationStatusLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RegistrationSystem] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Relationship] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RelationshipType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Report] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReportGroup] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReportGroupLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReportLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReportVisibilityCountry] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReportVisibilityDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ReportVisibilityServiceLine] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Requirement] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementArea] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementAreaHierarchy] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementAttributeValue] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementCharacteristic] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementCountry] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementDealStructure] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementDocumentTypeUsage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementNetiator] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementOtherMotivation] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementPropertyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementSalutation] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementSecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementTypeLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementUndisclosed] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[RequirementUniqueNumber] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Role] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[SapIndividualUniqueNumber] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ScheduledNotification] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[SearchConfiguration] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[SearchConfigurationAccess] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[SearchFilterConfiguration] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[SecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ServiceLine] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ServiceLineLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ShowoverAvailability] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[SignalRConnection] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TargetDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TargetNetiator] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Tenancy] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyAreaHierarchy] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyBillsDescription] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyBreak] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyDocumentTypeUsage] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyIdentification] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyNetiator] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyParty] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyPropertyArea] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyReview] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancySecurityAttribute] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyTypeLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TenancyUniqueNumber] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[Translation] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[TranslationLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_MaxCallbacksPerDay]  DEFAULT ((35)) FOR [MaxCallbacksPerDay]
+
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF_User_ContactExportLimit]  DEFAULT ((500)) FOR [ContactExportLimit]
+
+ALTER TABLE [dbo].[UserDotmailerAccount] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserExportLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserExportLogContact] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserFeedDetails] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserFeedLog] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserPreferenceArea] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserPropertyType] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserRole] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserRoleBusiness] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[UserRoleDepartment] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[ViewingTour] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[WebPropertyTypeDefinition] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[WindowsTimeZone] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+ALTER TABLE [dbo].[WindowsTimeZoneLocalised] ADD  DEFAULT (newsequentialid()) FOR [Id]
+
+@enduml

@@ -1,0 +1,112 @@
+@startuml
+
+title Activity
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Activity)
+{
+    primary : key(Id)
+}
+
+ActivityAppointment ||--|{ Activity : ActivityId
+ActivityAppointment ||--|{ Appointment : AppointmentId
+
+ActivityAreaHierarchy ||--|{ Activity : ActivityId
+ActivityAreaHierarchy ||--|{ AreaHierarchy : AreaHierarchyId
+ActivityAttachment ||--|{ Activity : ActivityId
+ActivityAttachment ||--|{ Attachment : AttachmentId
+ActivityAttributeValue ||--|{ Activity : ActivityId
+ActivityAttributeValue ||--|{ Attribute : AttributeId
+ActivityAttributeValue ||--|{ EnumTypeItem : EnumValueId
+ActivityAttributeValue ||--|{ MeasurementUnitValue : MaxNumberWithUnitValueId
+ActivityAttributeValue ||--|{ MeasurementUnitValue : MinNumberWithUnitValueId
+ActivityAttributeValue ||--|{ MeasurementUnitValue : NumberWithUnitValueId
+ActivityCharacteristic ||--|{ Activity : ActivityId
+ActivityCharacteristic ||--|{ Characteristic : CharacteristicId
+ActivityDealStructure ||--|{  Activity : ActivityId
+ActivityDealStructure ||--|{  EnumTypeItem : DealStructureId
+ActivityDepartment ||--|{ Activity : ActivityId
+ActivityDepartment ||--|{ EnumTypeItem : DepartmentTypeId
+ActivityDepartment ||--|{ OrganisationUnit : DepartmentId
+ActivityDocumentTypeUsage ||--|{ Country : CountryId
+ActivityDocumentTypeUsage ||--|{ EnumTypeItem : DocumentTypeId
+ActivityDocumentTypeUsage ||--|{ EnumTypeItem : ServiceLineId
+ActivityExternalLink ||--|{ Activity : ActivityId
+ActivityLocalised ||--|{ Activity : ActivityId
+ActivityLocalised ||--|{ Locale : LocaleId
+ActivityMarketingImage ||--|{ Activity : ActivityId
+ActivityMarketingImage ||--|{ MarketingImage : MarketingImageId
+ActivityMarketingImage ||--|{ User : CreatedByUserId
+ActivityMarketingImage ||--|{ User : LastModifiedByUserId
+ActivityMarketingImage ||--|{ User : UserId
+ActivityNetiator ||--|{ Activity : ActivityId
+ActivityNetiator ||--|{ EnumTypeItem : UserTypeId
+ActivityNetiator ||--|{ User : UserId
+ActivityNote ||--|{  Activity : ActivityId
+ActivityNote ||--|{  Note : NoteId
+ActivityParty ||--|{  Activity : ActivityId
+ActivityParty ||--|{ Address : AddressId
+ActivityParty ||--|{ Company : CompanyId
+ActivityParty ||--|{ Contact : ContactId
+ActivityParty ||--|{ Country : HeadOfficeLocationId
+ActivityParty ||--|{ EnumTypeItem : InvestorTypeId
+ActivityParty ||--|{ EnumTypeItem : RoleId
+ActivityParty ||--|{ EnumTypeItem : TenantTypeId
+ActivityPortal ||--|{ Activity : ActivityId
+ActivityPortal ||--|{ Portal : PortalId
+ActivityPropertyArea ||--|{ Activity : ActivityId
+ActivityPropertyArea ||--|{ EnumTypeItem : SubStateId
+ActivityPropertyArea ||--|{ MeasurementUnitValue : AgreedRentId
+ActivityPropertyArea ||--|{ MeasurementUnitValue : MinSizeId
+ActivityPropertyArea ||--|{ MeasurementUnitValue : QuotingRentId
+ActivityPropertyArea ||--|{ MeasurementUnitValue : SizeId
+ActivityPropertyArea ||--|{ PropertyArea : PropertyAreaId
+ActivityPropertyArea ||--|{ PropertyFloor : FloorId
+ActivityPropertyArea ||--|{ TenancyPropertyArea : TenancyPropertyAreaId
+ActivityReferral ||--|{ Activity : ActivityId
+ActivityReferral ||--|{ Referral : ReferralId
+ActivityRequirementNote ||--|{ Activity : ActivityId
+ActivityRequirementNote ||--|{ Note : NoteId
+ActivityRequirementNote ||--|{ Requirement : RequirementId
+ActivitySalutation ||--|{ Activity : ActivityId
+ActivitySalutation ||--|{ Address : AddressId
+ActivitySecurityAttribute ||--|{ Activity : ActivityId
+ActivitySecurityAttribute ||--|{ SecurityAttribute : SecurityAttributeId
+ActivityServiceLineDefinition ||--|{ ActivityType : ActivityTypeId
+ActivityServiceLineDefinition ||--|{ EnumTypeItem : ServiceLineId
+ActivityStatusDefinition ||--|{ ActivityType : ActivityTypeId
+ActivityStatusDefinition ||--|{ EnumTypeItem : ActivityStatusId
+ActivityStatusDefinition ||--|{ EnumTypeItem : AgencyTypeId
+ActivityStatusDefinition ||--|{ EnumTypeItem : DivisionId
+ActivityTypeDefinition ||--|{ ActivityType : ActivityTypeId
+ActivityTypeDefinition ||--|{ Country : CountryId
+ActivityTypeDefinition ||--|{ PropertyType : PropertyTypeId
+ActivityTypeLocalised ||--|{ ActivityType : ActivityTypeId
+ActivityTypeLocalised ||--|{ Locale : LocaleId
+ActivityWebNetiator ||--|{ Activity : ActivityId
+ActivityWebNetiator ||--|{ User : UserId
+ActivityWebPropertyType ||--|{ Activity : ActivityId
+ActivityWebPropertyType ||--|{ EnumTypeItem : WebPropertyTypeId
+
+@enduml

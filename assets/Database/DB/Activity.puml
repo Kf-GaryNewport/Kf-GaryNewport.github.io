@@ -1,0 +1,226 @@
+@startuml
+
+title Activity
+
+left to right direction
+
+!define table(x) class x << (T,mistyrose) >>   
+!define view(x) class x << (V,lightblue) >>   
+!define table(x) class x << (T,mistyrose) >>  
+!define tr(x) class x << (R,red) >>  
+!define tf(x) class x << (F,darkorange) >>   
+!define af(x) class x << (F,white) >>   
+!define fn(x) class x << (F,plum) >>   
+!define fs(x) class x << (F,tan) >>   
+!define ft(x) class x << (F,wheat) >>   
+!define if(x) class x << (F,gaisboro) >>   
+!define p(x) class x << (P,indianred) >>   
+!define pc(x) class x << (P,lemonshiffon) >>   
+!define x(x) class x << (P,linen) >>     
+!define primary_key(x) <<pk>> <u>x</u>
+!define foreign_key(x) <<fk>> <b>x</b>
+!define link( k, y) k }--||  y
+hide methods   
+hide stereotypes  
+skinparam classarrowcolor gray  
+
+table( Activity)
+{
+    primary_key(Id)
+}
+
+table( ActivityType)
+{
+    primary_key(Id)
+}
+
+table( Asset)
+{
+    primary_key(Id)
+}
+
+table( Company)
+{
+    primary_key(Id)
+}
+
+table( Contact)
+{
+    primary_key(Id)
+}
+
+table( EnumTypeItem)
+{
+    primary_key(Id)
+}
+
+table( MarketingImage)
+{
+    primary_key(Id)
+}
+
+table( MeasurementUnitValue)
+{
+    primary_key(Id)
+}
+
+table( Offer)
+{
+    primary_key(Id)
+}
+
+table( OrganisationUnit)
+{
+    primary_key(Id)
+}
+
+table( PropertyType)
+{
+    primary_key(Id)
+}
+
+table( Tenancy)
+{
+    primary_key(Id)
+}
+
+table( TenancyReview)
+{
+    primary_key(Id)
+}
+
+table( User)
+{
+    primary_key(Id)
+}
+
+Activity ||--|{ Activity : OriginalActivityId
+ Activity  ||--|| ActivityType : ActivitySubTypeId
+ Activity  ||--|| ActivityType : ActivityTypeId
+ Activity  ||--|| Asset : AssetId
+ Activity  ||--|| Company : ResponsibleForSaleOrLetCompanyId
+ Activity  ||--|| Contact : ResponsibleForSaleOrLetContactId
+
+ Activity  ||--|| EnumTypeItem 
+note right of EnumTypeItem
+  ActivityAssetTypeId
+, ActivityInstructionCddStatusId
+, ActivitySaleTypeId
+, ActivityStatusId
+, AdvertisingPrPermittedTypeId
+, AgencyTypeId
+, AlienationProvisionId 
+, AreaAvailabilityTypeId 
+, BreakTypeId 
+, ConditionId 
+, ConfidentialityLevelId 
+, CurrencyId 
+, DevPipelineCompletionDateQuarterId 
+, DevPipelineConstructionContractStageId 
+, DevPipelineConstructionStageId 
+, DevPipelineConstructionStartQuarterId 
+, DevPipelineDevelopmentProbabilityId 
+, DevPipelineSiteStatusId 
+, DevPipelineSpeculativePreLetId 
+, DevPipelineTypeOfPreLetId 
+, DisposalTypeId 
+, DurationTypeId 
+, FeeTypeId 
+, FurnishingId 
+, GradeId 
+, InformationQualityId 
+, KeyHolderTypeId 
+, LonResCommissionTypeId 
+, LonResStatusId 
+, LostFromId 
+, ManagementFeeTypeId 
+, ManagementTypeId 
+, OccupationalProfileId 
+, OwnershipTenureId 
+, PremiumPaidById 
+, PriceQualifierId 
+, PriceTypeId 
+, PurposeId 
+, QuotingRentTypeId 
+, RentFrequencyId 
+, RepairinbligationId 
+, RepresentingId 
+, RetirementHousingId 
+, SalePotentialId 
+, SalesBoardStatusId 
+, SalesBoardTypeId 
+, SellingReasonId 
+, ServiceLineId 
+, SourceId 
+, StandardDisregardsId 
+, SurrenderFromId 
+, SurrenderToId 
+, TreatmentOfRentFreePeriodsId 
+, TypeOfLeaseId 
+, WithdrawalReasonId
+end note
+
+ Activity  ||--|| MarketingImage : ActivityMainImageId
+
+ Activity  ||--|| MeasurementUnitValue
+note right of MeasurementUnitValue
+AgreedCapitalValueId
+AgreedRentMaxId
+AgreedRentMinId
+DevPipelinePreLetSizeId
+DevPipelineTotalDevelopmentSizeId
+DevPipelineTotalSpeculativeSizeId
+EstimatedRatesId
+EstimatedRentalValueId
+EstimatedServiceChargeId
+LongLetRentPerMonthPerGrossAreaUnitId
+LongLetRentPerMonthPerSaleableAreaUnitId
+LongLetRentPerWeekPerGrossAreaUnitId
+LongLetRentPerWeekPerSaleableAreaUnitId
+PricePerGrossAreaUnitId
+PricePerSaleableAreaUnitId
+PriorAgreedRentMaxId
+PriorAgreedRentMinId
+ProposedAgreedCapitalValueId
+ProposedQuotedCapitalValueId
+ProposedSizeLandAreaId
+ProposedSizeLivingAreaId
+QuotedCapitalValueId
+QuotingRentMaxId
+QuotingRentMinId
+ShortLetRentPerMonthPerGrossAreaUnitId
+ShortLetRentPerMonthPerSaleableAreaUnitId
+ShortLetRentPerWeekPerGrossAreaUnitId
+ShortLetRentPerWeekPerSaleableAreaUnitId
+TotalRentId
+ZoneARentId
+ end note
+
+ Activity  ||--|| Offer : AcceptedOfferId
+
+ Activity  ||--|| OrganisationUnit 
+note right of OrganisationUnit 
+ CreatedByDepartmentId
+ KeyHolderDepartmentId
+ ResponsibleForSaleOrLetNetiatorDepartmentId
+end note
+
+ Activity  ||--|| PropertyType
+note right of PropertyType
+OriginalPropertyTypeId
+PropertyTypeId
+end note
+ 
+ Activity  ||--|| Tenancy : HeadLeaseId
+ Activity  ||--|| TenancyReview : TenancyReviewId
+
+ Activity  ||--|| User
+note right of User
+ CreatedByUserId,
+ LastModifiedByUserId
+ ResponsibleForSaleOrLetNetiatorId,
+ UserId
+end note
+
+@enduml
+
