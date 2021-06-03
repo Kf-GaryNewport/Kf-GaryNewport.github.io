@@ -39,7 +39,8 @@ table(CDD)
     primary_key(Id)
     ContactId
     ExpiryDate
-    QuestionnaireId
+    Valid
+    RAG
     DocumentId
 }
 
@@ -58,9 +59,11 @@ table(Action)
 {
     primary_key(Id)
     ActionOwnerId
+    CddJobId
     Action
     ActionCreatedDateTime
     ExpectedCompletionDateTime 
+    
 }
 
 table(Notify)
@@ -75,10 +78,22 @@ table(EnumTypeItem)
     primary_key(Id)
 }
 
+table( CDDQuestionnaire)
+{
+    primary_key(Id)
+    CDDId
+    QuestionnaireId
+}
+table(Questionnaire)
+{
+    primary_key(Id)
+}
+
+
 User ||--|{ CddJob : A User can have many Cdd Jobs
 CddJob ||--|| CDD : A CddJob has a CDD
 CddJob ||--|{ EnumTypeItem : ActionType
-CddJob ||--|{ Action : A CddJob has a Action
+CddJob ||--|{ Action : A CddJob has Action's\n A Action has a CddJob
 CddJob ||--|{ EnumTypeItem : CDDStatus
 
 Action ||--|| User : A Action has a User 
@@ -87,6 +102,8 @@ Notify ||--|| User : Notify has a User
 
 Contact ||--|{ CDD : A contact can have many CDDs
 
+CDD ||--|{ CDDQuestionnaire : A CDD has many Questionnaires
+CDDQuestionnaire }|--|| Questionnaire : A Questionnaire has many CDD's
 
 @enduml
 
