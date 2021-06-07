@@ -34,13 +34,19 @@ table(Contact)
     primary_key(Id)
 }
 
+table(Company)
+{
+    primary_key(Id)
+}
+
 table(CDD)
 {
     primary_key(Id)
     ContactId
+    CompanyId
     ExpiryDate
     Valid
-    RAG
+    RiskRating
     DocumentId
 }
 
@@ -52,7 +58,7 @@ table( CddJob)
     NextActionId
     ActionTypeId
     Priority
-    -CDDStatus
+    -CDDJobStatus
 }
 
 table( CddJobQuality)
@@ -115,6 +121,7 @@ Action ||--|{ Notify : A Action has many Notifications
 Notify ||--|| User : Notify has a User
 
 Contact ||--|{ CDD : A contact can have many CDDs
+Company ||--|{ CDD : A Company can have many CDDs
 
 CDD ||--|{ CDDQuestionnaire : A CDD has many Questionnaires
 CDDQuestionnaire }|--|| Questionnaire : A Questionnaire has many CDD's

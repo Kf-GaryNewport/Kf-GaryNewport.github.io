@@ -34,24 +34,20 @@ table(Contact)
     primary_key(Id)
 }
 
+table(Company)
+{
+    primary_key(Id)
+}
+
 table(CDD)
 {
     primary_key(Id)
     ContactId
+    CompanyId
     ExpiryDate
     Valid
-    RAG
+    RiskRating
     DocumentId
-}
-
-table( CddJob)
-{
-    primary_key(Id)
-    UserId
-    CDDId
-    NextActionId
-    ActionTypeId
-    - Priority
 }
 
 table(Action)
@@ -87,7 +83,9 @@ CddJob ||--|{ EnumTypeItem : ActionType
 CddJob ||--|{ Action : A CddJob has Action's\n A Action has a CddJob
 
 Action ||--|| User : A Action has a User 
+
 Contact ||--|{ CDD : A contact can have many CDDs
+Company ||--|{ CDD : A Company can have many CDDs
 
 CDD ||--|{ CDDQuestionnaire : A CDD has many Questionnaires
 CDDQuestionnaire }|--|| Questionnaire : A Questionnaire has many CDD's
