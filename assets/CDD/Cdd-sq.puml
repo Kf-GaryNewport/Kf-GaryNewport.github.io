@@ -5,7 +5,7 @@
 Person(cp1, "CounterParty 1", "Contact")
 Person(cp2, "CounterParty 2", "Contact")
 
-Container( req, "Requirement", "")
+Container( req, "Requirement", "OR Activity")
 Container( que, "Questionnaire", "")
 
 Container( cddt, "CDDTeam", "")
