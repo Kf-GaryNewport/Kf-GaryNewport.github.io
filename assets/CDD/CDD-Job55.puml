@@ -205,14 +205,14 @@ newtable(Notify)
     -NotifiedDateTime
 }
 
-table( CddJobQuality)
+newtable( CddJobQuality)
 {
     -primary_key(Id)
     -CheckedById
     -Quality
 }
 
-table( CddJobDefects)
+newtable( CddJobDefects)
 {
     -primary_key(Id)
     -Defect
