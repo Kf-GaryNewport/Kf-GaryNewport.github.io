@@ -51,6 +51,7 @@ table( ActivityParty)
     ActivityId
     ContactId
     CompanyId
+    -CddJobId
 }
 
 table( Instruction)
@@ -67,6 +68,7 @@ table( InstructionParty)
     InstructionId
     ContactId
     CompanyId
+    -CddJobId
 }
 
 table( Requirement)
@@ -81,6 +83,7 @@ table( RequirementParty)
     RequirementId
     ContactId
     CompanyId
+    -CddJobId
 }
 
 'table(EnumTypeItem)
@@ -179,11 +182,11 @@ RequirementParty ||--|| Company
 newtable( CddJob)
 {
     primary_key(Id)
-    EntityCddTeamMemberId
+    EntityPartyId
+    EntityPartyTypeId
     CDDId
     NextActionId
     ActionTypeId
-
 }
 
 newtable(Action)
@@ -208,7 +211,9 @@ newtable(Action)
 '}
 
 
-EntityCddTeamMember ||--|{ CddJob : A Cdd Team Member can have many Cdd Jobs
+ActivityParty ||--|| CddJob : A Party can has a Cdd Job
+InstructionParty ||--|| CddJob : A Party can has a Cdd Job
+RequirementParty ||--|| CddJob : A Party can has a Cdd Job
 
 
 CddJob ||--|| CDD : A CddJob has a CDD
