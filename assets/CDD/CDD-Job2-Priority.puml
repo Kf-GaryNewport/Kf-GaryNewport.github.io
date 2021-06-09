@@ -50,6 +50,16 @@ table(CDD)
     DocumentId
 }
 
+table( CddJob)
+{
+    primary_key(Id)
+    UserId
+    CDDId
+    NextActionId
+    ActionTypeId
+    -Priority
+}
+
 table(Action)
 {
     primary_key(Id)
