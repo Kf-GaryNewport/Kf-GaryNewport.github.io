@@ -1,0 +1,40 @@
+@startuml
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+Person(cn1, "Contact 1", "Contact")
+
+Container( neg, "Negotiator", "Notify")
+Container( neg, "Negotiator", "Notify")
+
+
+
+Container( req, "Requirement", "OR Activity")
+Container( que, "Questionnaire", "")
+
+Container( cddt, "CDDTeam", "")
+Person(cda, "Cdd Team Member")
+
+System_Boundary(hub_system, "Thirdfort"){
+Container( tf1, "Check Contact", "")
+Container( tf2, "Check Contact", "")
+}
+
+Rel_D(cp1, req, "Party")
+Rel_D(cp2, req, "Party")
+
+Rel_D(req, que, "On Accepted Offer")
+Rel_D(que, cddt, "")
+
+Rel_D(cddt, cda, "Assigned")
+Rel_D(que, tf1, "Request")
+Rel_D(que, tf2, "Request")
+
+Rel_D(tf1, cda, "Report")
+Rel_D(tf2, cda, "Report")
+
+Rel_D(cda, cda, "Review Reports")
+Rel_U(cda, cp1, "Set Risk Level")
+Rel_U(cda, cp2, "Set Risk Level")
+
+@enduml

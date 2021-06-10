@@ -1,0 +1,39 @@
+@startuml
+hide empty description
+
+Actor Negotiator
+Actor CDDTeamMemeber
+Actor EVS
+Actor HubOvernight
+rectangle CDDRecord {
+    (Set_CDD)
+}
+
+CDDTeamMemeber --> (Review_PreExpiry)
+(Review_PreExpiry) --> (NoAction)
+(Review_PreExpiry) --> (SentToEVS)
+(SentToEVS) --> EVS
+EVS --> (Review_EVSResponse)
+
+CDDTeamMemeber --> (Review_EVSResponse)
+(Review_EVSResponse) --> (Set_CDD)
+(Set_CDD) --> (NoAction)
+
+CDDTeamMemeber --> (New_Contact)
+(New_Contact) --> (SentToEVS)
+
+CDDTeamMemeber --> (Renew_Contact)
+(Renew_Contact) --> (SentToEVS)
+
+CDDTeamMemeber --> (New_Company)
+(New_Company) --> (Manual_Review)
+(Manual_Review) --> (Set_CDD)
+
+CDDTeamMemeber --> (Renew_Company)
+(Renew_Company) --> (Manual_Review)
+
+HubOvernight --> (Review_PreExpiry) : Creates
+HubOvernight -> Negotiator : Informs
+Negotiator -> CDDTeamMemeber : Communicates
+
+@enduml
