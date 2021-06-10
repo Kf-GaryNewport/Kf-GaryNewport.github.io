@@ -142,7 +142,6 @@ newtable(CDD)
     ExpiryDate
     Valid
     RiskRating
-    DocumentId
 }
 
 
@@ -257,5 +256,18 @@ Company ||--|{ CDD : A Company can have many CDDs
 CddJobQuality ||--|{ User : User perfomring quality check
 CddJobQuality ||--|{ CddJobDefects : Quality has many defects
 CddJobQuality ||--|{ EnumTypeItem : Quality
+
+table( ContactAttachment)
+{
+     primary_key(Id)
+}
+
+table( CompanyAttachment)
+{
+     primary_key(Id)
+}
+
+Contact ||--|{ ContactAttachment
+Company ||--|{ CompanyAttachment
 
 @enduml

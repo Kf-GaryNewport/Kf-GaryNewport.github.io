@@ -142,7 +142,6 @@ newtable(CDD)
     ExpiryDate
     Valid
     RiskRating
-    DocumentId
 }
 
 
@@ -210,7 +209,6 @@ newtable(Action)
 '    primary_key(Id)
 '}
 
-
 ActivityParty ||--|| CddJob : A Party can has a Cdd Job
 InstructionParty ||--|| CddJob : A Party can has a Cdd Job
 RequirementParty ||--|| CddJob : A Party can has a Cdd Job
@@ -227,5 +225,18 @@ Company ||--|{ CDD : A Company can have many CDDs
 
 'CDD ||--|{ CDDQuestionnaire : A CDD has many Questionnaires
 'CDDQuestionnaire }|--|| Questionnaire : A Questionnaire has many CDD's
+
+table( ContactAttachment)
+{
+     primary_key(Id)
+}
+
+table( CompanyAttachment)
+{
+     primary_key(Id)
+}
+
+Contact ||--|{ ContactAttachment
+Company ||--|{ CompanyAttachment
 
 @enduml
