@@ -1,0 +1,34 @@
+@startuml Thirdfort Service
+
+Details -> hub
+hub -> SvcQueue
+SvcQueue -> Svc
+SvcQueue -> Svc : Create Transaciton in a storage table
+Activate Svc
+Svc -> Thirdfort : Post Create Transaction
+alt Success
+    Svc <-- Thirdfort : Response 201 
+    Svc -> Table : Update details in a storage table
+end
+Deactivate Svc
+
+== Every Hour ==
+Svc -> Table : Get requests Ids with incomplete status
+Activate Svc
+Loop Through RequestIds
+    Svc -> Thirdfort : Get Transaction Id
+    alt Success
+        Svc <-- Thirdfort : Response 200
+        alt With Report
+            Svc -> Table : Remove transaction from storage table
+            Svc -> HubBlob : Save report to Hub Data Store
+            Svc -> SvcQueue : Put Blob Id the Hub Inbound Queue
+        else Without Report
+            Svc -> Table : Update transation
+        end
+    end
+End
+Deactivate Svc
+
+
+@enduml

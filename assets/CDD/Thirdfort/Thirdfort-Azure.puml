@@ -1,0 +1,54 @@
+@startuml "Thirdfort"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureEventGrid.puml
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+!includeurl AzurePuml/Storage/AzureStorage.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+Container(hub, Hub, "Hub Web API")
+Container(WebJob, WebJob, "Hub Web Job")
+ContainerDb(Sql, Sql, "Hub Sql")
+Container(hubNote, Notification, "Hub Notification")
+
+AzureQueueStorage(OutQ, "Hub OutBound Queue", "Storage Queue")
+AzureQueueStorage(InQ, "Hub InBound Queue", "Storage Queue")
+AzureStorage(Mst, "Hub Message Store", "Storage Table")
+AzureStorage(Sst, "Svc Message Store", "Storage Table")
+
+AzureFunction(fnCreate, "Create", "Queue Trigger")
+AzureFunction(fnReport, "Get Report", "Timer Trigger")
+
+System_Ext(Exs, "Thirdfort")
+
+
+hub --> OutQ : Send Message
+fnCreate --> OutQ : Subscibe
+OutQ --> fnCreate : Trigger
+
+fnCreate --> Sst : Create Table entry
+fnCreate --> Exs : Send Create Transaction to Thirdfort
+Exs --> fnCreate : Response
+fnCreate --> Sst : Update Table Entry
+
+fnReport --> Sst : Get Outstanding transations
+Exs <-- fnReport : Get Transaction Request
+
+Exs --> fnReport : Response
+fnReport --> Sst : Update/Delete Transaction
+fnReport --> Mst : Store report 
+fnReport --> InQ : Put message on hub inbound queue
+
+WebJob <-- InQ : Get Message 
+WebJob <-- Mst : Get Message
+
+hubNote <-- WebJob
+Sql <-- WebJob
+
+
+@enduml

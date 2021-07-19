@@ -1,0 +1,35 @@
+@startuml "HM Land Registry"
+
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+!define AzurePuml https://raw.githubusercontent.com/RicardoNiepel/Azure-PlantUML/release/2-1/dist
+!includeurl AzurePuml/AzureCommon.puml
+!includeurl AzurePuml/Compute/AzureFunction.puml
+!includeurl AzurePuml/Integration/AzureLogicApps.puml
+
+!includeurl AzurePuml/Storage/AzureQueueStorage.puml
+!includeurl AzurePuml/Storage/AzureStorage.puml
+
+LAYOUT_LEFT_RIGHT
+LAYOUT_WITH_LEGEND()
+
+System_Ext(tps, "Lead Pro")
+System_Ext(zoopla, "Zoopla")
+System_Ext(rightmove, "Right Move")
+System_Ext(onthemarket, "On The Market")
+
+zoopla --> tps
+rightmove --> tps
+onthemarket  --> tps
+
+ContainerDb(Sql, Sql, "Hub Sql")
+AzureStorage(Mst, "Temporary Message Store", "Storage Table")
+
+AzureLogicApps(laLeadIn,"Lead Ingestion", "Logic App")
+AzureLogicApps(laLeadHub,"Hub Update", "Logic App")
+
+tps --> laLeadIn : Sends Message
+laLeadIn --> Mst : Store Lead
+Mst --> laLeadHub
+laLeadHub --> Sql
+
+@enduml
